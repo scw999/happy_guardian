@@ -618,6 +618,454 @@ const DATE_LOCATIONS = {
                 ]
             }
         ]
+    },
+    amusement_park: {
+        id: 'amusement_park',
+        name: '놀이공원',
+        icon: '🎡',
+        cost: 120000,
+        stamina: 45,
+        baseAffection: 10,
+        baseTrust: 7,
+        description: '스릴 넘치는 놀이기구와 즐거운 시간',
+        scenarios: [
+            {
+                id: 'park_rollercoaster',
+                situation: '무서운 롤러코스터 앞입니다. 상대방이 망설입니다.',
+                choices: [
+                    { text: '"제가 꼭 잡아줄게요" 용기를 준다', affection: 15, trust: 18, type: 'reassuring' },
+                    { text: '"안 타도 돼요. 다른 거 탈까요?"', affection: 12, trust: 20, type: 'considerate' },
+                    { text: '"같이 타요! 재밌을 거예요" 설득한다', affection: 14, trust: 15, type: 'encouraging' },
+                    { text: '"겁쟁이네요" 놀린다', affection: -15, trust: -18, type: 'mocking' }
+                ]
+            },
+            {
+                id: 'park_prize',
+                situation: '경품 뽑기 게임이 있습니다. 인형을 따달라고 합니다.',
+                choices: [
+                    { text: '끝까지 도전해서 인형을 딴다', affection: 20, trust: 18, type: 'determined' },
+                    { text: '몇 번 시도하다 "옆에서 사는 게 나을 것 같아요"', affection: 10, trust: 15, type: 'practical' },
+                    { text: '"저 잘 못해요" 처음부터 거절한다', affection: -10, trust: -12, type: 'refuse' },
+                    { text: '계속 실패하지만 웃으며 즐긴다', affection: 12, trust: 16, type: 'fun' }
+                ]
+            },
+            {
+                id: 'park_haunted',
+                situation: '귀신의 집에 들어갔습니다. 상대방이 무서워합니다.',
+                choices: [
+                    { text: '손을 꼭 잡고 보호한다', affection: 18, trust: 20, type: 'protective' },
+                    { text: '재밌어하며 귀신을 따라한다', affection: 10, trust: 8, type: 'playful' },
+                    { text: '"괜찮아요. 다 가짜예요"', affection: 14, trust: 16, type: 'reassuring' },
+                    { text: '본인도 겁먹어서 같이 비명지른다', affection: 15, trust: 12, type: 'honest' }
+                ]
+            },
+            {
+                id: 'park_ferris_wheel',
+                situation: '관람차에서 아름다운 야경을 봅니다.',
+                choices: [
+                    { text: '손을 잡고 경치를 감상한다', affection: 18, trust: 18, type: 'romantic' },
+                    { text: '"오늘 정말 즐거웠어요"', affection: 16, trust: 20, type: 'happy' },
+                    { text: '사진을 찍자고 한다', affection: 14, trust: 14, type: 'memory' },
+                    { text: '휴대폰만 본다', affection: -15, trust: -18, type: 'rude' }
+                ]
+            },
+            {
+                id: 'park_food',
+                situation: '맛있어 보이는 간식들이 많습니다.',
+                choices: [
+                    { text: '"뭐 먹고 싶어요? 제가 살게요"', affection: 14, trust: 16, type: 'treat' },
+                    { text: '여러 가지를 사서 나눠 먹는다', affection: 16, trust: 18, type: 'sharing' },
+                    { text: '"배불러서 괜찮아요"', affection: 8, trust: 10, type: 'skip' },
+                    { text: '"돈 아까운데 집에 가서 먹어요"', affection: -12, trust: -15, type: 'cheap' }
+                ]
+            },
+            {
+                id: 'park_parade',
+                situation: '화려한 퍼레이드가 시작됩니다.',
+                choices: [
+                    { text: '같이 신나게 즐긴다', affection: 16, trust: 14, type: 'fun' },
+                    { text: '뒤에서 꼭 안아준다', affection: 18, trust: 16, type: 'romantic' },
+                    { text: '영상을 찍어준다', affection: 14, trust: 14, type: 'photographer' },
+                    { text: '"유치하네요" 시큰둥하다', affection: -15, trust: -16, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'park_wait',
+                situation: '인기 있는 놀이기구라 1시간이나 기다려야 합니다.',
+                choices: [
+                    { text: '"괜찮아요. 당신과 함께니까"', affection: 18, trust: 20, type: 'patient' },
+                    { text: '재미있게 대화하며 시간을 보낸다', affection: 16, trust: 18, type: 'entertaining' },
+                    { text: '"다른 거 탈까요?"', affection: 12, trust: 16, type: 'flexible' },
+                    { text: '"너무 오래 기다리는데..." 짜증낸다', affection: -12, trust: -15, type: 'impatient' }
+                ]
+            },
+            {
+                id: 'park_photo_booth',
+                situation: '포토부스를 발견했습니다.',
+                choices: [
+                    { text: '"같이 찍어요!" 신나게 제안한다', affection: 18, trust: 16, type: 'fun' },
+                    { text: '여러 포즈를 만들며 즐긴다', affection: 20, trust: 14, type: 'playful' },
+                    { text: '"사진 별로 안 좋아해요"', affection: -10, trust: -8, type: 'refuse' },
+                    { text: '한 장만 찍고 끝낸다', affection: 10, trust: 10, type: 'minimal' }
+                ]
+            },
+            {
+                id: 'park_tired',
+                situation: '상대방이 피곤해 보입니다.',
+                choices: [
+                    { text: '"벤치에서 쉬어요"', affection: 16, trust: 20, type: 'caring' },
+                    { text: '음료수를 사다준다', affection: 18, trust: 18, type: 'thoughtful' },
+                    { text: '"조금만 더 놀다 갈까요?"', affection: -8, trust: -10, type: 'insensitive' },
+                    { text: '팔짱을 끼며 지지해준다', affection: 17, trust: 19, type: 'supportive' }
+                ]
+            },
+            {
+                id: 'park_souvenir',
+                situation: '기념품 가게에 들렀습니다.',
+                choices: [
+                    { text: '"오늘의 기념으로 하나 골라요"', affection: 18, trust: 16, type: 'gift' },
+                    { text: '커플 아이템을 제안한다', affection: 20, trust: 18, type: 'couple' },
+                    { text: '구경만 한다', affection: 8, trust: 10, type: 'browse' },
+                    { text: '"비싸기만 하네요"', affection: -10, trust: -12, type: 'cheap' }
+                ]
+            }
+        ]
+    },
+    beach: {
+        id: 'beach',
+        name: '해변 데이트',
+        icon: '🏖️',
+        cost: 50000,
+        stamina: 35,
+        baseAffection: 8,
+        baseTrust: 6,
+        description: '시원한 바다와 낭만적인 해변',
+        scenarios: [
+            {
+                id: 'beach_sunset',
+                situation: '아름다운 석양을 봅니다.',
+                choices: [
+                    { text: '조용히 손을 잡고 감상한다', affection: 18, trust: 20, type: 'romantic' },
+                    { text: '"정말 아름답네요. 당신처럼"', affection: 16, trust: 16, type: 'compliment' },
+                    { text: '사진을 찍어준다', affection: 14, trust: 14, type: 'photographer' },
+                    { text: '휴대폰만 본다', affection: -15, trust: -18, type: 'rude' }
+                ]
+            },
+            {
+                id: 'beach_swim',
+                situation: '바다에서 수영하자고 합니다.',
+                choices: [
+                    { text: '"좋아요! 같이 들어가요"', affection: 16, trust: 14, type: 'fun' },
+                    { text: '"조심해서 놀아요" 걱정한다', affection: 14, trust: 18, type: 'caring' },
+                    { text: '"저는 모래사장에 있을게요"', affection: 8, trust: 10, type: 'decline' },
+                    { text: '"수영복 안 가져왔어요"', affection: 6, trust: 8, type: 'unprepared' }
+                ]
+            },
+            {
+                id: 'beach_sandcastle',
+                situation: '모래성을 만들자고 합니다.',
+                choices: [
+                    { text: '신나게 같이 만든다', affection: 18, trust: 16, type: 'playful' },
+                    { text: '"멋진 성 만들어요!"', affection: 16, trust: 14, type: 'enthusiastic' },
+                    { text: '"유치한데요..." 거절한다', affection: -15, trust: -16, type: 'dismissive' },
+                    { text: '사진만 찍어준다', affection: 10, trust: 10, type: 'passive' }
+                ]
+            },
+            {
+                id: 'beach_cold',
+                situation: '바다에서 나와 춥다고 합니다.',
+                choices: [
+                    { text: '수건으로 감싸준다', affection: 18, trust: 20, type: 'caring' },
+                    { text: '따뜻한 음료를 사온다', affection: 16, trust: 18, type: 'thoughtful' },
+                    { text: '꼭 안아준다', affection: 20, trust: 16, type: 'warm' },
+                    { text: '"제가 춥다고 했잖아요"', affection: -12, trust: -15, type: 'blame' }
+                ]
+            },
+            {
+                id: 'beach_shell',
+                situation: '예쁜 조개를 발견했습니다.',
+                choices: [
+                    { text: '"이거 선물할게요"', affection: 16, trust: 14, type: 'gift' },
+                    { text: '같이 조개를 찾는다', affection: 14, trust: 16, type: 'together' },
+                    { text: '"조개껍질이 많네요"', affection: 8, trust: 8, type: 'casual' },
+                    { text: '관심 없이 지나친다', affection: -8, trust: -10, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'beach_wave',
+                situation: '큰 파도가 와서 옷이 젖었습니다.',
+                choices: [
+                    { text: '같이 웃으며 즐긴다', affection: 18, trust: 16, type: 'fun' },
+                    { text: '"괜찮아요?" 걱정한다', affection: 14, trust: 18, type: 'caring' },
+                    { text: '"조심하라고 했잖아요"', affection: -12, trust: -15, type: 'scold' },
+                    { text: '옷을 벗어서 닦아준다', affection: 16, trust: 18, type: 'helpful' }
+                ]
+            },
+            {
+                id: 'beach_vendor',
+                situation: '해변 상인이 물건을 팝니다.',
+                choices: [
+                    { text: '"뭐 사줄까요?"', affection: 14, trust: 14, type: 'generous' },
+                    { text: '둘이 먹을 간식을 산다', affection: 16, trust: 16, type: 'sharing' },
+                    { text: '"필요 없어요"', affection: 6, trust: 8, type: 'skip' },
+                    { text: '"바가지네요" 불평한다', affection: -10, trust: -12, type: 'cheap' }
+                ]
+            },
+            {
+                id: 'beach_walk',
+                situation: '해변을 따라 걷습니다.',
+                choices: [
+                    { text: '손을 잡고 걷는다', affection: 18, trust: 18, type: 'romantic' },
+                    { text: '"경치가 정말 좋네요"', affection: 14, trust: 14, type: 'appreciative' },
+                    { text: '발을 바다에 담그며 걷는다', affection: 16, trust: 16, type: 'playful' },
+                    { text: '빨리 걸어서 뒤처지게 한다', affection: -12, trust: -15, type: 'inconsiderate' }
+                ]
+            },
+            {
+                id: 'beach_photo',
+                situation: '사진 찍기 좋은 장소입니다.',
+                choices: [
+                    { text: '멋진 사진을 찍어준다', affection: 16, trust: 16, type: 'photographer' },
+                    { text: '"같이 찍어요"', affection: 18, trust: 14, type: 'together' },
+                    { text: '"이따가 찍어요"', affection: 6, trust: 8, type: 'later' },
+                    { text: '"사진 또요?"', affection: -10, trust: -12, type: 'annoyed' }
+                ]
+            },
+            {
+                id: 'beach_evening',
+                situation: '해가 지고 밤이 됩니다.',
+                choices: [
+                    { text: '"별이 예쁘네요"', affection: 18, trust: 18, type: 'romantic' },
+                    { text: '가까이 다가가서 어깨를 감싼다', affection: 20, trust: 16, type: 'intimate' },
+                    { text: '"집에 갈까요?"', affection: 10, trust: 12, type: 'end' },
+                    { text: '"춥네요" 빨리 가자고 한다', affection: -8, trust: -10, type: 'hurry' }
+                ]
+            }
+        ]
+    },
+    museum: {
+        id: 'museum',
+        name: '미술관/박물관',
+        icon: '🖼️',
+        cost: 35000,
+        stamina: 30,
+        baseAffection: 7,
+        baseTrust: 10,
+        description: '문화적이고 지적인 데이트',
+        scenarios: [
+            {
+                id: 'museum_art',
+                situation: '추상화 앞에 섭니다. 의미를 묻습니다.',
+                choices: [
+                    { text: '자신의 해석을 진지하게 설명한다', affection: 14, trust: 18, type: 'intellectual' },
+                    { text: '"당신은 어떻게 생각해요?"', affection: 12, trust: 20, type: 'curious' },
+                    { text: '"저도 잘 모르겠어요" 솔직하게 말한다', affection: 10, trust: 16, type: 'honest' },
+                    { text: '"이해가 안 가네요"', affection: -8, trust: -10, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'museum_guide',
+                situation: '오디오 가이드를 빌릴까 물어봅니다.',
+                choices: [
+                    { text: '"같이 들어요"', affection: 14, trust: 16, type: 'together' },
+                    { text: '"제가 설명해줄게요"', affection: 16, trust: 18, type: 'knowledgeable' },
+                    { text: '"필요 없어요. 그냥 볼까요?"', affection: 10, trust: 12, type: 'casual' },
+                    { text: '"돈 아까워요"', affection: -12, trust: -14, type: 'cheap' }
+                ]
+            },
+            {
+                id: 'museum_favorite',
+                situation: '"이 작품이 마음에 들어요"라고 말합니다.',
+                choices: [
+                    { text: '"왜 좋아하세요?" 관심있게 듣는다', affection: 14, trust: 20, type: 'interested' },
+                    { text: '"저도 이 작품 좋아해요"', affection: 16, trust: 16, type: 'agree' },
+                    { text: '"저는 저게 더 좋은데요"', affection: 8, trust: 12, type: 'different' },
+                    { text: '"별로 안 예쁜데요"', affection: -15, trust: -18, type: 'dismiss' }
+                ]
+            },
+            {
+                id: 'museum_photo',
+                situation: '사진 촬영이 금지된 곳에서 사진을 찍으려 합니다.',
+                choices: [
+                    { text: '"여기 사진 찍으면 안 돼요"', affection: 10, trust: 22, type: 'rule_follower' },
+                    { text: '"나중에 밖에서 찍어요"', affection: 12, trust: 18, type: 'suggest_alternative' },
+                    { text: '같이 몰래 찍는다', affection: 15, trust: -10, type: 'rebellious' },
+                    { text: '무시하고 지나간다', affection: 5, trust: 8, type: 'ignore' }
+                ]
+            },
+            {
+                id: 'museum_bench',
+                situation: '벤치에 앉아 쉬자고 합니다.',
+                choices: [
+                    { text: '"좋아요. 천천히 쉬어요"', affection: 14, trust: 18, type: 'caring' },
+                    { text: '같이 앉아 작품을 감상한다', affection: 16, trust: 20, type: 'together' },
+                    { text: '"조금만 더 보고 쉬어요"', affection: 8, trust: 10, type: 'insensitive' },
+                    { text: '피곤해하는 모습을 드러낸다', affection: -10, trust: -12, type: 'impatient' }
+                ]
+            },
+            {
+                id: 'museum_shop',
+                situation: '뮤지엄 숍에 들렀습니다.',
+                choices: [
+                    { text: '"기념품 하나 고를래요?"', affection: 16, trust: 16, type: 'gift' },
+                    { text: '같이 구경하며 재미있게 둘러본다', affection: 14, trust: 14, type: 'fun' },
+                    { text: '"비싸네요. 나가요"', affection: -10, trust: -12, type: 'cheap' },
+                    { text: '관심 없이 빨리 나간다', affection: -8, trust: -10, type: 'rush' }
+                ]
+            },
+            {
+                id: 'museum_sculpture',
+                situation: '유명한 조각상 앞입니다.',
+                choices: [
+                    { text: '"정말 대단하네요"', affection: 12, trust: 16, type: 'appreciative' },
+                    { text: '같은 포즈를 취하며 웃긴다', affection: 16, trust: 12, type: 'playful' },
+                    { text: '조각에 대해 설명한다', affection: 14, trust: 18, type: 'informative' },
+                    { text: '"그냥 돌덩이네요"', affection: -12, trust: -15, type: 'disrespectful' }
+                ]
+            },
+            {
+                id: 'museum_cafe',
+                situation: '미술관 카페에서 쉽니다.',
+                choices: [
+                    { text: '"뭐 마실래요? 제가 살게요"', affection: 14, trust: 16, type: 'treat' },
+                    { text: '오늘 본 작품에 대해 이야기한다', affection: 16, trust: 20, type: 'discuss' },
+                    { text: '"피곤하네요"', affection: 8, trust: 10, type: 'tired' },
+                    { text: '휴대폰만 본다', affection: -12, trust: -15, type: 'rude' }
+                ]
+            },
+            {
+                id: 'museum_quiet',
+                situation: '조용한 전시실입니다.',
+                choices: [
+                    { text: '속삭이며 조용히 대화한다', affection: 14, trust: 18, type: 'respectful' },
+                    { text: '손을 잡고 조용히 관람한다', affection: 16, trust: 16, type: 'romantic' },
+                    { text: '큰 소리로 이야기한다', affection: -15, trust: -20, type: 'rude' },
+                    { text: '아무 말 없이 같이 관람한다', affection: 12, trust: 14, type: 'calm' }
+                ]
+            },
+            {
+                id: 'museum_exit',
+                situation: '관람을 마치고 나옵니다.',
+                choices: [
+                    { text: '"오늘 정말 좋았어요"', affection: 16, trust: 18, type: 'happy' },
+                    { text: '"다음에 또 같이 와요"', affection: 18, trust: 20, type: 'future' },
+                    { text: '"이제 뭐 할까요?"', affection: 12, trust: 14, type: 'next' },
+                    { text: '"지루했어요"', affection: -15, trust: -18, type: 'bored' }
+                ]
+            }
+        ]
+    },
+    park_picnic: {
+        id: 'park_picnic',
+        name: '공원 피크닉',
+        icon: '🧺',
+        cost: 30000,
+        stamina: 25,
+        baseAffection: 6,
+        baseTrust: 8,
+        description: '평화로운 공원에서 피크닉',
+        scenarios: [
+            {
+                id: 'picnic_prepare',
+                situation: '피크닉 준비물을 챙겼습니다.',
+                choices: [
+                    { text: '"모든 걸 다 준비했어요"', affection: 18, trust: 20, type: 'prepared' },
+                    { text: '"같이 샌드위치 만들어요"', affection: 16, trust: 18, type: 'together' },
+                    { text: '"편의점에서 살까요?"', affection: 10, trust: 12, type: 'casual' },
+                    { text: '"준비 안 했어요"', affection: -12, trust: -15, type: 'unprepared' }
+                ]
+            },
+            {
+                id: 'picnic_spot',
+                situation: '자리를 찾습니다.',
+                choices: [
+                    { text: '나무 그늘 아래 좋은 자리를 찾는다', affection: 16, trust: 18, type: 'thoughtful' },
+                    { text: '"어디가 좋아요?"', affection: 12, trust: 16, type: 'ask' },
+                    { text: '아무 데나 앉는다', affection: 8, trust: 10, type: 'casual' },
+                    { text: '사람 많은 곳에 앉는다', affection: -8, trust: -10, type: 'inconsiderate' }
+                ]
+            },
+            {
+                id: 'picnic_blanket',
+                situation: '돗자리를 깝니다.',
+                choices: [
+                    { text: '정성스럽게 펼치고 정리한다', affection: 14, trust: 18, type: 'neat' },
+                    { text: '같이 펼친다', affection: 12, trust: 16, type: 'together' },
+                    { text: '대충 펼친다', affection: 8, trust: 10, type: 'careless' },
+                    { text: '"당신이 펼쳐요"', affection: -10, trust: -12, type: 'lazy' }
+                ]
+            },
+            {
+                id: 'picnic_food',
+                situation: '준비한 음식을 꺼냅니다.',
+                choices: [
+                    { text: '"좋아하는 걸로 준비했어요"', affection: 18, trust: 20, type: 'thoughtful' },
+                    { text: '같이 나눠 먹는다', affection: 16, trust: 18, type: 'sharing' },
+                    { text: '음식이 별로다', affection: -12, trust: -15, type: 'complain' },
+                    { text: '"배고프네요" 많이 먹는다', affection: 10, trust: 12, type: 'hungry' }
+                ]
+            },
+            {
+                id: 'picnic_talk',
+                situation: '평화로운 분위기에서 대화합니다.',
+                choices: [
+                    { text: '깊은 대화를 나눈다', affection: 16, trust: 22, type: 'deep' },
+                    { text: '가벼운 농담을 주고받는다', affection: 14, trust: 16, type: 'fun' },
+                    { text: '조용히 경치를 즐긴다', affection: 12, trust: 18, type: 'peaceful' },
+                    { text: '휴대폰만 본다', affection: -15, trust: -20, type: 'rude' }
+                ]
+            },
+            {
+                id: 'picnic_nap',
+                situation: '상대방이 졸립다고 합니다.',
+                choices: [
+                    { text: '"무릎 베고 자세요"', affection: 20, trust: 18, type: 'romantic' },
+                    { text: '"잠깐 자도 돼요"', affection: 14, trust: 20, type: 'caring' },
+                    { text: '같이 눕는다', affection: 18, trust: 16, type: 'together' },
+                    { text: '"집에 가서 자요"', affection: -10, trust: -12, type: 'insensitive' }
+                ]
+            },
+            {
+                id: 'picnic_frisbee',
+                situation: '프리스비나 공을 가져왔습니다.',
+                choices: [
+                    { text: '신나게 같이 논다', affection: 18, trust: 16, type: 'active' },
+                    { text: '"조금만 놀다 쉬어요"', affection: 14, trust: 14, type: 'moderate' },
+                    { text: '"저는 그냥 앉아있을게요"', affection: -8, trust: -10, type: 'lazy' },
+                    { text: '게임을 제안한다', affection: 16, trust: 14, type: 'playful' }
+                ]
+            },
+            {
+                id: 'picnic_weather',
+                situation: '날씨가 완벽합니다.',
+                choices: [
+                    { text: '"날씨처럼 완벽한 하루예요"', affection: 18, trust: 16, type: 'romantic' },
+                    { text: '"정말 좋은 날씨네요"', affection: 14, trust: 14, type: 'appreciative' },
+                    { text: '"좀 덥네요"', affection: 6, trust: 8, type: 'complain' },
+                    { text: '그냥 즐긴다', affection: 12, trust: 12, type: 'enjoy' }
+                ]
+            },
+            {
+                id: 'picnic_cleanup',
+                situation: '정리할 시간입니다.',
+                choices: [
+                    { text: '깔끔하게 정리한다', affection: 14, trust: 20, type: 'responsible' },
+                    { text: '같이 정리한다', affection: 16, trust: 18, type: 'together' },
+                    { text: '대충 정리한다', affection: -8, trust: -12, type: 'careless' },
+                    { text: '"당신이 정리해요"', affection: -15, trust: -18, type: 'lazy' }
+                ]
+            },
+            {
+                id: 'picnic_end',
+                situation: '피크닉이 끝났습니다.',
+                choices: [
+                    { text: '"오늘 정말 행복했어요"', affection: 18, trust: 18, type: 'happy' },
+                    { text: '"다음에 또 와요"', affection: 16, trust: 20, type: 'future' },
+                    { text: '"집에 갈까요?"', affection: 12, trust: 14, type: 'end' },
+                    { text: '"좀 지루했어요"', affection: -15, trust: -18, type: 'bored' }
+                ]
+            }
+        ]
     }
 };
 
@@ -2015,6 +2463,96 @@ const CRISIS_EVENTS = [
             { text: '아무렇지 않은 척 넘어간다.', affection: 5, trust: 10, type: 'ignore' },
             { text: '"그 사람이랑 친해요?" 가볍게 물어본다.', affection: 0, trust: 5, type: 'ask' },
             { text: '"제 게시물에도 좋아요 눌러주세요" 농담으로 말한다.', affection: 8, trust: 8, type: 'joke' }
+        ]
+    },
+    {
+        id: 'late_for_date',
+        situation: '약속 시간에 30분이나 늦었습니다. 상대방이 화가 난 것 같습니다.',
+        choices: [
+            { text: '"정말 죄송해요. 교통이 막혀서..." 솔직하게 사과한다.', affection: -5, trust: 5, type: 'honest_apology' },
+            { text: '"미안해요, 큰 일 생겼어요" 거짓말로 둘러댄다.', affection: -10, trust: -20, type: 'lie' },
+            { text: '"30분밖에 안 늦었는데..." 변명한다.', affection: -20, trust: -25, type: 'excuse' }
+        ]
+    },
+    {
+        id: 'forgot_anniversary',
+        situation: '상대방이 기대하던 기념일을 깜빡 잊었습니다. 실망한 표정입니다.',
+        choices: [
+            { text: '"정말 죄송해요. 지금 당장 만회할게요!" 즉시 행동한다.', affection: -8, trust: -5, type: 'immediate_action' },
+            { text: '"미안해요... 제가 잊었어요" 솔직하게 인정한다.', affection: -15, trust: 10, type: 'honest' },
+            { text: '"그런 날이었어요? 미안한데 기억 안 나요"', affection: -30, trust: -35, type: 'casual' }
+        ]
+    },
+    {
+        id: 'cancel_plan_last_minute',
+        situation: '갑자기 친구들과의 약속이 생겨서 데이트를 취소해야 합니다.',
+        choices: [
+            { text: '"미안해요, 다음에 더 좋은 곳 갈게요" 진심으로 사과한다.', affection: -10, trust: -5, type: 'apologize' },
+            { text: '친구를 거절하고 데이트를 우선한다.', affection: 15, trust: 20, type: 'prioritize' },
+            { text: '"어쩔 수 없어요. 다음에 봬요" 가볍게 말한다.', affection: -25, trust: -30, type: 'dismissive' }
+        ]
+    },
+    {
+        id: 'ignore_message',
+        situation: '바빠서 상대방의 메시지를 6시간 동안 확인하지 못했습니다. 서운해합니다.',
+        choices: [
+            { text: '"정말 바빴어요. 미안해요" 사과한다.', affection: -5, trust: 5, type: 'apologize' },
+            { text: '"항상 답장해야 하나요?" 반문한다.', affection: -20, trust: -25, type: 'defensive' },
+            { text: '먼저 전화해서 진심으로 사과한다.', affection: 5, trust: 15, type: 'call_apologize' }
+        ]
+    },
+    {
+        id: 'rude_to_server',
+        situation: '레스토랑 직원이 실수했을 때 당신의 반응을 상대방이 지켜봅니다.',
+        choices: [
+            { text: '"괜찮아요" 이해하며 넘어간다.', affection: 10, trust: 15, type: 'understanding' },
+            { text: '매니저를 부르며 강하게 항의한다.', affection: -15, trust: -20, type: 'harsh' },
+            { text: '"이 정도면 괜찮죠?" 상대방에게 물어본다.', affection: 5, trust: 10, type: 'considerate' }
+        ]
+    },
+    {
+        id: 'compare_with_ex',
+        situation: '무심코 "전 연인은 이런 거 좋아했는데"라고 말했습니다.',
+        choices: [
+            { text: '"미안해요, 실수였어요" 즉시 사과한다.', affection: -10, trust: -5, type: 'apologize' },
+            { text: '아무렇지 않게 넘어간다.', affection: -20, trust: -25, type: 'ignore' },
+            { text: '"하지만 당신이 더 좋아요" 만회한다.', affection: -5, trust: -10, type: 'recover' }
+        ]
+    },
+    {
+        id: 'broke_promise',
+        situation: '약속했던 것을 지키지 못했습니다. 상대방이 실망합니다.',
+        choices: [
+            { text: '"정말 죄송해요. 다음엔 꼭 지킬게요"', affection: -10, trust: -15, type: 'promise_again' },
+            { text: '"제가 약속했나요? 기억이 안 나는데..."', affection: -25, trust: -35, type: 'deny' },
+            { text: '즉시 보상할 방법을 찾아 실행한다.', affection: -5, trust: 5, type: 'compensate' }
+        ]
+    },
+    {
+        id: 'flirt_with_others',
+        situation: '당신이 다른 사람과 너무 친하게 대화하는 모습을 봤다고 합니다.',
+        choices: [
+            { text: '"오해예요. 그냥 친구예요" 해명한다.', affection: -5, trust: -10, type: 'explain' },
+            { text: '"질투하는 거예요?" 웃으며 장난친다.', affection: -15, trust: -20, type: 'joke' },
+            { text: '"미안해요. 조심할게요" 진지하게 사과한다.', affection: 5, trust: 10, type: 'serious_apology' }
+        ]
+    },
+    {
+        id: 'insensitive_comment',
+        situation: '무심코 한 말이 상대방에게 상처를 줬습니다. 표정이 어두워집니다.',
+        choices: [
+            { text: '"미안해요, 그런 뜻이 아니었어요" 즉시 사과한다.', affection: -5, trust: 0, type: 'apologize' },
+            { text: '"너무 예민한 거 아니에요?" 방어적으로 나온다.', affection: -25, trust: -30, type: 'defensive' },
+            { text: '왜 기분이 나빴는지 진지하게 물어본다.', affection: 0, trust: 15, type: 'ask_sincerely' }
+        ]
+    },
+    {
+        id: 'priority_issue',
+        situation: '중요한 날인데 당신이 게임이나 취미에 빠져있습니다.',
+        choices: [
+            { text: '즉시 중단하고 관심을 돌린다.', affection: 5, trust: 10, type: 'stop' },
+            { text: '"잠깐만요, 거의 끝났어요" 계속한다.', affection: -15, trust: -20, type: 'continue' },
+            { text: '"조금만 기다려주세요" 부탁한다.', affection: -8, trust: -10, type: 'ask_wait' }
         ]
     }
 ];

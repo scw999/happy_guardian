@@ -136,9 +136,9 @@ function showGameObjective() {
                     <ul style="line-height: 1.8;">
                         <li><strong>호감도 %</strong> = 프로포즈 승낙 확률</li>
                         <li><strong>하루 최대 3회</strong> 행동 가능 (데이트/선물/대화)</li>
-                        <li>같은 행동을 반복하면 <strong>체력이 2배씩</strong> 소모됩니다</li>
+                        <li>같은 행동을 반복하면 <strong>체력이 6배, 11배씩</strong> 급증!</li>
                         <li><strong>호감도가 낮으면</strong> 데이트를 거절당할 수 있습니다</li>
-                        <li>거절당하면 <strong>체력 -20, 호감도 -5</strong></li>
+                        <li>거절당하면 <strong>체력 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
                     </ul>
 
                     <h3 style="margin-top: 20px;">💪 자원 관리</h3>
@@ -443,25 +443,25 @@ function selectDateLocation(index) {
         return;
     }
 
-    // 호감도 기반 데이트 수락 확률 체크
+    // 호감도 기반 데이트 수락 확률 체크 (더 엄격하게 변경)
     let acceptChance = 1.0;
     if (gameState.affection < 20) {
-        acceptChance = 0.3;
+        acceptChance = 0.2;  // 20% 확률로 낮춤
     } else if (gameState.affection < 40) {
-        acceptChance = 0.5;
+        acceptChance = 0.4;  // 40% 확률로 낮춤
     } else if (gameState.affection < 60) {
-        acceptChance = 0.7;
+        acceptChance = 0.6;  // 60% 확률로 낮춤
     } else if (gameState.affection < 80) {
-        acceptChance = 0.9;
+        acceptChance = 0.85;  // 85% 확률로 낮춤
     }
 
     // 거절 체크
     if (Math.random() > acceptChance) {
-        gameState.stamina -= 40;  // 체력 급감 (20 → 40으로 증가)
-        gameState.affection -= 5;  // 호감도 감소
-        gameState.trust -= 3;  // 신뢰도 감소
+        gameState.stamina -= 50;  // 체력 급감 (40 → 50으로 증가)
+        gameState.affection -= 8;  // 호감도 감소 (5 → 8로 증가)
+        gameState.trust -= 5;  // 신뢰도 감소 (3 → 5로 증가)
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-40 체력, -5 호감도, -3 신뢰도)\n\n호감도를 더 높인 후 다시 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-50 체력, -8 호감도, -5 신뢰도)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
         updateAllUI();
         return;
     }
@@ -579,10 +579,10 @@ function giveGift(index) {
     gameState.dailyActionCounts['gift']++;
     const repeatCount = gameState.dailyActionCounts['gift'];
 
-    // 반복 횟수에 따라 추가 체력 소모 (200%씩 증가 - 1번째: 기본, 2번째: 3배, 3번째: 5배)
+    // 반복 횟수에 따라 추가 체력 소모 (500%씩 증가 - 1번째: 기본, 2번째: 6배, 3번째: 11배)
     let staminaCost = gift.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 2.0));
+        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 5.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -790,10 +790,10 @@ window.selectScenarioChoice = function(index) {
     gameState.dailyActionCounts[actionKey]++;
     const repeatCount = gameState.dailyActionCounts[actionKey];
 
-    // 반복 횟수에 따라 추가 체력 소모 (200%씩 증가 - 1번째: 기본, 2번째: 3배, 3번째: 5배)
+    // 반복 횟수에 따라 추가 체력 소모 (500%씩 증가 - 1번째: 기본, 2번째: 6배, 3번째: 11배)
     let staminaCost = sourceData.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 2.0));
+        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 5.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -1778,9 +1778,10 @@ function showInGameHelp() {
                     <li>같은 행동 반복 시 <strong>체력 소모가 급증!</strong></li>
                     <ul>
                         <li>1번째: 기본 체력</li>
-                        <li>2번째: <strong>3배</strong> 체력 소모</li>
-                        <li>3번째: <strong>5배</strong> 체력 소모</li>
+                        <li>2번째: <strong>6배</strong> 체력 소모</li>
+                        <li>3번째: <strong>11배</strong> 체력 소모</li>
                     </ul>
+                    <li>⚠️ <strong>같은 액션 반복은 사실상 불가능!</strong> 다양한 행동을 하세요</li>
                     <li>체력이 0이 되면 자동으로 잠들기</li>
                     <li>휴식으로 체력 회복 (50 회복)</li>
                 </ul>
@@ -1798,14 +1799,14 @@ function showInGameHelp() {
                 <h3>💔 데이트 거절</h3>
                 <ul>
                     <li>호감도가 낮으면 데이트를 거절당할 수 있음</li>
-                    <li>거절 시 <strong>체력 -40, 호감도 -5, 신뢰도 -3</strong></li>
-                    <li>호감도별 수락 확률:</li>
+                    <li>거절 시 <strong>체력 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
+                    <li>호감도별 수락 확률 (엄격함):</li>
                     <ul>
-                        <li>20% 미만: 30% 확률</li>
-                        <li>20-40%: 50% 확률</li>
-                        <li>40-60%: 70% 확률</li>
-                        <li>60-80%: 90% 확률</li>
-                        <li>80% 이상: 100% 확률</li>
+                        <li>20% 미만: <strong>20%</strong> 확률 (거의 거절)</li>
+                        <li>20-40%: <strong>40%</strong> 확률 (자주 거절)</li>
+                        <li>40-60%: <strong>60%</strong> 확률 (반반)</li>
+                        <li>60-80%: <strong>85%</strong> 확률 (가끔 거절)</li>
+                        <li>80% 이상: <strong>100%</strong> 확률 (항상 수락)</li>
                     </ul>
                 </ul>
 
