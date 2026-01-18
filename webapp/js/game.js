@@ -579,10 +579,10 @@ function giveGift(index) {
     gameState.dailyActionCounts['gift']++;
     const repeatCount = gameState.dailyActionCounts['gift'];
 
-    // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
+    // 반복 횟수에 따라 추가 체력 소모 (200%씩 증가 - 1번째: 기본, 2번째: 3배, 3번째: 5배)
     let staminaCost = gift.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 1.0));
+        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 2.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -790,10 +790,10 @@ window.selectScenarioChoice = function(index) {
     gameState.dailyActionCounts[actionKey]++;
     const repeatCount = gameState.dailyActionCounts[actionKey];
 
-    // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
+    // 반복 횟수에 따라 추가 체력 소모 (200%씩 증가 - 1번째: 기본, 2번째: 3배, 3번째: 5배)
     let staminaCost = sourceData.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 1.0));
+        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 2.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -1775,7 +1775,12 @@ function showInGameHelp() {
                 <h3>⏰ 하루 행동 제한</h3>
                 <ul>
                     <li><strong>하루 최대 3회</strong> 행동 가능 (대화/데이트/선물)</li>
-                    <li>같은 행동 반복 시 <strong>체력이 2배씩</strong> 소모</li>
+                    <li>같은 행동 반복 시 <strong>체력 소모가 급증!</strong></li>
+                    <ul>
+                        <li>1번째: 기본 체력</li>
+                        <li>2번째: <strong>3배</strong> 체력 소모</li>
+                        <li>3번째: <strong>5배</strong> 체력 소모</li>
+                    </ul>
                     <li>체력이 0이 되면 자동으로 잠들기</li>
                     <li>휴식으로 체력 회복 (50 회복)</li>
                 </ul>

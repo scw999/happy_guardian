@@ -961,6 +961,87 @@ const TALK_TOPICS = {
                     { text: '"다음에 같이 산책시켜요"', affection: 12, trust: 15, type: 'active' },
                     { text: '"동물 냄새 안 나요?" 찡그리며 말한다', affection: -15, trust: -20, type: 'rude' }
                 ]
+            },
+            {
+                id: 'daily_nightmare',
+                situation: '"어젯밤에 악몽 꿨어요. 당신이 떠나는 꿈이었어요"',
+                choices: [
+                    { text: '"절대 안 떠나요!" 즉시 대답한다', affection: 15, trust: -5, type: 'quick_reassure' },
+                    { text: '"그런 일 없을 거예요" 진지하게 약속한다', affection: 10, trust: 20, type: 'promise' },
+                    { text: '"꿈은 반대래요" 가볍게 넘긴다', affection: -8, trust: -12, type: 'dismiss' }
+                ]
+            },
+            {
+                id: 'daily_compliment',
+                situation: '오늘 다른 사람에게 칭찬을 받았다고 기뻐합니다.',
+                choices: [
+                    { text: '"누가요? 무슨 칭찬이었어요?"', affection: 5, trust: 15, type: 'curious' },
+                    { text: '"당연하죠! 당신은 정말 멋져요"', affection: 12, trust: 8, type: 'supportive' },
+                    { text: '"그 사람 당신 좋아하는 거 아니에요?" 의심한다', affection: -12, trust: -18, type: 'jealous' }
+                ]
+            },
+            {
+                id: 'daily_haircut',
+                situation: '머리를 자르고 왔습니다. "어때요?"',
+                choices: [
+                    { text: '"정말 잘 어울려요!" 진심으로 칭찬한다', affection: 12, trust: 10, type: 'compliment' },
+                    { text: '"달라 보이긴 하네요" 애매하게 답한다', affection: -5, trust: 5, type: 'vague' },
+                    { text: '"전 머리가 더 좋았는데..." 솔직하게 말한다', affection: -15, trust: 15, type: 'too_honest' }
+                ]
+            },
+            {
+                id: 'daily_late_reply',
+                situation: '"왜 답장이 늦었어요?" 조금 삐진 듯 물어봅니다.',
+                choices: [
+                    { text: '솔직하게 바빴던 이유를 설명한다', affection: 5, trust: 20, type: 'honest' },
+                    { text: '"미안해요, 다음엔 바로 답할게요" 사과한다', affection: 10, trust: 12, type: 'apologize' },
+                    { text: '"항상 바로 답할 수는 없잖아요" 변명한다', affection: -10, trust: -15, type: 'defensive' }
+                ]
+            },
+            {
+                id: 'daily_memories',
+                situation: '"우리 처음 만났을 때 기억나요?"',
+                choices: [
+                    { text: '자세하게 기억을 되짚으며 이야기한다', affection: 18, trust: 20, type: 'detailed' },
+                    { text: '"그럼요! 정말 떨렸어요" 감정을 표현한다', affection: 15, trust: 15, type: 'emotional' },
+                    { text: '"어... 대충요?" 기억이 흐릿한 척한다', affection: -20, trust: -25, type: 'forgot' }
+                ]
+            },
+            {
+                id: 'daily_social_media',
+                situation: '"제 SNS 게시물 봤어요?" 기대하는 표정으로 묻습니다.',
+                choices: [
+                    { text: '"봤어요! 정말 좋더라고요" 즉시 반응한다', affection: 12, trust: 10, type: 'saw' },
+                    { text: '"아직 못 봤는데, 지금 볼게요!" 바로 확인한다', affection: 10, trust: 15, type: 'check_now' },
+                    { text: '"SNS 잘 안 봐서..." 무관심하게 말한다', affection: -15, trust: -10, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'daily_cooking',
+                situation: '오늘 요리를 했다며 자랑스러워합니다.',
+                choices: [
+                    { text: '"대단한데요! 다음엔 저한테도 해줄래요?"', affection: 12, trust: 15, type: 'interested' },
+                    { text: '"맛있었겠다! 사진 있어요?"', affection: 10, trust: 10, type: 'ask_photo' },
+                    { text: '"잘하시네요" 무덤덤하게 반응한다', affection: -5, trust: -8, type: 'bland' }
+                ]
+            },
+            {
+                id: 'daily_promotion',
+                situation: '직장에서 승진 기회가 생겼다고 합니다. 하지만 더 바빠질 것 같습니다.',
+                choices: [
+                    { text: '"축하해요! 정말 잘됐네요" 무조건 응원한다', affection: 15, trust: 10, type: 'support' },
+                    { text: '"좋지만... 우리 만날 시간은 괜찮을까요?" 걱정을 표현한다', affection: -5, trust: 20, type: 'honest_worry' },
+                    { text: '"승진보다 저랑 시간이 더 중요하지 않나요?" 압박한다', affection: -20, trust: -25, type: 'selfish' }
+                ]
+            },
+            {
+                id: 'daily_old_photo',
+                situation: '옛날 사진을 보며 "그때가 좋았어요" 라고 말합니다.',
+                choices: [
+                    { text: '"지금이 더 좋지 않나요?" 현재를 강조한다', affection: 12, trust: 15, type: 'present' },
+                    { text: '"그때도 좋았지만 앞으로가 더 기대돼요"', affection: 15, trust: 18, type: 'future' },
+                    { text: '"과거에 너무 집착하시는 거 아니에요?"', affection: -15, trust: -12, type: 'critical' }
+                ]
             }
         ]
     },
@@ -1061,6 +1142,96 @@ const TALK_TOPICS = {
                     { text: '"과거는 바꿀 수 없어요. 지금부터 잘 하면 돼요"', affection: 10, trust: 18, type: 'forward' },
                     { text: '"누구나 실수하잖아요. 그게 당신의 전부는 아니에요"', affection: 12, trust: 22, type: 'accepting' },
                     { text: '"그러게 그때 왜 그러셨어요" 과거를 들춰낸다', affection: -15, trust: -28, type: 'reproachful' }
+                ]
+            },
+            {
+                id: 'comfort_anxiety',
+                situation: '"요즘 불안해요. 모든 게 잘 안 될 것 같아요"',
+                choices: [
+                    { text: '"괜찮아질 거예요!" 무조건 긍정적으로 말한다', affection: 10, trust: -5, type: 'forced_positive' },
+                    { text: '"왜 불안한지 천천히 이야기해봐요" 경청한다', affection: 8, trust: 25, type: 'listen' },
+                    { text: '"다들 그렇게 살아요" 대수롭지 않게 넘긴다', affection: -15, trust: -20, type: 'dismiss' }
+                ]
+            },
+            {
+                id: 'comfort_crying',
+                situation: '갑자기 울기 시작합니다. 이유를 말하지 않습니다.',
+                choices: [
+                    { text: '아무 말 없이 꼭 안아준다', affection: 18, trust: 20, type: 'hug' },
+                    { text: '"무슨 일이에요?" 계속 물어본다', affection: -5, trust: 10, type: 'pry' },
+                    { text: '"말하고 싶을 때 말해요" 기다려준다', affection: 12, trust: 25, type: 'patient' }
+                ]
+            },
+            {
+                id: 'comfort_comparison',
+                situation: '"다른 사람들은 다 잘 사는 것 같은데 저만 뒤처진 것 같아요"',
+                choices: [
+                    { text: '"당신은 충분히 잘하고 있어요" 위로한다', affection: 12, trust: 15, type: 'reassure' },
+                    { text: '"비교하지 마세요. 각자의 속도가 있어요"', affection: 10, trust: 22, type: 'perspective' },
+                    { text: '"그럼 더 열심히 하면 되죠" 채찍질한다', affection: -18, trust: -15, type: 'push' }
+                ]
+            },
+            {
+                id: 'comfort_betrayal',
+                situation: '가까운 사람에게 배신당했다며 눈물을 흘립니다.',
+                choices: [
+                    { text: '"그 사람은 당신을 받을 자격이 없어요" 분노한다', affection: 15, trust: 10, type: 'angry' },
+                    { text: '조용히 손을 잡고 옆에 있어준다', affection: 10, trust: 25, type: 'presence' },
+                    { text: '"혹시 오해는 아닐까요?" 의심한다', affection: -12, trust: -20, type: 'doubt' }
+                ]
+            },
+            {
+                id: 'comfort_nightmare_bad',
+                situation: '악몽을 꾸고 놀라 깨어 떨고 있습니다. 새벽 3시입니다.',
+                choices: [
+                    { text: '즉시 전화를 걸어 위로한다', affection: 20, trust: 22, type: 'immediate' },
+                    { text: '메시지로 "괜찮아요. 제가 있어요" 보낸다', affection: 12, trust: 18, type: 'message' },
+                    { text: '아침에 확인하고 답장한다', affection: -20, trust: -25, type: 'delay' }
+                ]
+            },
+            {
+                id: 'comfort_self_hate',
+                situation: '"저는 정말 쓸모없는 사람인 것 같아요..."',
+                choices: [
+                    { text: '"무슨 소리예요! 당신은 소중한 사람이에요"', affection: 15, trust: 15, type: 'deny' },
+                    { text: '"왜 그렇게 생각하는지 말해줄래요?"', affection: 8, trust: 25, type: 'explore' },
+                    { text: '"그런 말 하지 마세요. 듣기 힘들어요"', affection: -10, trust: -18, type: 'avoid' }
+                ]
+            },
+            {
+                id: 'comfort_overwhelmed',
+                situation: '해야 할 일이 너무 많다며 패닉 상태입니다.',
+                choices: [
+                    { text: '"하나씩 같이 정리해봐요" 실질적으로 돕는다', affection: 12, trust: 25, type: 'practical' },
+                    { text: '"다 괜찮아질 거예요. 걱정 마세요"', affection: 10, trust: 10, type: 'vague' },
+                    { text: '"계획을 잘 세워야죠" 지적한다', affection: -15, trust: -20, type: 'blame' }
+                ]
+            },
+            {
+                id: 'comfort_disappointed',
+                situation: '중요한 시험에 떨어졌다며 낙담합니다.',
+                choices: [
+                    { text: '"이번엔 운이 없었어요. 다음엔 잘 될 거예요"', affection: 10, trust: 15, type: 'encourage' },
+                    { text: '"많이 속상하시겠어요. 제가 뭘 도와드릴까요?"', affection: 12, trust: 22, type: 'empathy' },
+                    { text: '"왜 떨어졌을까요? 무엇이 부족했나요?"', affection: -18, trust: -15, type: 'analyze' }
+                ]
+            },
+            {
+                id: 'comfort_body_image',
+                situation: '거울을 보며 "저 정말 못생겼어요..." 라고 말합니다.',
+                choices: [
+                    { text: '"무슨 소리예요! 정말 예뻐요"', affection: 15, trust: -8, type: 'compliment' },
+                    { text: '"외모보다 내면이 더 중요해요"', affection: -5, trust: 15, type: 'inner_beauty' },
+                    { text: '"제 눈엔 세상에서 제일 아름다워요"', affection: 18, trust: 12, type: 'romantic' }
+                ]
+            },
+            {
+                id: 'comfort_burnout',
+                situation: '"더 이상 아무것도 하기 싫어요. 모든 게 의미 없어요"',
+                choices: [
+                    { text: '"잠깐 쉬어가요. 제가 옆에 있을게요"', affection: 15, trust: 25, type: 'rest' },
+                    { text: '"무기력은 일시적이에요. 곧 나아질 거예요"', affection: 8, trust: 12, type: 'temporary' },
+                    { text: '"정신 차리세요. 이렇게 있으면 안 돼요"', affection: -20, trust: -25, type: 'harsh' }
                 ]
             }
         ]
