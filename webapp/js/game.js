@@ -108,29 +108,38 @@ function selectCharacter(characterId) {
 
 function showFirstMeetingScenario(characterId) {
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
-    if (!scenario) return;
+    if (!scenario) {
+        console.warn('첫 만남 시나리오를 찾을 수 없습니다:', characterId);
+        return;
+    }
 
-    const modal = createActionModal('💝 첫 만남', scenario.situation);
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
+    // 기존 모달 닫기
+    closeModal('action-modal');
 
-    scenario.choices.forEach((choice, index) => {
-        const choiceBtn = document.createElement('button');
-        choiceBtn.className = 'choice-option-btn';
+    // 약간의 딜레이 후 새 모달 표시
+    setTimeout(() => {
+        const modal = createActionModal('💝 첫 만남', scenario.situation);
+        const content = modal.querySelector('.modal-body');
+        content.innerHTML = '';
 
-        choiceBtn.innerHTML = `
-            <span class="choice-number">${index + 1}.</span>
-            <span class="choice-text">${choice.text}</span>
-        `;
+        scenario.choices.forEach((choice, index) => {
+            const choiceBtn = document.createElement('button');
+            choiceBtn.className = 'choice-option-btn';
 
-        choiceBtn.addEventListener('click', () => {
-            handleFirstMeetingChoice(choice);
+            choiceBtn.innerHTML = `
+                <span class="choice-number">${index + 1}.</span>
+                <span class="choice-text">${choice.text}</span>
+            `;
+
+            choiceBtn.onclick = function() {
+                handleFirstMeetingChoice(choice);
+            };
+
+            content.appendChild(choiceBtn);
         });
 
-        content.appendChild(choiceBtn);
-    });
-
-    showModal('action-modal');
+        showModal('action-modal');
+    }, 100);
 }
 
 function handleFirstMeetingChoice(choice) {
@@ -258,7 +267,6 @@ function createActionButtons() {
         const button = document.createElement('button');
         button.className = 'action-choice-btn';
         button.id = `action-${action.id}`;
-        button.disabled = false; // 명시적으로 활성화
 
         button.innerHTML = `
             <div class="action-icon">${action.icon}</div>
@@ -267,16 +275,12 @@ function createActionButtons() {
             </div>
         `;
 
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (button.disabled || button.classList.contains('disabled')) {
-                return;
+        // 간단한 onclick 핸들러 사용
+        button.onclick = function() {
+            if (!this.disabled && !this.classList.contains('disabled')) {
+                action.handler();
             }
-
-            action.handler();
-        }, { passive: false });
+        };
 
         choicesArea.appendChild(button);
     });
@@ -348,11 +352,11 @@ function showDateMenu() {
             </div>
         `;
 
-        option.addEventListener('click', () => {
-            if (!option.classList.contains('disabled')) {
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
                 selectDateLocation(location.id);
             }
-        });
+        };
 
         content.appendChild(option);
     });
@@ -403,11 +407,11 @@ function showGiftMenu() {
             </div>
         `;
 
-        option.addEventListener('click', () => {
-            if (!option.classList.contains('disabled')) {
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
                 giveGift(gift.id);
             }
-        });
+        };
 
         content.appendChild(option);
     });
@@ -475,11 +479,11 @@ function showTalkMenu() {
             </div>
         `;
 
-        option.addEventListener('click', () => {
-            if (!option.classList.contains('disabled')) {
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
                 selectTalkTopic(topic.id);
             }
-        });
+        };
 
         content.appendChild(option);
     });
@@ -521,9 +525,9 @@ function showScenario(scenario, sourceData, actionType) {
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.addEventListener('click', () => {
+        choiceBtn.onclick = function() {
             selectChoice(choice, sourceData, actionType);
-        });
+        };
 
         content.appendChild(choiceBtn);
     });
@@ -1032,9 +1036,9 @@ function triggerCrisisEvent() {
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.addEventListener('click', () => {
+        choiceBtn.onclick = function() {
             handleCrisisChoice(choice, event);
-        });
+        };
 
         content.appendChild(choiceBtn);
     });
@@ -1152,9 +1156,9 @@ function updateMiniCalendar() {
 
         // 클릭 이벤트 - 해당 날짜의 활동 상세 보기
         if (day <= gameState.day) {
-            dayElement.addEventListener('click', () => {
+            dayElement.onclick = function() {
                 showDayDetail(day);
-            });
+            };
             dayElement.style.cursor = 'pointer';
         }
 
@@ -1209,9 +1213,9 @@ function showCalendar() {
 
         // 클릭 이벤트
         if (day <= gameState.day) {
-            dayElement.addEventListener('click', () => {
+            dayElement.onclick = function() {
                 showDayDetail(day);
-            });
+            };
         }
 
         container.appendChild(dayElement);
