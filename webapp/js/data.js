@@ -1335,6 +1335,96 @@ const TALK_TOPICS = {
                     { text: '"당신한테 맞출게요"', affection: 10, trust: 20, type: 'flexible' },
                     { text: '"전 제 패턴 못 바꿔요" 단호하게 말한다', affection: -12, trust: -18, type: 'inflexible' }
                 ]
+            },
+            {
+                id: 'future_sacrifice',
+                situation: '"제 커리어 때문에 이사해야 할 수도 있어요. 괜찮을까요?"',
+                choices: [
+                    { text: '"당신의 꿈을 응원해요. 어디든 따라갈게요"', affection: 18, trust: 25, type: 'supportive' },
+                    { text: '"같이 상의해서 결정해요. 제 일도 있으니까"', affection: 8, trust: 28, type: 'realistic' },
+                    { text: '"저는 여기서 떠날 수 없어요" 거절한다', affection: -20, trust: -22, type: 'refuse' }
+                ]
+            },
+            {
+                id: 'future_debt',
+                situation: '"사실 학자금 대출이 좀 남아있어요..." 조심스럽게 고백합니다.',
+                choices: [
+                    { text: '"같이 갚아나가요. 우리 문제니까"', affection: 20, trust: 30, type: 'together' },
+                    { text: '"얼마나 남았어요? 구체적으로 이야기해봐요"', affection: 5, trust: 25, type: 'practical' },
+                    { text: '"왜 진작 말 안 했어요?" 따진다', affection: -18, trust: -25, type: 'accuse' }
+                ]
+            },
+            {
+                id: 'future_ex_relationship',
+                situation: '"전 연인과 좋게 헤어져서 가끔 연락해요. 괜찮죠?"',
+                choices: [
+                    { text: '"믿어요. 당신 판단을 존중해요"', affection: 12, trust: 30, type: 'trust' },
+                    { text: '"솔직히... 좀 불편한데 솔직하게 말해줘서 고마워요"', affection: 8, trust: 25, type: 'honest' },
+                    { text: '"그건 좀 아닌 것 같은데요" 불쾌감을 드러낸다', affection: -15, trust: -20, type: 'uncomfortable' }
+                ]
+            },
+            {
+                id: 'future_religion',
+                situation: '종교에 대한 생각이 다르다는 것을 알게 됩니다.',
+                choices: [
+                    { text: '"서로 존중하면 문제없어요"', affection: 15, trust: 28, type: 'respectful' },
+                    { text: '"제 종교로 개종해주면 안 될까요?"', affection: -10, trust: -15, type: 'convert' },
+                    { text: '"이건 중요한 문제네요. 깊이 이야기해봐요"', affection: 10, trust: 25, type: 'serious_talk' }
+                ]
+            },
+            {
+                id: 'future_work_life',
+                situation: '"일과 가정 중 뭐가 더 중요해요?"라고 물어봅니다.',
+                choices: [
+                    { text: '"가정이 우선이죠. 당신이 제일 중요해요"', affection: 18, trust: 15, type: 'family_first' },
+                    { text: '"둘 다 중요해요. 균형을 맞춰야죠"', affection: 10, trust: 28, type: 'balanced' },
+                    { text: '"일 없이는 가정도 없어요" 현실적으로 답한다', affection: -8, trust: 20, type: 'work_focused' }
+                ]
+            },
+            {
+                id: 'future_emergency',
+                situation: '"제 가족이 갑자기 큰 돈이 필요하다면 도와줄 수 있어요?"',
+                choices: [
+                    { text: '"당연하죠. 가족인데요"', affection: 20, trust: 28, type: 'family' },
+                    { text: '"상황을 보고 최선을 다해 도와드릴게요"', affection: 12, trust: 25, type: 'conditional' },
+                    { text: '"그건... 좀 부담스러운데요"', affection: -15, trust: -20, type: 'burden' }
+                ]
+            },
+            {
+                id: 'future_health',
+                situation: '"만약 제가 심하게 아프면... 그래도 함께 있어줄 수 있어요?"',
+                choices: [
+                    { text: '손을 꼭 잡으며 "평생 함께할게요"', affection: 25, trust: 30, type: 'devoted' },
+                    { text: '"무슨 소리예요. 당연하죠"', affection: 20, trust: 28, type: 'reassure' },
+                    { text: '"그런 일 없을 거예요" 주제를 회피한다', affection: -12, trust: -25, type: 'avoid' }
+                ]
+            },
+            {
+                id: 'future_friends',
+                situation: '"결혼해도 친구들 자주 만나고 싶어요"',
+                choices: [
+                    { text: '"당연하죠! 저도 당신 친구들이랑 친해지고 싶어요"', affection: 15, trust: 25, type: 'supportive' },
+                    { text: '"적당히는 괜찮아요"', affection: 8, trust: 18, type: 'moderate' },
+                    { text: '"결혼하면 가족이 우선 아니에요?"', affection: -18, trust: -25, type: 'controlling' }
+                ]
+            },
+            {
+                id: 'future_past_mistakes',
+                situation: '"과거에 실수가 많았어요. 그래도 받아들여줄 수 있어요?"',
+                choices: [
+                    { text: '"과거는 과거예요. 지금의 당신이 중요해요"', affection: 20, trust: 28, type: 'accepting' },
+                    { text: '"어떤 실수였는지 말해줄 수 있어요?"', affection: 5, trust: 25, type: 'curious' },
+                    { text: '"그게 무슨 실수인데요?" 불안해한다', affection: -10, trust: -15, type: 'anxious' }
+                ]
+            },
+            {
+                id: 'future_retirement',
+                situation: '"노후는 어떻게 보내고 싶어요?"',
+                choices: [
+                    { text: '"당신이랑 조용한 시골에서 살고 싶어요"', affection: 18, trust: 22, type: 'peaceful' },
+                    { text: '"건강하게 취미 생활하면서 보내고 싶어요"', affection: 12, trust: 25, type: 'active' },
+                    { text: '"아직 그런 건 생각 안 해봤어요" 무관심하게 답한다', affection: -8, trust: -12, type: 'indifferent' }
+                ]
             }
         ]
     },
@@ -1447,6 +1537,96 @@ const TALK_TOPICS = {
                     { text: '실수한 표현을 따라하며 놀린다', affection: 10, trust: 8, type: 'tease_mistake', successRate: 0.6 },
                     { text: '모른 척하며 넘어간다', affection: 7, trust: 12, type: 'ignore_politely', successRate: 0.8 },
                     { text: '계속 그 실수를 언급하며 창피하게 만든다', affection: -12, trust: -15, type: 'keep_mentioning', successRate: 0.3 }
+                ]
+            },
+            {
+                id: 'humor_aegyo',
+                situation: '상대방이 애교를 부리며 뭔가를 부탁합니다.',
+                choices: [
+                    { text: '"너무 귀여운데요?" 웃으며 들어준다', affection: 15, trust: 12, type: 'accept_cute', successRate: 0.8 },
+                    { text: '"그만 하세요" 웃으며 장난스럽게 거절한다', affection: 10, trust: 10, type: 'playful_reject', successRate: 0.7 },
+                    { text: '같이 애교 부리며 맞받아친다', affection: 14, trust: 8, type: 'mirror_aegyo', successRate: 0.6 },
+                    { text: '"징그러워요" 진지하게 거부한다', affection: -18, trust: -15, type: 'disgusted', successRate: 0.2 }
+                ]
+            },
+            {
+                id: 'humor_voice',
+                situation: '상대방의 목소리가 감기 때문에 쉬어서 웃깁니다.',
+                choices: [
+                    { text: '"목소리 귀여운데요?" 웃으며 위로한다', affection: 12, trust: 15, type: 'cute_voice', successRate: 0.8 },
+                    { text: '쉰 목소리를 흉내내며 같이 웃는다', affection: 10, trust: 8, type: 'imitate_voice', successRate: 0.6 },
+                    { text: '약을 사다주겠다고 진지하게 말한다', affection: 11, trust: 20, type: 'caring', successRate: 0.8 },
+                    { text: '계속 놀리며 말을 시킨다', affection: -15, trust: -12, type: 'mean_tease', successRate: 0.3 }
+                ]
+            },
+            {
+                id: 'humor_surprise',
+                situation: '깜짝 선물로 장난감 같은 걸 준비했습니다.',
+                choices: [
+                    { text: '신나게 좋아하며 같이 논다', affection: 16, trust: 12, type: 'enthusiastic', successRate: 0.8 },
+                    { text: '"유치한데 좋네요" 웃으며 받는다', affection: 12, trust: 10, type: 'amused', successRate: 0.7 },
+                    { text: '"이게 뭐예요?" 당황한다', affection: -5, trust: 5, type: 'confused', successRate: 0.6 },
+                    { text: '"이런 거 싫어요" 냉담하게 거절한다', affection: -20, trust: -18, type: 'cold_reject', successRate: 0.2 }
+                ]
+            },
+            {
+                id: 'humor_nickname_fail',
+                situation: '상대방이 지어준 별명이 별로입니다.',
+                choices: [
+                    { text: '"귀여운데요?" 웃으며 받아들인다', affection: 15, trust: 18, type: 'accept', successRate: 0.8 },
+                    { text: '"다른 걸로 해주세요" 장난스럽게 거절한다', affection: 10, trust: 12, type: 'playful_reject', successRate: 0.7 },
+                    { text: '더 웃긴 별명으로 맞받아친다', affection: 13, trust: 10, type: 'counter', successRate: 0.6 },
+                    { text: '"정말 싫은데요" 진지하게 화낸다', affection: -12, trust: -10, type: 'angry', successRate: 0.4 }
+                ]
+            },
+            {
+                id: 'humor_photobomb',
+                situation: '사진 찍으려는 순간 웃긴 표정으로 방해합니다.',
+                choices: [
+                    { text: '같이 웃으며 다시 찍는다', affection: 14, trust: 12, type: 'laugh_together', successRate: 0.8 },
+                    { text: '"진지하게 찍어요!" 웃으며 혼낸다', affection: 11, trust: 10, type: 'playful_scold', successRate: 0.7 },
+                    { text: '더 웃긴 표정으로 같이 장난친다', affection: 15, trust: 8, type: 'join_fun', successRate: 0.7 },
+                    { text: '"사진 망쳤잖아요" 짜증낸다', affection: -15, trust: -12, type: 'annoyed', successRate: 0.3 }
+                ]
+            },
+            {
+                id: 'humor_snort',
+                situation: '웃다가 코웃음을 쳐서 당황합니다.',
+                choices: [
+                    { text: '"그것도 귀여운데요?" 웃으며 위로한다', affection: 13, trust: 15, type: 'cute', successRate: 0.8 },
+                    { text: '같이 웃으며 "인간적이네요"', affection: 11, trust: 18, type: 'human', successRate: 0.8 },
+                    { text: '모른 척 넘어간다', affection: 8, trust: 12, type: 'ignore', successRate: 0.7 },
+                    { text: '흉내내며 놀린다', affection: -10, trust: -8, type: 'mock', successRate: 0.4 }
+                ]
+            },
+            {
+                id: 'humor_bad_joke',
+                situation: '당신이 한 농담이 완전히 실패했습니다.',
+                choices: [
+                    { text: '"미안해요" 웃으며 인정한다', affection: 10, trust: 15, type: 'admit', successRate: 0.8 },
+                    { text: '더 웃긴 농담으로 만회한다', affection: 13, trust: 10, type: 'recover', successRate: 0.6 },
+                    { text: '"원래 제 개그 센스가..." 변명한다', affection: 8, trust: 8, type: 'excuse', successRate: 0.7 },
+                    { text: '억지로 웃기려고 계속 시도한다', affection: -8, trust: -10, type: 'force', successRate: 0.4 }
+                ]
+            },
+            {
+                id: 'humor_sleepy',
+                situation: '상대방이 졸린 모습이 너무 귀엽습니다.',
+                choices: [
+                    { text: '"푹 쉬세요" 조용히 잠들게 해준다', affection: 12, trust: 20, type: 'caring', successRate: 0.8 },
+                    { text: '졸린 모습을 살짝 놀리며 웃긴다', affection: 10, trust: 12, type: 'tease', successRate: 0.7 },
+                    { text: '사진을 살짝 찍는다', affection: 8, trust: 5, type: 'photo', successRate: 0.6 },
+                    { text: '"자면 안 돼요!" 계속 깨운다', affection: -12, trust: -15, type: 'prevent_sleep', successRate: 0.3 }
+                ]
+            },
+            {
+                id: 'humor_awkward_silence',
+                situation: '갑자기 어색한 침묵이 흐릅니다.',
+                choices: [
+                    { text: '재밌는 주제를 꺼내 분위기를 바꾼다', affection: 12, trust: 15, type: 'change_topic', successRate: 0.8 },
+                    { text: '"어색하네요" 솔직하게 말하며 웃는다', affection: 10, trust: 18, type: 'honest', successRate: 0.7 },
+                    { text: '손을 잡으며 미소짓는다', affection: 15, trust: 12, type: 'romantic', successRate: 0.7 },
+                    { text: '계속 침묵을 유지하며 불편해한다', affection: -10, trust: -12, type: 'silent', successRate: 0.4 }
                 ]
             }
         ]
