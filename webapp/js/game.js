@@ -58,23 +58,25 @@ function closeRules() {
 function selectCharacter(characterId) {
     const character = CHARACTERS[characterId];
 
-    // 게임 상태 초기화
-    gameState.character = character;
-    gameState.affection = character.startAffection;
-    gameState.trust = character.startTrust;
-    gameState.money = 1000000;  // 100만원
-    gameState.stamina = 100;
-    gameState.day = 1;
-    gameState.dDay = 30;
-    gameState.startDate = new Date();
-    gameState.biorhythm = 'normal';
-    gameState.biorhythmDays = 0;
-    gameState.lastInteraction = 1;
-    gameState.workCount = 0;
-    gameState.hasProposalRing = false;
-    gameState.history = [];
-    gameState.dailyActivities = {};
-    gameState.isGameOver = false;
+    // 게임 상태 완전 초기화
+    gameState = {
+        character: character,
+        affection: character.startAffection,
+        trust: character.startTrust,
+        money: 1000000,
+        stamina: 100,
+        day: 1,
+        dDay: 30,
+        startDate: new Date(),
+        biorhythm: 'normal',
+        biorhythmDays: 0,
+        lastInteraction: 1,
+        workCount: 0,
+        hasProposalRing: false,
+        history: [],
+        dailyActivities: {},
+        isGameOver: false
+    };
 
     // 첫 히스토리 기록
     addHistory();
@@ -85,7 +87,9 @@ function selectCharacter(characterId) {
     updateAllUI();
 
     // 첫 만남 시나리오 표시
-    showFirstMeetingScenario(characterId);
+    setTimeout(() => {
+        showFirstMeetingScenario(characterId);
+    }, 300);
 }
 
 function showFirstMeetingScenario(characterId) {
@@ -1054,6 +1058,8 @@ function recordActivity(activityType, activityIcon) {
         type: activityType,
         icon: activityIcon
     });
+    // 달력 즉시 업데이트
+    updateMiniCalendar();
 }
 
 // ============================================

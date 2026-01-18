@@ -35,8 +35,12 @@
             <p class="screen-subtitle">각 캐릭터는 고유한 성격과 난이도를 가지고 있습니다</p>
 
             <div class="character-selection">
-                <!-- 완벽주의 센서티브 -->
-                <div class="character-option" onclick="selectCharacter('perfectionist')">
+                <button class="carousel-nav prev" onclick="changeCharacter(-1)">‹</button>
+                <button class="carousel-nav next" onclick="changeCharacter(1)">›</button>
+
+                <div class="character-carousel" id="character-carousel">
+                    <!-- 완벽주의 센서티브 -->
+                    <div class="character-option" onclick="selectCharacter('perfectionist')">
                     <div class="char-portrait perfectionist">
                         <div class="char-image-wrapper">
                             <img src="images/character1-perfectionist-normal.jpg" alt="완벽주의 센서티브" class="char-image">
@@ -133,6 +137,14 @@
                         <p class="char-desc">논리적이고 이성적인 그녀. 대화를 중시합니다.</p>
                         <p class="char-quote">"논리적으로 설명해 보세요"</p>
                     </div>
+                </div>
+                </div>
+
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToCharacter(0)"></div>
+                    <div class="carousel-indicator" onclick="goToCharacter(1)"></div>
+                    <div class="carousel-indicator" onclick="goToCharacter(2)"></div>
+                    <div class="carousel-indicator" onclick="goToCharacter(3)"></div>
                 </div>
             </div>
         </div>
@@ -399,6 +411,7 @@
     </div>
 
     <script src="js/data.js"></script>
+    <script src="js/carousel.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>
