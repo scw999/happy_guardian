@@ -9,86 +9,130 @@
 <body>
     <!-- 메인 화면 -->
     <div id="main-screen" class="screen active">
-        <div class="title-container">
-            <h1>💗 해피 하트 가디언 💗</h1>
-            <p class="subtitle">Happy Heart Guardian</p>
-            <p class="tagline">그녀의 마음을 읽는 법</p>
+        <div class="main-container">
+            <div class="game-logo">
+                <h1>💗 해피 하트 가디언 💗</h1>
+                <p class="game-subtitle">Happy Heart Guardian</p>
+                <p class="game-tagline">그녀의 마음을 읽는 연애 시뮬레이션</p>
+            </div>
+            <div class="main-menu">
+                <button class="menu-btn start-btn" onclick="showCharacterSelect()">
+                    <span class="btn-icon">▶</span>
+                    <span>게임 시작</span>
+                </button>
+                <button class="menu-btn" onclick="showRules()">
+                    <span class="btn-icon">📖</span>
+                    <span>게임 가이드</span>
+                </button>
+            </div>
         </div>
-        <button class="btn-primary" onclick="showCharacterSelect()">게임 시작</button>
-        <button class="btn-secondary" onclick="showRules()">게임 규칙</button>
     </div>
 
     <!-- 캐릭터 선택 화면 -->
     <div id="character-select-screen" class="screen">
-        <h2>캐릭터 선택</h2>
-        <p class="info-text">관리할 여자친구의 성향을 선택하세요</p>
+        <div class="select-container">
+            <h2 class="screen-title">만날 사람을 선택하세요</h2>
+            <p class="screen-subtitle">각 캐릭터는 고유한 성격과 난이도를 가지고 있습니다</p>
 
-        <div class="character-grid">
-            <!-- 완벽주의 센서티브 -->
-            <div class="character-card" onclick="selectCharacter('perfectionist')">
-                <div class="character-image">
-                    <img src="images/character1-perfectionist.jpg" alt="완벽주의 센서티브">
-                </div>
-                <div class="character-info">
-                    <h3>💎 완벽주의 센서티브</h3>
-                    <div class="difficulty">
-                        <span>난이도: </span>
-                        <span class="stars">⭐⭐⭐⭐⭐</span>
+            <div class="character-selection">
+                <!-- 완벽주의 센서티브 -->
+                <div class="character-option" onclick="selectCharacter('perfectionist')">
+                    <div class="char-portrait perfectionist">
+                        <div class="char-image-wrapper">
+                            <div class="char-gradient"></div>
+                            <div class="char-icon">💎</div>
+                        </div>
                     </div>
-                    <p class="start-score">시작 점수: <span class="score-value">30점</span></p>
-                    <p class="character-trait">취향 저격 시 점수 2배!</p>
-                    <p class="character-quote">"완벽하지 않으면 의미 없어요"</p>
+                    <div class="char-info">
+                        <h3>💎 완벽주의 센서티브</h3>
+                        <div class="char-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">난이도</span>
+                                <span class="stat-value difficulty-5">★★★★★</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">시작 호감도</span>
+                                <span class="stat-value">30%</span>
+                            </div>
+                        </div>
+                        <p class="char-desc">완벽을 추구하는 그녀. 섬세한 배려가 필요합니다.</p>
+                        <p class="char-quote">"완벽하지 않으면 의미 없어요"</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 비타민 긍정녀 -->
-            <div class="character-card" onclick="selectCharacter('positive')">
-                <div class="character-image">
-                    <img src="images/character2-positive.jpg" alt="비타민 긍정녀">
-                </div>
-                <div class="character-info">
-                    <h3>☀️ 비타민 긍정녀</h3>
-                    <div class="difficulty">
-                        <span>난이도: </span>
-                        <span class="stars">⭐⭐</span>
+                <!-- 비타민 긍정녀 -->
+                <div class="character-option" onclick="selectCharacter('positive')">
+                    <div class="char-portrait positive">
+                        <div class="char-image-wrapper">
+                            <div class="char-gradient"></div>
+                            <div class="char-icon">☀️</div>
+                        </div>
                     </div>
-                    <p class="start-score">시작 점수: <span class="score-value">70점</span></p>
-                    <p class="character-trait">높은 시작 점수! (초보자 추천)</p>
-                    <p class="character-quote">"오늘도 화이팅! 우리 행복하자!"</p>
+                    <div class="char-info">
+                        <h3>☀️ 비타민 긍정녀</h3>
+                        <div class="char-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">난이도</span>
+                                <span class="stat-value difficulty-2">★★☆☆☆</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">시작 호감도</span>
+                                <span class="stat-value">70%</span>
+                            </div>
+                        </div>
+                        <p class="char-desc">밝고 긍정적인 그녀. 관심을 원합니다.</p>
+                        <p class="char-quote">"오늘도 화이팅! 우리 행복하자!"</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 반전 매력의 츤데레 -->
-            <div class="character-card" onclick="selectCharacter('tsundere')">
-                <div class="character-image">
-                    <img src="images/character3-tsundere.jpg" alt="반전 매력의 츤데레">
-                </div>
-                <div class="character-info">
-                    <h3>🌸 반전 매력의 츤데레</h3>
-                    <div class="difficulty">
-                        <span>난이도: </span>
-                        <span class="stars">⭐⭐⭐</span>
+                <!-- 반전 매력의 츤데레 -->
+                <div class="character-option" onclick="selectCharacter('tsundere')">
+                    <div class="char-portrait tsundere">
+                        <div class="char-image-wrapper">
+                            <div class="char-gradient"></div>
+                            <div class="char-icon">🌸</div>
+                        </div>
                     </div>
-                    <p class="start-score">시작 점수: <span class="score-value">50점</span></p>
-                    <p class="character-trait">효과가 다음 턴에 반영</p>
-                    <p class="character-quote">"별로... 안 좋은데... (좋아)"</p>
+                    <div class="char-info">
+                        <h3>🌸 반전 매력의 츤데레</h3>
+                        <div class="char-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">난이도</span>
+                                <span class="stat-value difficulty-3">★★★☆☆</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">시작 호감도</span>
+                                <span class="stat-value">50%</span>
+                            </div>
+                        </div>
+                        <p class="char-desc">겉과 속이 다른 그녀. 진심을 알아주길 바랍니다.</p>
+                        <p class="char-quote">"별로... 안 좋은데... (좋아)"</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- 논리적인 커리어우먼 -->
-            <div class="character-card" onclick="selectCharacter('career')">
-                <div class="character-image">
-                    <img src="images/character4-career.jpg" alt="논리적인 커리어우먼">
-                </div>
-                <div class="character-info">
-                    <h3>💼 논리적인 커리어우먼</h3>
-                    <div class="difficulty">
-                        <span>난이도: </span>
-                        <span class="stars">⭐⭐⭐⭐</span>
+                <!-- 논리적인 커리어우먼 -->
+                <div class="character-option" onclick="selectCharacter('career')">
+                    <div class="char-portrait career">
+                        <div class="char-image-wrapper">
+                            <div class="char-gradient"></div>
+                            <div class="char-icon">💼</div>
+                        </div>
                     </div>
-                    <p class="start-score">시작 점수: <span class="score-value">50점</span></p>
-                    <p class="character-trait">대화 카드 +50% 효과</p>
-                    <p class="character-quote">"논리적으로 설명해 보세요"</p>
+                    <div class="char-info">
+                        <h3>💼 논리적인 커리어우먼</h3>
+                        <div class="char-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">난이도</span>
+                                <span class="stat-value difficulty-4">★★★★☆</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">시작 호감도</span>
+                                <span class="stat-value">50%</span>
+                            </div>
+                        </div>
+                        <p class="char-desc">논리적이고 이성적인 그녀. 대화를 중시합니다.</p>
+                        <p class="char-quote">"논리적으로 설명해 보세요"</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,129 +140,146 @@
 
     <!-- 게임 화면 -->
     <div id="game-screen" class="screen">
-        <!-- 상단 정보바 -->
+        <!-- 상단 UI -->
         <div class="game-header">
-            <div class="character-info-bar">
-                <img id="current-character-img" src="" alt="" class="small-character-img">
-                <span id="current-character-name"></span>
+            <div class="header-left">
+                <div class="character-nameplate">
+                    <span id="char-name-display">서윤아</span>
+                </div>
             </div>
-            <div class="turn-info">
-                턴: <span id="current-turn">1</span> / 15
-            </div>
-            <div class="score-info">
-                점수: <span id="current-score">50</span> / 100
+            <div class="header-right">
+                <div class="day-counter">
+                    <span class="day-label">Day</span>
+                    <span id="day-number">1</span>
+                    <span class="day-total">/ 30</span>
+                </div>
             </div>
         </div>
 
-        <!-- 점수 게이지 -->
-        <div class="score-gauge-container">
-            <div class="score-gauge">
-                <div id="score-gauge-fill" class="score-gauge-fill" style="width: 50%"></div>
+        <!-- 호감도 바 -->
+        <div class="affection-bar-container">
+            <div class="affection-label">
+                <span>호감도</span>
+                <span id="affection-percentage">50%</span>
             </div>
-            <div class="score-labels">
-                <span>0</span>
-                <span class="danger">위기</span>
-                <span class="warning">불안정</span>
-                <span class="normal">보통</span>
-                <span class="good">좋음</span>
-                <span class="perfect">완벽</span>
-                <span>100</span>
+            <div class="affection-bar">
+                <div id="affection-fill" class="affection-fill" style="width: 50%">
+                    <div class="affection-shine"></div>
+                </div>
+            </div>
+            <div class="affection-status">
+                <span id="relationship-status">알아가는 중</span>
             </div>
         </div>
 
         <!-- 메인 게임 영역 -->
-        <div class="game-main">
-            <!-- 보드판 -->
-            <div class="board-container">
-                <h3>게임 보드</h3>
-                <div id="game-board" class="game-board"></div>
-                <div class="board-center">
-                    <button id="dice-button" class="dice-button" onclick="rollDice()">
-                        <span class="dice-icon">🎲</span>
-                        <span>주사위 굴리기</span>
-                    </button>
-                    <div id="dice-result" class="dice-result"></div>
+        <div class="game-main-area">
+            <!-- 캐릭터 표시 영역 -->
+            <div class="character-display">
+                <div id="character-portrait" class="portrait-container">
+                    <div class="portrait-bg"></div>
+                    <div class="portrait-icon">💎</div>
                 </div>
             </div>
 
-            <!-- 카드 영역 -->
-            <div class="cards-container">
-                <h3>내 카드 <span class="card-count">(<span id="hand-count">5</span>/7)</span></h3>
-                <div id="player-hand" class="player-hand"></div>
+            <!-- 대화/이벤트 영역 -->
+            <div class="dialogue-area">
+                <div class="dialogue-box">
+                    <div class="speaker-name" id="speaker-name">서윤아</div>
+                    <div class="dialogue-text" id="dialogue-text">
+                        안녕하세요. 처음 뵙겠습니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 액션 버튼 영역 -->
+            <div class="action-area" id="action-area">
+                <button class="action-btn" onclick="nextScene()">
+                    <span>다음</span>
+                    <span class="btn-arrow">▶</span>
+                </button>
+            </div>
+
+            <!-- 선택지 영역 -->
+            <div class="choices-area" id="choices-area" style="display: none;">
+                <!-- 선택지가 동적으로 생성됨 -->
             </div>
         </div>
 
-        <!-- 게임 로그 -->
-        <div class="game-log-container">
-            <h4>게임 로그</h4>
-            <div id="game-log" class="game-log"></div>
+        <!-- 하단 메뉴 -->
+        <div class="bottom-menu">
+            <button class="menu-icon-btn" onclick="toggleMenu()">
+                <span>⚙️</span>
+            </button>
         </div>
     </div>
 
-    <!-- 이벤트 모달 -->
-    <div id="event-modal" class="modal">
-        <div class="modal-content event-modal-content">
-            <h2 id="event-title">특수 이벤트!</h2>
-            <div id="event-situation" class="event-situation"></div>
-            <div id="event-choices" class="event-choices"></div>
-        </div>
-    </div>
-
-    <!-- 결과 모달 -->
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="result-title"></h2>
-            <div id="result-message" class="result-message"></div>
-            <div id="result-score" class="result-score"></div>
-            <button class="btn-primary" onclick="closeResultModal()">확인</button>
-        </div>
-    </div>
-
-    <!-- 게임 오버 모달 -->
-    <div id="gameover-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="gameover-title"></h2>
-            <div id="gameover-message"></div>
-            <div class="gameover-buttons">
-                <button class="btn-primary" onclick="restartGame()">다시 시작</button>
-                <button class="btn-secondary" onclick="backToMain()">메인으로</button>
+    <!-- 결과 화면 -->
+    <div id="ending-screen" class="screen">
+        <div class="ending-container">
+            <div class="ending-portrait" id="ending-portrait">
+                <div class="portrait-icon" id="ending-icon">💎</div>
+            </div>
+            <h2 class="ending-title" id="ending-title">트루 엔딩</h2>
+            <div class="ending-stats">
+                <div class="ending-stat">
+                    <span class="stat-label">최종 호감도</span>
+                    <span class="stat-value" id="final-affection">100%</span>
+                </div>
+                <div class="ending-stat">
+                    <span class="stat-label">소요 일수</span>
+                    <span class="stat-value" id="final-days">30일</span>
+                </div>
+            </div>
+            <div class="ending-message" id="ending-message">
+                축하합니다! 완벽한 사랑을 쟁취했습니다!
+            </div>
+            <div class="ending-buttons">
+                <button class="ending-btn" onclick="restartGame()">다시 시작</button>
+                <button class="ending-btn secondary" onclick="backToMain()">메인으로</button>
             </div>
         </div>
     </div>
 
-    <!-- 게임 규칙 모달 -->
+    <!-- 게임 가이드 모달 -->
     <div id="rules-modal" class="modal">
-        <div class="modal-content rules-content">
-            <span class="close" onclick="closeRules()">&times;</span>
-            <h2>게임 규칙</h2>
-            <div class="rules-text">
-                <h3>🎯 목표</h3>
-                <p>15턴 안에 점수 100점을 달성하거나, 가장 높은 점수를 획득하세요!</p>
-                <p class="warning">⚠️ 점수가 0 이하로 떨어지면 게임 오버 (이별)</p>
-
-                <h3>📋 게임 진행</h3>
-                <ol>
-                    <li><strong>주사위 굴리기:</strong> 1-6 중 하나의 숫자가 나옵니다</li>
-                    <li><strong>칸 이동:</strong> 나온 숫자만큼 앞으로 이동</li>
-                    <li><strong>칸 효과:</strong> 도착한 칸의 효과를 받습니다</li>
-                    <li><strong>카드 사용:</strong> 적절한 카드를 사용하여 점수를 획득</li>
-                </ol>
-
-                <h3>🎴 칸 종류</h3>
-                <ul>
-                    <li><strong>💑 데이트 칸:</strong> 데이트 카드로 +10점</li>
-                    <li><strong>🎁 선물 칸:</strong> 선물 카드로 +8~15점</li>
-                    <li><strong>💬 대화 칸:</strong> 대화 카드로 +7~12점</li>
-                    <li><strong>🎭 특수 이벤트:</strong> 상황별 선택지 등장 (±50점)</li>
-                    <li><strong>⚡ 이벤트 칸:</strong> 랜덤 이벤트 발생</li>
-                    <li><strong>☕ 휴식 칸:</strong> 자동으로 +5점</li>
-                </ul>
-
-                <h3>💝 특별 규칙</h3>
-                <p><strong>주기 카드:</strong> 3턴 동안 모든 점수 변화가 2배!</p>
-                <p><strong>특수 토큰:</strong> 완벽한 대응으로 영구 보너스 획득</p>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>게임 가이드</h2>
+                <button class="close-btn" onclick="closeRules()">✕</button>
             </div>
-            <button class="btn-primary" onclick="closeRules()">확인</button>
+            <div class="modal-body">
+                <div class="guide-section">
+                    <h3>🎯 게임 목표</h3>
+                    <p>30일 안에 호감도를 100%로 만들어 사랑을 쟁취하세요!</p>
+                    <p class="warning">⚠️ 호감도가 0%가 되면 게임 오버입니다.</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💝 호감도 시스템</h3>
+                    <ul>
+                        <li><strong>0-20%</strong>: 위기 - 이별 직전</li>
+                        <li><strong>21-40%</strong>: 불안정 - 관계 개선 필요</li>
+                        <li><strong>41-60%</strong>: 보통 - 알아가는 중</li>
+                        <li><strong>61-80%</strong>: 좋음 - 좋은 관계</li>
+                        <li><strong>81-100%</strong>: 완벽 - 진정한 사랑</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🎮 게임 진행</h3>
+                    <p>매일 다양한 상황이 발생하며, 적절한 선택을 통해 호감도를 높여야 합니다.</p>
+                    <p>선택에 따라 호감도가 오르거나 내릴 수 있으니 신중하게 선택하세요!</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>👤 캐릭터 특성</h3>
+                    <p>각 캐릭터는 고유한 성격을 가지고 있어 같은 선택에도 다른 반응을 보입니다.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeRules()">확인</button>
+            </div>
         </div>
     </div>
 
