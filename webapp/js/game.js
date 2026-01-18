@@ -20,6 +20,9 @@ let gameState = {
     isGameOver: false
 };
 
+// pending timeouts를 추적하기 위한 변수
+let pendingTimeouts = [];
+
 // ============================================
 // 유틸리티 함수
 // ============================================
@@ -58,6 +61,9 @@ function closeRules() {
 function selectCharacter(characterId) {
     const character = CHARACTERS[characterId];
 
+    // 모든 pending timeout 클리어
+    clearAllTimeouts();
+
     // 게임 상태 완전 초기화
     gameState = {
         character: character,
@@ -84,12 +90,20 @@ function selectCharacter(characterId) {
     // 게임 화면 초기화
     initGameScreen();
     showScreen('game-screen');
+
+    // UI 초기화
+    const dialogueText = document.getElementById('dialogue-text');
+    dialogueText.textContent = '무엇을 할까요?';
+    dialogueText.style.color = '';
+    dialogueText.style.fontWeight = '';
+
     updateAllUI();
 
     // 첫 만남 시나리오 표시
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
         showFirstMeetingScenario(characterId);
     }, 300);
+    pendingTimeouts.push(timeoutId);
 }
 
 function showFirstMeetingScenario(characterId) {
@@ -244,6 +258,7 @@ function createActionButtons() {
         const button = document.createElement('button');
         button.className = 'action-choice-btn';
         button.id = `action-${action.id}`;
+        button.disabled = false; // 명시적으로 활성화
 
         button.innerHTML = `
             <div class="action-icon">${action.icon}</div>
@@ -252,11 +267,16 @@ function createActionButtons() {
             </div>
         `;
 
-        button.addEventListener('click', () => {
-            if (!button.disabled && !button.classList.contains('disabled')) {
-                action.handler();
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (button.disabled || button.classList.contains('disabled')) {
+                return;
             }
-        });
+
+            action.handler();
+        }, { passive: false });
 
         choicesArea.appendChild(button);
     });
@@ -265,6 +285,16 @@ function createActionButtons() {
 }
 
 function updateActionButtons() {
+    // 모든 기본 액션 버튼은 활성화 (date, gift, talk, rest)
+    const alwaysEnabledButtons = ['date', 'gift', 'talk', 'rest'];
+    alwaysEnabledButtons.forEach(id => {
+        const btn = document.getElementById(`action-${id}`);
+        if (btn) {
+            btn.classList.remove('disabled');
+            btn.disabled = false;
+        }
+    });
+
     // 프로포즈 버튼은 반지가 있거나 일정 조건 충족 시에만 활성화
     const proposeBtn = document.getElementById('action-propose');
     if (proposeBtn) {
@@ -281,9 +311,14 @@ function updateActionButtons() {
 
     // 알바는 하루 2회 제한
     const workBtn = document.getElementById('action-work');
-    if (workBtn && gameState.workCount >= 2) {
-        workBtn.classList.add('disabled');
-        workBtn.disabled = true;
+    if (workBtn) {
+        if (gameState.workCount >= 2) {
+            workBtn.classList.add('disabled');
+            workBtn.disabled = true;
+        } else {
+            workBtn.classList.remove('disabled');
+            workBtn.disabled = false;
+        }
     }
 }
 
@@ -615,13 +650,20 @@ function showResult(message, affectionChange, trustChange, extraInfo = '') {
     dialogueText.style.color = affectionChange >= 0 ? '#44ff88' : '#ff4444';
     dialogueText.style.fontWeight = 'bold';
 
-    setTimeout(() => {
-        dialogueText.textContent = `Day ${gameState.day} / 30 (D-${gameState.dDay})`;
+    const timeoutId = setTimeout(() => {
+        dialogueText.textContent = '무엇을 할까요?';
         dialogueText.style.color = '';
         dialogueText.style.fontWeight = '';
     }, 3000);
+    pendingTimeouts.push(timeoutId);
 
     updateAllUI();
+}
+
+// 모든 pending timeout 클리어
+function clearAllTimeouts() {
+    pendingTimeouts.forEach(id => clearTimeout(id));
+    pendingTimeouts = [];
 }
 
 // ============================================
@@ -1066,7 +1108,7 @@ function recordActivity(activityType, activityIcon) {
 // 달력 시스템
 // ============================================
 function updateMiniCalendar() {
-    const container = document.getElementById('mini-calendar-days');
+    const container = document.getElementById('calendar-display-grid');
     if (!container) return;
 
     container.innerHTML = '';
@@ -1074,9 +1116,32 @@ function updateMiniCalendar() {
     // 30일치 달력 생성
     for (let day = 1; day <= 30; day++) {
         const dayElement = document.createElement('div');
-        dayElement.className = 'mini-calendar-day';
-        dayElement.textContent = day;
+        dayElement.className = 'calendar-display-day';
 
+        // 날짜 번호
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'calendar-display-day-number';
+        dayNumber.textContent = day;
+        dayElement.appendChild(dayNumber);
+
+        // 활동 아이콘 표시
+        if (gameState.dailyActivities[day] && gameState.dailyActivities[day].length > 0) {
+            const iconsDiv = document.createElement('div');
+            iconsDiv.className = 'calendar-display-day-icons';
+
+            // 중복 제거하고 표시 (최대 4개)
+            const uniqueIcons = [...new Set(gameState.dailyActivities[day].map(a => a.icon))];
+            uniqueIcons.slice(0, 4).forEach(icon => {
+                const iconSpan = document.createElement('span');
+                iconSpan.textContent = icon;
+                iconSpan.title = '활동';
+                iconsDiv.appendChild(iconSpan);
+            });
+
+            dayElement.appendChild(iconsDiv);
+        }
+
+        // 상태 클래스 추가
         if (day === gameState.day) {
             dayElement.classList.add('today');
         } else if (day < gameState.day) {
@@ -1085,16 +1150,12 @@ function updateMiniCalendar() {
             dayElement.classList.add('future');
         }
 
-        // 활동이 있는 날 표시
-        if (gameState.dailyActivities[day] && gameState.dailyActivities[day].length > 0) {
-            dayElement.classList.add('has-activity');
-        }
-
-        // 클릭 이벤트 - 모달 달력 열기
+        // 클릭 이벤트 - 해당 날짜의 활동 상세 보기
         if (day <= gameState.day) {
             dayElement.addEventListener('click', () => {
-                showCalendar();
+                showDayDetail(day);
             });
+            dayElement.style.cursor = 'pointer';
         }
 
         container.appendChild(dayElement);
@@ -1233,6 +1294,9 @@ function loadGame() {
 
 function confirmRestart() {
     if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n현재 진행 상황은 저장되지 않습니다.')) {
+        // 모든 pending timeout 클리어
+        clearAllTimeouts();
+
         // 게임 상태 완전 초기화
         gameState = {
             character: null,

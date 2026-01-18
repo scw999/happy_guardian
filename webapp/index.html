@@ -218,20 +218,23 @@
             <div class="relationship-status-display">
                 <span id="relationship-status">알아가는 중</span>
             </div>
-
-            <!-- 간단한 달력 표시 -->
-            <div class="mini-calendar-container">
-                <div class="mini-calendar-header">📅 30일 달력</div>
-                <div id="mini-calendar-days" class="mini-calendar-days"></div>
-            </div>
         </div>
 
         <!-- 메인 게임 영역 -->
         <div class="game-main-area">
-            <!-- 캐릭터 표시 영역 -->
-            <div class="character-display">
-                <div id="character-portrait" class="portrait-container">
-                    <img id="portrait-image" src="images/character1-perfectionist-normal.jpg" alt="Character Portrait" class="portrait-image">
+            <!-- 상단: 캐릭터와 달력 -->
+            <div class="character-calendar-row">
+                <!-- 캐릭터 표시 영역 -->
+                <div class="character-display">
+                    <div id="character-portrait" class="portrait-container">
+                        <img id="portrait-image" src="images/character1-perfectionist-normal.jpg" alt="Character Portrait" class="portrait-image">
+                    </div>
+                </div>
+
+                <!-- 달력 표시 영역 -->
+                <div class="calendar-display">
+                    <div class="calendar-display-header">📅 30일 달력</div>
+                    <div id="calendar-display-grid" class="calendar-display-grid"></div>
                 </div>
             </div>
 
