@@ -135,7 +135,7 @@ function showGameObjective() {
                     <ul style="line-height: 1.8;">
                         <li><strong>체력</strong>: 매일 80으로 회복, 모든 행동에 필요</li>
                         <li><strong>신뢰도</strong>: 깊은 대화와 일관된 행동으로 상승</li>
-                        <li><strong>돈</strong>: 알바로 벌거나 데이트/선물에 사용</li>
+                        <li><strong>돈</strong>: 다양한 방법으로 벌거나 데이트/선물에 사용</li>
                     </ul>
 
                     <h3 style="margin-top: 20px;">🎂 특별한 날</h3>
@@ -315,9 +315,13 @@ function createActionButtons() {
             <div class="action-icon">💬</div>
             <div class="action-info"><div class="action-name">대화하기</div></div>
         </button>
+        <button class="action-choice-btn" id="action-skinship" onclick="showSkinshipMenu()">
+            <div class="action-icon">💕</div>
+            <div class="action-info"><div class="action-name">스킨십</div></div>
+        </button>
         <button class="action-choice-btn" id="action-work" onclick="doWork()">
-            <div class="action-icon">💼</div>
-            <div class="action-info"><div class="action-name">알바하기</div></div>
+            <div class="action-icon">💰</div>
+            <div class="action-info"><div class="action-name">돈 벌기</div></div>
         </button>
         <button class="action-choice-btn" id="action-rest" onclick="doRest()">
             <div class="action-icon">😴</div>
@@ -1015,29 +1019,301 @@ function getDifficultyMultiplier() {
 const GLOBAL_DIFFICULTY_MULTIPLIER = 0.35;
 
 // ============================================
-// 알바 & 휴식
+// 스킨십 시스템
 // ============================================
-function doWork() {
-    if (gameState.workCount >= 2) {
-        alert('오늘은 더 이상 알바를 할 수 없습니다!');
+function showSkinshipMenu() {
+    // 하루 액션 제한 체크
+    if (gameState.dailyActionCount >= 3) {
+        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
         return;
     }
 
-    if (gameState.stamina < 40) {
+    const skinshipOptions = Object.values(SKINSHIP_OPTIONS);
+
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💕 스킨십</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>어떤 스킨십을 시도하시겠어요?</p>
+                <p style="font-size: 0.85rem; color: #ffaa00; margin-bottom: 15px;">
+                    ⚠️ 호감도가 낮으면 거절당할 수 있습니다!<br>
+                    거절 시: 체력 -10, 호감도 -10, 신뢰도 -15
+                </p>
+                ${skinshipOptions.map((skinship, idx) => {
+                    const canTry = gameState.affection >= skinship.minAffection &&
+                                   gameState.stamina >= skinship.stamina &&
+                                   (!skinship.money || gameState.money >= skinship.money);
+                    const meetsAffection = gameState.affection >= skinship.minAffection;
+                    const disabled = canTry ? '' : 'disabled';
+
+                    let requirementText = `필요 호감도: ${skinship.minAffection}`;
+                    if (!meetsAffection) {
+                        requirementText = `❌ ${requirementText} (현재: ${gameState.affection})`;
+                    }
+
+                    return `
+                        <div class="action-option ${disabled}" onclick="${canTry ? `attemptSkinship(${idx})` : ''}">
+                            <div class="option-icon">${skinship.icon}</div>
+                            <div class="option-info">
+                                <div class="option-name">${skinship.name}</div>
+                                <div class="option-desc">${skinship.description}</div>
+                                <div class="option-cost">
+                                    ⚡ ${skinship.stamina}
+                                    ${skinship.money ? `💰 ${formatMoney(skinship.money)}` : ''}
+                                </div>
+                                <div class="option-requirement" style="font-size: 0.85rem; color: ${meetsAffection ? '#44ff88' : '#ff4444'};">
+                                    ${requirementText}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+
+    window.currentSkinshipOptions = skinshipOptions;
+
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('action-modal');
+}
+
+window.attemptSkinship = function(index) {
+    const skinship = window.currentSkinshipOptions[index];
+
+    if (gameState.affection < skinship.minAffection) {
+        alert(`호감도가 부족합니다! (필요: ${skinship.minAffection}, 현재: ${gameState.affection})`);
+        return;
+    }
+
+    if (gameState.stamina < skinship.stamina) {
         alert('체력이 부족합니다!');
         return;
     }
 
-    const workMoney = WORK_OPTIONS.parttime.money;  // 80,000원
-    gameState.stamina -= 40;
-    gameState.money += workMoney;
+    if (skinship.money && gameState.money < skinship.money) {
+        alert('돈이 부족합니다!');
+        return;
+    }
+
+    closeModal('action-modal');
+
+    // 성공 확률 계산 - 호감도가 높을수록 성공률 증가
+    let successChance = skinship.successRate;
+    const affectionOver = gameState.affection - skinship.minAffection;
+    successChance += (affectionOver / 100) * 0.3;  // 호감도 10당 3% 증가
+    successChance = Math.min(successChance, 0.95);  // 최대 95%
+
+    // 성공 여부 판정
+    const isSuccess = Math.random() < successChance;
+
+    gameState.stamina -= skinship.stamina;
+    if (skinship.money) {
+        gameState.money -= skinship.money;
+    }
+    gameState.dailyActionCount++;
+
+    if (isSuccess) {
+        // 성공!
+        let affectionGain = skinship.baseAffection;
+        let trustGain = skinship.baseTrust;
+
+        // 난이도 적용
+        const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+        affectionGain = Math.round(affectionGain * difficultyMult);
+        trustGain = Math.round(trustGain * difficultyMult);
+
+        // 바이오리듬 적용
+        const bioMultiplier = getBiorhythmMultiplier();
+        affectionGain = Math.round(affectionGain * bioMultiplier);
+        trustGain = Math.round(trustGain * bioMultiplier);
+
+        gameState.affection += affectionGain;
+        gameState.trust += trustGain;
+        gameState.lastInteraction = gameState.day;
+
+        recordActivity('skinship', skinship.icon);
+
+        showResult(`💕 ${skinship.name} 성공!`, affectionGain, trustGain);
+    } else {
+        // 실패...
+        gameState.stamina -= 10;  // 추가 체력 손실
+        gameState.affection -= 10;
+        gameState.trust -= 15;
+
+        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n체력 -10, 호감도 -10, 신뢰도 -15\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
+    }
+
+    updateAllUI();
+};
+
+// ============================================
+// 알바 & 휴식
+// ============================================
+function doWork() {
+    showWorkMenu();
+}
+
+function showWorkMenu() {
+    const workOptions = Object.values(WORK_OPTIONS);
+
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💰 돈 벌기</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>어떤 방법으로 돈을 벌까요?</p>
+                ${workOptions.map((work, idx) => {
+                    const canWork = gameState.stamina >= work.stamina;
+                    let moneyText = '';
+                    if (work.money) {
+                        moneyText = `💰 ${formatMoney(work.money)}`;
+                    } else if (work.minMoney) {
+                        moneyText = `💰 ${formatMoney(work.minMoney)}~${formatMoney(work.maxMoney)}`;
+                    } else if (work.investMin) {
+                        moneyText = `💰 투자금 ${formatMoney(work.investMin)}~${formatMoney(work.investMax)}`;
+                    }
+
+                    const disabled = canWork ? '' : 'disabled';
+                    return `
+                        <div class="action-option ${disabled}" onclick="${canWork ? `selectWorkOption(${idx})` : ''}">
+                            <div class="option-icon">${work.icon}</div>
+                            <div class="option-info">
+                                <div class="option-name">${work.name}</div>
+                                <div class="option-desc">${work.description}</div>
+                                <div class="option-cost">
+                                    ⚡ ${work.stamina} ${moneyText}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+
+    window.currentWorkOptions = workOptions;
+
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('action-modal');
+}
+
+window.selectWorkOption = function(index) {
+    const work = window.currentWorkOptions[index];
+
+    if (gameState.stamina < work.stamina) {
+        alert('체력이 부족합니다!');
+        return;
+    }
+
+    closeModal('action-modal');
+
+    // 주식 투자는 특별 처리
+    if (work.id === 'stock') {
+        showStockInvestment(work);
+        return;
+    }
+
+    // 프리랜서는 랜덤 수익
+    let earnedMoney = work.money;
+    if (work.minMoney) {
+        earnedMoney = Math.floor(Math.random() * (work.maxMoney - work.minMoney + 1)) + work.minMoney;
+    }
+
+    gameState.stamina -= work.stamina;
+    gameState.money += earnedMoney;
     gameState.workCount++;
 
-    recordActivity('work', '💼');
+    recordActivity('work', work.icon);
 
-    showResult('알바를 마쳤습니다!', 0, 0, `+${formatMoney(workMoney)}`);
+    showResult(`${work.name}을(를) 마쳤습니다!`, 0, 0, `+${formatMoney(earnedMoney)}`);
     updateAllUI();
+};
+
+function showStockInvestment(work) {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.id = 'stock-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📈 주식 투자</h2>
+            </div>
+            <div class="modal-body">
+                <p>투자할 금액을 선택하세요:</p>
+                <p style="font-size: 0.9rem; color: #ffaa00;">⚠️ 손실 가능: -50% ~ +100%</p>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                    <button class="menu-btn" onclick="executeStock(50000)" ${gameState.money >= 50000 ? '' : 'disabled'}>
+                        5만원 투자
+                    </button>
+                    <button class="menu-btn" onclick="executeStock(100000)" ${gameState.money >= 100000 ? '' : 'disabled'}>
+                        10만원 투자
+                    </button>
+                    <button class="menu-btn" onclick="executeStock(200000)" ${gameState.money >= 200000 ? '' : 'disabled'}>
+                        20만원 투자
+                    </button>
+                    <button class="menu-btn" onclick="closeStockModal()">취소</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
 }
+
+window.executeStock = function(investment) {
+    if (gameState.money < investment) {
+        alert('돈이 부족합니다!');
+        return;
+    }
+
+    // 주식 결과: -50% ~ +100%
+    const result = (Math.random() * 1.5) - 0.5;  // -0.5 ~ +1.0
+    const profit = Math.floor(investment * result);
+
+    gameState.money -= investment;
+    gameState.money += investment + profit;
+    gameState.stamina -= 15;
+    gameState.workCount++;
+
+    recordActivity('work', '📈');
+
+    closeStockModal();
+
+    if (profit > 0) {
+        showResult(`📈 주식 투자 성공!`, 0, 0, `+${formatMoney(profit)} (${Math.round(result * 100)}%)`);
+    } else {
+        showResult(`📉 주식 투자 실패...`, 0, 0, `${formatMoney(profit)} (${Math.round(result * 100)}%)`);
+    }
+    updateAllUI();
+};
+
+window.closeStockModal = function() {
+    const modal = document.getElementById('stock-modal');
+    if (modal) {
+        modal.remove();
+    }
+};
 
 function doRest() {
     gameState.stamina = 80;  // 체력 80으로만 회복 (난이도 상승)

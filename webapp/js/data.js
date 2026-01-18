@@ -593,16 +593,113 @@ const TALK_TOPICS = {
     }
 };
 
-// 알바 옵션
+// 돈 벌기 옵션
 const WORK_OPTIONS = {
-    parttime: {
-        id: 'parttime',
-        name: '단기 알바',
-        icon: '💼',
-        stamina: 40,
-        money: 80000,  // 8만원으로 감소 (하루 최대 16만원)
+    convenience: {
+        id: 'convenience',
+        name: '편의점 알바',
+        icon: '🏪',
+        stamina: 25,
+        money: 50000,
+        maxPerDay: 3,
+        description: '편한 실내 알바, 낮은 수익'
+    },
+    tutoring: {
+        id: 'tutoring',
+        name: '과외',
+        icon: '📚',
+        stamina: 35,
+        money: 100000,
         maxPerDay: 2,
-        description: '체력을 소모해 돈을 벌니다'
+        description: '머리를 써야 하지만 수익이 좋음'
+    },
+    construction: {
+        id: 'construction',
+        name: '건설 일용직',
+        icon: '🏗️',
+        stamina: 55,
+        money: 150000,
+        maxPerDay: 1,
+        description: '힘들지만 돈을 많이 벌 수 있음'
+    },
+    freelance: {
+        id: 'freelance',
+        name: '프리랜서',
+        icon: '💻',
+        stamina: 40,
+        minMoney: 80000,
+        maxMoney: 200000,
+        maxPerDay: 2,
+        description: '성과에 따라 수익이 변동됨'
+    },
+    stock: {
+        id: 'stock',
+        name: '주식 투자',
+        icon: '📈',
+        stamina: 15,
+        investMin: 50000,
+        investMax: 200000,
+        maxPerDay: 1,
+        description: '리스크가 크지만 큰 수익 가능'
+    },
+    delivery: {
+        id: 'delivery',
+        name: '배달 아르바이트',
+        icon: '🛵',
+        stamina: 45,
+        money: 120000,
+        maxPerDay: 2,
+        description: '체력 소모가 크지만 수익이 괜찮음'
+    }
+};
+
+// ============================================
+// 스킨십 옵션
+const SKINSHIP_OPTIONS = {
+    handhold: {
+        id: 'handhold',
+        name: '손 잡기',
+        icon: '🤝',
+        minAffection: 30,
+        stamina: 10,
+        baseAffection: 8,
+        baseTrust: 5,
+        description: '부담스럽지 않은 스킨십',
+        successRate: 0.9  // 호감도 충족 시 90% 성공
+    },
+    hug: {
+        id: 'hug',
+        name: '포옹하기',
+        icon: '🤗',
+        minAffection: 50,
+        stamina: 15,
+        baseAffection: 15,
+        baseTrust: 10,
+        description: '조금 더 친밀한 스킨십',
+        successRate: 0.8
+    },
+    kiss: {
+        id: 'kiss',
+        name: '키스하기',
+        icon: '💋',
+        minAffection: 70,
+        stamina: 20,
+        baseAffection: 25,
+        baseTrust: 15,
+        description: '로맨틱한 스킨십',
+        successRate: 0.7
+    },
+    trip: {
+        id: 'trip',
+        name: '1박2일 여행 제안',
+        icon: '✈️',
+        minAffection: 85,
+        stamina: 30,
+        money: 300000,
+        baseAffection: 35,
+        baseTrust: 25,
+        description: '아주 친밀한 관계에서만 가능',
+        successRate: 0.6
     }
 };
 
