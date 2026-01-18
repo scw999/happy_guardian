@@ -173,14 +173,16 @@ body {
 
 .character-selection {
     position: relative;
-    max-width: 500px;
+    max-width: 700px;
     margin: 0 auto;
-    overflow: hidden;
+    padding: 0 80px;
+    overflow: visible;
 }
 
 .character-carousel {
     display: flex;
     transition: transform 0.5s ease;
+    overflow: hidden;
 }
 
 .character-option {
@@ -1497,11 +1499,11 @@ body {
 }
 
 .carousel-nav.prev {
-    left: -70px;
+    left: -60px;
 }
 
 .carousel-nav.next {
-    right: -70px;
+    right: -60px;
 }
 
 .carousel-indicators {

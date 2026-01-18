@@ -19,6 +19,10 @@ let gameState = {
     dailyActivities: {},
     dailyActionCount: 0,  // 하루 액션 횟수 (최대 3회)
     dailyActionCounts: {date: 0, gift: 0, talk: 0},  // 각 행동 반복 추적
+    multiStage: null,  // 다단계 액션 진행 상태 { type, location, scenarios, currentIndex, totalAffection, totalTrust }
+    todayIsAnniversary: false,  // 오늘이 기념일인지
+    anniversaryCelebrated: false,  // 기념일을 축하했는지
+    anniversaryType: null,  // 기념일 종류 ('meeting', 'birthday')
     isGameOver: false
 };
 
@@ -79,6 +83,10 @@ function selectCharacter(characterId) {
         dailyActivities: {},
         dailyActionCount: 0,
         dailyActionCounts: {date: 0, gift: 0, talk: 0},
+        multiStage: null,
+        todayIsAnniversary: false,
+        anniversaryCelebrated: false,
+        anniversaryType: null,
         isGameOver: false
     };
 
@@ -368,10 +376,23 @@ function selectDateLocation(index) {
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
 
-    const scenario = location.scenarios[Math.floor(Math.random() * location.scenarios.length)];
+    // 다단계 시스템: 2-3개의 시나리오를 선택
+    const scenarioCount = Math.min(3, location.scenarios.length);
+    const shuffled = [...location.scenarios].sort(() => Math.random() - 0.5);
+    const selectedScenarios = shuffled.slice(0, scenarioCount);
+
+    // 다단계 액션 상태 초기화
+    gameState.multiStage = {
+        type: 'date',
+        location: location,
+        scenarios: selectedScenarios,
+        currentIndex: 0,
+        totalAffection: 0,
+        totalTrust: 0
+    };
 
     closeModal('action-modal');
-    showScenario(scenario, location, 'date');
+    showMultiStageScenario();
 }
 
 // ============================================
@@ -453,8 +474,22 @@ function giveGift(index) {
     // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
     const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
     const preference = gameState.character.preferences.gifts[gift.id] || 1.0;
-    const affectionGain = Math.round(gift.baseAffection * difficultyMult * preference * getBiorhythmMultiplier());
-    const trustGain = Math.round(gift.baseTrust * difficultyMult * preference * getBiorhythmMultiplier());
+    let affectionGain = Math.round(gift.baseAffection * difficultyMult * preference * getBiorhythmMultiplier());
+    let trustGain = Math.round(gift.baseTrust * difficultyMult * preference * getBiorhythmMultiplier());
+
+    // 기념일 보너스 적용
+    if (gameState.todayIsAnniversary) {
+        const originalAff = affectionGain;
+        const originalTrust = trustGain;
+        affectionGain = Math.round(affectionGain * 1.5);
+        trustGain = Math.round(trustGain * 1.5);
+        gameState.anniversaryCelebrated = true;
+
+        const bonusType = gameState.anniversaryType === 'birthday' ? '🎂 생일' : '💕 기념일';
+        setTimeout(() => {
+            alert(`${bonusType} 선물 보너스! 효과가 1.5배로 증가했습니다! (+${affectionGain - originalAff} 호감도, +${trustGain - originalTrust} 신뢰도)`);
+        }, 500);
+    }
 
     gameState.affection += affectionGain;
     gameState.trust += trustGain;
@@ -536,10 +571,23 @@ function selectTalkTopic(index) {
 
     gameState.stamina -= topic.stamina;
 
-    const scenario = topic.scenarios[Math.floor(Math.random() * topic.scenarios.length)];
+    // 다단계 대화 시스템: 3-4개의 대화 시나리오 선택
+    const scenarioCount = Math.min(4, topic.scenarios.length);
+    const shuffled = [...topic.scenarios].sort(() => Math.random() - 0.5);
+    const selectedScenarios = shuffled.slice(0, scenarioCount);
+
+    // 다단계 액션 상태 초기화
+    gameState.multiStage = {
+        type: 'talk',
+        location: topic,
+        scenarios: selectedScenarios,
+        currentIndex: 0,
+        totalAffection: 0,
+        totalTrust: 0
+    };
 
     closeModal('action-modal');
-    showScenario(scenario, topic, 'talk');
+    showMultiStageScenario();
 }
 
 // ============================================
@@ -653,6 +701,206 @@ window.selectScenarioChoice = function(index) {
     checkDayEnd();
 };
 
+// ============================================
+// 다단계 시나리오 시스템
+// ============================================
+function showMultiStageScenario() {
+    if (!gameState.multiStage || gameState.multiStage.currentIndex >= gameState.multiStage.scenarios.length) {
+        // 모든 시나리오 완료
+        finishMultiStage();
+        return;
+    }
+
+    const { scenarios, currentIndex, location } = gameState.multiStage;
+    const scenario = scenarios[currentIndex];
+    const progress = `[${currentIndex + 1}/${scenarios.length}]`;
+
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>${location.name} ${progress}</h2>
+                <button class="close-btn" onclick="closeMultiStageModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>${scenario.situation}</p>
+                ${scenario.choices.map((choice, idx) => `
+                    <button class="choice-option-btn" onclick="selectMultiStageChoice(${idx})">
+                        <span class="choice-number">${idx + 1}.</span>
+                        <span class="choice-text">${choice.text}</span>
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('action-modal');
+}
+
+window.selectMultiStageChoice = function(index) {
+    const { scenarios, currentIndex, location, type } = gameState.multiStage;
+    const scenario = scenarios[currentIndex];
+    const choice = scenario.choices[index];
+
+    let affectionGain = choice.affection || 0;
+    let trustGain = choice.trust || 0;
+
+    // 기본 효과 추가
+    affectionGain += location.baseAffection;
+    trustGain += location.baseTrust;
+
+    // 난이도 배수 적용
+    let difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+
+    // 대화는 40%만 적용
+    if (type === 'talk') {
+        difficultyMult *= 0.4;
+    }
+
+    affectionGain = Math.round(affectionGain * difficultyMult);
+    trustGain = Math.round(trustGain * difficultyMult);
+
+    // 선호도 배수
+    const preference = getPreferenceMultiplier(location.id, type);
+    affectionGain = Math.round(affectionGain * preference);
+    trustGain = Math.round(trustGain * preference);
+
+    // 바이오리듬
+    const bioMultiplier = getBiorhythmMultiplier();
+    affectionGain = Math.round(affectionGain * bioMultiplier);
+    trustGain = Math.round(trustGain * bioMultiplier);
+
+    // 성공률 체크
+    if (choice.successRate !== undefined) {
+        if (Math.random() > choice.successRate) {
+            affectionGain = Math.round(affectionGain * 0.3);
+            trustGain = Math.round(trustGain * 0.3);
+        }
+    }
+
+    // 누적
+    gameState.multiStage.totalAffection += affectionGain;
+    gameState.multiStage.totalTrust += trustGain;
+    gameState.multiStage.currentIndex++;
+
+    closeModal('action-modal');
+
+    // 중간 결과 표시 후 다음 단계로
+    const isLast = gameState.multiStage.currentIndex >= scenarios.length;
+    if (isLast) {
+        showMultiStageResult(choice.text, affectionGain, trustGain, true);
+    } else {
+        showMultiStageResult(choice.text, affectionGain, trustGain, false);
+    }
+};
+
+function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
+    const resultModal = document.createElement('div');
+    resultModal.className = 'modal active';
+    resultModal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>${isLast ? '데이트 결과' : '진행 중...'}</h2>
+            </div>
+            <div class="modal-body">
+                <p><strong>${choiceText}</strong></p>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <span>호감도</span>
+                        <span class="stat-change ${affectionGain >= 0 ? 'positive' : 'negative'}">
+                            ${affectionGain >= 0 ? '+' : ''}${affectionGain}
+                        </span>
+                    </div>
+                    <div class="result-stat">
+                        <span>신뢰도</span>
+                        <span class="stat-change ${trustGain >= 0 ? 'positive' : 'negative'}">
+                            ${trustGain >= 0 ? '+' : ''}${trustGain}
+                        </span>
+                    </div>
+                </div>
+                <button class="menu-btn" onclick="continueMultiStage()">${isLast ? '확인' : '계속하기'}</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(resultModal);
+}
+
+window.continueMultiStage = function() {
+    // 결과 모달 제거
+    const resultModals = document.querySelectorAll('.modal');
+    resultModals.forEach(m => {
+        if (m.querySelector('.modal-header h2')?.textContent.includes('진행 중') ||
+            m.querySelector('.modal-header h2')?.textContent.includes('데이트 결과')) {
+            m.remove();
+        }
+    });
+
+    if (gameState.multiStage && gameState.multiStage.currentIndex < gameState.multiStage.scenarios.length) {
+        // 다음 시나리오로
+        showMultiStageScenario();
+    } else {
+        // 모든 시나리오 완료
+        finishMultiStage();
+    }
+};
+
+function closeMultiStageModal() {
+    if (confirm('데이트를 중단하시겠습니까?')) {
+        finishMultiStage();
+        closeModal('action-modal');
+    }
+}
+
+function finishMultiStage() {
+    if (!gameState.multiStage) return;
+
+    let { totalAffection, totalTrust, type } = gameState.multiStage;
+
+    // 기념일 보너스 적용
+    if (gameState.todayIsAnniversary) {
+        const originalAff = totalAffection;
+        const originalTrust = totalTrust;
+        totalAffection = Math.round(totalAffection * 1.5);
+        totalTrust = Math.round(totalTrust * 1.5);
+        gameState.anniversaryCelebrated = true;
+
+        const bonusType = gameState.anniversaryType === 'birthday' ? '🎂 생일' : '💕 기념일';
+        setTimeout(() => {
+            alert(`${bonusType} 보너스! 효과가 1.5배로 증가했습니다! (+${totalAffection - originalAff} 호감도, +${totalTrust - originalTrust} 신뢰도)`);
+        }, 500);
+    }
+
+    // 액션 카운트 증가 (여기서 한 번만)
+    gameState.dailyActionCount++;
+    const actionKey = type === 'date' ? 'date' : 'talk';
+    gameState.dailyActionCounts[actionKey]++;
+
+    // 최종 효과 적용
+    gameState.affection += totalAffection;
+    gameState.trust += totalTrust;
+    gameState.lastInteraction = gameState.day;
+
+    if (type === 'date') {
+        recordActivity('date', '💑');
+    } else if (type === 'talk') {
+        recordActivity('talk', '💬');
+    }
+
+    // 다단계 상태 초기화
+    gameState.multiStage = null;
+
+    updateAllUI();
+    checkDayEnd();
+}
+
 function getPreferenceMultiplier(itemId, actionType) {
     if (!gameState.character.preferences) return 1.0;
 
@@ -765,6 +1013,7 @@ function nextDay() {
 
     updateBiorhythm();
     checkNeglect();
+    checkAnniversary();
 
     if (Math.random() < 0.25 && gameState.day > 3) {
         triggerCrisisEvent();
@@ -809,6 +1058,45 @@ function checkNeglect() {
 
         gameState.affection -= penalty;
         alert(`😢 ${gameState.character.fullName}이(가) 서운해합니다... (-${penalty} 호감도)`);
+    }
+}
+
+function checkAnniversary() {
+    // 이전 기념일에서 축하하지 않았으면 페널티
+    if (gameState.todayIsAnniversary && !gameState.anniversaryCelebrated) {
+        gameState.affection -= 15;
+        gameState.trust -= 10;
+        alert(`💔 기념일을 챙기지 않아 ${gameState.character.fullName}이(가) 섭섭해합니다... (-15 호감도, -10 신뢰도)`);
+    }
+
+    // 새로운 날의 기념일 체크
+    gameState.todayIsAnniversary = false;
+    gameState.anniversaryCelebrated = false;
+    gameState.anniversaryType = null;
+
+    // 7일마다 만남 기념일
+    if (gameState.day % 7 === 0 && gameState.day <= 28) {
+        gameState.todayIsAnniversary = true;
+        gameState.anniversaryType = 'meeting';
+        const weeks = gameState.day / 7;
+        alert(`💕 오늘은 만난 지 ${weeks}주 기념일입니다! 특별한 데이트나 선물로 마음을 전해보세요!`);
+    }
+
+    // 생일 체크 (게임 시작 날짜 기준)
+    if (gameState.startDate && gameState.character.birthday) {
+        const currentDate = new Date(gameState.startDate);
+        currentDate.setDate(currentDate.getDate() + gameState.day - 1);
+
+        const birthdayThisYear = new Date(currentDate.getFullYear(),
+                                          gameState.character.birthday.month - 1,
+                                          gameState.character.birthday.day);
+
+        if (currentDate.getMonth() === gameState.character.birthday.month - 1 &&
+            currentDate.getDate() === gameState.character.birthday.day) {
+            gameState.todayIsAnniversary = true;
+            gameState.anniversaryType = 'birthday';
+            alert(`🎂 오늘은 ${gameState.character.fullName}의 생일입니다! 축하해주세요!`);
+        }
     }
 }
 

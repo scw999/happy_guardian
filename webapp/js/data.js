@@ -9,6 +9,7 @@ const CHARACTERS = {
         age: 27,
         job: '패션 디자이너',
         quote: '"완벽하지 않으면 의미 없어요"',
+        birthday: { month: 3, day: 14 },  // 3월 14일 (화이트데이)
         difficulty: 5,
         difficultyMultiplier: 0.3,  // 매우 어려움 - 호감도/신뢰도 상승 30%만 적용
         startAffection: 5,  // 극도로 낮은 시작점 (10 → 5)
@@ -52,6 +53,7 @@ const CHARACTERS = {
         age: 25,
         job: '초등학교 교사',
         quote: '"오늘도 화이팅! 우리 행복하자!"',
+        birthday: { month: 5, day: 5 },  // 5월 5일 (어린이날)
         difficulty: 2,
         difficultyMultiplier: 0.9,  // 쉬움 - 기본 효과의 90%
         startAffection: 12,  // 2배 이하로 감소 (25 → 12)
@@ -92,6 +94,7 @@ const CHARACTERS = {
         age: 24,
         job: '웹툰 작가',
         quote: '"별로... 안 좋은데... (좋아)"',
+        birthday: { month: 11, day: 11 },  // 11월 11일 (빼빼로데이)
         difficulty: 3,
         difficultyMultiplier: 0.65,  // 보통 - 호감도/신뢰도 상승 65%만 적용
         startAffection: 10,  // 2배 이하로 감소 (20 → 10)
@@ -132,6 +135,7 @@ const CHARACTERS = {
         age: 29,
         job: '변호사',
         quote: '"논리적으로 설명해 보세요"',
+        birthday: { month: 12, day: 25 },  // 12월 25일 (크리스마스)
         difficulty: 4,
         difficultyMultiplier: 0.45,  // 어려움 - 호감도/신뢰도 상승 45%만 적용
         startAffection: 7,  // 2배 이하로 감소 (15 → 7)
