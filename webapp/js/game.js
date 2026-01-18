@@ -3,24 +3,23 @@
 // ============================================
 let gameState = {
     character: null,
-    affection: 50,        // 호감도 (0-100)
-    trust: 30,            // 신뢰도 (0-100)
-    money: 1000000,       // 돈 (초기 100만원)
-    stamina: 100,         // 체력 (0-100)
-    day: 1,               // 현재 날짜 (1-30)
-    dDay: 30,             // D-Day (30일 후 프로포즈)
-    startDate: null,      // 시작 날짜 (Date 객체)
-    biorhythm: 'normal',  // 바이오리듬: normal, period
-    biorhythmDays: 0,     // 바이오리듬 남은 일수
-    lastInteraction: 0,   // 마지막 상호작용 날짜
-    workCount: 0,         // 오늘 알바 횟수
-    hasProposalRing: false, // 다이아 반지 보유 여부
-    history: [],          // 히스토리 (그래프용)
-    dailyActivities: {},  // 일별 활동 기록 { day: [activities] }
+    affection: 50,
+    trust: 30,
+    money: 1000000,
+    stamina: 100,
+    day: 1,
+    dDay: 30,
+    startDate: null,
+    biorhythm: 'normal',
+    biorhythmDays: 0,
+    lastInteraction: 0,
+    workCount: 0,
+    hasProposalRing: false,
+    history: [],
+    dailyActivities: {},
     isGameOver: false
 };
 
-// pending timeouts를 추적하기 위한 변수
 let pendingTimeouts = [];
 
 // ============================================
@@ -43,9 +42,6 @@ function formatMoney(amount) {
     return amount.toLocaleString() + '원';
 }
 
-// ============================================
-// 게임 초기화
-// ============================================
 function showCharacterSelect() {
     showScreen('character-select-screen');
 }
@@ -61,10 +57,8 @@ function closeRules() {
 function selectCharacter(characterId) {
     const character = CHARACTERS[characterId];
 
-    // 모든 pending timeout 클리어
     clearAllTimeouts();
 
-    // 게임 상태 완전 초기화
     gameState = {
         character: character,
         affection: character.startAffection,
@@ -84,14 +78,10 @@ function selectCharacter(characterId) {
         isGameOver: false
     };
 
-    // 첫 히스토리 기록
     addHistory();
-
-    // 게임 화면 초기화
     initGameScreen();
     showScreen('game-screen');
 
-    // UI 초기화
     const dialogueText = document.getElementById('dialogue-text');
     dialogueText.textContent = '무엇을 할까요?';
     dialogueText.style.color = '';
@@ -99,71 +89,66 @@ function selectCharacter(characterId) {
 
     updateAllUI();
 
-    // 첫 만남 시나리오 표시
     const timeoutId = setTimeout(() => {
-        console.log('첫 만남 시나리오 표시 시도:', characterId);
         showFirstMeetingScenario(characterId);
     }, 500);
     pendingTimeouts.push(timeoutId);
 }
 
 function showFirstMeetingScenario(characterId) {
-    console.log('showFirstMeetingScenario 호출됨:', characterId);
-
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
-    if (!scenario) {
-        console.error('첫 만남 시나리오를 찾을 수 없습니다:', characterId);
-        return;
+    if (!scenario) return;
+
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💝 첫 만남</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>${scenario.situation}</p>
+                ${scenario.choices.map((choice, idx) => `
+                    <button class="choice-option-btn" onclick="window.selectFirstMeeting(${idx})">
+                        <span class="choice-number">${idx + 1}.</span>
+                        <span class="choice-text">${choice.text}</span>
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    window.currentFirstMeetingChoices = scenario.choices;
+
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
     }
 
-    console.log('시나리오 찾음:', scenario);
-
-    const modal = createActionModal('💝 첫 만남', scenario.situation);
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
-
-    scenario.choices.forEach((choice, index) => {
-        const choiceBtn = document.createElement('button');
-        choiceBtn.className = 'choice-option-btn';
-
-        choiceBtn.innerHTML = `
-            <span class="choice-number">${index + 1}.</span>
-            <span class="choice-text">${choice.text}</span>
-        `;
-
-        const choiceData = choice;
-        choiceBtn.onclick = function() {
-            console.log('첫 만남 선택:', choiceData.text);
-            handleFirstMeetingChoice(choiceData);
-        };
-
-        content.appendChild(choiceBtn);
-    });
-
+    modal.innerHTML = html;
     showModal('action-modal');
-    console.log('첫 만남 모달 표시됨');
 }
 
-function handleFirstMeetingChoice(choice) {
-    let affectionChange = choice.affection || 0;
-    let trustChange = choice.trust || 0;
+window.selectFirstMeeting = function(index) {
+    const choice = window.currentFirstMeetingChoices[index];
+    const affectionChange = choice.affection || 0;
+    const trustChange = choice.trust || 0;
 
     gameState.affection += affectionChange;
     gameState.trust += trustChange;
 
     closeModal('action-modal');
 
-    let message = `첫 만남이 인상적이었습니다!\n\n"${gameState.character.fullName}과(와)의 관계가 시작되었습니다."`;
-
-    // 모달을 닫은 후 약간의 딜레이를 주고 결과 표시
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
+        const message = `첫 만남이 인상적이었습니다!\n\n"${gameState.character.fullName}과(와)의 관계가 시작되었습니다."`;
         showResult(message, affectionChange, trustChange);
-
-        // 히스토리 업데이트
         addHistory();
         updateAllUI();
     }, 100);
-}
+    pendingTimeouts.push(timeoutId);
+};
 
 function initGameScreen() {
     document.getElementById('char-name-display').textContent = gameState.character.fullName;
@@ -171,9 +156,6 @@ function initGameScreen() {
     createActionButtons();
 }
 
-// ============================================
-// UI 업데이트
-// ============================================
 function updateAllUI() {
     updateDDay();
     updateResources();
@@ -185,36 +167,29 @@ function updateAllUI() {
 function updateDDay() {
     document.getElementById('day-number').textContent = gameState.day;
     document.querySelector('.day-total').textContent = ` / 30`;
-
-    // D-Day 표시
     const dDayText = `D-${gameState.dDay}`;
     document.getElementById('day-number').setAttribute('data-dday', dDayText);
 }
 
 function updateResources() {
-    // 호감도
     gameState.affection = Math.max(0, Math.min(100, gameState.affection));
     document.getElementById('affection-percentage').textContent = Math.round(gameState.affection) + '%';
     document.getElementById('affection-fill').style.width = gameState.affection + '%';
 
-    // 신뢰도 (새로 추가)
     gameState.trust = Math.max(0, Math.min(100, gameState.trust));
     if (document.getElementById('trust-percentage')) {
         document.getElementById('trust-percentage').textContent = Math.round(gameState.trust) + '%';
         document.getElementById('trust-fill').style.width = gameState.trust + '%';
     }
 
-    // 돈
     document.getElementById('money-value').textContent = formatMoney(gameState.money);
-    const moneyPercent = Math.min(100, (gameState.money / 10000000) * 100); // 1000만원 기준
+    const moneyPercent = Math.min(100, (gameState.money / 10000000) * 100);
     document.getElementById('money-fill').style.width = moneyPercent + '%';
 
-    // 체력
     gameState.stamina = Math.max(0, Math.min(100, gameState.stamina));
     document.getElementById('stamina-value').textContent = gameState.stamina;
     document.getElementById('stamina-fill').style.width = gameState.stamina + '%';
 
-    // 관계 상태
     updateRelationshipStatus();
 }
 
@@ -250,93 +225,43 @@ function updateCharacterMood() {
 }
 
 // ============================================
-// 액션 버튼 시스템 - 완전 재설계
+// 액션 버튼 시스템
 // ============================================
 function createActionButtons() {
     const choicesArea = document.getElementById('choices-area');
-    if (!choicesArea) {
-        console.error('choices-area를 찾을 수 없습니다');
-        return;
-    }
+    if (!choicesArea) return;
 
     choicesArea.innerHTML = `
-        <button class="action-choice-btn" id="action-date" onclick="window.handleActionClick('date')">
+        <button class="action-choice-btn" id="action-date" onclick="showDateMenu()">
             <div class="action-icon">💑</div>
-            <div class="action-info">
-                <div class="action-name">데이트하기</div>
-            </div>
+            <div class="action-info"><div class="action-name">데이트하기</div></div>
         </button>
-        <button class="action-choice-btn" id="action-gift" onclick="window.handleActionClick('gift')">
+        <button class="action-choice-btn" id="action-gift" onclick="showGiftMenu()">
             <div class="action-icon">🎁</div>
-            <div class="action-info">
-                <div class="action-name">선물하기</div>
-            </div>
+            <div class="action-info"><div class="action-name">선물하기</div></div>
         </button>
-        <button class="action-choice-btn" id="action-talk" onclick="window.handleActionClick('talk')">
+        <button class="action-choice-btn" id="action-talk" onclick="showTalkMenu()">
             <div class="action-icon">💬</div>
-            <div class="action-info">
-                <div class="action-name">대화하기</div>
-            </div>
+            <div class="action-info"><div class="action-name">대화하기</div></div>
         </button>
-        <button class="action-choice-btn" id="action-work" onclick="window.handleActionClick('work')">
+        <button class="action-choice-btn" id="action-work" onclick="doWork()">
             <div class="action-icon">💼</div>
-            <div class="action-info">
-                <div class="action-name">알바하기</div>
-            </div>
+            <div class="action-info"><div class="action-name">알바하기</div></div>
         </button>
-        <button class="action-choice-btn" id="action-rest" onclick="window.handleActionClick('rest')">
+        <button class="action-choice-btn" id="action-rest" onclick="doRest()">
             <div class="action-icon">😴</div>
-            <div class="action-info">
-                <div class="action-name">휴식하기</div>
-            </div>
+            <div class="action-info"><div class="action-name">휴식하기</div></div>
         </button>
-        <button class="action-choice-btn" id="action-propose" onclick="window.handleActionClick('propose')">
+        <button class="action-choice-btn" id="action-propose" onclick="attemptProposal()">
             <div class="action-icon">💍</div>
-            <div class="action-info">
-                <div class="action-name">프로포즈</div>
-            </div>
+            <div class="action-info"><div class="action-name">프로포즈</div></div>
         </button>
     `;
 
     updateActionButtons();
 }
 
-// 전역 액션 핸들러
-window.handleActionClick = function(action) {
-    console.log('액션 클릭됨:', action);
-
-    const button = document.getElementById(`action-${action}`);
-    if (button && (button.disabled || button.classList.contains('disabled'))) {
-        console.log('버튼이 비활성화됨:', action);
-        return;
-    }
-
-    switch(action) {
-        case 'date':
-            showDateMenu();
-            break;
-        case 'gift':
-            showGiftMenu();
-            break;
-        case 'talk':
-            showTalkMenu();
-            break;
-        case 'work':
-            doWork();
-            break;
-        case 'rest':
-            doRest();
-            break;
-        case 'propose':
-            attemptProposal();
-            break;
-        default:
-            console.error('알 수 없는 액션:', action);
-    }
-};
-
 function updateActionButtons() {
-    // 모든 기본 액션 버튼은 활성화 (date, gift, talk, rest)
     const alwaysEnabledButtons = ['date', 'gift', 'talk', 'rest'];
     alwaysEnabledButtons.forEach(id => {
         const btn = document.getElementById(`action-${id}`);
@@ -346,11 +271,9 @@ function updateActionButtons() {
         }
     });
 
-    // 프로포즈 버튼은 반지가 있거나 일정 조건 충족 시에만 활성화
     const proposeBtn = document.getElementById('action-propose');
     if (proposeBtn) {
-        const canPropose = gameState.hasProposalRing ||
-                          (gameState.affection >= 60 && gameState.trust >= 60);
+        const canPropose = gameState.hasProposalRing || (gameState.affection >= 60 && gameState.trust >= 60);
         if (!canPropose) {
             proposeBtn.classList.add('disabled');
             proposeBtn.disabled = true;
@@ -360,7 +283,6 @@ function updateActionButtons() {
         }
     }
 
-    // 알바는 하루 2회 제한
     const workBtn = document.getElementById('action-work');
     if (workBtn) {
         if (gameState.workCount >= 2) {
@@ -377,61 +299,62 @@ function updateActionButtons() {
 // 데이트 시스템
 // ============================================
 function showDateMenu() {
-    console.log('showDateMenu 호출됨');
+    const locations = Object.values(DATE_LOCATIONS);
 
-    const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
-
-    Object.values(DATE_LOCATIONS).forEach(location => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
-        option.style.cursor = 'pointer';
-
-        const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
-        if (!canAfford) option.classList.add('disabled');
-
-        option.innerHTML = `
-            <div class="option-icon">${location.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${location.name}</div>
-                <div class="option-desc">${location.description}</div>
-                <div class="option-cost">
-                    ${location.cost > 0 ? '💰 ' + formatMoney(location.cost) : '무료'}
-                    ⚡ ${location.stamina}
-                </div>
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>데이트 장소 선택</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
             </div>
-        `;
+            <div class="modal-body">
+                <p>어디로 데이트를 갈까요?</p>
+                ${locations.map((loc, idx) => {
+                    const canAfford = gameState.money >= loc.cost && gameState.stamina >= loc.stamina;
+                    const disabled = canAfford ? '' : 'disabled';
+                    return `
+                        <div class="action-option ${disabled}" onclick="${canAfford ? `selectDateLocation(${idx})` : ''}">
+                            <div class="option-icon">${loc.icon}</div>
+                            <div class="option-info">
+                                <div class="option-name">${loc.name}</div>
+                                <div class="option-desc">${loc.description}</div>
+                                <div class="option-cost">
+                                    ${loc.cost > 0 ? '💰 ' + formatMoney(loc.cost) : '무료'}
+                                    ⚡ ${loc.stamina}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
 
-        const locationId = location.id;
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                console.log('데이트 장소 선택:', locationId);
-                selectDateLocation(locationId);
-            }
-        };
+    window.currentDateLocations = locations;
 
-        content.appendChild(option);
-    });
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
 
+    modal.innerHTML = html;
     showModal('action-modal');
-    console.log('데이트 메뉴 표시됨');
 }
 
-function selectDateLocation(locationId) {
-    const location = DATE_LOCATIONS[locationId];
+function selectDateLocation(index) {
+    const location = window.currentDateLocations[index];
 
-    // 비용 체크
     if (gameState.money < location.cost || gameState.stamina < location.stamina) {
         alert('자원이 부족합니다!');
         return;
     }
 
-    // 비용 소모
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
 
-    // 랜덤 시나리오 선택
     const scenario = location.scenarios[Math.floor(Math.random() * location.scenarios.length)];
 
     closeModal('action-modal');
@@ -442,46 +365,50 @@ function selectDateLocation(locationId) {
 // 선물 시스템
 // ============================================
 function showGiftMenu() {
-    console.log('showGiftMenu 호출됨');
+    const gifts = Object.values(GIFT_ITEMS);
 
-    const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
-
-    Object.values(GIFT_ITEMS).forEach(gift => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
-        option.style.cursor = 'pointer';
-
-        const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
-        if (!canAfford) option.classList.add('disabled');
-
-        option.innerHTML = `
-            <div class="option-icon">${gift.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${gift.name}</div>
-                <div class="option-desc">${gift.description}</div>
-                <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>선물 선택</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
             </div>
-        `;
+            <div class="modal-body">
+                <p>무엇을 선물할까요?</p>
+                ${gifts.map((gift, idx) => {
+                    const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
+                    const disabled = canAfford ? '' : 'disabled';
+                    return `
+                        <div class="action-option ${disabled}" onclick="${canAfford ? `giveGift(${idx})` : ''}">
+                            <div class="option-icon">${gift.icon}</div>
+                            <div class="option-info">
+                                <div class="option-name">${gift.name}</div>
+                                <div class="option-desc">${gift.description}</div>
+                                <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
 
-        const giftId = gift.id;
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                console.log('선물 선택:', giftId);
-                giveGift(giftId);
-            }
-        };
+    window.currentGifts = gifts;
 
-        content.appendChild(option);
-    });
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
 
+    modal.innerHTML = html;
     showModal('action-modal');
-    console.log('선물 메뉴 표시됨');
 }
 
-function giveGift(giftId) {
-    const gift = GIFT_ITEMS[giftId];
+function giveGift(index) {
+    const gift = window.currentGifts[index];
 
     if (gameState.money < gift.cost) {
         alert('돈이 부족합니다!');
@@ -491,8 +418,7 @@ function giveGift(giftId) {
     gameState.money -= gift.cost;
     gameState.stamina -= gift.stamina;
 
-    // 캐릭터 선호도 반영
-    const preference = gameState.character.preferences.gifts[giftId] || 1.0;
+    const preference = gameState.character.preferences.gifts[gift.id] || 1.0;
     const affectionGain = Math.round(gift.baseAffection * preference * getBiorhythmMultiplier());
     const trustGain = Math.round(gift.baseTrust * preference * getBiorhythmMultiplier());
 
@@ -500,12 +426,10 @@ function giveGift(giftId) {
     gameState.trust += trustGain;
     gameState.lastInteraction = gameState.day;
 
-    // 다이아 반지는 특별 처리
-    if (giftId === 'ring') {
+    if (gift.id === 'ring') {
         gameState.hasProposalRing = true;
     }
 
-    // 활동 기록
     recordActivity('gift', '🎁');
 
     closeModal('action-modal');
@@ -518,49 +442,52 @@ function giveGift(giftId) {
 // 대화 시스템
 // ============================================
 function showTalkMenu() {
-    console.log('showTalkMenu 호출됨');
+    const topics = Object.values(TALK_TOPICS);
 
-    const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
-
-    Object.values(TALK_TOPICS).forEach(topic => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
-        option.style.cursor = 'pointer';
-
-        const canTalk = gameState.stamina >= topic.stamina;
-        const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
-
-        if (!canTalk || !meetsRequirement) option.classList.add('disabled');
-
-        option.innerHTML = `
-            <div class="option-icon">${topic.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${topic.name}</div>
-                <div class="option-desc">${topic.description}</div>
-                <div class="option-cost">⚡ ${topic.stamina}</div>
-                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>대화 주제 선택</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
             </div>
-        `;
+            <div class="modal-body">
+                <p>무엇에 대해 이야기할까요?</p>
+                ${topics.map((topic, idx) => {
+                    const canTalk = gameState.stamina >= topic.stamina;
+                    const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
+                    const disabled = (canTalk && meetsRequirement) ? '' : 'disabled';
+                    return `
+                        <div class="action-option ${disabled}" onclick="${(canTalk && meetsRequirement) ? `selectTalkTopic(${idx})` : ''}">
+                            <div class="option-icon">${topic.icon}</div>
+                            <div class="option-info">
+                                <div class="option-name">${topic.name}</div>
+                                <div class="option-desc">${topic.description}</div>
+                                <div class="option-cost">⚡ ${topic.stamina}</div>
+                                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
 
-        const topicId = topic.id;
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                console.log('대화 주제 선택:', topicId);
-                selectTalkTopic(topicId);
-            }
-        };
+    window.currentTopics = topics;
 
-        content.appendChild(option);
-    });
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
 
+    modal.innerHTML = html;
     showModal('action-modal');
-    console.log('대화 메뉴 표시됨');
 }
 
-function selectTalkTopic(topicId) {
-    const topic = TALK_TOPICS[topicId];
+function selectTalkTopic(index) {
+    const topic = window.currentTopics[index];
 
     if (gameState.stamina < topic.stamina) {
         alert('체력이 부족합니다!');
@@ -569,7 +496,6 @@ function selectTalkTopic(topicId) {
 
     gameState.stamina -= topic.stamina;
 
-    // 랜덤 시나리오 선택
     const scenario = topic.scenarios[Math.floor(Math.random() * topic.scenarios.length)];
 
     closeModal('action-modal');
@@ -577,40 +503,51 @@ function selectTalkTopic(topicId) {
 }
 
 // ============================================
-// 시나리오 시스템 (핵심)
+// 시나리오 시스템
 // ============================================
 function showScenario(scenario, sourceData, actionType) {
-    const modal = createActionModal('', scenario.situation);
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2></h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>${scenario.situation}</p>
+                ${scenario.choices.map((choice, idx) => `
+                    <button class="choice-option-btn" onclick="window.selectScenarioChoice(${idx})">
+                        <span class="choice-number">${idx + 1}.</span>
+                        <span class="choice-text">${choice.text}</span>
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+    `;
 
-    scenario.choices.forEach((choice, index) => {
-        const choiceBtn = document.createElement('button');
-        choiceBtn.className = 'choice-option-btn';
+    window.currentScenarioChoices = scenario.choices;
+    window.currentScenarioSource = sourceData;
+    window.currentScenarioType = actionType;
 
-        choiceBtn.innerHTML = `
-            <span class="choice-number">${index + 1}.</span>
-            <span class="choice-text">${choice.text}</span>
-        `;
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
 
-        const choiceData = choice;
-        choiceBtn.onclick = function() {
-            console.log('시나리오 선택:', choiceData.text);
-            selectChoice(choiceData, sourceData, actionType);
-        };
-
-        content.appendChild(choiceBtn);
-    });
-
+    modal.innerHTML = html;
     showModal('action-modal');
 }
 
-function selectChoice(choice, sourceData, actionType) {
-    // 기본 점수
+window.selectScenarioChoice = function(index) {
+    const choice = window.currentScenarioChoices[index];
+    const sourceData = window.currentScenarioSource;
+    const actionType = window.currentScenarioType;
+
     let affectionGain = choice.affection || 0;
     let trustGain = choice.trust || 0;
 
-    // 소스 데이터의 기본 점수 추가
     if (actionType === 'date') {
         affectionGain += sourceData.baseAffection;
         trustGain += sourceData.baseTrust;
@@ -619,17 +556,14 @@ function selectChoice(choice, sourceData, actionType) {
         trustGain += sourceData.baseTrust;
     }
 
-    // 캐릭터 선호도 반영
     const preference = getPreferenceMultiplier(sourceData.id, actionType);
     affectionGain = Math.round(affectionGain * preference);
     trustGain = Math.round(trustGain * preference);
 
-    // 바이오리듬 반영
     const bioMultiplier = getBiorhythmMultiplier();
     affectionGain = Math.round(affectionGain * bioMultiplier);
     trustGain = Math.round(trustGain * bioMultiplier);
 
-    // 확률 체크 (유머 등)
     if (choice.successRate !== undefined) {
         if (Math.random() > choice.successRate) {
             affectionGain = Math.round(affectionGain * 0.3);
@@ -637,12 +571,10 @@ function selectChoice(choice, sourceData, actionType) {
         }
     }
 
-    // 점수 적용
     gameState.affection += affectionGain;
     gameState.trust += trustGain;
     gameState.lastInteraction = gameState.day;
 
-    // 활동 기록
     if (actionType === 'date') {
         recordActivity('date', '💑');
     } else if (actionType === 'talk') {
@@ -653,7 +585,7 @@ function selectChoice(choice, sourceData, actionType) {
     showResult(choice.text, affectionGain, trustGain);
 
     checkDayEnd();
-}
+};
 
 function getPreferenceMultiplier(itemId, actionType) {
     if (!gameState.character.preferences) return 1.0;
@@ -669,7 +601,7 @@ function getPreferenceMultiplier(itemId, actionType) {
 
 function getBiorhythmMultiplier() {
     if (gameState.biorhythm === 'period') {
-        return 0.5; // 주기 중에는 효과 50% 감소, 패널티 200% 증가
+        return 0.5;
     }
     return 1.0;
 }
@@ -692,7 +624,6 @@ function doWork() {
     gameState.money += 100000;
     gameState.workCount++;
 
-    // 활동 기록
     recordActivity('work', '💼');
 
     showResult('알바를 마쳤습니다!', 0, 0, '+100,000원');
@@ -702,7 +633,6 @@ function doWork() {
 function doRest() {
     gameState.stamina = 100;
 
-    // 활동 기록
     recordActivity('rest', '😴');
 
     showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0);
@@ -734,7 +664,6 @@ function showResult(message, affectionChange, trustChange, extraInfo = '') {
     updateAllUI();
 }
 
-// 모든 pending timeout 클리어
 function clearAllTimeouts() {
     pendingTimeouts.forEach(id => clearTimeout(id));
     pendingTimeouts = [];
@@ -744,8 +673,6 @@ function clearAllTimeouts() {
 // 다음 날
 // ============================================
 function checkDayEnd() {
-    // 자동으로 날이 넘어가지 않음
-    // 플레이어가 "휴식하기"를 눌러야 함
 }
 
 function nextDay() {
@@ -754,22 +681,16 @@ function nextDay() {
     gameState.workCount = 0;
     gameState.stamina = 100;
 
-    // 바이오리듬 업데이트
     updateBiorhythm();
-
-    // 방치 체크
     checkNeglect();
 
-    // 돌발 상황 체크 (25% 확률)
     if (Math.random() < 0.25 && gameState.day > 3) {
         triggerCrisisEvent();
-        return; // 돌발 상황 처리 후 return
+        return;
     }
 
-    // 히스토리 기록
     addHistory();
 
-    // 게임 종료 체크
     if (gameState.dDay <= 0 || gameState.affection <= 0) {
         endGame();
         return;
@@ -785,7 +706,6 @@ function updateBiorhythm() {
             gameState.biorhythm = 'normal';
         }
     } else {
-        // 20% 확률로 주기 발생 (3일간)
         if (Math.random() < 0.2) {
             gameState.biorhythm = 'period';
             gameState.biorhythmDays = 3;
@@ -800,7 +720,6 @@ function checkNeglect() {
     if (daysSinceInteraction > 3) {
         const neglectPenalty = (daysSinceInteraction - 3) * 5;
 
-        // 캐릭터별 방치 민감도
         let penalty = neglectPenalty;
         if (gameState.character.traits.neglectPenalty) {
             penalty = gameState.character.traits.neglectPenalty * (daysSinceInteraction - 3);
@@ -831,7 +750,6 @@ function showStatsGraph() {
 
     showModal('stats-graph-modal');
 
-    // 모달이 표시된 후 그래프 그리기
     setTimeout(() => {
         drawStatsGraph();
     }, 100);
@@ -845,10 +763,8 @@ function drawStatsGraph() {
     const width = canvas.width;
     const height = canvas.height;
 
-    // 캔버스 초기화
     ctx.clearRect(0, 0, width, height);
 
-    // 배경
     ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
     ctx.fillRect(0, 0, width, height);
 
@@ -856,11 +772,9 @@ function drawStatsGraph() {
     const graphWidth = width - padding * 2;
     const graphHeight = height - padding * 2;
 
-    // 그리드 그리기
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
     ctx.lineWidth = 1;
 
-    // 가로선 (0%, 25%, 50%, 75%, 100%)
     for (let i = 0; i <= 4; i++) {
         const y = padding + (graphHeight / 4) * i;
         ctx.beginPath();
@@ -868,14 +782,12 @@ function drawStatsGraph() {
         ctx.lineTo(width - padding, y);
         ctx.stroke();
 
-        // 퍼센트 라벨
         ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         ctx.font = '12px sans-serif';
         ctx.textAlign = 'right';
         ctx.fillText((100 - i * 25) + '%', padding - 10, y + 4);
     }
 
-    // 세로선 (날짜)
     const history = gameState.history;
     const maxDays = Math.max(10, history.length);
     const dayStep = Math.ceil(maxDays / 10);
@@ -888,14 +800,12 @@ function drawStatsGraph() {
         ctx.lineTo(x, height - padding);
         ctx.stroke();
 
-        // 날짜 라벨
         ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         ctx.font = '12px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText('Day ' + (i + 1), x, height - padding + 20);
     }
 
-    // 데이터 선 그리기
     function drawLine(data, color, label) {
         if (data.length < 2) return;
 
@@ -917,7 +827,6 @@ function drawStatsGraph() {
 
         ctx.stroke();
 
-        // 점 그리기
         for (let i = 0; i < data.length; i++) {
             const x = padding + (graphWidth / (maxDays - 1)) * i;
             const value = Math.max(0, Math.min(100, data[i]));
@@ -930,11 +839,9 @@ function drawStatsGraph() {
         }
     }
 
-    // 호감도 데이터
     const affectionData = history.map(h => h.affection);
     drawLine(affectionData, '#ff69b4', '호감도');
 
-    // 신뢰도 데이터
     const trustData = history.map(h => h.trust);
     drawLine(trustData, '#4169E1', '신뢰도');
 }
@@ -1004,7 +911,6 @@ function showEnding(type, title, message) {
     document.getElementById('final-affection').textContent = Math.round(gameState.affection) + '%';
     document.getElementById('final-days').textContent = gameState.day + '일';
 
-    // 엔딩 이미지 설정
     const endingImage = document.getElementById('ending-image');
     const baseImage = gameState.character.image.replace('-normal.jpg', '');
 
@@ -1019,7 +925,6 @@ function showEnding(type, title, message) {
         this.onerror = null;
     };
 
-    // 엔딩 포트레이트 테두리
     const endingPortrait = document.getElementById('ending-portrait');
     const colors = {
         perfect: '#44ff88',
@@ -1038,36 +943,6 @@ function showEnding(type, title, message) {
 }
 
 // ============================================
-// 모달 생성 유틸리티
-// ============================================
-function createActionModal(title, subtitle) {
-    let modal = document.getElementById('action-modal');
-
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'action-modal';
-        modal.className = 'modal';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="action-modal-title"></h2>
-                    <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
-                </div>
-                <div class="modal-body" id="action-modal-body">
-                    <p id="action-modal-subtitle"></p>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-    }
-
-    document.getElementById('action-modal-title').textContent = title;
-    document.getElementById('action-modal-subtitle').textContent = subtitle;
-
-    return modal;
-}
-
-// ============================================
 // 게임 재시작
 // ============================================
 function restartGame() {
@@ -1079,7 +954,6 @@ function backToMain() {
 }
 
 function toggleMenu() {
-    // 간단한 메뉴로 가이드 표시
     showRules();
 }
 
@@ -1093,45 +967,52 @@ function showGameMenu() {
 function triggerCrisisEvent() {
     const event = CRISIS_EVENTS[Math.floor(Math.random() * CRISIS_EVENTS.length)];
 
-    const modal = createActionModal('⚠️ 돌발 상황!', event.situation);
-    const content = modal.querySelector('.modal-body');
-    content.innerHTML = '';
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ 돌발 상황!</h2>
+                <button class="close-btn" onclick="closeModal('action-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>${event.situation}</p>
+                ${event.choices.map((choice, idx) => `
+                    <button class="choice-option-btn" onclick="window.selectCrisisChoice(${idx})">
+                        <span class="choice-number">${idx + 1}.</span>
+                        <span class="choice-text">${choice.text}</span>
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+    `;
 
-    event.choices.forEach((choice, index) => {
-        const choiceBtn = document.createElement('button');
-        choiceBtn.className = 'choice-option-btn';
+    window.currentCrisisChoices = event.choices;
+    window.currentCrisisEvent = event;
 
-        choiceBtn.innerHTML = `
-            <span class="choice-number">${index + 1}.</span>
-            <span class="choice-text">${choice.text}</span>
-        `;
+    let modal = document.getElementById('action-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'action-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
 
-        const choiceData = choice;
-        const eventData = event;
-        choiceBtn.onclick = function() {
-            console.log('위기 이벤트 선택:', choiceData.text);
-            handleCrisisChoice(choiceData, eventData);
-        };
-
-        content.appendChild(choiceBtn);
-    });
-
+    modal.innerHTML = html;
     showModal('action-modal');
 }
 
-function handleCrisisChoice(choice, event) {
+window.selectCrisisChoice = function(index) {
+    const choice = window.currentCrisisChoices[index];
+    const event = window.currentCrisisEvent;
+
     let affectionChange = choice.affection || 0;
     let trustChange = choice.trust || 0;
     let moneyChange = choice.money || 0;
 
-    // 캐릭터 특성에 따라 조정
     if (gameState.character.traits) {
-        // 완벽주의자는 실수에 민감
         if (gameState.character.id === 'perfectionist' && (affectionChange < 0 || trustChange < 0)) {
             affectionChange = Math.round(affectionChange * 1.3);
             trustChange = Math.round(trustChange * 1.3);
         }
-        // 츤데레는 긍정적 행동에 더 큰 반응
         if (gameState.character.id === 'tsundere' && affectionChange > 0) {
             affectionChange = Math.round(affectionChange * 1.2);
         }
@@ -1141,7 +1022,6 @@ function handleCrisisChoice(choice, event) {
     gameState.trust += trustChange;
     gameState.money += moneyChange;
 
-    // 활동 기록
     recordActivity('crisis', '⚠️');
 
     closeModal('action-modal');
@@ -1153,17 +1033,15 @@ function handleCrisisChoice(choice, event) {
 
     showResult(resultMessage, affectionChange, trustChange);
 
-    // 히스토리 기록
     addHistory();
 
-    // 게임 종료 체크
     if (gameState.dDay <= 0 || gameState.affection <= 0) {
         endGame();
         return;
     }
 
     updateAllUI();
-}
+};
 
 // ============================================
 // 활동 기록
@@ -1177,7 +1055,6 @@ function recordActivity(activityType, activityIcon) {
         type: activityType,
         icon: activityIcon
     });
-    // 달력 즉시 업데이트
     updateMiniCalendar();
 }
 
@@ -1190,23 +1067,19 @@ function updateMiniCalendar() {
 
     container.innerHTML = '';
 
-    // 30일치 달력 생성
     for (let day = 1; day <= 30; day++) {
         const dayElement = document.createElement('div');
         dayElement.className = 'calendar-display-day';
 
-        // 날짜 번호
         const dayNumber = document.createElement('div');
         dayNumber.className = 'calendar-display-day-number';
         dayNumber.textContent = day;
         dayElement.appendChild(dayNumber);
 
-        // 활동 아이콘 표시
         if (gameState.dailyActivities[day] && gameState.dailyActivities[day].length > 0) {
             const iconsDiv = document.createElement('div');
             iconsDiv.className = 'calendar-display-day-icons';
 
-            // 중복 제거하고 표시 (최대 4개)
             const uniqueIcons = [...new Set(gameState.dailyActivities[day].map(a => a.icon))];
             uniqueIcons.slice(0, 4).forEach(icon => {
                 const iconSpan = document.createElement('span');
@@ -1218,7 +1091,6 @@ function updateMiniCalendar() {
             dayElement.appendChild(iconsDiv);
         }
 
-        // 상태 클래스 추가
         if (day === gameState.day) {
             dayElement.classList.add('today');
         } else if (day < gameState.day) {
@@ -1227,10 +1099,10 @@ function updateMiniCalendar() {
             dayElement.classList.add('future');
         }
 
-        // 클릭 이벤트 - 해당 날짜의 활동 상세 보기
         if (day <= gameState.day) {
+            const currentDay = day;
             dayElement.onclick = function() {
-                showDayDetail(day);
+                showDayDetail(currentDay);
             };
             dayElement.style.cursor = 'pointer';
         }
@@ -1243,13 +1115,11 @@ function showCalendar() {
     const container = document.getElementById('calendar-container');
     container.innerHTML = '';
 
-    // 헤더
     const header = document.createElement('div');
     header.className = 'calendar-header';
     header.textContent = `${gameState.character.fullName}와의 30일`;
     container.appendChild(header);
 
-    // 30일치 달력 생성
     for (let day = 1; day <= 30; day++) {
         const dayElement = document.createElement('div');
         dayElement.className = 'calendar-day';
@@ -1260,18 +1130,15 @@ function showCalendar() {
             dayElement.classList.add('future');
         }
 
-        // 날짜 번호
         const dayNumber = document.createElement('div');
         dayNumber.className = 'calendar-day-number';
         dayNumber.textContent = day;
         dayElement.appendChild(dayNumber);
 
-        // 활동 아이콘 표시
         if (gameState.dailyActivities[day]) {
             const activitiesDiv = document.createElement('div');
             activitiesDiv.className = 'calendar-day-activities';
 
-            // 중복 제거하고 표시 (최대 3개)
             const uniqueActivities = [...new Set(gameState.dailyActivities[day].map(a => a.icon))];
             uniqueActivities.slice(0, 3).forEach(icon => {
                 const activitySpan = document.createElement('span');
@@ -1284,10 +1151,10 @@ function showCalendar() {
             dayElement.appendChild(activitiesDiv);
         }
 
-        // 클릭 이벤트
         if (day <= gameState.day) {
+            const currentDay = day;
             dayElement.onclick = function() {
-                showDayDetail(day);
+                showDayDetail(currentDay);
             };
         }
 
@@ -1333,17 +1200,14 @@ function showDayDetail(day) {
 // ============================================
 function confirmRestart() {
     if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n모든 데이터가 완전히 삭제됩니다.')) {
-        // 모든 pending timeout 클리어
         clearAllTimeouts();
 
-        // localStorage 완전 삭제
         try {
             localStorage.clear();
         } catch (error) {
             console.warn('localStorage 삭제 실패:', error);
         }
 
-        // 게임 상태 완전 초기화
         gameState = {
             character: null,
             affection: 50,
