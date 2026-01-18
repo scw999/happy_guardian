@@ -11,8 +11,8 @@ const CHARACTERS = {
         quote: '"완벽하지 않으면 의미 없어요"',
         difficulty: 5,
         difficultyMultiplier: 0.3,  // 매우 어려움 - 호감도/신뢰도 상승 30%만 적용
-        startAffection: 20,
-        startTrust: 10,
+        startAffection: 10,  // 매우 낮은 시작점
+        startTrust: 5,
         preferences: {
             // 데이트 선호도 (곱수)
             dates: {
@@ -54,8 +54,8 @@ const CHARACTERS = {
         quote: '"오늘도 화이팅! 우리 행복하자!"',
         difficulty: 2,
         difficultyMultiplier: 0.9,  // 쉬움 - 기본 효과의 90%
-        startAffection: 50,
-        startTrust: 30,
+        startAffection: 25,  // 대폭 감소 (50 → 25)
+        startTrust: 15,  // 대폭 감소 (30 → 15)
         preferences: {
             dates: {
                 walk: 1.5,
@@ -94,8 +94,8 @@ const CHARACTERS = {
         quote: '"별로... 안 좋은데... (좋아)"',
         difficulty: 3,
         difficultyMultiplier: 0.65,  // 보통 - 호감도/신뢰도 상승 65%만 적용
-        startAffection: 30,
-        startTrust: 20,
+        startAffection: 20,  // 감소 (30 → 20)
+        startTrust: 10,  // 감소 (20 → 10)
         preferences: {
             dates: {
                 walk: 1.1,
@@ -134,8 +134,8 @@ const CHARACTERS = {
         quote: '"논리적으로 설명해 보세요"',
         difficulty: 4,
         difficultyMultiplier: 0.45,  // 어려움 - 호감도/신뢰도 상승 45%만 적용
-        startAffection: 30,
-        startTrust: 20,
+        startAffection: 15,  // 감소 (30 → 15)
+        startTrust: 8,  // 감소 (20 → 8)
         preferences: {
             dates: {
                 walk: 0.9,
@@ -428,8 +428,8 @@ const TALK_TOPICS = {
         name: '일상 이야기',
         icon: '☀️',
         stamina: 15,
-        baseAffection: 4,
-        baseTrust: 5,
+        baseAffection: 2,  // 대폭 감소 (4 → 2)
+        baseTrust: 2,  // 대폭 감소 (5 → 2)
         description: '오늘 있었던 일을 나눕니다',
         scenarios: [
             {
@@ -475,8 +475,8 @@ const TALK_TOPICS = {
         name: '위로하기',
         icon: '🤗',
         stamina: 15,
-        baseAffection: 5,
-        baseTrust: 7,
+        baseAffection: 2,  // 대폭 감소 (5 → 2)
+        baseTrust: 3,  // 대폭 감소 (7 → 3)
         description: '힘든 일을 들어주고 위로합니다',
         scenarios: [
             {
@@ -513,8 +513,8 @@ const TALK_TOPICS = {
         name: '미래 계획',
         icon: '🌟',
         stamina: 15,
-        baseAffection: 6,
-        baseTrust: 10,
+        baseAffection: 3,  // 대폭 감소 (6 → 3)
+        baseTrust: 4,  // 대폭 감소 (10 → 4)
         description: '앞으로의 계획과 꿈을 이야기합니다',
         minAffection: 40,
         scenarios: [
@@ -552,8 +552,8 @@ const TALK_TOPICS = {
         name: '농담/유머',
         icon: '😄',
         stamina: 15,
-        baseAffection: 8,
-        baseTrust: 3,
+        baseAffection: 3,  // 대폭 감소 (8 → 3)
+        baseTrust: 1,  // 대폭 감소 (3 → 1)
         description: '즐거운 농담으로 분위기를 띄웁니다',
         random: true,
         successRate: 0.7,

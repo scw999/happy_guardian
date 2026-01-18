@@ -562,7 +562,13 @@ window.selectScenarioChoice = function(index) {
     }
 
     // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
-    const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+    let difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+
+    // 대화는 추가로 60%만 적용 (데이트보다 훨씬 낮은 효과)
+    if (actionType === 'talk') {
+        difficultyMult *= 0.6;
+    }
+
     affectionGain = Math.round(affectionGain * difficultyMult);
     trustGain = Math.round(trustGain * difficultyMult);
 
@@ -624,8 +630,8 @@ function getDifficultyMultiplier() {
     return gameState.character.difficultyMultiplier;
 }
 
-// 시나리오 선택지 효과에 난이도 배수 적용 (0.45배로 전역 감소 - 더 어렵게)
-const GLOBAL_DIFFICULTY_MULTIPLIER = 0.45;
+// 시나리오 선택지 효과에 난이도 배수 적용 (0.35배로 전역 감소 - 더욱 어렵게)
+const GLOBAL_DIFFICULTY_MULTIPLIER = 0.35;
 
 // ============================================
 // 알바 & 휴식
