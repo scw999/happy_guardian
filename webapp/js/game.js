@@ -1252,50 +1252,19 @@ function showDayDetail(day) {
 }
 
 // ============================================
-// 저장/불러오기 시스템
+// 게임 재시작 - 완전한 데이터 리셋
 // ============================================
-function saveGame() {
-    try {
-        const saveData = {
-            gameState: gameState,
-            savedAt: new Date().toISOString()
-        };
-        localStorage.setItem('happyHeartGuardian_save', JSON.stringify(saveData));
-        alert('✅ 게임이 저장되었습니다!');
-        closeModal('game-menu-modal');
-    } catch (error) {
-        alert('❌ 저장에 실패했습니다: ' + error.message);
-    }
-}
-
-function loadGame() {
-    try {
-        const saveData = localStorage.getItem('happyHeartGuardian_save');
-        if (!saveData) {
-            alert('⚠️ 저장된 데이터가 없습니다.');
-            return;
-        }
-
-        const data = JSON.parse(saveData);
-        const savedDate = new Date(data.savedAt);
-
-        if (confirm(`저장된 게임을 불러오시겠습니까?\n\n저장 시각: ${savedDate.toLocaleString()}`)) {
-            gameState = data.gameState;
-            initGameScreen();
-            updateAllUI();
-            showScreen('game-screen');
-            closeModal('game-menu-modal');
-            alert('✅ 게임을 불러왔습니다!');
-        }
-    } catch (error) {
-        alert('❌ 불러오기에 실패했습니다: ' + error.message);
-    }
-}
-
 function confirmRestart() {
-    if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n현재 진행 상황은 저장되지 않습니다.')) {
+    if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n모든 데이터가 완전히 삭제됩니다.')) {
         // 모든 pending timeout 클리어
         clearAllTimeouts();
+
+        // localStorage 완전 삭제
+        try {
+            localStorage.clear();
+        } catch (error) {
+            console.warn('localStorage 삭제 실패:', error);
+        }
 
         // 게임 상태 완전 초기화
         gameState = {
