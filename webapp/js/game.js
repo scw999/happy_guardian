@@ -330,38 +330,44 @@ function updateActionButtons() {
 // 데이트 시스템
 // ============================================
 function showDateMenu() {
-    const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
-    const content = modal.querySelector('.modal-body');
+    // 기존 모달 완전히 닫기
+    closeModal('action-modal');
 
-    Object.values(DATE_LOCATIONS).forEach(location => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
+    setTimeout(() => {
+        const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
+        const content = modal.querySelector('.modal-body');
+        content.innerHTML = '';
 
-        const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
-        if (!canAfford) option.classList.add('disabled');
+        Object.values(DATE_LOCATIONS).forEach(location => {
+            const option = document.createElement('div');
+            option.className = 'action-option';
 
-        option.innerHTML = `
-            <div class="option-icon">${location.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${location.name}</div>
-                <div class="option-desc">${location.description}</div>
-                <div class="option-cost">
-                    ${location.cost > 0 ? '💰 ' + formatMoney(location.cost) : '무료'}
-                    ⚡ ${location.stamina}
+            const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
+            if (!canAfford) option.classList.add('disabled');
+
+            option.innerHTML = `
+                <div class="option-icon">${location.icon}</div>
+                <div class="option-info">
+                    <div class="option-name">${location.name}</div>
+                    <div class="option-desc">${location.description}</div>
+                    <div class="option-cost">
+                        ${location.cost > 0 ? '💰 ' + formatMoney(location.cost) : '무료'}
+                        ⚡ ${location.stamina}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                selectDateLocation(location.id);
-            }
-        };
+            option.onclick = function() {
+                if (!this.classList.contains('disabled')) {
+                    selectDateLocation(location.id);
+                }
+            };
 
-        content.appendChild(option);
-    });
+            content.appendChild(option);
+        });
 
-    showModal('action-modal');
+        showModal('action-modal');
+    }, 50);
 }
 
 function selectDateLocation(locationId) {
@@ -388,35 +394,41 @@ function selectDateLocation(locationId) {
 // 선물 시스템
 // ============================================
 function showGiftMenu() {
-    const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
-    const content = modal.querySelector('.modal-body');
+    // 기존 모달 완전히 닫기
+    closeModal('action-modal');
 
-    Object.values(GIFT_ITEMS).forEach(gift => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
+    setTimeout(() => {
+        const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
+        const content = modal.querySelector('.modal-body');
+        content.innerHTML = '';
 
-        const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
-        if (!canAfford) option.classList.add('disabled');
+        Object.values(GIFT_ITEMS).forEach(gift => {
+            const option = document.createElement('div');
+            option.className = 'action-option';
 
-        option.innerHTML = `
-            <div class="option-icon">${gift.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${gift.name}</div>
-                <div class="option-desc">${gift.description}</div>
-                <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
-            </div>
-        `;
+            const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
+            if (!canAfford) option.classList.add('disabled');
 
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                giveGift(gift.id);
-            }
-        };
+            option.innerHTML = `
+                <div class="option-icon">${gift.icon}</div>
+                <div class="option-info">
+                    <div class="option-name">${gift.name}</div>
+                    <div class="option-desc">${gift.description}</div>
+                    <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
+                </div>
+            `;
 
-        content.appendChild(option);
-    });
+            option.onclick = function() {
+                if (!this.classList.contains('disabled')) {
+                    giveGift(gift.id);
+                }
+            };
 
-    showModal('action-modal');
+            content.appendChild(option);
+        });
+
+        showModal('action-modal');
+    }, 50);
 }
 
 function giveGift(giftId) {
@@ -457,38 +469,44 @@ function giveGift(giftId) {
 // 대화 시스템
 // ============================================
 function showTalkMenu() {
-    const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
-    const content = modal.querySelector('.modal-body');
+    // 기존 모달 완전히 닫기
+    closeModal('action-modal');
 
-    Object.values(TALK_TOPICS).forEach(topic => {
-        const option = document.createElement('div');
-        option.className = 'action-option';
+    setTimeout(() => {
+        const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
+        const content = modal.querySelector('.modal-body');
+        content.innerHTML = '';
 
-        const canTalk = gameState.stamina >= topic.stamina;
-        const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
+        Object.values(TALK_TOPICS).forEach(topic => {
+            const option = document.createElement('div');
+            option.className = 'action-option';
 
-        if (!canTalk || !meetsRequirement) option.classList.add('disabled');
+            const canTalk = gameState.stamina >= topic.stamina;
+            const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
 
-        option.innerHTML = `
-            <div class="option-icon">${topic.icon}</div>
-            <div class="option-info">
-                <div class="option-name">${topic.name}</div>
-                <div class="option-desc">${topic.description}</div>
-                <div class="option-cost">⚡ ${topic.stamina}</div>
-                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
-            </div>
-        `;
+            if (!canTalk || !meetsRequirement) option.classList.add('disabled');
 
-        option.onclick = function() {
-            if (!this.classList.contains('disabled')) {
-                selectTalkTopic(topic.id);
-            }
-        };
+            option.innerHTML = `
+                <div class="option-icon">${topic.icon}</div>
+                <div class="option-info">
+                    <div class="option-name">${topic.name}</div>
+                    <div class="option-desc">${topic.description}</div>
+                    <div class="option-cost">⚡ ${topic.stamina}</div>
+                    ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
+                </div>
+            `;
 
-        content.appendChild(option);
-    });
+            option.onclick = function() {
+                if (!this.classList.contains('disabled')) {
+                    selectTalkTopic(topic.id);
+                }
+            };
 
-    showModal('action-modal');
+            content.appendChild(option);
+        });
+
+        showModal('action-modal');
+    }, 50);
 }
 
 function selectTalkTopic(topicId) {
