@@ -1384,211 +1384,286 @@ const SKINSHIP_OPTIONS = {
         icon: '✈️',
         minAffection: 85,
         stamina: 30,
-        money: 300000,
+        money: 1000000,  // 100만원으로 변경
         baseAffection: 35,
         baseTrust: 25,
-        description: '아주 친밀한 관계에서만 가능',
+        description: '아주 친밀한 관계에서만 가능 (비용: 100만원)',
         successRate: 0.6
     }
 };
 
 // ============================================
-// 돌발 상황 이벤트
+// 돌발 상황 이벤트 (더 미묘하고 어렵게, 호감도 하락 이벤트 포함)
 // ============================================
 const CRISIS_EVENTS = [
     {
         id: 'jealousy',
         situation: '거리를 걷다가 당신의 전 연인과 마주쳤습니다. 상대방이 불편한 표정을 짓습니다.',
         choices: [
-            {
-                text: '상황을 솔직하게 설명하고 오해를 풀려고 노력한다.',
-                affection: 15,
-                trust: 20,
-                type: 'honest'
-            },
-            {
-                text: '가볍게 인사만 하고 빠르게 자리를 피한다.',
-                affection: 5,
-                trust: -5,
-                type: 'avoid'
-            },
-            {
-                text: '전 연인을 완전히 무시하고 상대방만 신경쓴다.',
-                affection: -10,
-                trust: -15,
-                type: 'ignore'
-            }
+            { text: '상황을 솔직하게 설명하고 오해를 풀려고 노력한다.', affection: 10, trust: 20, type: 'honest' },
+            { text: '가볍게 인사만 하고 빠르게 자리를 피한다.', affection: 5, trust: 8, type: 'avoid' },
+            { text: '전 연인을 완전히 무시하고 상대방만 신경쓴다.', affection: 8, trust: -10, type: 'ignore' }
         ]
     },
     {
         id: 'late',
-        situation: '약속 시간에 늦게 되었습니다. 상대방이 화난 표정으로 기다리고 있습니다.',
+        situation: '약속 시간에 30분 늦었습니다. 상대방이 화난 표정으로 기다리고 있습니다.',
         choices: [
-            {
-                text: '진심으로 사과하고 다시는 늦지 않겠다고 약속한다.',
-                affection: 5,
-                trust: 10,
-                type: 'apologize'
-            },
-            {
-                text: '변명을 늘어놓으며 상황을 설명한다.',
-                affection: -5,
-                trust: -10,
-                type: 'excuse'
-            },
-            {
-                text: '선물을 사서 기분을 풀어드린다.',
-                affection: 10,
-                trust: -5,
-                money: -50000,
-                type: 'gift'
-            }
+            { text: '진심으로 사과하고 다시는 늦지 않겠다고 약속한다.', affection: 3, trust: 12, type: 'apologize' },
+            { text: '교통 상황을 설명하며 어쩔 수 없었다고 말한다.', affection: -5, trust: -12, type: 'excuse' },
+            { text: '선물을 사서 기분을 풀어드린다.', affection: 8, trust: -8, money: -50000, type: 'gift' }
         ]
     },
     {
-        id: 'friend_issue',
+        id: 'friend_badmouth',
         situation: '상대방의 친한 친구가 당신에 대해 안 좋게 이야기하는 것을 들었다고 합니다.',
         choices: [
-            {
-                text: '친구를 만나서 직접 대화하며 오해를 풀겠다고 한다.',
-                affection: 15,
-                trust: 15,
-                type: 'proactive'
-            },
-            {
-                text: '상대방에게 친구와의 관계를 끊으라고 요구한다.',
-                affection: -20,
-                trust: -15,
-                type: 'demand'
-            },
-            {
-                text: '신경쓰지 말자고 위로하며 넘어간다.',
-                affection: 5,
-                trust: 0,
-                type: 'comfort'
-            }
+            { text: '친구를 만나서 직접 대화하며 오해를 풀겠다고 한다.', affection: 12, trust: 18, type: 'proactive' },
+            { text: '신경쓰지 말자고 위로하며 넘어간다.', affection: 5, trust: 5, type: 'comfort' },
+            { text: '"그 친구가 질투하는 거 아닐까요?" 친구를 비난한다.', affection: -15, trust: -20, type: 'blame' }
         ]
     },
     {
-        id: 'family_meeting',
-        situation: '갑자기 부모님이 만나자고 하십니다. 상대방이 긴장한 표정을 짓습니다.',
+        id: 'family_pressure',
+        situation: '부모님이 만나자고 하십니다. 상대방이 긴장한 표정을 짓습니다.',
         choices: [
-            {
-                text: '부모님을 미리 만나 이야기를 나누고 준비한다.',
-                affection: 10,
-                trust: 20,
-                type: 'prepare'
-            },
-            {
-                text: '부모님께 시간을 좀 더 달라고 부탁한다.',
-                affection: 5,
-                trust: 5,
-                type: 'delay'
-            },
-            {
-                text: '아무 준비 없이 바로 만나자고 한다.',
-                affection: -10,
-                trust: -10,
-                type: 'rush'
-            }
+            { text: '부모님을 미리 만나 이야기를 나누고 준비한다.', affection: 8, trust: 22, type: 'prepare' },
+            { text: '부모님께 시간을 좀 더 달라고 부탁한다.', affection: 5, trust: 8, type: 'delay' },
+            { text: '"괜찮아요, 제 부모님 좋으신 분들이에요" 안심시킨다.', affection: 10, trust: 15, type: 'reassure' }
         ]
     },
     {
-        id: 'work_stress',
-        situation: '상대방이 직장에서 스트레스를 많이 받아 힘들어하고 있습니다.',
+        id: 'work_overtime',
+        situation: '상대방이 잦은 야근으로 지쳐있습니다. 이번 주에만 3번 약속을 취소했습니다.',
         choices: [
-            {
-                text: '진지하게 이야기를 들어주고 공감한다.',
-                affection: 15,
-                trust: 15,
-                type: 'listen'
-            },
-            {
-                text: '해결책을 제시하며 조언한다.',
-                affection: 5,
-                trust: 10,
-                type: 'advise'
-            },
-            {
-                text: '재미있는 곳으로 데려가 기분전환을 시킨다.',
-                affection: 10,
-                trust: 5,
-                money: -100000,
-                type: 'distract'
-            }
+            { text: '"힘드시죠. 제가 응원할게요" 이해하고 지지한다.', affection: 8, trust: 20, type: 'supportive' },
+            { text: '"저도 외롭지만 참을게요" 서운함을 조금 표현한다.', affection: 5, trust: 10, type: 'honest' },
+            { text: '"저랑 약속이 그렇게 중요하지 않나요?" 섭섭함을 드러낸다.', affection: -12, trust: -15, type: 'complain' }
         ]
     },
     {
         id: 'forgot_anniversary',
-        situation: '중요한 기념일을 깜빡했습니다. 상대방이 실망한 표정입니다.',
+        situation: '100일 기념일을 깜빡했습니다. 상대방이 실망한 표정입니다.',
         choices: [
-            {
-                text: '즉시 사과하고 특별한 선물을 준비한다.',
-                affection: 10,
-                trust: 5,
-                money: -200000,
-                type: 'compensate'
-            },
-            {
-                text: '진심으로 사과하고 다음에 두 배로 보상하겠다고 약속한다.',
-                affection: 5,
-                trust: 10,
-                type: 'promise'
-            },
-            {
-                text: '그렇게 중요한 날이었냐며 가볍게 넘긴다.',
-                affection: -25,
-                trust: -20,
-                type: 'dismiss'
-            }
+            { text: '즉시 사과하고 특별한 선물을 준비한다.', affection: 8, trust: 5, money: -200000, type: 'compensate' },
+            { text: '진심으로 사과하고 다음에 두 배로 보상하겠다고 약속한다.', affection: 5, trust: 12, type: 'promise' },
+            { text: '"사실 준비했어요" 거짓말을 하고 급하게 준비한다.', affection: 10, trust: -18, money: -150000, type: 'lie' }
         ]
     },
     {
-        id: 'misunderstanding',
-        situation: '다른 사람과 친하게 지내는 것을 본 상대방이 오해하고 있습니다.',
+        id: 'sns_misunderstanding',
+        situation: 'SNS에 다른 이성과 찍은 사진이 올라왔습니다. 상대방이 조용히 물어봅니다.',
         choices: [
-            {
-                text: '솔직하게 상황을 설명하고 오해를 푼다.',
-                affection: 10,
-                trust: 20,
-                type: 'explain'
-            },
-            {
-                text: '화를 내며 믿지 못하는 것에 서운함을 표현한다.',
-                affection: -10,
-                trust: -15,
-                type: 'angry'
-            },
-            {
-                text: '앞으로 조심하겠다고 약속한다.',
-                affection: 5,
-                trust: 10,
-                type: 'careful'
-            }
+            { text: '솔직하게 상황을 설명하고 오해를 푼다.', affection: 8, trust: 22, type: 'explain' },
+            { text: '사진을 삭제하고 앞으로 조심하겠다고 한다.', affection: 5, trust: 12, type: 'delete' },
+            { text: '"왜 SNS 감시해요?" 방어적으로 반응한다.', affection: -18, trust: -25, type: 'defensive' }
         ]
     },
     {
-        id: 'surprise_visit',
+        id: 'messy_house',
         situation: '예고 없이 집에 놀러 왔는데, 집이 엉망입니다.',
         choices: [
-            {
-                text: '솔직하게 사과하고 빠르게 정리한다.',
-                affection: 5,
-                trust: 10,
-                type: 'clean'
-            },
-            {
-                text: '밖에서 놀자고 하며 집 안으로 들어오지 못하게 한다.',
-                affection: -5,
-                trust: -10,
-                type: 'avoid'
-            },
-            {
-                text: '부끄러워하면서도 솔직하게 들어오라고 한다.',
-                affection: 10,
-                trust: 15,
-                type: 'honest'
-            }
+            { text: '솔직하게 사과하고 빠르게 정리한다.', affection: 5, trust: 12, type: 'clean' },
+            { text: '부끄러워하면서도 솔직하게 들어오라고 한다.', affection: 10, trust: 18, type: 'honest' },
+            { text: '"미리 연락했어야죠" 상대방을 탓한다.', affection: -20, trust: -22, type: 'blame' }
+        ]
+    },
+    {
+        id: 'money_shortage',
+        situation: '데이트 비용이 부족하다는 것을 깨달았습니다. 계산대 앞입니다.',
+        choices: [
+            { text: '솔직하게 말하고 다음에 갚겠다고 한다.', affection: -5, trust: 15, type: 'honest' },
+            { text: '급하게 ATM을 찾으러 간다.', affection: -8, trust: 8, type: 'atm' },
+            { text: '"카드가 이상한가봐요" 거짓말하고 다른 카드를 꺼낸다.', affection: 5, trust: -20, type: 'lie' }
+        ]
+    },
+    {
+        id: 'phone_addiction',
+        situation: '상대방이 "요즘 저랑 있을 때 휴대폰만 보는 것 같아요"라고 말합니다.',
+        choices: [
+            { text: '진심으로 사과하고 휴대폰을 가방에 넣는다.', affection: 12, trust: 18, type: 'apologize' },
+            { text: '"죄송해요, 급한 일이 있어서..." 변명한다.', affection: 0, trust: -8, type: 'excuse' },
+            { text: '"저도 외로웠으면 좋겠어요" 역공한다.', affection: -15, trust: -20, type: 'counterattack' }
+        ]
+    },
+    {
+        id: 'weight_comment',
+        situation: '상대방이 "요즘 제가 살 좀 찐 것 같죠?"라고 물어봅니다.',
+        choices: [
+            { text: '"그래도 여전히 예뻐요" 위로한다.', affection: -8, trust: 5, type: 'consolation' },
+            { text: '"아니에요, 전혀요!" 단호하게 부정한다.', affection: 10, trust: -5, type: 'deny' },
+            { text: '"건강이 제일 중요하죠. 같이 운동할까요?" 제안한다.', affection: 5, trust: 15, type: 'proactive' }
+        ]
+    },
+    {
+        id: 'ex_contact',
+        situation: '전 연인에게서 연락이 왔습니다. 상대방이 눈치챈 것 같습니다.',
+        choices: [
+            { text: '바로 보여주며 "이상한 사람이네요" 함께 웃는다.', affection: 15, trust: 25, type: 'transparent' },
+            { text: '무시하고 차단한다.', affection: 10, trust: 20, type: 'block' },
+            { text: '몰래 답장하고 숨긴다.', affection: -25, trust: -35, type: 'hide' }
+        ]
+    },
+    {
+        id: 'fashion_disaster',
+        situation: '오늘 상대방의 패션 센스가... 별로입니다. "어때요?"라고 물어봅니다.',
+        choices: [
+            { text: '"좋은데요?" 거짓말을 한다.', affection: 5, trust: -10, type: 'lie' },
+            { text: '"이건 어떨까요?" 다른 옷을 권유한다.', affection: -5, trust: 15, type: 'suggest' },
+            { text: '"당신이 입으면 다 예뻐요" 진심으로 말한다.', affection: 12, trust: 8, type: 'romantic' }
+        ]
+    },
+    {
+        id: 'parent_call',
+        situation: '데이트 중 부모님에게서 전화가 왔습니다. "급한 일이에요"라고 하십니다.',
+        choices: [
+            { text: '"잠깐만요" 양해를 구하고 받는다.', affection: 5, trust: 18, type: 'polite' },
+            { text: '나중에 다시 걸겠다고 문자를 보낸다.', affection: 8, trust: 10, type: 'text' },
+            { text: '전화를 무시하고 계속 데이트한다.', affection: 10, trust: -15, type: 'ignore' }
+        ]
+    },
+    {
+        id: 'gift_reaction',
+        situation: '상대방이 준 선물이 취향에 맞지 않습니다. "마음에 드세요?"라고 묻습니다.',
+        choices: [
+            { text: '"너무 좋아요! 감사합니다" 진심으로 기뻐한다.', affection: 15, trust: -5, type: 'pretend' },
+            { text: '"감사한데, 제 스타일은 아니에요" 솔직하게 말한다.', affection: -10, trust: 20, type: 'honest' },
+            { text: '"정성이 느껴져요. 소중히 쓸게요" 마음을 강조한다.', affection: 18, trust: 15, type: 'grateful' }
+        ]
+    },
+    {
+        id: 'drunk_call',
+        situation: '밤 늦게 술 취한 상대방에게서 전화가 왔습니다. "보고싶어요..."',
+        choices: [
+            { text: '바로 데리러 간다.', affection: 20, trust: 15, type: 'rescue' },
+            { text: '"택시 타고 집에 가세요. 내일 통화해요" 말한다.', affection: -5, trust: 10, type: 'rational' },
+            { text: '전화를 받지 않고 잔다.', affection: -25, trust: -20, type: 'ignore' }
+        ]
+    },
+    {
+        id: 'career_vs_relationship',
+        situation: '"당신 일이 더 중요해요, 저보다?" 상대방이 조용히 묻습니다.',
+        choices: [
+            { text: '"당신이 제일 중요해요" 즉시 답한다.', affection: 15, trust: -5, type: 'you_first' },
+            { text: '"둘 다 소중해요. 균형을 맞추려고 노력할게요" 솔직하게 말한다.', affection: 5, trust: 20, type: 'balanced' },
+            { text: '"일도 중요하지만 당신을 위해 조정할게요" 타협한다.', affection: 12, trust: 15, type: 'compromise' }
+        ]
+    },
+    {
+        id: 'comparison',
+        situation: '상대방이 "전 애인은 어땠어요?"라고 물어봅니다.',
+        choices: [
+            { text: '"과거는 중요하지 않아요. 지금 당신이 최고예요" 말한다.', affection: 18, trust: 10, type: 'best' },
+            { text: '"비교하고 싶지 않아요" 거절한다.', affection: 5, trust: 15, type: 'refuse' },
+            { text: '솔직하게 과거를 이야기한다.', affection: -5, trust: 20, type: 'honest' }
+        ]
+    },
+    {
+        id: 'surprise_fail',
+        situation: '준비한 깜짝 이벤트가 완전히 실패했습니다. 상대방이 당황한 표정입니다.',
+        choices: [
+            { text: '웃으며 "이것도 추억이죠?" 긍정적으로 넘긴다.', affection: 12, trust: 15, type: 'positive' },
+            { text: '진심으로 사과한다.', affection: 5, trust: 18, type: 'apologize' },
+            { text: '"준비한 사람 기분 생각 안 해요?" 화를 낸다.', affection: -20, trust: -25, type: 'angry' }
+        ]
+    },
+    {
+        id: 'sick_partner',
+        situation: '상대방이 갑자기 아프다고 연락했습니다. 오늘은 중요한 회의가 있습니다.',
+        choices: [
+            { text: '회의를 취소하고 바로 간다.', affection: 20, trust: 10, type: 'immediate' },
+            { text: '회의 후 바로 가겠다고 약속한다.', affection: 5, trust: 15, type: 'later' },
+            { text: '"약 먹고 쉬세요. 내일 볼게요" 전화로 위로한다.', affection: -15, trust: -10, type: 'phone_only' }
+        ]
+    },
+    {
+        id: 'public_affection',
+        situation: '사람이 많은 곳에서 상대방이 손을 잡으려 합니다. 주변 시선이 느껴집니다.',
+        choices: [
+            { text: '자연스럽게 손을 잡는다.', affection: 15, trust: 15, type: 'accept' },
+            { text: '살짝 피하며 "나중에요" 속삭인다.', affection: -10, trust: -15, type: 'avoid' },
+            { text: '손을 잡고 더 가까이 다가간다.', affection: 20, trust: 10, type: 'closer' }
+        ]
+    },
+    {
+        id: 'dream_vs_reality',
+        situation: '"제 꿈을 응원해주실 거죠?" 상대방의 꿈은 현실성이 없어 보입니다.',
+        choices: [
+            { text: '"무조건 응원할게요! 함께 해요" 전폭 지지한다.', affection: 20, trust: 5, type: 'full_support' },
+            { text: '"좋지만 현실도 생각해봐요" 조언한다.', affection: -10, trust: 15, type: 'realistic' },
+            { text: '"당신이 행복하면 저도 행복해요" 존중한다.', affection: 15, trust: 18, type: 'respect' }
+        ]
+    },
+    {
+        id: 'memory_test',
+        situation: '"우리 첫 만남이 언제였죠?" 상대방이 물어보는데 기억이 잘 안 납니다.',
+        choices: [
+            { text: '정확한 날짜를 맞춘다. (기억력 테스트)', affection: 20, trust: 20, type: 'remember' },
+            { text: '"정확히는 기억 안 나지만, 그날 정말 행복했어요" 솔직하게 말한다.', affection: 8, trust: 15, type: 'honest' },
+            { text: '대충 날짜를 추측해서 말한다.', affection: -15, trust: -20, type: 'guess' }
+        ]
+    },
+    {
+        id: 'future_pressure',
+        situation: '"우리 앞으로 어떻게 될까요?" 진지하게 물어봅니다.',
+        choices: [
+            { text: '"당신과 결혼하고 싶어요" 확신있게 말한다.', affection: 25, trust: 15, type: 'marriage' },
+            { text: '"천천히 좋은 방향으로 가요" 신중하게 답한다.', affection: 5, trust: 18, type: 'slow' },
+            { text: '"지금이 행복하면 됐죠" 현재에 집중한다.', affection: 10, trust: 5, type: 'present' }
+        ]
+    },
+    {
+        id: 'bad_day',
+        situation: '오늘 정말 최악의 하루였습니다. 피곤하고 짜증이 납니다. 상대방이 연락합니다.',
+        choices: [
+            { text: '"오늘은 좀 힘들어서... 내일 통화할게요" 솔직하게 말한다.', affection: 5, trust: 18, type: 'honest' },
+            { text: '피곤해도 밝게 대화한다.', affection: 10, trust: -5, type: 'pretend' },
+            { text: '"왜 자꾸 연락해요?" 짜증을 낸다.', affection: -25, trust: -30, type: 'irritated' }
+        ]
+    },
+    {
+        id: 'diet_support',
+        situation: '상대방이 다이어트 중입니다. 맛있는 음식을 먹고 싶어합니다.',
+        choices: [
+            { text: '"오늘 하루만 치팅데이 해요" 함께 먹자고 한다.', affection: 15, trust: -5, type: 'cheat' },
+            { text: '"목표 달성하면 같이 먹어요" 응원한다.', affection: 8, trust: 20, type: 'support' },
+            { text: '"다이어트는 내일부터!" 유혹한다.', affection: 12, trust: -15, type: 'tempt' }
+        ]
+    },
+    {
+        id: 'hobby_time',
+        situation: '상대방이 "요즘 제 취미 시간이 없어요"라고 말합니다.',
+        choices: [
+            { text: '"제가 시간을 너무 많이 뺏는 건가요?" 미안해한다.', affection: 10, trust: 15, type: 'apologetic' },
+            { text: '"그럼 오늘은 취미 즐기세요. 전 괜찮아요" 배려한다.', affection: 15, trust: 20, type: 'considerate' },
+            { text: '"저랑 있는 게 취미가 되면 안 되나요?" 농담한다.', affection: 8, trust: 5, type: 'joke' }
+        ]
+    },
+    {
+        id: 'financial_disparity',
+        situation: '상대방이 비싼 레스토랑 계산서를 보고 미안해합니다. 경제적 차이가 느껴집니다.',
+        choices: [
+            { text: '"괜찮아요. 다음엔 당신이 사세요" 가볍게 말한다.', affection: 12, trust: 18, type: 'light' },
+            { text: '"돈보다 함께 있는 게 중요해요" 위로한다.', affection: 18, trust: 15, type: 'comfort' },
+            { text: '"더치페이 할까요?" 제안한다.', affection: -5, trust: 15, type: 'split' }
+        ]
+    },
+    {
+        id: 'overthinking',
+        situation: '"제가 너무 예민한가요? 요즘 자꾸 걱정돼요" 상대방이 불안해합니다.',
+        choices: [
+            { text: '"무슨 걱정이에요? 다 이야기해봐요" 들어준다.', affection: 15, trust: 25, type: 'listen' },
+            { text: '"예민한 게 아니라 신중한 거예요" 긍정적으로 말한다.', affection: 12, trust: 15, type: 'positive' },
+            { text: '"너무 생각 많이 하지 마세요" 가볍게 넘긴다.', affection: -8, trust: -15, type: 'dismiss' }
+        ]
+    },
+    {
+        id: 'social_media_like',
+        situation: '상대방이 다른 이성의 SNS 게시물에 자주 좋아요를 누릅니다.',
+        choices: [
+            { text: '아무렇지 않은 척 넘어간다.', affection: 5, trust: 10, type: 'ignore' },
+            { text: '"그 사람이랑 친해요?" 가볍게 물어본다.', affection: 0, trust: 5, type: 'ask' },
+            { text: '"제 게시물에도 좋아요 눌러주세요" 농담으로 말한다.', affection: 8, trust: 8, type: 'joke' }
         ]
     }
 ];

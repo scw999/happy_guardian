@@ -23,7 +23,12 @@ let gameState = {
     todayIsAnniversary: false,  // 오늘이 기념일인지
     anniversaryCelebrated: false,  // 기념일을 축하했는지
     anniversaryType: null,  // 기념일 종류 ('meeting', 'birthday')
-    isGameOver: false
+    isGameOver: false,
+    usedScenarios: {  // 사용한 시나리오 추적 (반복 방지)
+        talk: [],  // 대화 시나리오 ID
+        date: {},  // 데이트 장소별 시나리오 ID { walk: [], cafe: [], ... }
+        crisis: []  // 돌발 이벤트 ID
+    }
 };
 
 let pendingTimeouts = [];
@@ -87,7 +92,12 @@ function selectCharacter(characterId) {
         todayIsAnniversary: false,
         anniversaryCelebrated: false,
         anniversaryType: null,
-        isGameOver: false
+        isGameOver: false,
+        usedScenarios: {
+            talk: [],
+            date: {},
+            crisis: []
+        }
     };
 
     addHistory();
@@ -447,11 +457,11 @@ function selectDateLocation(index) {
 
     // 거절 체크
     if (Math.random() > acceptChance) {
-        gameState.stamina -= 20;  // 체력 급감
+        gameState.stamina -= 40;  // 체력 급감 (20 → 40으로 증가)
         gameState.affection -= 5;  // 호감도 감소
         gameState.trust -= 3;  // 신뢰도 감소
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-20 체력, -5 호감도, -3 신뢰도)\n\n호감도를 더 높인 후 다시 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-40 체력, -5 호감도, -3 신뢰도)\n\n호감도를 더 높인 후 다시 시도하세요!`);
         updateAllUI();
         return;
     }
@@ -459,10 +469,32 @@ function selectDateLocation(index) {
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
 
+    // 사용한 시나리오 추적을 위한 초기화
+    if (!gameState.usedScenarios.date[location.id]) {
+        gameState.usedScenarios.date[location.id] = [];
+    }
+
+    // 사용하지 않은 시나리오만 필터링
+    const usedIds = gameState.usedScenarios.date[location.id];
+    const availableScenarios = location.scenarios.filter(s => !usedIds.includes(s.id));
+
+    // 모든 시나리오를 다 사용했다면 리셋
+    const scenariosToUse = availableScenarios.length > 0 ? availableScenarios : location.scenarios;
+    if (availableScenarios.length === 0) {
+        gameState.usedScenarios.date[location.id] = [];
+    }
+
     // 다단계 시스템: 2-3개의 시나리오를 선택
-    const scenarioCount = Math.min(3, location.scenarios.length);
-    const shuffled = [...location.scenarios].sort(() => Math.random() - 0.5);
+    const scenarioCount = Math.min(3, scenariosToUse.length);
+    const shuffled = [...scenariosToUse].sort(() => Math.random() - 0.5);
     const selectedScenarios = shuffled.slice(0, scenarioCount);
+
+    // 사용한 시나리오 ID 기록
+    selectedScenarios.forEach(s => {
+        if (!gameState.usedScenarios.date[location.id].includes(s.id)) {
+            gameState.usedScenarios.date[location.id].push(s.id);
+        }
+    });
 
     // 다단계 액션 상태 초기화
     gameState.multiStage = {
@@ -654,10 +686,33 @@ function selectTalkTopic(index) {
 
     gameState.stamina -= topic.stamina;
 
+    // 사용한 시나리오 추적
+    const topicKey = topic.id;
+    if (!gameState.usedScenarios.talk[topicKey]) {
+        gameState.usedScenarios.talk[topicKey] = [];
+    }
+
+    // 사용하지 않은 시나리오만 필터링
+    const usedIds = gameState.usedScenarios.talk[topicKey];
+    const availableScenarios = topic.scenarios.filter(s => !usedIds.includes(s.id));
+
+    // 모든 시나리오를 다 사용했다면 리셋
+    const scenariosToUse = availableScenarios.length > 0 ? availableScenarios : topic.scenarios;
+    if (availableScenarios.length === 0) {
+        gameState.usedScenarios.talk[topicKey] = [];
+    }
+
     // 다단계 대화 시스템: 3-4개의 대화 시나리오 선택
-    const scenarioCount = Math.min(4, topic.scenarios.length);
-    const shuffled = [...topic.scenarios].sort(() => Math.random() - 0.5);
+    const scenarioCount = Math.min(4, scenariosToUse.length);
+    const shuffled = [...scenariosToUse].sort(() => Math.random() - 0.5);
     const selectedScenarios = shuffled.slice(0, scenarioCount);
+
+    // 사용한 시나리오 ID 기록
+    selectedScenarios.forEach(s => {
+        if (!gameState.usedScenarios.talk[topicKey].includes(s.id)) {
+            gameState.usedScenarios.talk[topicKey].push(s.id);
+        }
+    });
 
     // 다단계 액션 상태 초기화
     gameState.multiStage = {
@@ -1691,10 +1746,124 @@ function showGameMenu() {
 }
 
 // ============================================
+// 게임 중 도움말
+// ============================================
+function showInGameHelp() {
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>❓ 게임 도움말</h2>
+                <button class="close-btn" onclick="closeModal('help-modal')">✕</button>
+            </div>
+            <div class="modal-body" style="text-align: left; max-height: 600px; overflow-y: auto;">
+                <h3>🎯 게임 목표</h3>
+                <p><strong>30일 안에 호감도를 올려 프로포즈를 성공시키세요!</strong></p>
+                <ul>
+                    <li><strong>호감도 %</strong> = 프로포즈 승낙 확률</li>
+                    <li>호감도가 높을수록 데이트 수락 확률 증가</li>
+                    <li>신뢰도가 높을수록 관계가 안정적</li>
+                </ul>
+
+                <h3>📊 자원 관리</h3>
+                <ul>
+                    <li><strong>💖 호감도</strong>: 프로포즈 성공 확률 (0-100%)</li>
+                    <li><strong>🤝 신뢰도</strong>: 관계의 안정성 (0-100%)</li>
+                    <li><strong>💰 돈</strong>: 데이트, 선물 구매에 필요</li>
+                    <li><strong>⚡ 체력</strong>: 모든 행동에 필요, 0이 되면 하루가 끝남</li>
+                </ul>
+
+                <h3>⏰ 하루 행동 제한</h3>
+                <ul>
+                    <li><strong>하루 최대 3회</strong> 행동 가능 (대화/데이트/선물)</li>
+                    <li>같은 행동 반복 시 <strong>체력이 2배씩</strong> 소모</li>
+                    <li>체력이 0이 되면 자동으로 잠들기</li>
+                    <li>휴식으로 체력 회복 (50 회복)</li>
+                </ul>
+
+                <h3>💰 돈 벌기</h3>
+                <ul>
+                    <li><strong>편의점 알바</strong>: 체력 25, 수익 5만원 (하루 3회)</li>
+                    <li><strong>과외</strong>: 체력 35, 수익 10만원 (하루 2회)</li>
+                    <li><strong>건설 일용직</strong>: 체력 55, 수익 15만원 (하루 1회)</li>
+                    <li><strong>배달 아르바이트</strong>: 체력 45, 수익 12만원 (하루 2회)</li>
+                    <li><strong>프리랜서</strong>: 체력 40, 수익 8-20만원 (변동)</li>
+                    <li><strong>주식 투자</strong>: 체력 15, 수익 -50% ~ +100% (리스크 큼)</li>
+                </ul>
+
+                <h3>💔 데이트 거절</h3>
+                <ul>
+                    <li>호감도가 낮으면 데이트를 거절당할 수 있음</li>
+                    <li>거절 시 <strong>체력 -40, 호감도 -5, 신뢰도 -3</strong></li>
+                    <li>호감도별 수락 확률:</li>
+                    <ul>
+                        <li>20% 미만: 30% 확률</li>
+                        <li>20-40%: 50% 확률</li>
+                        <li>40-60%: 70% 확률</li>
+                        <li>60-80%: 90% 확률</li>
+                        <li>80% 이상: 100% 확률</li>
+                    </ul>
+                </ul>
+
+                <h3>💕 스킨십</h3>
+                <ul>
+                    <li><strong>손 잡기</strong>: 호감도 30 이상 (성공률 90%)</li>
+                    <li><strong>포옹하기</strong>: 호감도 50 이상 (성공률 80%)</li>
+                    <li><strong>키스하기</strong>: 호감도 70 이상 (성공률 70%)</li>
+                    <li><strong>1박2일 여행</strong>: 호감도 85 이상, 비용 100만원 (성공률 60%)</li>
+                    <li>실패 시 <strong>체력 -10, 호감도 -10, 신뢰도 -15</strong></li>
+                </ul>
+
+                <h3>🎲 프로포즈</h3>
+                <ul>
+                    <li>30일째에 자동으로 프로포즈</li>
+                    <li>다이아 반지가 있으면 <strong>+15% 보너스</strong></li>
+                    <li>호감도가 승낙 확률을 결정</li>
+                    <li>신뢰도가 높을수록 안정적인 성공</li>
+                </ul>
+
+                <h3>💡 팁</h3>
+                <ul>
+                    <li>다양한 행동을 하면 체력 소모가 적습니다</li>
+                    <li>호감도와 신뢰도를 균형있게 올리세요</li>
+                    <li>돈 관리를 잘 하세요 (데이트와 선물은 비쌉니다)</li>
+                    <li>돌발 이벤트에서 신중하게 선택하세요</li>
+                    <li>캐릭터마다 선호하는 데이트/선물이 다릅니다</li>
+                </ul>
+            </div>
+        </div>
+    `;
+
+    let modal = document.getElementById('help-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'help-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('help-modal');
+}
+
+// ============================================
 // 돌발 상황 시스템
 // ============================================
 function triggerCrisisEvent() {
-    const event = CRISIS_EVENTS[Math.floor(Math.random() * CRISIS_EVENTS.length)];
+    // 사용하지 않은 이벤트만 필터링
+    const availableEvents = CRISIS_EVENTS.filter(e => !gameState.usedScenarios.crisis.includes(e.id));
+
+    // 모든 이벤트를 다 사용했다면 리셋
+    const eventsToUse = availableEvents.length > 0 ? availableEvents : CRISIS_EVENTS;
+    if (availableEvents.length === 0) {
+        gameState.usedScenarios.crisis = [];
+    }
+
+    const event = eventsToUse[Math.floor(Math.random() * eventsToUse.length)];
+
+    // 사용한 이벤트 ID 기록
+    if (!gameState.usedScenarios.crisis.includes(event.id)) {
+        gameState.usedScenarios.crisis.push(event.id);
+    }
 
     const html = `
         <div class="modal-content">
