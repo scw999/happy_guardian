@@ -109,50 +109,39 @@ function selectCharacter(characterId) {
 
 function showFirstMeetingScenario(characterId) {
     console.log('showFirstMeetingScenario 호출됨:', characterId);
-    console.log('FIRST_MEETING_SCENARIOS:', typeof FIRST_MEETING_SCENARIOS);
 
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
     if (!scenario) {
         console.error('첫 만남 시나리오를 찾을 수 없습니다:', characterId);
-        console.log('사용 가능한 시나리오:', Object.keys(FIRST_MEETING_SCENARIOS));
         return;
     }
 
     console.log('시나리오 찾음:', scenario);
 
-    // 모든 모달 강제 닫기
-    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    const modal = createActionModal('💝 첫 만남', scenario.situation);
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
 
-    // 새 모달 생성 및 표시
-    setTimeout(() => {
-        const modal = createActionModal('💝 첫 만남', scenario.situation);
-        const content = modal.querySelector('.modal-body');
-        content.innerHTML = '';
+    scenario.choices.forEach((choice, index) => {
+        const choiceBtn = document.createElement('button');
+        choiceBtn.className = 'choice-option-btn';
 
-        scenario.choices.forEach((choice, index) => {
-            const choiceBtn = document.createElement('button');
-            choiceBtn.className = 'choice-option-btn';
-            choiceBtn.style.cursor = 'pointer';
-            choiceBtn.style.pointerEvents = 'auto';
+        choiceBtn.innerHTML = `
+            <span class="choice-number">${index + 1}.</span>
+            <span class="choice-text">${choice.text}</span>
+        `;
 
-            choiceBtn.innerHTML = `
-                <span class="choice-number">${index + 1}.</span>
-                <span class="choice-text">${choice.text}</span>
-            `;
+        const choiceData = choice;
+        choiceBtn.onclick = function() {
+            console.log('첫 만남 선택:', choiceData.text);
+            handleFirstMeetingChoice(choiceData);
+        };
 
-            choiceBtn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('첫 만남 선택:', choice.text);
-                handleFirstMeetingChoice(choice);
-            };
+        content.appendChild(choiceBtn);
+    });
 
-            content.appendChild(choiceBtn);
-        });
-
-        showModal('action-modal');
-        console.log('첫 만남 모달 표시됨');
-    }, 200);
+    showModal('action-modal');
+    console.log('첫 만남 모달 표시됨');
 }
 
 function handleFirstMeetingChoice(choice) {
@@ -261,60 +250,90 @@ function updateCharacterMood() {
 }
 
 // ============================================
-// 액션 버튼 시스템
+// 액션 버튼 시스템 - 완전 재설계
 // ============================================
 function createActionButtons() {
     const choicesArea = document.getElementById('choices-area');
-    choicesArea.innerHTML = '';
+    if (!choicesArea) {
+        console.error('choices-area를 찾을 수 없습니다');
+        return;
+    }
 
-    const actions = [
-        { id: 'date', name: '데이트하기', icon: '💑', handler: 'showDateMenu' },
-        { id: 'gift', name: '선물하기', icon: '🎁', handler: 'showGiftMenu' },
-        { id: 'talk', name: '대화하기', icon: '💬', handler: 'showTalkMenu' },
-        { id: 'work', name: '알바하기', icon: '💼', handler: 'doWork' },
-        { id: 'rest', name: '휴식하기', icon: '😴', handler: 'doRest' },
-        { id: 'propose', name: '프로포즈', icon: '💍', handler: 'attemptProposal' }
-    ];
-
-    actions.forEach(action => {
-        const button = document.createElement('button');
-        button.className = 'action-choice-btn';
-        button.id = `action-${action.id}`;
-        button.setAttribute('data-handler', action.handler);
-
-        button.innerHTML = `
-            <div class="action-icon">${action.icon}</div>
+    choicesArea.innerHTML = `
+        <button class="action-choice-btn" id="action-date" onclick="window.handleActionClick('date')">
+            <div class="action-icon">💑</div>
             <div class="action-info">
-                <div class="action-name">${action.name}</div>
+                <div class="action-name">데이트하기</div>
             </div>
-        `;
-
-        choicesArea.appendChild(button);
-    });
-
-    // 이벤트 위임 방식으로 클릭 처리
-    choicesArea.onclick = function(e) {
-        const button = e.target.closest('.action-choice-btn');
-        if (!button) return;
-
-        if (button.disabled || button.classList.contains('disabled')) {
-            console.log('버튼이 비활성화되어 있습니다:', button.id);
-            return;
-        }
-
-        const handler = button.getAttribute('data-handler');
-        console.log('버튼 클릭:', button.id, '핸들러:', handler);
-
-        // 핸들러 실행
-        if (typeof window[handler] === 'function') {
-            window[handler]();
-        } else {
-            console.error('핸들러를 찾을 수 없습니다:', handler);
-        }
-    };
+        </button>
+        <button class="action-choice-btn" id="action-gift" onclick="window.handleActionClick('gift')">
+            <div class="action-icon">🎁</div>
+            <div class="action-info">
+                <div class="action-name">선물하기</div>
+            </div>
+        </button>
+        <button class="action-choice-btn" id="action-talk" onclick="window.handleActionClick('talk')">
+            <div class="action-icon">💬</div>
+            <div class="action-info">
+                <div class="action-name">대화하기</div>
+            </div>
+        </button>
+        <button class="action-choice-btn" id="action-work" onclick="window.handleActionClick('work')">
+            <div class="action-icon">💼</div>
+            <div class="action-info">
+                <div class="action-name">알바하기</div>
+            </div>
+        </button>
+        <button class="action-choice-btn" id="action-rest" onclick="window.handleActionClick('rest')">
+            <div class="action-icon">😴</div>
+            <div class="action-info">
+                <div class="action-name">휴식하기</div>
+            </div>
+        </button>
+        <button class="action-choice-btn" id="action-propose" onclick="window.handleActionClick('propose')">
+            <div class="action-icon">💍</div>
+            <div class="action-info">
+                <div class="action-name">프로포즈</div>
+            </div>
+        </button>
+    `;
 
     updateActionButtons();
 }
+
+// 전역 액션 핸들러
+window.handleActionClick = function(action) {
+    console.log('액션 클릭됨:', action);
+
+    const button = document.getElementById(`action-${action}`);
+    if (button && (button.disabled || button.classList.contains('disabled'))) {
+        console.log('버튼이 비활성화됨:', action);
+        return;
+    }
+
+    switch(action) {
+        case 'date':
+            showDateMenu();
+            break;
+        case 'gift':
+            showGiftMenu();
+            break;
+        case 'talk':
+            showTalkMenu();
+            break;
+        case 'work':
+            doWork();
+            break;
+        case 'rest':
+            doRest();
+            break;
+        case 'propose':
+            attemptProposal();
+            break;
+        default:
+            console.error('알 수 없는 액션:', action);
+    }
+};
 
 function updateActionButtons() {
     // 모든 기본 액션 버튼은 활성화 (date, gift, talk, rest)
@@ -360,49 +379,43 @@ function updateActionButtons() {
 function showDateMenu() {
     console.log('showDateMenu 호출됨');
 
-    // 모든 모달 강제 닫기
-    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
 
-    setTimeout(() => {
-        const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
-        const content = modal.querySelector('.modal-body');
-        content.innerHTML = '';
+    Object.values(DATE_LOCATIONS).forEach(location => {
+        const option = document.createElement('div');
+        option.className = 'action-option';
+        option.style.cursor = 'pointer';
 
-        Object.values(DATE_LOCATIONS).forEach(location => {
-            const option = document.createElement('div');
-            option.className = 'action-option';
-            option.style.cursor = 'pointer';
+        const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
+        if (!canAfford) option.classList.add('disabled');
 
-            const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
-            if (!canAfford) option.classList.add('disabled');
-
-            option.innerHTML = `
-                <div class="option-icon">${location.icon}</div>
-                <div class="option-info">
-                    <div class="option-name">${location.name}</div>
-                    <div class="option-desc">${location.description}</div>
-                    <div class="option-cost">
-                        ${location.cost > 0 ? '💰 ' + formatMoney(location.cost) : '무료'}
-                        ⚡ ${location.stamina}
-                    </div>
+        option.innerHTML = `
+            <div class="option-icon">${location.icon}</div>
+            <div class="option-info">
+                <div class="option-name">${location.name}</div>
+                <div class="option-desc">${location.description}</div>
+                <div class="option-cost">
+                    ${location.cost > 0 ? '💰 ' + formatMoney(location.cost) : '무료'}
+                    ⚡ ${location.stamina}
                 </div>
-            `;
+            </div>
+        `;
 
-            option.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!this.classList.contains('disabled')) {
-                    console.log('데이트 장소 선택:', location.id);
-                    selectDateLocation(location.id);
-                }
-            };
+        const locationId = location.id;
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
+                console.log('데이트 장소 선택:', locationId);
+                selectDateLocation(locationId);
+            }
+        };
 
-            content.appendChild(option);
-        });
+        content.appendChild(option);
+    });
 
-        showModal('action-modal');
-        console.log('데이트 메뉴 표시됨');
-    }, 100);
+    showModal('action-modal');
+    console.log('데이트 메뉴 표시됨');
 }
 
 function selectDateLocation(locationId) {
@@ -431,46 +444,40 @@ function selectDateLocation(locationId) {
 function showGiftMenu() {
     console.log('showGiftMenu 호출됨');
 
-    // 모든 모달 강제 닫기
-    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
 
-    setTimeout(() => {
-        const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
-        const content = modal.querySelector('.modal-body');
-        content.innerHTML = '';
+    Object.values(GIFT_ITEMS).forEach(gift => {
+        const option = document.createElement('div');
+        option.className = 'action-option';
+        option.style.cursor = 'pointer';
 
-        Object.values(GIFT_ITEMS).forEach(gift => {
-            const option = document.createElement('div');
-            option.className = 'action-option';
-            option.style.cursor = 'pointer';
+        const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
+        if (!canAfford) option.classList.add('disabled');
 
-            const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
-            if (!canAfford) option.classList.add('disabled');
+        option.innerHTML = `
+            <div class="option-icon">${gift.icon}</div>
+            <div class="option-info">
+                <div class="option-name">${gift.name}</div>
+                <div class="option-desc">${gift.description}</div>
+                <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
+            </div>
+        `;
 
-            option.innerHTML = `
-                <div class="option-icon">${gift.icon}</div>
-                <div class="option-info">
-                    <div class="option-name">${gift.name}</div>
-                    <div class="option-desc">${gift.description}</div>
-                    <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
-                </div>
-            `;
+        const giftId = gift.id;
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
+                console.log('선물 선택:', giftId);
+                giveGift(giftId);
+            }
+        };
 
-            option.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!this.classList.contains('disabled')) {
-                    console.log('선물 선택:', gift.id);
-                    giveGift(gift.id);
-                }
-            };
+        content.appendChild(option);
+    });
 
-            content.appendChild(option);
-        });
-
-        showModal('action-modal');
-        console.log('선물 메뉴 표시됨');
-    }, 100);
+    showModal('action-modal');
+    console.log('선물 메뉴 표시됨');
 }
 
 function giveGift(giftId) {
@@ -513,49 +520,43 @@ function giveGift(giftId) {
 function showTalkMenu() {
     console.log('showTalkMenu 호출됨');
 
-    // 모든 모달 강제 닫기
-    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
 
-    setTimeout(() => {
-        const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
-        const content = modal.querySelector('.modal-body');
-        content.innerHTML = '';
+    Object.values(TALK_TOPICS).forEach(topic => {
+        const option = document.createElement('div');
+        option.className = 'action-option';
+        option.style.cursor = 'pointer';
 
-        Object.values(TALK_TOPICS).forEach(topic => {
-            const option = document.createElement('div');
-            option.className = 'action-option';
-            option.style.cursor = 'pointer';
+        const canTalk = gameState.stamina >= topic.stamina;
+        const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
 
-            const canTalk = gameState.stamina >= topic.stamina;
-            const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
+        if (!canTalk || !meetsRequirement) option.classList.add('disabled');
 
-            if (!canTalk || !meetsRequirement) option.classList.add('disabled');
+        option.innerHTML = `
+            <div class="option-icon">${topic.icon}</div>
+            <div class="option-info">
+                <div class="option-name">${topic.name}</div>
+                <div class="option-desc">${topic.description}</div>
+                <div class="option-cost">⚡ ${topic.stamina}</div>
+                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
+            </div>
+        `;
 
-            option.innerHTML = `
-                <div class="option-icon">${topic.icon}</div>
-                <div class="option-info">
-                    <div class="option-name">${topic.name}</div>
-                    <div class="option-desc">${topic.description}</div>
-                    <div class="option-cost">⚡ ${topic.stamina}</div>
-                    ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
-                </div>
-            `;
+        const topicId = topic.id;
+        option.onclick = function() {
+            if (!this.classList.contains('disabled')) {
+                console.log('대화 주제 선택:', topicId);
+                selectTalkTopic(topicId);
+            }
+        };
 
-            option.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!this.classList.contains('disabled')) {
-                    console.log('대화 주제 선택:', topic.id);
-                    selectTalkTopic(topic.id);
-                }
-            };
+        content.appendChild(option);
+    });
 
-            content.appendChild(option);
-        });
-
-        showModal('action-modal');
-        console.log('대화 메뉴 표시됨');
-    }, 100);
+    showModal('action-modal');
+    console.log('대화 메뉴 표시됨');
 }
 
 function selectTalkTopic(topicId) {
@@ -586,19 +587,16 @@ function showScenario(scenario, sourceData, actionType) {
     scenario.choices.forEach((choice, index) => {
         const choiceBtn = document.createElement('button');
         choiceBtn.className = 'choice-option-btn';
-        choiceBtn.style.cursor = 'pointer';
-        choiceBtn.style.pointerEvents = 'auto';
 
         choiceBtn.innerHTML = `
             <span class="choice-number">${index + 1}.</span>
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('시나리오 선택:', choice.text);
-            selectChoice(choice, sourceData, actionType);
+        const choiceData = choice;
+        choiceBtn.onclick = function() {
+            console.log('시나리오 선택:', choiceData.text);
+            selectChoice(choiceData, sourceData, actionType);
         };
 
         content.appendChild(choiceBtn);
@@ -1102,19 +1100,17 @@ function triggerCrisisEvent() {
     event.choices.forEach((choice, index) => {
         const choiceBtn = document.createElement('button');
         choiceBtn.className = 'choice-option-btn';
-        choiceBtn.style.cursor = 'pointer';
-        choiceBtn.style.pointerEvents = 'auto';
 
         choiceBtn.innerHTML = `
             <span class="choice-number">${index + 1}.</span>
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('위기 이벤트 선택:', choice.text);
-            handleCrisisChoice(choice, event);
+        const choiceData = choice;
+        const eventData = event;
+        choiceBtn.onclick = function() {
+            console.log('위기 이벤트 선택:', choiceData.text);
+            handleCrisisChoice(choiceData, eventData);
         };
 
         content.appendChild(choiceBtn);
