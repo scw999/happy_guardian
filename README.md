@@ -16,8 +16,11 @@ happy_guardian/
 │   ├── characters.md           # 캐릭터 상세 설명
 │   ├── cards.md                # 카드 목록
 │   ├── strategy-guide.md       # 전략 가이드
-│   ├── special-events.md       # 특수 이벤트 시나리오 (NEW!)
-│   └── crisis-response-guide.md # 위기 상황 대응 가이드 (NEW!)
+│   ├── special-events.md       # 특수 이벤트 시나리오
+│   ├── crisis-response-guide.md # 위기 상황 대응 가이드
+│   ├── board-design.md         # 보드판 디자인 레이아웃 🆕
+│   ├── icon-guide.md           # 아이콘 디자인 시스템 🆕
+│   └── character-profiles.md   # 캐릭터 프로필 카드 🆕
 └── assets/                     # 게임 리소스
     ├── cards/                  # 카드 디자인
     ├── board/                  # 보드판 디자인
@@ -60,12 +63,35 @@ happy_guardian/
 
 ### 고급 가이드
 - [전략 가이드](docs/strategy-guide.md) - 승리를 위한 전략과 팁
-- [특수 이벤트 시나리오](docs/special-events.md) - 🆕 75가지 대화/위기 상황과 선택지
-- [위기 대응 가이드](docs/crisis-response-guide.md) - 🆕 위기 상황별 최적 대응법
+- [특수 이벤트 시나리오](docs/special-events.md) - 75가지 대화/위기 상황과 선택지
+- [위기 대응 가이드](docs/crisis-response-guide.md) - 위기 상황별 최적 대응법
+
+### 디자인 & 제작
+- [보드판 디자인](docs/board-design.md) - 🆕 40칸 원형 보드 레이아웃 및 제작 사양
+- [아이콘 가이드](docs/icon-guide.md) - 🆕 50+ 게임 아이콘 디자인 시스템
+- [캐릭터 프로필 카드](docs/character-profiles.md) - 🆕 4개 캐릭터 카드 상세 디자인
 
 ## 개발 현황
 
-현재 게임 디자인 및 규칙 정립 단계입니다.
+### 완료 ✅
+- [x] 게임 규칙 및 메커니즘 설계
+- [x] 4개 캐릭터 디자인 및 밸런싱
+- [x] 100+ 액션 카드 설계
+- [x] 75개 특수 이벤트 시나리오 작성
+- [x] 위기 관리 시스템 구축
+- [x] 보드판 레이아웃 설계 (40칸 원형)
+- [x] 아이콘 시스템 정의 (50+ 아이콘)
+- [x] 캐릭터 프로필 카드 디자인
+- [x] 제작 사양서 작성
+
+### 진행 예정 🔄
+- [ ] 캐릭터 일러스트 제작
+- [ ] 카드 디자인 (전체 175장)
+- [ ] 보드판 실물 제작
+- [ ] 플레이테스트 및 밸런스 조정
+- [ ] 최종 제작 및 생산
+
+현재 **프로토타입 제작 준비 완료** 단계입니다.
 
 ## 라이센스
 
