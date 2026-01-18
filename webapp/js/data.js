@@ -3,240 +3,453 @@ const CHARACTERS = {
     perfectionist: {
         id: 'perfectionist',
         name: '완벽주의 센서티브',
+        fullName: '서윤아',
         icon: '💎',
         image: 'images/character1-perfectionist-normal.jpg',
-        difficulty: 5,
-        startScore: 30,
-        traits: {
-            scoreMultiplier: 2, // 취향 저격 시 2배
-            penaltyMultiplier: 2 // 실수 시 2배 페널티
-        },
-        fullName: '서윤아',
         age: 27,
         job: '패션 디자이너',
-        quote: '"완벽하지 않으면 의미 없어요"'
+        quote: '"완벽하지 않으면 의미 없어요"',
+        difficulty: 5,
+        startAffection: 20,
+        startTrust: 10,
+        preferences: {
+            // 데이트 선호도 (곱수)
+            dates: {
+                walk: 0.5,
+                cafe: 0.8,
+                drive: 1.2,
+                dining: 1.5
+            },
+            // 선물 선호도
+            gifts: {
+                cake: 0.7,
+                flower: 0.9,
+                perfume: 1.3,
+                bag: 1.5,
+                ring: 1.2
+            },
+            // 대화 선호도
+            talks: {
+                daily: 0.8,
+                comfort: 1.1,
+                future: 1.3,
+                humor: 0.6
+            }
+        },
+        traits: {
+            highCostBonus: 1.5,      // 고비용 데이트 보너스
+            lowCostPenalty: 0.5,     // 저비용 데이트 페널티
+            mistakePenalty: 2.0      // 실수 시 페널티 2배
+        }
     },
     positive: {
         id: 'positive',
         name: '비타민 긍정녀',
+        fullName: '강하영',
         icon: '☀️',
         image: 'images/character2-positive-normal.jpg',
-        difficulty: 2,
-        startScore: 70,
-        traits: {
-            lonelinessPenalty: -3, // 매 턴 방치 시 -3점
-            forgivingNature: true // 실수에 관대
-        },
-        fullName: '강하영',
         age: 25,
         job: '초등학교 교사',
-        quote: '"오늘도 화이팅! 우리 행복하자!"'
+        quote: '"오늘도 화이팅! 우리 행복하자!"',
+        difficulty: 2,
+        startAffection: 50,
+        startTrust: 30,
+        preferences: {
+            dates: {
+                walk: 1.5,
+                cafe: 1.2,
+                drive: 1.1,
+                dining: 0.9
+            },
+            gifts: {
+                cake: 1.4,
+                flower: 1.3,
+                perfume: 1.0,
+                bag: 0.8,
+                ring: 1.1
+            },
+            talks: {
+                daily: 1.3,
+                comfort: 1.4,
+                future: 1.1,
+                humor: 1.5
+            }
+        },
+        traits: {
+            lowCostBonus: 1.3,       // 저비용 데이트 효율 좋음
+            neglectPenalty: 5,       // 3일 이상 방치 시 매일 -5
+            forgivingNature: true    // 실수에 관대
+        }
     },
     tsundere: {
         id: 'tsundere',
         name: '반전 매력의 츤데레',
+        fullName: '이지우',
         icon: '🌸',
         image: 'images/character3-tsundere-normal.jpg',
-        difficulty: 3,
-        startScore: 50,
-        traits: {
-            delayedEffect: true, // 효과가 다음 턴에 반영
-            stableScore: true // 점수가 잘 안 떨어짐
-        },
-        fullName: '이지우',
         age: 24,
         job: '웹툰 작가',
-        quote: '"별로... 안 좋은데... (좋아)"'
+        quote: '"별로... 안 좋은데... (좋아)"',
+        difficulty: 3,
+        startAffection: 30,
+        startTrust: 20,
+        preferences: {
+            dates: {
+                walk: 1.1,
+                cafe: 1.3,
+                drive: 1.0,
+                dining: 1.1
+            },
+            gifts: {
+                cake: 1.2,
+                flower: 1.4,
+                perfume: 1.1,
+                bag: 0.9,
+                ring: 1.3
+            },
+            talks: {
+                daily: 1.2,
+                comfort: 1.3,
+                future: 0.9,
+                humor: 1.1
+            }
+        },
+        traits: {
+            delayedEffect: true,     // 효과가 다음 날 반영
+            stableScore: true,       // 점수 변동 적음
+            tsundereBonus: 1.2       // 특정 상황에서 보너스
+        }
     },
     career: {
         id: 'career',
         name: '논리적인 커리어우먼',
+        fullName: '최서연',
         icon: '💼',
         image: 'images/character4-career-normal.jpg',
-        difficulty: 4,
-        startScore: 50,
-        traits: {
-            talkBonus: 1.5, // 대화 카드 +50%
-            mistakePenalty: 1.5 // 말실수 -50% 추가 페널티
-        },
-        fullName: '최서연',
         age: 29,
         job: '변호사',
-        quote: '"논리적으로 설명해 보세요"'
+        quote: '"논리적으로 설명해 보세요"',
+        difficulty: 4,
+        startAffection: 30,
+        startTrust: 20,
+        preferences: {
+            dates: {
+                walk: 0.9,
+                cafe: 1.1,
+                drive: 1.0,
+                dining: 1.3
+            },
+            gifts: {
+                cake: 0.8,
+                flower: 0.9,
+                perfume: 1.2,
+                bag: 1.1,
+                ring: 1.2
+            },
+            talks: {
+                daily: 1.0,
+                comfort: 1.1,
+                future: 1.5,
+                humor: 0.8
+            }
+        },
+        traits: {
+            talkBonus: 1.5,          // 대화 효과 1.5배
+            logicRequired: true,     // 논리적 대화 선호
+            mistakePenalty: 1.5      // 비논리적 대화 시 페널티
+        }
     }
 };
 
-// 보드 칸 설정 (40칸)
-const BOARD_SPACES = [
-    {id: 1, type: 'date', icon: '💑', name: '데이트'},
-    {id: 2, type: 'talk', icon: '💬', name: '대화'},
-    {id: 3, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 4, type: 'date', icon: '💑', name: '데이트'},
-    {id: 5, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 6, type: 'talk', icon: '💬', name: '대화'},
-    {id: 7, type: 'date', icon: '💑', name: '데이트'},
-    {id: 8, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 9, type: 'date', icon: '💑', name: '데이트'},
-    {id: 10, type: 'random', icon: '⚡', name: '이벤트'},
-    {id: 11, type: 'talk', icon: '💬', name: '대화'},
-    {id: 12, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 13, type: 'date', icon: '💑', name: '데이트'},
-    {id: 14, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 15, type: 'date', icon: '💑', name: '데이트'},
-    {id: 16, type: 'talk', icon: '💬', name: '대화'},
-    {id: 17, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 18, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 19, type: 'date', icon: '💑', name: '데이트'},
-    {id: 20, type: 'rest', icon: '☕', name: '휴식'},
-    {id: 21, type: 'talk', icon: '💬', name: '대화'},
-    {id: 22, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 23, type: 'date', icon: '💑', name: '데이트'},
-    {id: 24, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 25, type: 'date', icon: '💑', name: '데이트'},
-    {id: 26, type: 'random', icon: '⚡', name: '이벤트'},
-    {id: 27, type: 'talk', icon: '💬', name: '대화'},
-    {id: 28, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 29, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 30, type: 'date', icon: '💑', name: '데이트'},
-    {id: 31, type: 'talk', icon: '💬', name: '대화'},
-    {id: 32, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 33, type: 'date', icon: '💑', name: '데이트'},
-    {id: 34, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 35, type: 'talk', icon: '💬', name: '대화'},
-    {id: 36, type: 'date', icon: '💑', name: '데이트'},
-    {id: 37, type: 'event', icon: '🎭', name: '특수 이벤트'},
-    {id: 38, type: 'gift', icon: '🎁', name: '선물'},
-    {id: 39, type: 'random', icon: '⚡', name: '이벤트'},
-    {id: 40, type: 'event', icon: '🎭', name: '특수 이벤트'}
-];
-
-// 액션 카드 데이터
-const CARDS = {
-    // 데이트 카드
-    date_movie: {id: 'date_movie', type: 'date', name: '영화 데이트', icon: '🎬', effect: 10},
-    date_restaurant: {id: 'date_restaurant', type: 'date', name: '맛집 데이트', icon: '🍽️', effect: 10},
-    date_walk: {id: 'date_walk', type: 'date', name: '산책 데이트', icon: '🚶', effect: 8},
-    date_culture: {id: 'date_culture', type: 'date', name: '문화 생활', icon: '🎨', effect: 12},
-    date_home: {id: 'date_home', type: 'date', name: '홈 데이트', icon: '🏠', effect: 9},
-
-    // 선물 카드
-    gift_flowers: {id: 'gift_flowers', type: 'gift', name: '꽃 선물', icon: '💐', effect: 8},
-    gift_cosmetics: {id: 'gift_cosmetics', type: 'gift', name: '화장품/향수', icon: '💄', effect: 12},
-    gift_book: {id: 'gift_book', type: 'gift', name: '책/잡지', icon: '📚', effect: 10},
-    gift_fashion: {id: 'gift_fashion', type: 'gift', name: '패션 아이템', icon: '👜', effect: 15},
-    gift_surprise: {id: 'gift_surprise', type: 'gift', name: '깜짝 선물', icon: '🎁', effect: 10},
-
-    // 대화 카드
-    talk_daily: {id: 'talk_daily', type: 'talk', name: '일상 대화', icon: '💬', effect: 7},
-    talk_deep: {id: 'talk_deep', type: 'talk', name: '깊이 있는 대화', icon: '🎯', effect: 12},
-    talk_love: {id: 'talk_love', type: 'talk', name: '사랑 고백', icon: '💝', effect: 15},
-    talk_empathy: {id: 'talk_empathy', type: 'talk', name: '공감 표현', icon: '🤝', effect: 10},
-    talk_compliment: {id: 'talk_compliment', type: 'talk', name: '칭찬', icon: '😊', effect: 8},
-
-    // 특수 카드
-    special_miracle: {id: 'special_miracle', type: 'special', name: '기적의 논리', icon: '🌟', effect: 'recover'},
-    special_surprise: {id: 'special_surprise', type: 'special', name: '서프라이즈', icon: '🎉', effect: 'random'},
-    special_patience: {id: 'special_patience', type: 'special', name: '인내', icon: '🛡️', effect: 'protect'}
-};
-
-// 특수 이벤트 데이터 (샘플)
-const SPECIAL_EVENTS = [
-    {
-        id: 'event_weight',
-        difficulty: 'easy',
-        situation: '"나 살쪘어?" 여자친구가 거울을 보며 묻습니다.',
-        choices: [
-            {text: '아니야, 전혀 안 쪘어', score: 8},
-            {text: '조금? 그래도 귀여워', score: -20},
-            {text: '원래도 예뻤고 지금도 예뻐', score: 15},
-            {text: '운동 같이 할까?', score: -18}
+// 데이트 장소 데이터
+const DATE_LOCATIONS = {
+    walk: {
+        id: 'walk',
+        name: '동네 산책',
+        icon: '🚶',
+        cost: 0,
+        stamina: 30,
+        baseAffection: 10,
+        baseTrust: 8,
+        description: '소소한 대화를 나누며 동네를 걷습니다',
+        scenarios: [
+            {
+                id: 'walk_sunset',
+                situation: '해가 지는 것을 보며 산책하고 있습니다.',
+                choices: [
+                    { text: '"노을이 정말 예쁘네요. 당신처럼요."', affection: 15, trust: 5, type: 'romantic' },
+                    { text: '조용히 손을 잡는다', affection: 12, trust: 10, type: 'skinship' },
+                    { text: '"배고프지 않아요? 뭐 먹으러 갈까요?"', affection: 8, trust: 8, type: 'caring' }
+                ]
+            },
+            {
+                id: 'walk_dog',
+                situation: '귀여운 강아지가 다가옵니다.',
+                choices: [
+                    { text: '함께 강아지를 쓰다듬는다', affection: 12, trust: 8, type: 'cute' },
+                    { text: '"강아지 키우고 싶지 않아요?"', affection: 10, trust: 12, type: 'future' },
+                    { text: '강아지를 피해 다른 길로 간다', affection: 5, trust: 5, type: 'neutral' }
+                ]
+            }
         ]
     },
-    {
-        id: 'event_ex',
-        difficulty: 'hard',
-        situation: '"전 여자친구랑 비교하면?" 위험한 질문이 날아왔습니다!',
-        choices: [
-            {text: '너가 훨씬 나아', score: -15},
-            {text: '비교할 수 없지, 너는 특별해', score: 15},
-            {text: '왜 갑자기 그런 얘기를 해?', score: -5},
-            {text: '전 여친은 과거야, 지금은 너만 생각해', score: 20}
+    cafe: {
+        id: 'cafe',
+        name: '영화관 & 카페',
+        icon: '☕',
+        cost: 50000,
+        stamina: 30,
+        baseAffection: 15,
+        baseTrust: 12,
+        description: '영화를 보고 카페에서 담소를 나눕니다',
+        scenarios: [
+            {
+                id: 'cafe_boring',
+                situation: '영화가 생각보다 지루합니다.',
+                choices: [
+                    { text: '"좀 지루하다, 나갈까요?"', affection: -5, trust: 10, type: 'honest' },
+                    { text: '끝까지 집중해서 본다', affection: 8, trust: 15, type: 'manner' },
+                    { text: '귓속말로 농담을 건넨다', affection: 12, trust: 8, type: 'playful' }
+                ]
+            },
+            {
+                id: 'cafe_drink',
+                situation: '카페에서 무엇을 마실지 고민합니다.',
+                choices: [
+                    { text: '"뭐 마실래요? 제가 살게요"', affection: 12, trust: 10, type: 'gentleman' },
+                    { text: '"커플 세트 시킬까요?"', affection: 15, trust: 8, type: 'romantic' },
+                    { text: '각자 주문한다', affection: 8, trust: 12, type: 'independent' }
+                ]
+            }
         ]
     },
-    {
-        id: 'event_first_date',
-        difficulty: 'medium',
-        situation: '"우리 처음 만난 날 기억나?" 갑작스런 기억력 테스트!',
-        choices: [
-            {text: '음... 언제더라?', score: -20},
-            {text: '물론이지! (정확한 날짜)', score: 25},
-            {text: '그때 네가 입었던 옷 기억나', score: 30},
-            {text: '기억 안 나지만 그날부터 행복했어', score: 10}
+    drive: {
+        id: 'drive',
+        name: '근교 드라이브',
+        icon: '🚗',
+        cost: 150000,
+        stamina: 30,
+        baseAffection: 20,
+        baseTrust: 15,
+        description: '차를 렌트해 근교로 드라이브를 갑니다',
+        scenarios: [
+            {
+                id: 'drive_music',
+                situation: '차 안에서 음악을 틀까 말까 고민됩니다.',
+                choices: [
+                    { text: '"어떤 노래 좋아해요?"', affection: 15, trust: 12, type: 'interest' },
+                    { text: '조용히 운전에 집중한다', affection: 10, trust: 15, type: 'safe' },
+                    { text: '내가 좋아하는 노래를 튼다', affection: 12, trust: 8, type: 'share' }
+                ]
+            },
+            {
+                id: 'drive_view',
+                situation: '멋진 뷰 포인트를 발견했습니다.',
+                choices: [
+                    { text: '차를 세우고 함께 경치를 본다', affection: 20, trust: 15, type: 'romantic' },
+                    { text: '"사진 찍어드릴까요?"', affection: 18, trust: 12, type: 'caring' },
+                    { text: '그냥 지나간다', affection: 5, trust: 8, type: 'skip' }
+                ]
+            }
         ]
     },
-    {
-        id: 'event_phone',
-        difficulty: 'hard',
-        situation: '"휴대폰 좀 봐도 돼?" 신뢰 테스트가 시작되었습니다.',
-        choices: [
-            {text: '왜? (방어적)', score: -15},
-            {text: '응, 봐 (자연스럽게)', score: 20},
-            {text: '나도 네 거 봐도 돼?', score: -10},
-            {text: '숨길 거 없어 (건네며)', score: 25}
-        ]
-    },
-    {
-        id: 'event_sick',
-        difficulty: 'easy',
-        situation: '여자친구가 감기에 걸렸습니다. "좀 아파..."',
-        choices: [
-            {text: '푹 쉬어 (문자만)', score: 5},
-            {text: '약이랑 죽 사들고 방문', score: 30},
-            {text: '전화로 위로', score: 12},
-            {text: '다 나을 때까지 기다림', score: -10}
-        ]
-    },
-    {
-        id: 'event_work_stress',
-        difficulty: 'medium',
-        situation: '"오늘 상사한테 혼났어..." 힘든 하루를 보냈다고 합니다.',
-        choices: [
-            {text: '너도 잘못한 거 있겠지', score: -30},
-            {text: '힘들었겠다. 괜찮아?', score: 15},
-            {text: '어떻게 된 거야? (자세히 듣기)', score: 20},
-            {text: '직접 만나서 위로', score: 28}
-        ]
-    },
-    {
-        id: 'event_anniversary',
-        difficulty: 'extreme',
-        situation: '"오늘이 무슨 날인지 알아?" 기념일을 깜빡한 것 같습니다!',
-        choices: [
-            {text: '몰랐어...', score: -40},
-            {text: '물론 알지! (거짓말)', score: -50},
-            {text: '미안... 지금 바로 준비할게', score: -20},
-            {text: '(서프라이즈 준비했음)', score: 50}
-        ]
-    },
-    {
-        id: 'event_friend_vs_date',
-        difficulty: 'medium',
-        situation: '"오늘 친구들이랑 약속 있는데... 너도 보고 싶어"',
-        choices: [
-            {text: '친구들 만나, 나는 괜찮아', score: 18},
-            {text: '나랑 있어줘', score: -12},
-            {text: '친구들이랑 놀다가 저녁에 보자', score: 22},
-            {text: '친구가 더 중요하구나', score: -25}
+    dining: {
+        id: 'dining',
+        name: '호텔 다이닝',
+        icon: '🍽️',
+        cost: 300000,
+        stamina: 30,
+        baseAffection: 30,
+        baseTrust: 20,
+        description: '고급 호텔 레스토랑에서 파인 다이닝을 즐깁니다',
+        scenarios: [
+            {
+                id: 'dining_wine',
+                situation: '소믈리에가 와인을 추천합니다.',
+                choices: [
+                    { text: '소믈리에의 추천을 따른다', affection: 25, trust: 18, type: 'trust' },
+                    { text: '"당신이 좋아하는 걸로 골라요"', affection: 28, trust: 15, type: 'caring' },
+                    { text: '내가 와인을 직접 고른다', affection: 20, trust: 12, type: 'confident' }
+                ]
+            },
+            {
+                id: 'dining_manner',
+                situation: '테이블 매너가 어렵습니다.',
+                choices: [
+                    { text: '자연스럽게 매너를 지킨다', affection: 30, trust: 25, type: 'perfect' },
+                    { text: '"매너가 어렵네요" 솔직하게 말한다', affection: 22, trust: 20, type: 'honest' },
+                    { text: '상대방의 행동을 따라한다', affection: 25, trust: 18, type: 'adaptive' }
+                ]
+            }
         ]
     }
-];
+};
 
-// 랜덤 이벤트 데이터
-const RANDOM_EVENTS = [
-    {text: '주기 카드 발동! 3턴 동안 모든 점수 변화 2배', effect: 'cycle', duration: 3},
-    {text: '친구들과의 약속으로 다음 턴 행동 제약', effect: 'skip', duration: 1},
-    {text: '갑작스런 피곤함... 점수 획득 -5점', effect: 'tired', duration: 1},
-    {text: 'SNS에서 의심스러운 좋아요 발견!', effect: 'penalty', score: -10},
-    {text: '예상치 못한 칭찬!', effect: 'bonus', score: 15},
-    {text: '좋은 날씨! 다음 데이트 +5점', effect: 'weather', duration: 1}
-];
+// 선물 아이템 데이터
+const GIFT_ITEMS = {
+    cake: {
+        id: 'cake',
+        name: '조각 케이크',
+        icon: '🍰',
+        cost: 20000,
+        stamina: 10,
+        baseAffection: 8,
+        baseTrust: 5,
+        description: '달콤한 디저트로 기분 전환',
+        category: 'sweet'
+    },
+    flower: {
+        id: 'flower',
+        name: '꽃다발',
+        icon: '💐',
+        cost: 50000,
+        stamina: 10,
+        baseAffection: 15,
+        baseTrust: 10,
+        description: '로맨틱한 분위기를 연출',
+        category: 'romantic'
+    },
+    perfume: {
+        id: 'perfume',
+        name: '향수/화장품',
+        icon: '💄',
+        cost: 200000,
+        stamina: 10,
+        baseAffection: 25,
+        baseTrust: 15,
+        description: '취향을 타지만 성공 시 효과 큼',
+        category: 'luxury'
+    },
+    bag: {
+        id: 'bag',
+        name: '명품 가방',
+        icon: '👜',
+        cost: 3000000,
+        stamina: 10,
+        baseAffection: 40,
+        baseTrust: 20,
+        description: '고가의 명품으로 대폭 상승',
+        category: 'premium'
+    },
+    ring: {
+        id: 'ring',
+        name: '다이아 반지',
+        icon: '💍',
+        cost: 5000000,
+        stamina: 10,
+        baseAffection: 50,
+        baseTrust: 30,
+        description: '프로포즈 필수 아이템',
+        category: 'proposal',
+        proposalBonus: 20
+    }
+};
+
+// 대화 주제 데이터
+const TALK_TOPICS = {
+    daily: {
+        id: 'daily',
+        name: '일상 이야기',
+        icon: '☀️',
+        stamina: 15,
+        baseAffection: 10,
+        baseTrust: 12,
+        description: '오늘 있었던 일을 나눕니다',
+        scenarios: [
+            {
+                id: 'daily_work',
+                situation: '오늘 회사에서 힘든 일이 있었다고 합니다.',
+                choices: [
+                    { text: '"그래서 어떻게 했어요?"', affection: 10, trust: 15, type: 'listen' },
+                    { text: '"제가 도와드릴 수 있을까요?"', affection: 12, trust: 18, type: 'help' },
+                    { text: '"힘내요, 당신은 잘하고 있어요"', affection: 15, trust: 12, type: 'encourage' }
+                ]
+            },
+            {
+                id: 'daily_hobby',
+                situation: '요즘 새로운 취미를 시작했다고 합니다.',
+                choices: [
+                    { text: '"재밌겠다! 더 얘기해줘요"', affection: 12, trust: 10, type: 'interest' },
+                    { text: '"저도 함께 해도 될까요?"', affection: 15, trust: 15, type: 'join' },
+                    { text: '"좋네요" 라고만 답한다', affection: 5, trust: 5, type: 'passive' }
+                ]
+            }
+        ]
+    },
+    comfort: {
+        id: 'comfort',
+        name: '위로하기',
+        icon: '🤗',
+        stamina: 15,
+        baseAffection: 12,
+        baseTrust: 18,
+        description: '힘든 일을 들어주고 위로합니다',
+        scenarios: [
+            {
+                id: 'comfort_sad',
+                situation: '기분이 많이 안 좋아 보입니다.',
+                choices: [
+                    { text: '조용히 손을 잡아준다', affection: 18, trust: 20, type: 'skinship' },
+                    { text: '"무슨 일 있어요? 말해줄래요?"', affection: 15, trust: 22, type: 'talk' },
+                    { text: '"괜찮아질 거예요"', affection: 10, trust: 12, type: 'simple' }
+                ]
+            }
+        ]
+    },
+    future: {
+        id: 'future',
+        name: '미래 계획',
+        icon: '🌟',
+        stamina: 15,
+        baseAffection: 15,
+        baseTrust: 25,
+        description: '앞으로의 계획과 꿈을 이야기합니다',
+        minAffection: 40,
+        scenarios: [
+            {
+                id: 'future_dream',
+                situation: '결혼에 대한 생각을 물어봅니다.',
+                choices: [
+                    { text: '"당신과 함께라면 언제든 좋아요"', affection: 25, trust: 30, type: 'romantic' },
+                    { text: '"서로 준비되었을 때가 좋겠어요"', affection: 18, trust: 28, type: 'realistic' },
+                    { text: '"아직 생각 안 해봤어요"', affection: -10, trust: -15, type: 'avoid' }
+                ]
+            }
+        ]
+    },
+    humor: {
+        id: 'humor',
+        name: '농담/유머',
+        icon: '😄',
+        stamina: 15,
+        baseAffection: 20,
+        baseTrust: 8,
+        description: '즐거운 농담으로 분위기를 띄웁니다',
+        random: true,
+        successRate: 0.7,
+        scenarios: [
+            {
+                id: 'humor_joke',
+                situation: '재밌는 농담을 하려고 합니다.',
+                choices: [
+                    { text: '아재개그를 시전한다', affection: 25, trust: 10, type: 'dad_joke', successRate: 0.5 },
+                    { text: '최근 유행하는 밈을 사용한다', affection: 20, trust: 12, type: 'meme', successRate: 0.7 },
+                    { text: '가벼운 장난을 친다', affection: 18, trust: 15, type: 'playful', successRate: 0.8 }
+                ]
+            }
+        ]
+    }
+};
+
+// 알바 옵션
+const WORK_OPTIONS = {
+    parttime: {
+        id: 'parttime',
+        name: '단기 알바',
+        icon: '💼',
+        stamina: 40,
+        money: 150000,
+        maxPerDay: 2,
+        description: '체력을 소모해 돈을 벌니다'
+    }
+};
