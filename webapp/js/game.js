@@ -5,7 +5,7 @@ let gameState = {
     character: null,
     affection: 50,
     trust: 30,
-    money: 1000000,
+    money: 300000,  // 초기 자금 30만원으로 감소
     stamina: 100,
     day: 1,
     dDay: 30,
@@ -63,7 +63,7 @@ function selectCharacter(characterId) {
         character: character,
         affection: character.startAffection,
         trust: character.startTrust,
-        money: 1000000,
+        money: 300000,  // 초기 자금 30만원
         stamina: 100,
         day: 1,
         dDay: 30,
@@ -133,8 +133,11 @@ function showFirstMeetingScenario(characterId) {
 
 window.selectFirstMeeting = function(index) {
     const choice = window.currentFirstMeetingChoices[index];
-    const affectionChange = choice.affection || 0;
-    const trustChange = choice.trust || 0;
+
+    // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
+    const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+    const affectionChange = Math.round((choice.affection || 0) * difficultyMult);
+    const trustChange = Math.round((choice.trust || 0) * difficultyMult);
 
     gameState.affection += affectionChange;
     gameState.trust += trustChange;
@@ -418,9 +421,11 @@ function giveGift(index) {
     gameState.money -= gift.cost;
     gameState.stamina -= gift.stamina;
 
+    // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
+    const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
     const preference = gameState.character.preferences.gifts[gift.id] || 1.0;
-    const affectionGain = Math.round(gift.baseAffection * preference * getBiorhythmMultiplier());
-    const trustGain = Math.round(gift.baseTrust * preference * getBiorhythmMultiplier());
+    const affectionGain = Math.round(gift.baseAffection * difficultyMult * preference * getBiorhythmMultiplier());
+    const trustGain = Math.round(gift.baseTrust * difficultyMult * preference * getBiorhythmMultiplier());
 
     gameState.affection += affectionGain;
     gameState.trust += trustGain;
@@ -556,6 +561,11 @@ window.selectScenarioChoice = function(index) {
         trustGain += sourceData.baseTrust;
     }
 
+    // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
+    const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+    affectionGain = Math.round(affectionGain * difficultyMult);
+    trustGain = Math.round(trustGain * difficultyMult);
+
     const preference = getPreferenceMultiplier(sourceData.id, actionType);
     affectionGain = Math.round(affectionGain * preference);
     trustGain = Math.round(trustGain * preference);
@@ -606,6 +616,17 @@ function getBiorhythmMultiplier() {
     return 1.0;
 }
 
+// 캐릭터별 난이도 배수 반환
+function getDifficultyMultiplier() {
+    if (!gameState.character || !gameState.character.difficultyMultiplier) {
+        return 1.0;
+    }
+    return gameState.character.difficultyMultiplier;
+}
+
+// 시나리오 선택지 효과에 난이도 배수 적용 (0.65배로 전역 감소)
+const GLOBAL_DIFFICULTY_MULTIPLIER = 0.65;
+
 // ============================================
 // 알바 & 휴식
 // ============================================
@@ -620,18 +641,19 @@ function doWork() {
         return;
     }
 
+    const workMoney = WORK_OPTIONS.parttime.money;  // 80,000원
     gameState.stamina -= 40;
-    gameState.money += 100000;
+    gameState.money += workMoney;
     gameState.workCount++;
 
     recordActivity('work', '💼');
 
-    showResult('알바를 마쳤습니다!', 0, 0, '+100,000원');
+    showResult('알바를 마쳤습니다!', 0, 0, `+${formatMoney(workMoney)}`);
     updateAllUI();
 }
 
 function doRest() {
-    gameState.stamina = 100;
+    gameState.stamina = 80;  // 체력 80으로만 회복 (난이도 상승)
 
     recordActivity('rest', '😴');
 
@@ -679,7 +701,7 @@ function nextDay() {
     gameState.day++;
     gameState.dDay--;
     gameState.workCount = 0;
-    gameState.stamina = 100;
+    gameState.stamina = 80;  // 체력 80으로만 회복
 
     updateBiorhythm();
     checkNeglect();
@@ -1007,6 +1029,19 @@ window.selectCrisisChoice = function(index) {
     let affectionChange = choice.affection || 0;
     let trustChange = choice.trust || 0;
     let moneyChange = choice.money || 0;
+
+    // 난이도 배수 적용: 긍정적 효과는 감소, 부정적 효과는 증가
+    const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
+    if (affectionChange > 0) {
+        affectionChange = Math.round(affectionChange * difficultyMult);
+    } else if (affectionChange < 0) {
+        affectionChange = Math.round(affectionChange / difficultyMult); // 부정적 효과 증가
+    }
+    if (trustChange > 0) {
+        trustChange = Math.round(trustChange * difficultyMult);
+    } else if (trustChange < 0) {
+        trustChange = Math.round(trustChange / difficultyMult); // 부정적 효과 증가
+    }
 
     if (gameState.character.traits) {
         if (gameState.character.id === 'perfectionist' && (affectionChange < 0 || trustChange < 0)) {

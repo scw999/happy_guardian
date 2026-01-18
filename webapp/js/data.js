@@ -10,6 +10,7 @@ const CHARACTERS = {
         job: '패션 디자이너',
         quote: '"완벽하지 않으면 의미 없어요"',
         difficulty: 5,
+        difficultyMultiplier: 0.4,  // 매우 어려움 - 호감도/신뢰도 상승 40%만 적용
         startAffection: 20,
         startTrust: 10,
         preferences: {
@@ -52,6 +53,7 @@ const CHARACTERS = {
         job: '초등학교 교사',
         quote: '"오늘도 화이팅! 우리 행복하자!"',
         difficulty: 2,
+        difficultyMultiplier: 1.0,  // 쉬움 - 기본 효과 적용
         startAffection: 50,
         startTrust: 30,
         preferences: {
@@ -91,6 +93,7 @@ const CHARACTERS = {
         job: '웹툰 작가',
         quote: '"별로... 안 좋은데... (좋아)"',
         difficulty: 3,
+        difficultyMultiplier: 0.75,  // 보통 - 호감도/신뢰도 상승 75%만 적용
         startAffection: 30,
         startTrust: 20,
         preferences: {
@@ -130,6 +133,7 @@ const CHARACTERS = {
         job: '변호사',
         quote: '"논리적으로 설명해 보세요"',
         difficulty: 4,
+        difficultyMultiplier: 0.55,  // 어려움 - 호감도/신뢰도 상승 55%만 적용
         startAffection: 30,
         startTrust: 20,
         preferences: {
@@ -169,17 +173,17 @@ const DATE_LOCATIONS = {
         icon: '🚶',
         cost: 0,
         stamina: 35,
-        baseAffection: 6,
-        baseTrust: 5,
+        baseAffection: 4,
+        baseTrust: 3,
         description: '소소한 대화를 나누며 동네를 걷습니다',
         scenarios: [
             {
                 id: 'walk_sunset',
                 situation: '해가 지는 것을 보며 산책하고 있습니다.',
                 choices: [
-                    { text: '"노을이 정말 예쁘네요. 당신처럼요."', affection: 9, trust: 5, type: 'romantic' },
-                    { text: '조용히 손을 잡는다', affection: 7, trust: 10, type: 'skinship' },
-                    { text: '"배고프지 않아요? 뭐 먹으러 갈까요?"', affection: 4, trust: 8, type: 'caring' }
+                    { text: '"노을이 정말 예쁘네요. 당신처럼요."', affection: 6, trust: 3, type: 'romantic' },
+                    { text: '조용히 손을 잡는다', affection: 5, trust: 7, type: 'skinship' },
+                    { text: '"배고프지 않아요? 뭐 먹으러 갈까요?"', affection: 3, trust: 5, type: 'caring' }
                 ]
             },
             {
@@ -217,8 +221,8 @@ const DATE_LOCATIONS = {
         icon: '☕',
         cost: 75000,
         stamina: 30,
-        baseAffection: 9,
-        baseTrust: 7,
+        baseAffection: 6,
+        baseTrust: 5,
         description: '영화를 보고 카페에서 담소를 나눕니다',
         scenarios: [
             {
@@ -265,8 +269,8 @@ const DATE_LOCATIONS = {
         icon: '🚗',
         cost: 200000,
         stamina: 30,
-        baseAffection: 12,
-        baseTrust: 9,
+        baseAffection: 8,
+        baseTrust: 6,
         description: '차를 렌트해 근교로 드라이브를 갑니다',
         scenarios: [
             {
@@ -313,8 +317,8 @@ const DATE_LOCATIONS = {
         icon: '🍽️',
         cost: 450000,
         stamina: 30,
-        baseAffection: 18,
-        baseTrust: 12,
+        baseAffection: 12,
+        baseTrust: 8,
         description: '고급 호텔 레스토랑에서 파인 다이닝을 즐깁니다',
         scenarios: [
             {
@@ -365,8 +369,8 @@ const GIFT_ITEMS = {
         icon: '🍰',
         cost: 30000,
         stamina: 10,
-        baseAffection: 5,
-        baseTrust: 5,
+        baseAffection: 3,
+        baseTrust: 3,
         description: '달콤한 디저트로 기분 전환',
         category: 'sweet'
     },
@@ -376,8 +380,8 @@ const GIFT_ITEMS = {
         icon: '💐',
         cost: 50000,
         stamina: 10,
-        baseAffection: 9,
-        baseTrust: 6,
+        baseAffection: 6,
+        baseTrust: 4,
         description: '로맨틱한 분위기를 연출',
         category: 'romantic'
     },
@@ -387,8 +391,8 @@ const GIFT_ITEMS = {
         icon: '💄',
         cost: 300000,
         stamina: 10,
-        baseAffection: 15,
-        baseTrust: 9,
+        baseAffection: 10,
+        baseTrust: 6,
         description: '취향을 타지만 성공 시 효과 큼',
         category: 'luxury'
     },
@@ -398,8 +402,8 @@ const GIFT_ITEMS = {
         icon: '👜',
         cost: 4500000,
         stamina: 10,
-        baseAffection: 24,
-        baseTrust: 12,
+        baseAffection: 16,
+        baseTrust: 8,
         description: '고가의 명품으로 대폭 상승',
         category: 'premium'
     },
@@ -409,11 +413,11 @@ const GIFT_ITEMS = {
         icon: '💍',
         cost: 7000000,
         stamina: 10,
-        baseAffection: 30,
-        baseTrust: 18,
+        baseAffection: 20,
+        baseTrust: 12,
         description: '프로포즈 필수 아이템',
         category: 'proposal',
-        proposalBonus: 20
+        proposalBonus: 15
     }
 };
 
@@ -424,8 +428,8 @@ const TALK_TOPICS = {
         name: '일상 이야기',
         icon: '☀️',
         stamina: 15,
-        baseAffection: 6,
-        baseTrust: 7,
+        baseAffection: 4,
+        baseTrust: 5,
         description: '오늘 있었던 일을 나눕니다',
         scenarios: [
             {
@@ -471,8 +475,8 @@ const TALK_TOPICS = {
         name: '위로하기',
         icon: '🤗',
         stamina: 15,
-        baseAffection: 7,
-        baseTrust: 10,
+        baseAffection: 5,
+        baseTrust: 7,
         description: '힘든 일을 들어주고 위로합니다',
         scenarios: [
             {
@@ -509,8 +513,8 @@ const TALK_TOPICS = {
         name: '미래 계획',
         icon: '🌟',
         stamina: 15,
-        baseAffection: 9,
-        baseTrust: 15,
+        baseAffection: 6,
+        baseTrust: 10,
         description: '앞으로의 계획과 꿈을 이야기합니다',
         minAffection: 40,
         scenarios: [
@@ -548,8 +552,8 @@ const TALK_TOPICS = {
         name: '농담/유머',
         icon: '😄',
         stamina: 15,
-        baseAffection: 12,
-        baseTrust: 5,
+        baseAffection: 8,
+        baseTrust: 3,
         description: '즐거운 농담으로 분위기를 띄웁니다',
         random: true,
         successRate: 0.7,
@@ -592,7 +596,7 @@ const WORK_OPTIONS = {
         name: '단기 알바',
         icon: '💼',
         stamina: 40,
-        money: 150000,
+        money: 80000,  // 8만원으로 감소 (하루 최대 16만원)
         maxPerDay: 2,
         description: '체력을 소모해 돈을 벌니다'
     }
