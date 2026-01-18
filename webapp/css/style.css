@@ -420,13 +420,13 @@ body {
     color: #4169E1;
 }
 
-/* 나의 기분 바 */
-.mood-fill {
-    background: linear-gradient(90deg, #FF69B4, #FF1493);
+/* 신뢰도 바 */
+.trust-fill {
+    background: linear-gradient(90deg, #87CEEB, #4169E1);
 }
 
-#mood-value {
-    color: #FF69B4;
+#trust-percentage {
+    color: #4169E1;
 }
 
 /* 관계 상태 표시 */
@@ -938,6 +938,109 @@ body {
     .portrait-icon {
         font-size: 5rem;
     }
+}
+
+/* ========== 액션 옵션 스타일 ========== */
+.action-option {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,105,180,0.3);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.action-option:hover:not(.disabled) {
+    border-color: var(--primary-pink);
+    background: rgba(255,105,180,0.15);
+    transform: translateX(5px);
+}
+
+.action-option.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: rgba(255,255,255,0.1);
+}
+
+.option-icon {
+    font-size: 2.5rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.option-info {
+    flex: 1;
+}
+
+.option-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.option-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+}
+
+.option-cost {
+    font-size: 0.85rem;
+    color: #ffaa44;
+}
+
+.option-requirement {
+    font-size: 0.85rem;
+    color: #ff8844;
+    margin-top: 5px;
+}
+
+/* ========== 선택지 버튼 스타일 ========== */
+.choice-option-btn {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,105,180,0.3);
+    color: var(--text-light);
+    padding: 18px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.choice-option-btn:hover {
+    border-color: var(--primary-pink);
+    background: rgba(255,105,180,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+}
+
+.choice-number {
+    color: var(--primary-pink);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.choice-text {
+    flex: 1;
+    line-height: 1.6;
+}
+
+/* ========== 모달 서브타이틀 ========== */
+#action-modal-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: var(--text-light);
 }
 
 /* 유틸리티 */
