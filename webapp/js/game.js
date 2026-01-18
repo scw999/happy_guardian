@@ -83,6 +83,54 @@ function selectCharacter(characterId) {
     initGameScreen();
     showScreen('game-screen');
     updateAllUI();
+
+    // 첫 만남 시나리오 표시
+    showFirstMeetingScenario(characterId);
+}
+
+function showFirstMeetingScenario(characterId) {
+    const scenario = FIRST_MEETING_SCENARIOS[characterId];
+    if (!scenario) return;
+
+    const modal = createActionModal('💝 첫 만남', scenario.situation);
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
+
+    scenario.choices.forEach((choice, index) => {
+        const choiceBtn = document.createElement('button');
+        choiceBtn.className = 'choice-option-btn';
+
+        choiceBtn.innerHTML = `
+            <span class="choice-number">${index + 1}.</span>
+            <span class="choice-text">${choice.text}</span>
+        `;
+
+        choiceBtn.addEventListener('click', () => {
+            handleFirstMeetingChoice(choice);
+        });
+
+        content.appendChild(choiceBtn);
+    });
+
+    showModal('action-modal');
+}
+
+function handleFirstMeetingChoice(choice) {
+    let affectionChange = choice.affection || 0;
+    let trustChange = choice.trust || 0;
+
+    gameState.affection += affectionChange;
+    gameState.trust += trustChange;
+
+    closeModal('action-modal');
+
+    let message = `첫 만남이 인상적이었습니다!\n\n"${gameState.character.fullName}과(와)의 관계가 시작되었습니다."`;
+
+    showResult(message, affectionChange, trustChange);
+
+    // 히스토리 업데이트
+    addHistory();
+    updateAllUI();
 }
 
 function initGameScreen() {
@@ -524,13 +572,13 @@ function doWork() {
     }
 
     gameState.stamina -= 40;
-    gameState.money += 150000;
+    gameState.money += 100000;
     gameState.workCount++;
 
     // 활동 기록
     recordActivity('work', '💼');
 
-    showResult('알바를 마쳤습니다!', 0, 0, '+150,000원');
+    showResult('알바를 마쳤습니다!', 0, 0, '+100,000원');
     updateAllUI();
 }
 
@@ -1139,6 +1187,26 @@ function loadGame() {
 
 function confirmRestart() {
     if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n현재 진행 상황은 저장되지 않습니다.')) {
+        // 게임 상태 완전 초기화
+        gameState = {
+            character: null,
+            affection: 50,
+            trust: 30,
+            money: 1000000,
+            stamina: 100,
+            day: 1,
+            dDay: 30,
+            startDate: null,
+            biorhythm: 'normal',
+            biorhythmDays: 0,
+            lastInteraction: 0,
+            workCount: 0,
+            hasProposalRing: false,
+            history: [],
+            dailyActivities: {},
+            isGameOver: false
+        };
+
         closeModal('game-menu-modal');
         showScreen('main-screen');
     }
