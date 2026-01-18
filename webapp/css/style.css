@@ -203,7 +203,7 @@ body {
 }
 
 .char-portrait {
-    height: 400px;
+    height: 800px;
     position: relative;
     overflow: hidden;
 }
@@ -616,13 +616,13 @@ body {
 .character-display {
     flex-shrink: 0;
     width: 100%;
-    max-width: 500px;
+    max-width: 750px;  /* 1.5배로 증가 (500 → 750) */
 }
 
 .portrait-container {
     width: 100%;
     aspect-ratio: 1;
-    max-width: 500px;
+    max-width: 750px;  /* 1.5배로 증가 (500 → 750) */
     position: relative;
     border-radius: 20px;
     overflow: hidden;

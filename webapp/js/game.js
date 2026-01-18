@@ -17,6 +17,8 @@ let gameState = {
     hasProposalRing: false,
     history: [],
     dailyActivities: {},
+    dailyActionCount: 0,  // 하루 액션 횟수 (최대 3회)
+    dailyActionCounts: {date: 0, gift: 0, talk: 0},  // 각 행동 반복 추적
     isGameOver: false
 };
 
@@ -75,6 +77,8 @@ function selectCharacter(characterId) {
         hasProposalRing: false,
         history: [],
         dailyActivities: {},
+        dailyActionCount: 0,
+        dailyActionCounts: {date: 0, gift: 0, talk: 0},
         isGameOver: false
     };
 
@@ -302,6 +306,12 @@ function updateActionButtons() {
 // 데이트 시스템
 // ============================================
 function showDateMenu() {
+    // 하루 액션 제한 체크 (최대 3회)
+    if (gameState.dailyActionCount >= 3) {
+        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        return;
+    }
+
     const locations = Object.values(DATE_LOCATIONS);
 
     const html = `
@@ -368,6 +378,12 @@ function selectDateLocation(index) {
 // 선물 시스템
 // ============================================
 function showGiftMenu() {
+    // 하루 액션 제한 체크 (최대 3회)
+    if (gameState.dailyActionCount >= 3) {
+        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        return;
+    }
+
     const gifts = Object.values(GIFT_ITEMS);
 
     const html = `
@@ -419,7 +435,20 @@ function giveGift(index) {
     }
 
     gameState.money -= gift.cost;
-    gameState.stamina -= gift.stamina;
+
+    // 하루 액션 카운트 증가
+    gameState.dailyActionCount++;
+
+    // 반복 행동 추적 및 추가 체력 소모
+    gameState.dailyActionCounts['gift']++;
+    const repeatCount = gameState.dailyActionCounts['gift'];
+
+    // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
+    let staminaCost = gift.stamina;
+    if (repeatCount > 1) {
+        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 0.5));
+    }
+    gameState.stamina -= staminaCost;
 
     // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
     const difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
@@ -447,6 +476,12 @@ function giveGift(index) {
 // 대화 시스템
 // ============================================
 function showTalkMenu() {
+    // 하루 액션 제한 체크 (최대 3회)
+    if (gameState.dailyActionCount >= 3) {
+        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        return;
+    }
+
     const topics = Object.values(TALK_TOPICS);
 
     const html = `
@@ -561,12 +596,27 @@ window.selectScenarioChoice = function(index) {
         trustGain += sourceData.baseTrust;
     }
 
+    // 하루 액션 카운트 증가
+    gameState.dailyActionCount++;
+
+    // 반복 행동 추적 및 추가 체력 소모
+    const actionKey = actionType === 'date' ? 'date' : 'talk';
+    gameState.dailyActionCounts[actionKey]++;
+    const repeatCount = gameState.dailyActionCounts[actionKey];
+
+    // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
+    let staminaCost = sourceData.stamina;
+    if (repeatCount > 1) {
+        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 0.5));
+    }
+    gameState.stamina -= staminaCost;
+
     // 난이도 배수 적용 (전역 배수 * 캐릭터별 배수)
     let difficultyMult = GLOBAL_DIFFICULTY_MULTIPLIER * getDifficultyMultiplier();
 
-    // 대화는 추가로 60%만 적용 (데이트보다 훨씬 낮은 효과)
+    // 대화는 추가로 40%만 적용 (데이트보다 훨씬 낮은 효과 - 60%에서 40%로 감소)
     if (actionType === 'talk') {
-        difficultyMult *= 0.6;
+        difficultyMult *= 0.4;
     }
 
     affectionGain = Math.round(affectionGain * difficultyMult);
@@ -708,6 +758,10 @@ function nextDay() {
     gameState.dDay--;
     gameState.workCount = 0;
     gameState.stamina = 80;  // 체력 80으로만 회복
+
+    // 하루 액션 카운터 리셋
+    gameState.dailyActionCount = 0;
+    gameState.dailyActionCounts = {date: 0, gift: 0, talk: 0};
 
     updateBiorhythm();
     checkNeglect();

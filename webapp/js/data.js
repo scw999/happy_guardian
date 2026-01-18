@@ -11,8 +11,8 @@ const CHARACTERS = {
         quote: '"완벽하지 않으면 의미 없어요"',
         difficulty: 5,
         difficultyMultiplier: 0.3,  // 매우 어려움 - 호감도/신뢰도 상승 30%만 적용
-        startAffection: 10,  // 매우 낮은 시작점
-        startTrust: 5,
+        startAffection: 5,  // 극도로 낮은 시작점 (10 → 5)
+        startTrust: 3,  // 극도로 낮은 시작점 (5 → 3)
         preferences: {
             // 데이트 선호도 (곱수)
             dates: {
@@ -54,8 +54,8 @@ const CHARACTERS = {
         quote: '"오늘도 화이팅! 우리 행복하자!"',
         difficulty: 2,
         difficultyMultiplier: 0.9,  // 쉬움 - 기본 효과의 90%
-        startAffection: 25,  // 대폭 감소 (50 → 25)
-        startTrust: 15,  // 대폭 감소 (30 → 15)
+        startAffection: 12,  // 2배 이하로 감소 (25 → 12)
+        startTrust: 7,  // 2배 이하로 감소 (15 → 7)
         preferences: {
             dates: {
                 walk: 1.5,
@@ -94,8 +94,8 @@ const CHARACTERS = {
         quote: '"별로... 안 좋은데... (좋아)"',
         difficulty: 3,
         difficultyMultiplier: 0.65,  // 보통 - 호감도/신뢰도 상승 65%만 적용
-        startAffection: 20,  // 감소 (30 → 20)
-        startTrust: 10,  // 감소 (20 → 10)
+        startAffection: 10,  // 2배 이하로 감소 (20 → 10)
+        startTrust: 5,  // 2배 이하로 감소 (10 → 5)
         preferences: {
             dates: {
                 walk: 1.1,
@@ -134,8 +134,8 @@ const CHARACTERS = {
         quote: '"논리적으로 설명해 보세요"',
         difficulty: 4,
         difficultyMultiplier: 0.45,  // 어려움 - 호감도/신뢰도 상승 45%만 적용
-        startAffection: 15,  // 감소 (30 → 15)
-        startTrust: 8,  // 감소 (20 → 8)
+        startAffection: 7,  // 2배 이하로 감소 (15 → 7)
+        startTrust: 4,  // 2배 이하로 감소 (8 → 4)
         preferences: {
             dates: {
                 walk: 0.9,
