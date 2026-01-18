@@ -323,12 +323,13 @@ function initGameScreen() {
     document.getElementById('char-name-display').textContent = gameState.character.fullName;
     document.getElementById('speaker-name').textContent = gameState.character.fullName;
 
-    // 포트레이트 아이콘 설정
-    const portraitContainer = document.getElementById('character-portrait');
-    const portraitIcon = portraitContainer.querySelector('.portrait-icon');
-    portraitIcon.textContent = gameState.character.icon;
+    // 포트레이트 이미지 설정
+    const portraitImage = document.getElementById('portrait-image');
+    portraitImage.src = gameState.character.image;
+    portraitImage.alt = gameState.character.fullName;
 
-    // 포트레이트 배경 클래스 설정
+    // 포트레이트 컨테이너 클래스 설정
+    const portraitContainer = document.getElementById('character-portrait');
     portraitContainer.className = 'portrait-container ' + gameState.character.id;
 
     // 호감도 및 날짜 업데이트
@@ -516,19 +517,25 @@ function showEnding(type, title, message) {
     document.getElementById('final-affection').textContent = gameState.affection + '%';
     document.getElementById('final-days').textContent = gameState.day + '일';
 
-    const endingPortrait = document.getElementById('ending-portrait');
-    const endingIcon = document.getElementById('ending-icon');
-    endingIcon.textContent = gameState.character.icon;
+    // 엔딩 이미지 설정
+    const endingImage = document.getElementById('ending-image');
+    endingImage.src = gameState.character.image;
+    endingImage.alt = gameState.character.fullName;
 
-    // 배경색 설정
+    // 엔딩 포트레이트 테두리 색상 설정
+    const endingPortrait = document.getElementById('ending-portrait');
     if (type === 'true') {
-        endingPortrait.style.background = 'linear-gradient(135deg, #44ff88 0%, #32CD32 100%)';
+        endingPortrait.style.borderColor = '#44ff88';
+        endingPortrait.style.boxShadow = '0 0 50px rgba(68, 255, 136, 0.8)';
     } else if (type === 'good') {
-        endingPortrait.style.background = 'linear-gradient(135deg, #88ff44 0%, #ffaa44 100%)';
+        endingPortrait.style.borderColor = '#ffaa44';
+        endingPortrait.style.boxShadow = '0 0 50px rgba(255, 170, 68, 0.8)';
     } else if (type === 'normal') {
-        endingPortrait.style.background = 'linear-gradient(135deg, #ffaa44 0%, #ff8844 100%)';
+        endingPortrait.style.borderColor = '#ff8844';
+        endingPortrait.style.boxShadow = '0 0 50px rgba(255, 136, 68, 0.8)';
     } else {
-        endingPortrait.style.background = 'linear-gradient(135deg, #ff4444 0%, #8B0000 100%)';
+        endingPortrait.style.borderColor = '#ff4444';
+        endingPortrait.style.boxShadow = '0 0 50px rgba(255, 68, 68, 0.8)';
     }
 
     showScreen('ending-screen');

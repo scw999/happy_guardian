@@ -1,49 +1,41 @@
-# 캐릭터 이미지 파일
+# 캐릭터 이미지 저장 방법
 
-이 폴더에 캐릭터 이미지를 저장하세요.
+이 폴더에 4개의 캐릭터 이미지를 저장해주세요.
 
 ## 필요한 이미지 파일
 
-다음 이미지 파일이 필요합니다:
+제공된 캐릭터 이미지를 다음과 같은 파일명으로 저장하세요:
 
-1. **character1-perfectionist.jpg** - 완벽주의 센서티브
-   - 빨간 정장 입은 여성
-   - 장미와 가시 배경
-   - 우아하고 세련된 분위기
-
-2. **character2-positive.jpg** - 비타민 긍정녀
-   - 베이지색 카디건 입은 밝은 여성
-   - 꽃 배경
-   - 따뜻하고 긍정적인 분위기
-
-3. **character3-tsundere.jpg** - 반전 매력의 츤데레
-   - 고딕 스타일 체크 스커트 입은 여성
-   - 체인과 하트 배경
-   - 츤데레 분위기
-
-4. **character4-career.jpg** - 논리적인 커리어우먼
-   - 검은 정장 입은 여성
-   - 디지털/비즈니스 배경
-   - 지적이고 프로페셔널한 분위기
-
-## 이미지 사양
-
-- **형식**: JPG 또는 PNG
-- **권장 크기**: 800px × 1000px (세로가 더 긴 비율)
-- **용량**: 각 500KB 이하 권장
-- **비율**: 4:5 또는 3:4
+1. **character1-perfectionist.jpg** - 빨간 정장을 입은 완벽주의 센서티브 (첫 번째 이미지)
+2. **character2-positive.jpg** - 베이지색 카디건을 입은 비타민 긍정녀 (두 번째 이미지)
+3. **character3-tsundere.jpg** - 고딕 스타일의 반전 매력의 츤데레 (세 번째 이미지)
+4. **character4-career.jpg** - 검은 정장과 안경을 쓴 논리적인 커리어우먼 (네 번째 이미지)
 
 ## 이미지 저장 방법
 
-제공받은 이미지를 위 파일명으로 이 폴더에 저장하세요.
+### 방법 1: 직접 다운로드
+1. 제공된 4개의 이미지를 위의 파일명으로 저장
+2. 이 폴더(`webapp/images/`)에 복사
 
-예:
-```
-webapp/images/
-├── character1-perfectionist.jpg
-├── character2-positive.jpg
-├── character3-tsundere.jpg
-└── character4-career.jpg
+### 방법 2: 명령줄 사용
+```bash
+# 현재 디렉토리에서 실행
+cd webapp/images/
+
+# 다운로드한 이미지 파일을 이 폴더로 이동
+mv ~/Downloads/image1.jpg character1-perfectionist.jpg
+mv ~/Downloads/image2.jpg character2-positive.jpg
+mv ~/Downloads/image3.jpg character3-tsundere.jpg
+mv ~/Downloads/image4.jpg character4-career.jpg
 ```
 
-이미지가 없으면 게임이 작동은 하지만 캐릭터 이미지가 표시되지 않습니다.
+## 이미지 형식
+
+- **지원 형식**: JPG, JPEG, PNG
+- **권장 크기**: 최소 500x500px (정사각형 또는 세로형)
+- **파일 크기**: 각 이미지당 2MB 이하 권장
+
+## 참고사항
+
+이미지가 없어도 게임은 실행되지만, 이미지가 표시되지 않습니다.
+모든 이미지 파일을 저장한 후 브라우저를 새로고침하세요.
