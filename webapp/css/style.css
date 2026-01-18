@@ -322,6 +322,36 @@ body {
 /* ========== 게임 화면 ========== */
 #game-screen {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    overflow: hidden;
+}
+
+/* 2칼럼 레이아웃 컨테이너 */
+.game-layout-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* 왼쪽 사이드바 (스테이터스) */
+.game-sidebar {
+    width: 350px;
+    min-width: 350px;
+    background: rgba(0,0,0,0.5);
+    border-right: 3px solid rgba(255,105,180,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-header {
+    background: rgba(0,0,0,0.5);
+    padding: 15px 20px;
+    border-bottom: 2px solid rgba(255,105,180,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
 }
 
 .game-header {
@@ -340,37 +370,40 @@ body {
     border-radius: 30px;
     font-size: 1.2rem;
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .day-counter {
     display: flex;
     align-items: baseline;
+    justify-content: center;
     gap: 5px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
 .day-label {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-dim);
 }
 
 #day-number {
     color: var(--primary-pink);
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .day-total {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-dim);
 }
 
 /* 자원 바 컨테이너 */
 .resources-container {
-    padding: 20px 30px;
+    padding: 15px;
     background: rgba(0,0,0,0.3);
     display: grid;
-    gap: 12px;
+    gap: 10px;
 }
 
 .resource-bar-wrapper {
@@ -529,14 +562,46 @@ body {
 }
 
 /* 메인 게임 영역 */
+/* 사이드바 메뉴 버튼 */
+.sidebar-menu {
+    padding: 15px;
+    border-top: 2px solid rgba(255,105,180,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.sidebar-menu-btn {
+    background: rgba(255,105,180,0.1);
+    border: 2px solid rgba(255,105,180,0.3);
+    color: var(--text-light);
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.sidebar-menu-btn:hover {
+    background: rgba(255,105,180,0.3);
+    border-color: var(--primary-pink);
+    transform: translateY(-2px);
+}
+
 .game-main-area {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+    align-items: center;
+    padding: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 20px;
 }
 
 /* 캐릭터와 달력 행 */
@@ -549,12 +614,15 @@ body {
 }
 
 .character-display {
-    flex: 0 0 auto;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 500px;
 }
 
 .portrait-container {
-    width: 450px;
-    height: 450px;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 500px;
     position: relative;
     border-radius: 20px;
     overflow: hidden;
@@ -569,15 +637,13 @@ body {
     object-position: center;
 }
 
-/* 달력 표시 (캐릭터 옆) */
+/* 달력 표시 (사이드바 내) */
 .calendar-display {
-    flex: 1;
     background: rgba(0,0,0,0.3);
-    border: 3px solid rgba(255,105,180,0.3);
-    border-radius: 15px;
-    padding: 15px;
-    max-width: 500px;
-    min-height: 450px;
+    border: 2px solid rgba(255,105,180,0.3);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 15px;
 }
 
 .calendar-display-header {
@@ -590,8 +656,8 @@ body {
 
 .calendar-display-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
 }
 
 .calendar-display-day {
@@ -688,14 +754,16 @@ body {
 
 /* 대화 영역 */
 .dialogue-area {
-    margin: 20px 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0;
 }
 
 .dialogue-box {
     background: rgba(0,0,0,0.6);
     border: 2px solid rgba(255,105,180,0.3);
     border-radius: var(--border-radius);
-    padding: 25px;
+    padding: 20px;
     backdrop-filter: blur(10px);
 }
 
@@ -707,10 +775,11 @@ body {
 }
 
 .dialogue-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1.05rem;
+    line-height: 1.7;
     color: var(--text-light);
     min-height: 60px;
+    text-align: center;
 }
 
 /* 액션 버튼 */
@@ -748,7 +817,8 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    padding: 10px;
+    width: 100%;
+    max-width: 800px;
 }
 
 .action-choice-btn {

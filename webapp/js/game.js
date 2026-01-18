@@ -624,8 +624,8 @@ function getDifficultyMultiplier() {
     return gameState.character.difficultyMultiplier;
 }
 
-// 시나리오 선택지 효과에 난이도 배수 적용 (0.65배로 전역 감소)
-const GLOBAL_DIFFICULTY_MULTIPLIER = 0.65;
+// 시나리오 선택지 효과에 난이도 배수 적용 (0.45배로 전역 감소 - 더 어렵게)
+const GLOBAL_DIFFICULTY_MULTIPLIER = 0.45;
 
 // ============================================
 // 알바 & 휴식

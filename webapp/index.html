@@ -152,82 +152,71 @@
 
     <!-- 게임 화면 -->
     <div id="game-screen" class="screen">
-        <!-- 상단 UI -->
-        <div class="game-header">
-            <div class="header-left">
-                <div class="character-nameplate">
-                    <span id="char-name-display">서윤아</span>
+        <!-- 2칼럼 레이아웃 -->
+        <div class="game-layout-container">
+            <!-- 왼쪽: 스테이터스 사이드바 -->
+            <div class="game-sidebar">
+                <!-- 상단 헤더 -->
+                <div class="sidebar-header">
+                    <div class="character-nameplate">
+                        <span id="char-name-display">서윤아</span>
+                    </div>
+                    <div class="day-counter">
+                        <span class="day-label">Day</span>
+                        <span id="day-number">1</span>
+                        <span class="day-total">/ 30</span>
+                    </div>
                 </div>
-            </div>
-            <div class="header-right">
-                <div class="day-counter">
-                    <span class="day-label">Day</span>
-                    <span id="day-number">1</span>
-                    <span class="day-total">/ 30</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- 자원 바 영역 -->
-        <div class="resources-container">
-            <!-- 호감도 -->
-            <div class="resource-bar-wrapper">
-                <div class="resource-label">
-                    <span>💖 호감도</span>
-                    <span id="affection-percentage" class="resource-value">50%</span>
-                </div>
-                <div class="resource-bar affection-bar">
-                    <div id="affection-fill" class="resource-fill affection-fill" style="width: 50%"></div>
-                </div>
-            </div>
+                <!-- 자원 바 영역 -->
+                <div class="resources-container">
+                    <!-- 호감도 -->
+                    <div class="resource-bar-wrapper">
+                        <div class="resource-label">
+                            <span>💖 호감도</span>
+                            <span id="affection-percentage" class="resource-value">50%</span>
+                        </div>
+                        <div class="resource-bar affection-bar">
+                            <div id="affection-fill" class="resource-fill affection-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
 
-            <!-- 신뢰도 -->
-            <div class="resource-bar-wrapper">
-                <div class="resource-label">
-                    <span>🤝 신뢰도</span>
-                    <span id="trust-percentage" class="resource-value">30%</span>
-                </div>
-                <div class="resource-bar trust-bar">
-                    <div id="trust-fill" class="resource-fill trust-fill" style="width: 30%"></div>
-                </div>
-            </div>
+                    <!-- 신뢰도 -->
+                    <div class="resource-bar-wrapper">
+                        <div class="resource-label">
+                            <span>🤝 신뢰도</span>
+                            <span id="trust-percentage" class="resource-value">30%</span>
+                        </div>
+                        <div class="resource-bar trust-bar">
+                            <div id="trust-fill" class="resource-fill trust-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
 
-            <!-- 돈 -->
-            <div class="resource-bar-wrapper">
-                <div class="resource-label">
-                    <span>💰 돈</span>
-                    <span id="money-value" class="resource-value">1,000,000원</span>
-                </div>
-                <div class="resource-bar money-bar">
-                    <div id="money-fill" class="resource-fill money-fill" style="width: 10%"></div>
-                </div>
-            </div>
+                    <!-- 돈 -->
+                    <div class="resource-bar-wrapper">
+                        <div class="resource-label">
+                            <span>💰 돈</span>
+                            <span id="money-value" class="resource-value">300,000원</span>
+                        </div>
+                        <div class="resource-bar money-bar">
+                            <div id="money-fill" class="resource-fill money-fill" style="width: 3%"></div>
+                        </div>
+                    </div>
 
-            <!-- 체력 -->
-            <div class="resource-bar-wrapper">
-                <div class="resource-label">
-                    <span>⚡ 체력</span>
-                    <span id="stamina-value" class="resource-value">100</span>
-                </div>
-                <div class="resource-bar stamina-bar">
-                    <div id="stamina-fill" class="resource-fill stamina-fill" style="width: 100%"></div>
-                </div>
-            </div>
+                    <!-- 체력 -->
+                    <div class="resource-bar-wrapper">
+                        <div class="resource-label">
+                            <span>⚡ 체력</span>
+                            <span id="stamina-value" class="resource-value">100</span>
+                        </div>
+                        <div class="resource-bar stamina-bar">
+                            <div id="stamina-fill" class="resource-fill stamina-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
 
-            <!-- 관계 상태 -->
-            <div class="relationship-status-display">
-                <span id="relationship-status">알아가는 중</span>
-            </div>
-        </div>
-
-        <!-- 메인 게임 영역 -->
-        <div class="game-main-area">
-            <!-- 상단: 캐릭터와 달력 -->
-            <div class="character-calendar-row">
-                <!-- 캐릭터 표시 영역 -->
-                <div class="character-display">
-                    <div id="character-portrait" class="portrait-container">
-                        <img id="portrait-image" src="images/character1-perfectionist-normal.jpg" alt="Character Portrait" class="portrait-image">
+                    <!-- 관계 상태 -->
+                    <div class="relationship-status-display">
+                        <span id="relationship-status">알아가는 중</span>
                     </div>
                 </div>
 
@@ -236,34 +225,41 @@
                     <div class="calendar-display-header">📅 30일 달력</div>
                     <div id="calendar-display-grid" class="calendar-display-grid"></div>
                 </div>
-            </div>
 
-            <!-- 상태 메시지 영역 -->
-            <div class="dialogue-area">
-                <div class="dialogue-box">
-                    <div class="dialogue-text" id="dialogue-text">
-                        무엇을 할까요?
-                    </div>
+                <!-- 사이드바 메뉴 버튼 -->
+                <div class="sidebar-menu">
+                    <button class="sidebar-menu-btn" onclick="showStatsGraph()" title="통계 그래프">
+                        <span>📊</span> 통계
+                    </button>
+                    <button class="sidebar-menu-btn" onclick="showGameMenu()" title="메뉴">
+                        <span>⚙️</span> 메뉴
+                    </button>
                 </div>
             </div>
 
-            <!-- 액션 버튼 영역 -->
-            <div class="choices-area" id="choices-area">
-                <!-- 액션 버튼이 동적으로 생성됨 -->
-            </div>
-        </div>
+            <!-- 오른쪽: 메인 게임 영역 -->
+            <div class="game-main-area">
+                <!-- 캐릭터 표시 영역 -->
+                <div class="character-display">
+                    <div id="character-portrait" class="portrait-container">
+                        <img id="portrait-image" src="images/character1-perfectionist-normal.jpg" alt="Character Portrait" class="portrait-image">
+                    </div>
+                </div>
 
-        <!-- 하단 메뉴 -->
-        <div class="bottom-menu">
-            <button class="menu-icon-btn" onclick="showCalendar()" title="달력">
-                <span>📅</span>
-            </button>
-            <button class="menu-icon-btn" onclick="showStatsGraph()" title="통계 그래프">
-                <span>📊</span>
-            </button>
-            <button class="menu-icon-btn" onclick="showGameMenu()" title="메뉴">
-                <span>⚙️</span>
-            </button>
+                <!-- 상태 메시지 영역 -->
+                <div class="dialogue-area">
+                    <div class="dialogue-box">
+                        <div class="dialogue-text" id="dialogue-text">
+                            무엇을 할까요?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 액션 버튼 영역 -->
+                <div class="choices-area" id="choices-area">
+                    <!-- 액션 버튼이 동적으로 생성됨 -->
+                </div>
+            </div>
         </div>
     </div>
 

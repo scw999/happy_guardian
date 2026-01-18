@@ -10,7 +10,7 @@ const CHARACTERS = {
         job: '패션 디자이너',
         quote: '"완벽하지 않으면 의미 없어요"',
         difficulty: 5,
-        difficultyMultiplier: 0.4,  // 매우 어려움 - 호감도/신뢰도 상승 40%만 적용
+        difficultyMultiplier: 0.3,  // 매우 어려움 - 호감도/신뢰도 상승 30%만 적용
         startAffection: 20,
         startTrust: 10,
         preferences: {
@@ -53,7 +53,7 @@ const CHARACTERS = {
         job: '초등학교 교사',
         quote: '"오늘도 화이팅! 우리 행복하자!"',
         difficulty: 2,
-        difficultyMultiplier: 1.0,  // 쉬움 - 기본 효과 적용
+        difficultyMultiplier: 0.9,  // 쉬움 - 기본 효과의 90%
         startAffection: 50,
         startTrust: 30,
         preferences: {
@@ -93,7 +93,7 @@ const CHARACTERS = {
         job: '웹툰 작가',
         quote: '"별로... 안 좋은데... (좋아)"',
         difficulty: 3,
-        difficultyMultiplier: 0.75,  // 보통 - 호감도/신뢰도 상승 75%만 적용
+        difficultyMultiplier: 0.65,  // 보통 - 호감도/신뢰도 상승 65%만 적용
         startAffection: 30,
         startTrust: 20,
         preferences: {
@@ -133,7 +133,7 @@ const CHARACTERS = {
         job: '변호사',
         quote: '"논리적으로 설명해 보세요"',
         difficulty: 4,
-        difficultyMultiplier: 0.55,  // 어려움 - 호감도/신뢰도 상승 55%만 적용
+        difficultyMultiplier: 0.45,  // 어려움 - 호감도/신뢰도 상승 45%만 적용
         startAffection: 30,
         startTrust: 20,
         preferences: {
