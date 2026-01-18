@@ -18,13 +18,20 @@ happy_guardian/
 │   ├── strategy-guide.md       # 전략 가이드
 │   ├── special-events.md       # 특수 이벤트 시나리오
 │   ├── crisis-response-guide.md # 위기 상황 대응 가이드
-│   ├── board-design.md         # 보드판 디자인 레이아웃 🆕
-│   ├── icon-guide.md           # 아이콘 디자인 시스템 🆕
-│   └── character-profiles.md   # 캐릭터 프로필 카드 🆕
-└── assets/                     # 게임 리소스
-    ├── cards/                  # 카드 디자인
-    ├── board/                  # 보드판 디자인
-    └── characters/             # 캐릭터 아트
+│   ├── board-design.md         # 보드판 디자인 레이아웃
+│   ├── icon-guide.md           # 아이콘 디자인 시스템
+│   └── character-profiles.md   # 캐릭터 프로필 카드
+├── assets/                     # 게임 리소스
+│   ├── cards/                  # 카드 디자인
+│   ├── board/                  # 보드판 디자인
+│   └── characters/             # 캐릭터 아트
+└── webapp/                     # 웹 애플리케이션 🆕
+    ├── index.html              # 메인 HTML
+    ├── css/style.css           # 스타일시트
+    ├── js/                     # JavaScript
+    │   ├── data.js            # 게임 데이터
+    │   └── game.js            # 게임 로직
+    └── images/                 # 캐릭터 이미지
 ```
 
 ## 게임 특징
@@ -67,9 +74,15 @@ happy_guardian/
 - [위기 대응 가이드](docs/crisis-response-guide.md) - 위기 상황별 최적 대응법
 
 ### 디자인 & 제작
-- [보드판 디자인](docs/board-design.md) - 🆕 40칸 원형 보드 레이아웃 및 제작 사양
-- [아이콘 가이드](docs/icon-guide.md) - 🆕 50+ 게임 아이콘 디자인 시스템
-- [캐릭터 프로필 카드](docs/character-profiles.md) - 🆕 4개 캐릭터 카드 상세 디자인
+- [보드판 디자인](docs/board-design.md) - 40칸 원형 보드 레이아웃 및 제작 사양
+- [아이콘 가이드](docs/icon-guide.md) - 50+ 게임 아이콘 디자인 시스템
+- [캐릭터 프로필 카드](docs/character-profiles.md) - 4개 캐릭터 카드 상세 디자인
+
+### 웹 애플리케이션
+- [웹앱 가이드](webapp/README.md) - 🆕 브라우저에서 바로 플레이 가능한 웹 버전
+  - HTML5/CSS3/JavaScript로 구현
+  - 반응형 디자인 (모바일/태블릿/데스크톱)
+  - 설치 불필요, 브라우저만 있으면 플레이 가능
 
 ## 개발 현황
 
@@ -83,15 +96,54 @@ happy_guardian/
 - [x] 아이콘 시스템 정의 (50+ 아이콘)
 - [x] 캐릭터 프로필 카드 디자인
 - [x] 제작 사양서 작성
+- [x] **웹 애플리케이션 구현** 🆕
+  - [x] 4개 캐릭터 선택 시스템
+  - [x] 40칸 보드판 구현
+  - [x] 주사위 및 이동 시스템
+  - [x] 카드 관리 시스템
+  - [x] 8개 특수 이벤트 구현
+  - [x] 점수 추적 및 시각화
+  - [x] 승리/패배 조건
 
 ### 진행 예정 🔄
+
+**보드게임 제작**:
 - [ ] 캐릭터 일러스트 제작
 - [ ] 카드 디자인 (전체 175장)
 - [ ] 보드판 실물 제작
 - [ ] 플레이테스트 및 밸런스 조정
 - [ ] 최종 제작 및 생산
 
-현재 **프로토타입 제작 준비 완료** 단계입니다.
+**웹앱 개선**:
+- [ ] 나머지 67개 이벤트 추가
+- [ ] 특수 카드 기능 구현
+- [ ] 캐릭터별 특성 완전 구현
+- [ ] 사운드 효과 추가
+- [ ] 저장/불러오기 기능
+
+## 🎮 웹에서 바로 플레이하기
+
+웹 버전으로 지금 바로 게임을 체험해보세요!
+
+### 빠른 시작
+
+```bash
+# 저장소 클론
+git clone [repository-url]
+cd happy_guardian/webapp
+
+# 웹 서버 실행
+python3 -m http.server 8000
+
+# 브라우저에서 접속
+# http://localhost:8000
+```
+
+자세한 내용은 [웹앱 가이드](webapp/README.md)를 참고하세요.
+
+---
+
+현재 **프로토타입 제작 준비 완료** + **플레이 가능한 웹 버전 출시** 단계입니다.
 
 ## 라이센스
 
