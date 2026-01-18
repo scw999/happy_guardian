@@ -16,6 +16,7 @@ let gameState = {
     workCount: 0,         // 오늘 알바 횟수
     hasProposalRing: false, // 다이아 반지 보유 여부
     history: [],          // 히스토리 (그래프용)
+    dailyActivities: {},  // 일별 활동 기록 { day: [activities] }
     isGameOver: false
 };
 
@@ -72,6 +73,7 @@ function selectCharacter(characterId) {
     gameState.workCount = 0;
     gameState.hasProposalRing = false;
     gameState.history = [];
+    gameState.dailyActivities = {};
     gameState.isGameOver = false;
 
     // 첫 히스토리 기록
@@ -174,19 +176,18 @@ function createActionButtons() {
     choicesArea.innerHTML = '';
 
     const actions = [
-        { id: 'date', name: '데이트하기', icon: '💑', onclick: 'showDateMenu()' },
-        { id: 'gift', name: '선물하기', icon: '🎁', onclick: 'showGiftMenu()' },
-        { id: 'talk', name: '대화하기', icon: '💬', onclick: 'showTalkMenu()' },
-        { id: 'work', name: '알바하기', icon: '💼', onclick: 'doWork()' },
-        { id: 'rest', name: '휴식하기', icon: '😴', onclick: 'doRest()' },
-        { id: 'propose', name: '프로포즈', icon: '💍', onclick: 'attemptProposal()' }
+        { id: 'date', name: '데이트하기', icon: '💑', handler: showDateMenu },
+        { id: 'gift', name: '선물하기', icon: '🎁', handler: showGiftMenu },
+        { id: 'talk', name: '대화하기', icon: '💬', handler: showTalkMenu },
+        { id: 'work', name: '알바하기', icon: '💼', handler: doWork },
+        { id: 'rest', name: '휴식하기', icon: '😴', handler: doRest },
+        { id: 'propose', name: '프로포즈', icon: '💍', handler: attemptProposal }
     ];
 
     actions.forEach(action => {
         const button = document.createElement('button');
         button.className = 'action-choice-btn';
         button.id = `action-${action.id}`;
-        button.setAttribute('onclick', action.onclick);
 
         button.innerHTML = `
             <div class="action-icon">${action.icon}</div>
@@ -194,6 +195,12 @@ function createActionButtons() {
                 <div class="action-name">${action.name}</div>
             </div>
         `;
+
+        button.addEventListener('click', () => {
+            if (!button.disabled && !button.classList.contains('disabled')) {
+                action.handler();
+            }
+        });
 
         choicesArea.appendChild(button);
     });
@@ -234,7 +241,6 @@ function showDateMenu() {
     Object.values(DATE_LOCATIONS).forEach(location => {
         const option = document.createElement('div');
         option.className = 'action-option';
-        option.onclick = () => selectDateLocation(location.id);
 
         const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
         if (!canAfford) option.classList.add('disabled');
@@ -250,6 +256,12 @@ function showDateMenu() {
                 </div>
             </div>
         `;
+
+        option.addEventListener('click', () => {
+            if (!option.classList.contains('disabled')) {
+                selectDateLocation(location.id);
+            }
+        });
 
         content.appendChild(option);
     });
@@ -287,7 +299,6 @@ function showGiftMenu() {
     Object.values(GIFT_ITEMS).forEach(gift => {
         const option = document.createElement('div');
         option.className = 'action-option';
-        option.onclick = () => giveGift(gift.id);
 
         const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
         if (!canAfford) option.classList.add('disabled');
@@ -300,6 +311,12 @@ function showGiftMenu() {
                 <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
             </div>
         `;
+
+        option.addEventListener('click', () => {
+            if (!option.classList.contains('disabled')) {
+                giveGift(gift.id);
+            }
+        });
 
         content.appendChild(option);
     });
@@ -332,6 +349,9 @@ function giveGift(giftId) {
         gameState.hasProposalRing = true;
     }
 
+    // 활동 기록
+    recordActivity('gift', '🎁');
+
     closeModal('action-modal');
     showResult(`${gift.name}을(를) 선물했습니다!`, affectionGain, trustGain);
 
@@ -348,7 +368,6 @@ function showTalkMenu() {
     Object.values(TALK_TOPICS).forEach(topic => {
         const option = document.createElement('div');
         option.className = 'action-option';
-        option.onclick = () => selectTalkTopic(topic.id);
 
         const canTalk = gameState.stamina >= topic.stamina;
         const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
@@ -364,6 +383,12 @@ function showTalkMenu() {
                 ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
             </div>
         `;
+
+        option.addEventListener('click', () => {
+            if (!option.classList.contains('disabled')) {
+                selectTalkTopic(topic.id);
+            }
+        });
 
         content.appendChild(option);
     });
@@ -399,12 +424,15 @@ function showScenario(scenario, sourceData, actionType) {
     scenario.choices.forEach((choice, index) => {
         const choiceBtn = document.createElement('button');
         choiceBtn.className = 'choice-option-btn';
-        choiceBtn.onclick = () => selectChoice(choice, sourceData, actionType);
 
         choiceBtn.innerHTML = `
             <span class="choice-number">${index + 1}.</span>
             <span class="choice-text">${choice.text}</span>
         `;
+
+        choiceBtn.addEventListener('click', () => {
+            selectChoice(choice, sourceData, actionType);
+        });
 
         content.appendChild(choiceBtn);
     });
@@ -449,6 +477,13 @@ function selectChoice(choice, sourceData, actionType) {
     gameState.trust += trustGain;
     gameState.lastInteraction = gameState.day;
 
+    // 활동 기록
+    if (actionType === 'date') {
+        recordActivity('date', '💑');
+    } else if (actionType === 'talk') {
+        recordActivity('talk', '💬');
+    }
+
     closeModal('action-modal');
     showResult(choice.text, affectionGain, trustGain);
 
@@ -492,12 +527,19 @@ function doWork() {
     gameState.money += 150000;
     gameState.workCount++;
 
+    // 활동 기록
+    recordActivity('work', '💼');
+
     showResult('알바를 마쳤습니다!', 0, 0, '+150,000원');
     updateAllUI();
 }
 
 function doRest() {
     gameState.stamina = 100;
+
+    // 활동 기록
+    recordActivity('rest', '😴');
+
     showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0);
     nextDay();
 }
@@ -545,6 +587,12 @@ function nextDay() {
 
     // 방치 체크
     checkNeglect();
+
+    // 돌발 상황 체크 (25% 확률)
+    if (Math.random() < 0.25 && gameState.day > 3) {
+        triggerCrisisEvent();
+        return; // 돌발 상황 처리 후 return
+    }
 
     // 히스토리 기록
     addHistory();
@@ -861,4 +909,237 @@ function backToMain() {
 function toggleMenu() {
     // 간단한 메뉴로 가이드 표시
     showRules();
+}
+
+function showGameMenu() {
+    showModal('game-menu-modal');
+}
+
+// ============================================
+// 돌발 상황 시스템
+// ============================================
+function triggerCrisisEvent() {
+    const event = CRISIS_EVENTS[Math.floor(Math.random() * CRISIS_EVENTS.length)];
+
+    const modal = createActionModal('⚠️ 돌발 상황!', event.situation);
+    const content = modal.querySelector('.modal-body');
+    content.innerHTML = '';
+
+    event.choices.forEach((choice, index) => {
+        const choiceBtn = document.createElement('button');
+        choiceBtn.className = 'choice-option-btn';
+
+        choiceBtn.innerHTML = `
+            <span class="choice-number">${index + 1}.</span>
+            <span class="choice-text">${choice.text}</span>
+        `;
+
+        choiceBtn.addEventListener('click', () => {
+            handleCrisisChoice(choice, event);
+        });
+
+        content.appendChild(choiceBtn);
+    });
+
+    showModal('action-modal');
+}
+
+function handleCrisisChoice(choice, event) {
+    let affectionChange = choice.affection || 0;
+    let trustChange = choice.trust || 0;
+    let moneyChange = choice.money || 0;
+
+    // 캐릭터 특성에 따라 조정
+    if (gameState.character.traits) {
+        // 완벽주의자는 실수에 민감
+        if (gameState.character.id === 'perfectionist' && (affectionChange < 0 || trustChange < 0)) {
+            affectionChange = Math.round(affectionChange * 1.3);
+            trustChange = Math.round(trustChange * 1.3);
+        }
+        // 츤데레는 긍정적 행동에 더 큰 반응
+        if (gameState.character.id === 'tsundere' && affectionChange > 0) {
+            affectionChange = Math.round(affectionChange * 1.2);
+        }
+    }
+
+    gameState.affection += affectionChange;
+    gameState.trust += trustChange;
+    gameState.money += moneyChange;
+
+    // 활동 기록
+    recordActivity('crisis', '⚠️');
+
+    closeModal('action-modal');
+
+    let resultMessage = choice.text;
+    if (moneyChange !== 0) {
+        resultMessage += `\n💰 ${moneyChange > 0 ? '+' : ''}${formatMoney(Math.abs(moneyChange))}`;
+    }
+
+    showResult(resultMessage, affectionChange, trustChange);
+
+    // 히스토리 기록
+    addHistory();
+
+    // 게임 종료 체크
+    if (gameState.dDay <= 0 || gameState.affection <= 0) {
+        endGame();
+        return;
+    }
+
+    updateAllUI();
+}
+
+// ============================================
+// 활동 기록
+// ============================================
+function recordActivity(activityType, activityIcon) {
+    const day = gameState.day;
+    if (!gameState.dailyActivities[day]) {
+        gameState.dailyActivities[day] = [];
+    }
+    gameState.dailyActivities[day].push({
+        type: activityType,
+        icon: activityIcon
+    });
+}
+
+// ============================================
+// 달력 시스템
+// ============================================
+function showCalendar() {
+    const container = document.getElementById('calendar-container');
+    container.innerHTML = '';
+
+    // 헤더
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+    header.textContent = `${gameState.character.fullName}와의 30일`;
+    container.appendChild(header);
+
+    // 30일치 달력 생성
+    for (let day = 1; day <= 30; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+
+        if (day === gameState.day) {
+            dayElement.classList.add('today');
+        } else if (day > gameState.day) {
+            dayElement.classList.add('future');
+        }
+
+        // 날짜 번호
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'calendar-day-number';
+        dayNumber.textContent = day;
+        dayElement.appendChild(dayNumber);
+
+        // 활동 아이콘 표시
+        if (gameState.dailyActivities[day]) {
+            const activitiesDiv = document.createElement('div');
+            activitiesDiv.className = 'calendar-day-activities';
+
+            // 중복 제거하고 표시 (최대 3개)
+            const uniqueActivities = [...new Set(gameState.dailyActivities[day].map(a => a.icon))];
+            uniqueActivities.slice(0, 3).forEach(icon => {
+                const activitySpan = document.createElement('span');
+                activitySpan.className = 'calendar-day-activity';
+                activitySpan.textContent = icon;
+                activitySpan.title = '활동';
+                activitiesDiv.appendChild(activitySpan);
+            });
+
+            dayElement.appendChild(activitiesDiv);
+        }
+
+        // 클릭 이벤트
+        if (day <= gameState.day) {
+            dayElement.addEventListener('click', () => {
+                showDayDetail(day);
+            });
+        }
+
+        container.appendChild(dayElement);
+    }
+
+    showModal('calendar-modal');
+}
+
+function showDayDetail(day) {
+    const activities = gameState.dailyActivities[day] || [];
+    let message = `📅 ${day}일차\n\n`;
+
+    if (activities.length === 0) {
+        message += '활동 없음';
+    } else {
+        const activityCounts = {};
+        activities.forEach(a => {
+            const key = a.type;
+            activityCounts[key] = (activityCounts[key] || 0) + 1;
+        });
+
+        const activityNames = {
+            'date': '데이트',
+            'gift': '선물',
+            'talk': '대화',
+            'work': '알바',
+            'rest': '휴식',
+            'crisis': '돌발상황'
+        };
+
+        Object.entries(activityCounts).forEach(([type, count]) => {
+            const icon = activities.find(a => a.type === type)?.icon || '';
+            message += `${icon} ${activityNames[type]}: ${count}회\n`;
+        });
+    }
+
+    alert(message);
+}
+
+// ============================================
+// 저장/불러오기 시스템
+// ============================================
+function saveGame() {
+    try {
+        const saveData = {
+            gameState: gameState,
+            savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('happyHeartGuardian_save', JSON.stringify(saveData));
+        alert('✅ 게임이 저장되었습니다!');
+        closeModal('game-menu-modal');
+    } catch (error) {
+        alert('❌ 저장에 실패했습니다: ' + error.message);
+    }
+}
+
+function loadGame() {
+    try {
+        const saveData = localStorage.getItem('happyHeartGuardian_save');
+        if (!saveData) {
+            alert('⚠️ 저장된 데이터가 없습니다.');
+            return;
+        }
+
+        const data = JSON.parse(saveData);
+        const savedDate = new Date(data.savedAt);
+
+        if (confirm(`저장된 게임을 불러오시겠습니까?\n\n저장 시각: ${savedDate.toLocaleString()}`)) {
+            gameState = data.gameState;
+            initGameScreen();
+            updateAllUI();
+            showScreen('game-screen');
+            closeModal('game-menu-modal');
+            alert('✅ 게임을 불러왔습니다!');
+        }
+    } catch (error) {
+        alert('❌ 불러오기에 실패했습니다: ' + error.message);
+    }
+}
+
+function confirmRestart() {
+    if (confirm('정말로 처음부터 다시 시작하시겠습니까?\n현재 진행 상황은 저장되지 않습니다.')) {
+        closeModal('game-menu-modal');
+        showScreen('main-screen');
+    }
 }

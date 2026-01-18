@@ -212,7 +212,7 @@ body {
 .char-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
@@ -477,7 +477,7 @@ body {
 .portrait-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -678,7 +678,7 @@ body {
 .ending-char-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -1041,6 +1041,123 @@ body {
     line-height: 1.8;
     margin-bottom: 20px;
     color: var(--text-light);
+}
+
+/* ========== 달력 모달 ========== */
+.calendar-modal .modal-content {
+    max-width: 700px;
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    padding: 10px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,105,180,0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+    border-color: var(--primary-pink);
+    background: rgba(255,105,180,0.1);
+    transform: scale(1.05);
+}
+
+.calendar-day.today {
+    border-color: var(--primary-pink);
+    background: rgba(255,105,180,0.15);
+    box-shadow: 0 0 15px rgba(255,105,180,0.4);
+}
+
+.calendar-day.future {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.calendar-day.future:hover {
+    transform: none;
+    border-color: rgba(255,105,180,0.2);
+    background: rgba(255,255,255,0.05);
+}
+
+.calendar-day-number {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-pink);
+    margin-bottom: 4px;
+}
+
+.calendar-day-activities {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.calendar-day-activity {
+    font-size: 1.2rem;
+}
+
+.calendar-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-pink);
+}
+
+/* ========== 게임 메뉴 모달 ========== */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+}
+
+.menu-option-btn {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,105,180,0.3);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.menu-option-btn:hover {
+    border-color: var(--primary-pink);
+    background: rgba(255,105,180,0.15);
+    transform: translateX(5px);
+}
+
+.menu-option-icon {
+    font-size: 2rem;
+    min-width: 40px;
+    text-align: center;
+}
+
+.menu-option-text {
+    flex: 1;
+    text-align: left;
 }
 
 /* ========== 통계 그래프 모달 ========== */

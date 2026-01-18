@@ -190,6 +190,24 @@ const DATE_LOCATIONS = {
                     { text: '"강아지 키우고 싶지 않아요?"', affection: 10, trust: 12, type: 'future' },
                     { text: '강아지를 피해 다른 길로 간다', affection: 5, trust: 5, type: 'neutral' }
                 ]
+            },
+            {
+                id: 'walk_bench',
+                situation: '공원 벤치에 앉아 쉬고 있습니다. 주변이 조용하고 평화롭습니다.',
+                choices: [
+                    { text: '어깨에 기대도록 슬며시 다가간다', affection: 15, trust: 8, type: 'romantic' },
+                    { text: '"어떤 생각하고 있어요?"라고 물어본다', affection: 10, trust: 12, type: 'caring' },
+                    { text: '조용히 함께 경치를 바라본다', affection: 8, trust: 10, type: 'calm' }
+                ]
+            },
+            {
+                id: 'walk_rain',
+                situation: '갑자기 비가 내리기 시작합니다.',
+                choices: [
+                    { text: '재킷을 벗어 씌워주며 뛰어간다', affection: 18, trust: 10, type: 'gentleman' },
+                    { text: '편의점으로 달려가 우산을 산다', affection: 12, trust: 8, type: 'practical' },
+                    { text: '"비 맞으면서 걸어볼까요?"라고 웃으며 말한다', affection: 15, trust: 5, type: 'romantic' }
+                ]
             }
         ]
     },
@@ -219,6 +237,24 @@ const DATE_LOCATIONS = {
                     { text: '"뭐 마실래요? 제가 살게요"', affection: 12, trust: 10, type: 'gentleman' },
                     { text: '"커플 세트 시킬까요?"', affection: 15, trust: 8, type: 'romantic' },
                     { text: '각자 주문한다', affection: 8, trust: 12, type: 'independent' }
+                ]
+            },
+            {
+                id: 'cafe_photo',
+                situation: '카페 인테리어가 예쁩니다. 상대방이 사진 찍을까 말까 망설입니다.',
+                choices: [
+                    { text: '"제가 사진 찍어드릴게요!" 먼저 제안한다', affection: 15, trust: 10, type: 'caring' },
+                    { text: '"같이 찍어요" 셀카를 찍자고 한다', affection: 18, trust: 8, type: 'romantic' },
+                    { text: '조용히 분위기를 즐긴다', affection: 8, trust: 12, type: 'calm' }
+                ]
+            },
+            {
+                id: 'cafe_dessert',
+                situation: '맛있어 보이는 디저트가 많습니다.',
+                choices: [
+                    { text: '"같이 나눠 먹어요" 여러 개 시킨다', affection: 15, trust: 12, type: 'sharing' },
+                    { text: '상대방이 좋아할 만한 것을 골라준다', affection: 18, trust: 10, type: 'attentive' },
+                    { text: '각자 먹고 싶은 것을 시킨다', affection: 10, trust: 10, type: 'respect' }
                 ]
             }
         ]
@@ -250,6 +286,24 @@ const DATE_LOCATIONS = {
                     { text: '"사진 찍어드릴까요?"', affection: 18, trust: 12, type: 'caring' },
                     { text: '그냥 지나간다', affection: 5, trust: 8, type: 'skip' }
                 ]
+            },
+            {
+                id: 'drive_tired',
+                situation: '장거리 운전으로 피곤해 보입니다.',
+                choices: [
+                    { text: '"제가 운전할게요" 교대를 제안한다', affection: 20, trust: 18, type: 'caring' },
+                    { text: '휴게소에 들러 쉬자고 한다', affection: 15, trust: 15, type: 'considerate' },
+                    { text: '재미있는 이야기로 졸음을 쫓아준다', affection: 18, trust: 12, type: 'entertaining' }
+                ]
+            },
+            {
+                id: 'drive_surprise',
+                situation: '미리 준비한 깜짝 장소에 도착했습니다.',
+                choices: [
+                    { text: '"여기 오고 싶다고 했잖아요" 말한다', affection: 25, trust: 20, type: 'attentive' },
+                    { text: '놀란 표정을 보며 즐거워한다', affection: 22, trust: 15, type: 'happy' },
+                    { text: '"사실 준비했어요" 수줍게 말한다', affection: 20, trust: 18, type: 'shy' }
+                ]
             }
         ]
     },
@@ -279,6 +333,24 @@ const DATE_LOCATIONS = {
                     { text: '자연스럽게 매너를 지킨다', affection: 30, trust: 25, type: 'perfect' },
                     { text: '"매너가 어렵네요" 솔직하게 말한다', affection: 22, trust: 20, type: 'honest' },
                     { text: '상대방의 행동을 따라한다', affection: 25, trust: 18, type: 'adaptive' }
+                ]
+            },
+            {
+                id: 'dining_proposal',
+                situation: '분위기가 너무 좋습니다. 주변 사람들이 둘을 바라봅니다.',
+                choices: [
+                    { text: '"정말 행복해요" 진심을 전한다', affection: 32, trust: 25, type: 'sincere' },
+                    { text: '손을 잡고 눈을 마주본다', affection: 35, trust: 22, type: 'romantic' },
+                    { text: '"자주 이렇게 나왔으면 좋겠어요"', affection: 28, trust: 20, type: 'hopeful' }
+                ]
+            },
+            {
+                id: 'dining_course',
+                situation: '메인 요리가 나왔습니다. 정말 맛있어 보입니다.',
+                choices: [
+                    { text: '"한 입 맛볼래요?" 나눠 먹자고 한다', affection: 30, trust: 20, type: 'sharing' },
+                    { text: '먼저 상대방의 반응을 살핀다', affection: 25, trust: 22, type: 'considerate' },
+                    { text: '"정말 맛있어요!" 즐거워한다', affection: 28, trust: 18, type: 'happy' }
                 ]
             }
         ]
@@ -373,6 +445,24 @@ const TALK_TOPICS = {
                     { text: '"저도 함께 해도 될까요?"', affection: 15, trust: 15, type: 'join' },
                     { text: '"좋네요" 라고만 답한다', affection: 5, trust: 5, type: 'passive' }
                 ]
+            },
+            {
+                id: 'daily_food',
+                situation: '오늘 점심으로 무엇을 먹었는지 물어봅니다.',
+                choices: [
+                    { text: '메뉴를 자세히 설명하며 같이 먹으러 가자고 한다', affection: 15, trust: 12, type: 'enthusiastic' },
+                    { text: '간단히 대답하고 상대방은 뭘 먹었는지 물어본다', affection: 12, trust: 15, type: 'balanced' },
+                    { text: '"그냥 평범하게 먹었어요"', affection: 5, trust: 8, type: 'simple' }
+                ]
+            },
+            {
+                id: 'daily_weather',
+                situation: '"오늘 날씨 정말 좋지 않아요?"라고 말합니다.',
+                choices: [
+                    { text: '"그러게요, 이런 날은 산책하기 딱이죠"', affection: 12, trust: 10, type: 'agree' },
+                    { text: '"당신이랑 함께라면 날씨는 중요하지 않아요"', affection: 18, trust: 8, type: 'romantic' },
+                    { text: '"그렇네요"라고만 답한다', affection: 5, trust: 5, type: 'passive' }
+                ]
             }
         ]
     },
@@ -392,6 +482,24 @@ const TALK_TOPICS = {
                     { text: '조용히 손을 잡아준다', affection: 18, trust: 20, type: 'skinship' },
                     { text: '"무슨 일 있어요? 말해줄래요?"', affection: 15, trust: 22, type: 'talk' },
                     { text: '"괜찮아질 거예요"', affection: 10, trust: 12, type: 'simple' }
+                ]
+            },
+            {
+                id: 'comfort_stress',
+                situation: '요즘 스트레스가 많다고 합니다.',
+                choices: [
+                    { text: '"제가 뭐 도와드릴 게 있을까요?"', affection: 15, trust: 20, type: 'helpful' },
+                    { text: '"함께 스트레스 풀러 가요"', affection: 18, trust: 15, type: 'active' },
+                    { text: '"이야기 들어줄게요"', affection: 12, trust: 22, type: 'listener' }
+                ]
+            },
+            {
+                id: 'comfort_tired',
+                situation: '피곤해 보입니다.',
+                choices: [
+                    { text: '"푹 쉬세요. 제가 옆에 있을게요"', affection: 20, trust: 18, type: 'caring' },
+                    { text: '"잠깐 눈 붙이고 가세요"', affection: 15, trust: 15, type: 'practical' },
+                    { text: '어깨를 주물러준다', affection: 22, trust: 20, type: 'physical' }
                 ]
             }
         ]
@@ -413,6 +521,24 @@ const TALK_TOPICS = {
                     { text: '"당신과 함께라면 언제든 좋아요"', affection: 25, trust: 30, type: 'romantic' },
                     { text: '"서로 준비되었을 때가 좋겠어요"', affection: 18, trust: 28, type: 'realistic' },
                     { text: '"아직 생각 안 해봤어요"', affection: -10, trust: -15, type: 'avoid' }
+                ]
+            },
+            {
+                id: 'future_house',
+                situation: '"나중에 어떤 집에서 살고 싶어요?"라고 물어봅니다.',
+                choices: [
+                    { text: '"당신이 원하는 곳이면 어디든 좋아요"', affection: 20, trust: 25, type: 'flexible' },
+                    { text: '구체적인 장소와 이유를 설명한다', affection: 18, trust: 28, type: 'detailed' },
+                    { text: '"같이 살 집을 상상해봤어요?"라고 되묻는다', affection: 22, trust: 30, type: 'reciprocal' }
+                ]
+            },
+            {
+                id: 'future_children',
+                situation: '아이에 대한 생각을 물어봅니다.',
+                choices: [
+                    { text: '"당신을 닮은 아이면 좋겠어요"', affection: 25, trust: 28, type: 'sweet' },
+                    { text: '"같이 천천히 생각해봐요"', affection: 18, trust: 25, type: 'thoughtful' },
+                    { text: '"둘이서 먼저 행복하면 좋겠어요"', affection: 20, trust: 22, type: 'couple_first' }
                 ]
             }
         ]
@@ -436,6 +562,24 @@ const TALK_TOPICS = {
                     { text: '최근 유행하는 밈을 사용한다', affection: 20, trust: 12, type: 'meme', successRate: 0.7 },
                     { text: '가벼운 장난을 친다', affection: 18, trust: 15, type: 'playful', successRate: 0.8 }
                 ]
+            },
+            {
+                id: 'humor_tease',
+                situation: '상대방을 살짝 놀리고 싶습니다.',
+                choices: [
+                    { text: '귀여운 별명을 지어준다', affection: 22, trust: 12, type: 'nickname', successRate: 0.7 },
+                    { text: '장난스럽게 웃으며 놀린다', affection: 20, trust: 15, type: 'tease', successRate: 0.6 },
+                    { text: '재미있었던 에피소드를 언급한다', affection: 18, trust: 18, type: 'story', successRate: 0.8 }
+                ]
+            },
+            {
+                id: 'humor_imitate',
+                situation: '상대방의 말투를 흉내내고 싶습니다.',
+                choices: [
+                    { text: '귀엽게 따라한다', affection: 25, trust: 10, type: 'cute', successRate: 0.6 },
+                    { text: '과장되게 웃기게 따라한다', affection: 20, trust: 8, type: 'exaggerate', successRate: 0.5 },
+                    { text: '살짝만 흉내내고 웃는다', affection: 18, trust: 15, type: 'gentle', successRate: 0.8 }
+                ]
             }
         ]
     }
@@ -453,3 +597,204 @@ const WORK_OPTIONS = {
         description: '체력을 소모해 돈을 벌니다'
     }
 };
+
+// ============================================
+// 돌발 상황 이벤트
+// ============================================
+const CRISIS_EVENTS = [
+    {
+        id: 'jealousy',
+        situation: '거리를 걷다가 당신의 전 연인과 마주쳤습니다. 상대방이 불편한 표정을 짓습니다.',
+        choices: [
+            {
+                text: '상황을 솔직하게 설명하고 오해를 풀려고 노력한다.',
+                affection: 15,
+                trust: 20,
+                type: 'honest'
+            },
+            {
+                text: '가볍게 인사만 하고 빠르게 자리를 피한다.',
+                affection: 5,
+                trust: -5,
+                type: 'avoid'
+            },
+            {
+                text: '전 연인을 완전히 무시하고 상대방만 신경쓴다.',
+                affection: -10,
+                trust: -15,
+                type: 'ignore'
+            }
+        ]
+    },
+    {
+        id: 'late',
+        situation: '약속 시간에 늦게 되었습니다. 상대방이 화난 표정으로 기다리고 있습니다.',
+        choices: [
+            {
+                text: '진심으로 사과하고 다시는 늦지 않겠다고 약속한다.',
+                affection: 5,
+                trust: 10,
+                type: 'apologize'
+            },
+            {
+                text: '변명을 늘어놓으며 상황을 설명한다.',
+                affection: -5,
+                trust: -10,
+                type: 'excuse'
+            },
+            {
+                text: '선물을 사서 기분을 풀어드린다.',
+                affection: 10,
+                trust: -5,
+                money: -50000,
+                type: 'gift'
+            }
+        ]
+    },
+    {
+        id: 'friend_issue',
+        situation: '상대방의 친한 친구가 당신에 대해 안 좋게 이야기하는 것을 들었다고 합니다.',
+        choices: [
+            {
+                text: '친구를 만나서 직접 대화하며 오해를 풀겠다고 한다.',
+                affection: 15,
+                trust: 15,
+                type: 'proactive'
+            },
+            {
+                text: '상대방에게 친구와의 관계를 끊으라고 요구한다.',
+                affection: -20,
+                trust: -15,
+                type: 'demand'
+            },
+            {
+                text: '신경쓰지 말자고 위로하며 넘어간다.',
+                affection: 5,
+                trust: 0,
+                type: 'comfort'
+            }
+        ]
+    },
+    {
+        id: 'family_meeting',
+        situation: '갑자기 부모님이 만나자고 하십니다. 상대방이 긴장한 표정을 짓습니다.',
+        choices: [
+            {
+                text: '부모님을 미리 만나 이야기를 나누고 준비한다.',
+                affection: 10,
+                trust: 20,
+                type: 'prepare'
+            },
+            {
+                text: '부모님께 시간을 좀 더 달라고 부탁한다.',
+                affection: 5,
+                trust: 5,
+                type: 'delay'
+            },
+            {
+                text: '아무 준비 없이 바로 만나자고 한다.',
+                affection: -10,
+                trust: -10,
+                type: 'rush'
+            }
+        ]
+    },
+    {
+        id: 'work_stress',
+        situation: '상대방이 직장에서 스트레스를 많이 받아 힘들어하고 있습니다.',
+        choices: [
+            {
+                text: '진지하게 이야기를 들어주고 공감한다.',
+                affection: 15,
+                trust: 15,
+                type: 'listen'
+            },
+            {
+                text: '해결책을 제시하며 조언한다.',
+                affection: 5,
+                trust: 10,
+                type: 'advise'
+            },
+            {
+                text: '재미있는 곳으로 데려가 기분전환을 시킨다.',
+                affection: 10,
+                trust: 5,
+                money: -100000,
+                type: 'distract'
+            }
+        ]
+    },
+    {
+        id: 'forgot_anniversary',
+        situation: '중요한 기념일을 깜빡했습니다. 상대방이 실망한 표정입니다.',
+        choices: [
+            {
+                text: '즉시 사과하고 특별한 선물을 준비한다.',
+                affection: 10,
+                trust: 5,
+                money: -200000,
+                type: 'compensate'
+            },
+            {
+                text: '진심으로 사과하고 다음에 두 배로 보상하겠다고 약속한다.',
+                affection: 5,
+                trust: 10,
+                type: 'promise'
+            },
+            {
+                text: '그렇게 중요한 날이었냐며 가볍게 넘긴다.',
+                affection: -25,
+                trust: -20,
+                type: 'dismiss'
+            }
+        ]
+    },
+    {
+        id: 'misunderstanding',
+        situation: '다른 사람과 친하게 지내는 것을 본 상대방이 오해하고 있습니다.',
+        choices: [
+            {
+                text: '솔직하게 상황을 설명하고 오해를 푼다.',
+                affection: 10,
+                trust: 20,
+                type: 'explain'
+            },
+            {
+                text: '화를 내며 믿지 못하는 것에 서운함을 표현한다.',
+                affection: -10,
+                trust: -15,
+                type: 'angry'
+            },
+            {
+                text: '앞으로 조심하겠다고 약속한다.',
+                affection: 5,
+                trust: 10,
+                type: 'careful'
+            }
+        ]
+    },
+    {
+        id: 'surprise_visit',
+        situation: '예고 없이 집에 놀러 왔는데, 집이 엉망입니다.',
+        choices: [
+            {
+                text: '솔직하게 사과하고 빠르게 정리한다.',
+                affection: 5,
+                trust: 10,
+                type: 'clean'
+            },
+            {
+                text: '밖에서 놀자고 하며 집 안으로 들어오지 못하게 한다.',
+                affection: -5,
+                trust: -10,
+                type: 'avoid'
+            },
+            {
+                text: '부끄러워하면서도 솔직하게 들어오라고 한다.',
+                affection: 10,
+                trust: 15,
+                type: 'honest'
+            }
+        ]
+    }
+];
