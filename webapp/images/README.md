@@ -1,15 +1,30 @@
 # 캐릭터 이미지 저장 방법
 
-이 폴더에 4개의 캐릭터 이미지를 저장해주세요.
+이 폴더에 **각 캐릭터당 3개씩, 총 12개**의 이미지를 저장해주세요.
 
 ## 필요한 이미지 파일
 
-제공된 캐릭터 이미지를 다음과 같은 파일명으로 저장하세요:
+각 캐릭터마다 **3가지 감정 상태** 이미지가 필요합니다:
 
-1. **character1-perfectionist.jpg** - 빨간 정장을 입은 완벽주의 센서티브 (첫 번째 이미지)
-2. **character2-positive.jpg** - 베이지색 카디건을 입은 비타민 긍정녀 (두 번째 이미지)
-3. **character3-tsundere.jpg** - 고딕 스타일의 반전 매력의 츤데레 (세 번째 이미지)
-4. **character4-career.jpg** - 검은 정장과 안경을 쓴 논리적인 커리어우먼 (네 번째 이미지)
+### 1. 완벽주의 센서티브 (빨간 정장 캐릭터)
+- **character1-perfectionist-normal.jpg** - 평소 상태 (기본)
+- **character1-perfectionist-happy.jpg** - 행복한 상태 (호감도 70% 이상)
+- **character1-perfectionist-unhappy.jpg** - 안좋은 기분 (호감도 35% 미만)
+
+### 2. 비타민 긍정녀 (베이지 카디건 캐릭터)
+- **character2-positive-normal.jpg** - 평소 상태 (기본)
+- **character2-positive-happy.jpg** - 행복한 상태 (호감도 70% 이상)
+- **character2-positive-unhappy.jpg** - 안좋은 기분 (호감도 35% 미만)
+
+### 3. 반전 매력의 츤데레 (고딕 스타일 캐릭터)
+- **character3-tsundere-normal.jpg** - 평소 상태 (기본)
+- **character3-tsundere-happy.jpg** - 행복한 상태 (호감도 70% 이상)
+- **character3-tsundere-unhappy.jpg** - 안좋은 기분 (호감도 35% 미만)
+
+### 4. 논리적인 커리어우먼 (검은 정장 캐릭터)
+- **character4-career-normal.jpg** - 평소 상태 (기본)
+- **character4-career-happy.jpg** - 행복한 상태 (호감도 70% 이상)
+- **character4-career-unhappy.jpg** - 안좋은 기분 (호감도 35% 미만)
 
 ## 이미지 저장 방법
 

@@ -4,7 +4,7 @@ const CHARACTERS = {
         id: 'perfectionist',
         name: '완벽주의 센서티브',
         icon: '💎',
-        image: 'images/character1-perfectionist.jpg',
+        image: 'images/character1-perfectionist-normal.jpg',
         difficulty: 5,
         startScore: 30,
         traits: {
@@ -20,7 +20,7 @@ const CHARACTERS = {
         id: 'positive',
         name: '비타민 긍정녀',
         icon: '☀️',
-        image: 'images/character2-positive.jpg',
+        image: 'images/character2-positive-normal.jpg',
         difficulty: 2,
         startScore: 70,
         traits: {
@@ -36,7 +36,7 @@ const CHARACTERS = {
         id: 'tsundere',
         name: '반전 매력의 츤데레',
         icon: '🌸',
-        image: 'images/character3-tsundere.jpg',
+        image: 'images/character3-tsundere-normal.jpg',
         difficulty: 3,
         startScore: 50,
         traits: {
@@ -52,7 +52,7 @@ const CHARACTERS = {
         id: 'career',
         name: '논리적인 커리어우먼',
         icon: '💼',
-        image: 'images/character4-career.jpg',
+        image: 'images/character4-career-normal.jpg',
         difficulty: 4,
         startScore: 50,
         traits: {
