@@ -603,6 +603,122 @@ function addHistory() {
     });
 }
 
+function showStatsGraph() {
+    if (gameState.history.length < 2) {
+        alert('그래프를 표시하기에 충분한 데이터가 없습니다.');
+        return;
+    }
+
+    showModal('stats-graph-modal');
+
+    // 모달이 표시된 후 그래프 그리기
+    setTimeout(() => {
+        drawStatsGraph();
+    }, 100);
+}
+
+function drawStatsGraph() {
+    const canvas = document.getElementById('stats-canvas');
+    if (!canvas || !canvas.getContext) return;
+
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    // 캔버스 초기화
+    ctx.clearRect(0, 0, width, height);
+
+    // 배경
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fillRect(0, 0, width, height);
+
+    const padding = 40;
+    const graphWidth = width - padding * 2;
+    const graphHeight = height - padding * 2;
+
+    // 그리드 그리기
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.lineWidth = 1;
+
+    // 가로선 (0%, 25%, 50%, 75%, 100%)
+    for (let i = 0; i <= 4; i++) {
+        const y = padding + (graphHeight / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+
+        // 퍼센트 라벨
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText((100 - i * 25) + '%', padding - 10, y + 4);
+    }
+
+    // 세로선 (날짜)
+    const history = gameState.history;
+    const maxDays = Math.max(10, history.length);
+    const dayStep = Math.ceil(maxDays / 10);
+
+    for (let i = 0; i <= maxDays; i += dayStep) {
+        const x = padding + (graphWidth / maxDays) * i;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.beginPath();
+        ctx.moveTo(x, padding);
+        ctx.lineTo(x, height - padding);
+        ctx.stroke();
+
+        // 날짜 라벨
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Day ' + (i + 1), x, height - padding + 20);
+    }
+
+    // 데이터 선 그리기
+    function drawLine(data, color, label) {
+        if (data.length < 2) return;
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+
+        for (let i = 0; i < data.length; i++) {
+            const x = padding + (graphWidth / (maxDays - 1)) * i;
+            const value = Math.max(0, Math.min(100, data[i]));
+            const y = padding + graphHeight - (graphHeight * value / 100);
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+
+        ctx.stroke();
+
+        // 점 그리기
+        for (let i = 0; i < data.length; i++) {
+            const x = padding + (graphWidth / (maxDays - 1)) * i;
+            const value = Math.max(0, Math.min(100, data[i]));
+            const y = padding + graphHeight - (graphHeight * value / 100);
+
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // 호감도 데이터
+    const affectionData = history.map(h => h.affection);
+    drawLine(affectionData, '#ff69b4', '호감도');
+
+    // 신뢰도 데이터
+    const trustData = history.map(h => h.trust);
+    drawLine(trustData, '#4169E1', '신뢰도');
+}
+
 // ============================================
 // 프로포즈 시스템
 // ============================================
@@ -740,4 +856,9 @@ function restartGame() {
 
 function backToMain() {
     showScreen('main-screen');
+}
+
+function toggleMenu() {
+    // 간단한 메뉴로 가이드 표시
+    showRules();
 }

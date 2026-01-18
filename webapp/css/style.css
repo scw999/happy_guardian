@@ -1043,6 +1043,61 @@ body {
     color: var(--text-light);
 }
 
+/* ========== 통계 그래프 모달 ========== */
+.graph-modal .modal-content {
+    max-width: 700px;
+}
+
+.graph-container {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+#stats-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.graph-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--border-radius);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.legend-color {
+    width: 30px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+.affection-color {
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+}
+
+.trust-color {
+    background: linear-gradient(90deg, #87CEEB, #4169E1);
+}
+
+/* 하단 메뉴 버튼 간격 */
+.bottom-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
 /* 유틸리티 */
 .hidden {
     display: none !important;

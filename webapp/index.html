@@ -230,6 +230,9 @@
 
         <!-- 하단 메뉴 -->
         <div class="bottom-menu">
+            <button class="menu-icon-btn" onclick="showStatsGraph()" title="통계 그래프">
+                <span>📊</span>
+            </button>
             <button class="menu-icon-btn" onclick="toggleMenu()">
                 <span>⚙️</span>
             </button>
@@ -259,6 +262,34 @@
             <div class="ending-buttons">
                 <button class="ending-btn" onclick="restartGame()">다시 시작</button>
                 <button class="ending-btn secondary" onclick="backToMain()">메인으로</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 통계 그래프 모달 -->
+    <div id="stats-graph-modal" class="modal">
+        <div class="modal-content graph-modal">
+            <div class="modal-header">
+                <h2>📊 관계 변화 그래프</h2>
+                <button class="close-btn" onclick="closeModal('stats-graph-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="graph-container">
+                    <canvas id="stats-canvas" width="560" height="300"></canvas>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <span class="legend-color affection-color"></span>
+                        <span>호감도</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color trust-color"></span>
+                        <span>신뢰도</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal('stats-graph-modal')">확인</button>
             </div>
         </div>
     </div>
