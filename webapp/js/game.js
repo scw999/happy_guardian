@@ -101,11 +101,67 @@ function selectCharacter(characterId) {
 
     updateAllUI();
 
+    // 게임 초기 안내
     const timeoutId = setTimeout(() => {
-        showFirstMeetingScenario(characterId);
+        showGameObjective();
     }, 500);
     pendingTimeouts.push(timeoutId);
 }
+
+function showGameObjective() {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.id = 'game-objective-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎯 게임 목표</h2>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; font-weight: bold; color: var(--primary-pink); margin-bottom: 20px;">
+                    30일 안에 호감도를 올려 프로포즈를 성공시키세요!
+                </p>
+                <div style="text-align: left; padding: 0 20px;">
+                    <h3>📝 주요 규칙</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>호감도 %</strong> = 프로포즈 승낙 확률</li>
+                        <li><strong>하루 최대 3회</strong> 행동 가능 (데이트/선물/대화)</li>
+                        <li>같은 행동을 반복하면 <strong>체력이 2배씩</strong> 소모됩니다</li>
+                        <li><strong>호감도가 낮으면</strong> 데이트를 거절당할 수 있습니다</li>
+                        <li>거절당하면 <strong>체력 -20, 호감도 -5</strong></li>
+                    </ul>
+
+                    <h3 style="margin-top: 20px;">💪 자원 관리</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>체력</strong>: 매일 80으로 회복, 모든 행동에 필요</li>
+                        <li><strong>신뢰도</strong>: 깊은 대화와 일관된 행동으로 상승</li>
+                        <li><strong>돈</strong>: 알바로 벌거나 데이트/선물에 사용</li>
+                    </ul>
+
+                    <h3 style="margin-top: 20px;">🎂 특별한 날</h3>
+                    <ul style="line-height: 1.8;">
+                        <li>7일마다 만남 기념일 (7일, 14일, 21일, 28일)</li>
+                        <li>캐릭터 생일</li>
+                        <li>기념일에 데이트/선물하면 <strong>효과 1.5배!</strong></li>
+                        <li>기념일을 챙기지 않으면 <strong>-15 호감도</strong></li>
+                    </ul>
+                </div>
+                <button class="menu-btn" onclick="closeGameObjective()" style="margin-top: 20px;">시작하기!</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+window.closeGameObjective = function() {
+    const modal = document.getElementById('game-objective-modal');
+    if (modal) {
+        modal.remove();
+    }
+    // 첫 만남 시나리오 표시
+    const characterId = gameState.character.id;
+    showFirstMeetingScenario(characterId);
+};
 
 function showFirstMeetingScenario(characterId) {
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
@@ -373,6 +429,29 @@ function selectDateLocation(index) {
         return;
     }
 
+    // 호감도 기반 데이트 수락 확률 체크
+    let acceptChance = 1.0;
+    if (gameState.affection < 20) {
+        acceptChance = 0.3;
+    } else if (gameState.affection < 40) {
+        acceptChance = 0.5;
+    } else if (gameState.affection < 60) {
+        acceptChance = 0.7;
+    } else if (gameState.affection < 80) {
+        acceptChance = 0.9;
+    }
+
+    // 거절 체크
+    if (Math.random() > acceptChance) {
+        gameState.stamina -= 20;  // 체력 급감
+        gameState.affection -= 5;  // 호감도 감소
+        gameState.trust -= 3;  // 신뢰도 감소
+        closeModal('action-modal');
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-20 체력, -5 호감도, -3 신뢰도)\n\n호감도를 더 높인 후 다시 시도하세요!`);
+        updateAllUI();
+        return;
+    }
+
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
 
@@ -467,7 +546,7 @@ function giveGift(index) {
     // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
     let staminaCost = gift.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 0.5));
+        staminaCost = Math.round(gift.stamina * (1 + (repeatCount - 1) * 1.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -655,7 +734,7 @@ window.selectScenarioChoice = function(index) {
     // 반복 횟수에 따라 추가 체력 소모 (50%씩 증가)
     let staminaCost = sourceData.stamina;
     if (repeatCount > 1) {
-        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 0.5));
+        staminaCost = Math.round(sourceData.stamina * (1 + (repeatCount - 1) * 1.0));
     }
     gameState.stamina -= staminaCost;
 
@@ -803,7 +882,14 @@ window.selectMultiStageChoice = function(index) {
 };
 
 function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
+    // 기존 결과 모달 제거
+    const existingModal = document.getElementById('multi-stage-result-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
     const resultModal = document.createElement('div');
+    resultModal.id = 'multi-stage-result-modal';
     resultModal.className = 'modal active';
     resultModal.innerHTML = `
         <div class="modal-content">
@@ -835,13 +921,10 @@ function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
 
 window.continueMultiStage = function() {
     // 결과 모달 제거
-    const resultModals = document.querySelectorAll('.modal');
-    resultModals.forEach(m => {
-        if (m.querySelector('.modal-header h2')?.textContent.includes('진행 중') ||
-            m.querySelector('.modal-header h2')?.textContent.includes('데이트 결과')) {
-            m.remove();
-        }
-    });
+    const resultModal = document.getElementById('multi-stage-result-modal');
+    if (resultModal) {
+        resultModal.remove();
+    }
 
     if (gameState.multiStage && gameState.multiStage.currentIndex < gameState.multiStage.scenarios.length) {
         // 다음 시나리오로
