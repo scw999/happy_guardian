@@ -101,22 +101,29 @@ function selectCharacter(characterId) {
 
     // 첫 만남 시나리오 표시
     const timeoutId = setTimeout(() => {
+        console.log('첫 만남 시나리오 표시 시도:', characterId);
         showFirstMeetingScenario(characterId);
-    }, 300);
+    }, 500);
     pendingTimeouts.push(timeoutId);
 }
 
 function showFirstMeetingScenario(characterId) {
+    console.log('showFirstMeetingScenario 호출됨:', characterId);
+    console.log('FIRST_MEETING_SCENARIOS:', typeof FIRST_MEETING_SCENARIOS);
+
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
     if (!scenario) {
-        console.warn('첫 만남 시나리오를 찾을 수 없습니다:', characterId);
+        console.error('첫 만남 시나리오를 찾을 수 없습니다:', characterId);
+        console.log('사용 가능한 시나리오:', Object.keys(FIRST_MEETING_SCENARIOS));
         return;
     }
 
-    // 기존 모달 닫기
-    closeModal('action-modal');
+    console.log('시나리오 찾음:', scenario);
 
-    // 약간의 딜레이 후 새 모달 표시
+    // 모든 모달 강제 닫기
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+
+    // 새 모달 생성 및 표시
     setTimeout(() => {
         const modal = createActionModal('💝 첫 만남', scenario.situation);
         const content = modal.querySelector('.modal-body');
@@ -125,13 +132,18 @@ function showFirstMeetingScenario(characterId) {
         scenario.choices.forEach((choice, index) => {
             const choiceBtn = document.createElement('button');
             choiceBtn.className = 'choice-option-btn';
+            choiceBtn.style.cursor = 'pointer';
+            choiceBtn.style.pointerEvents = 'auto';
 
             choiceBtn.innerHTML = `
                 <span class="choice-number">${index + 1}.</span>
                 <span class="choice-text">${choice.text}</span>
             `;
 
-            choiceBtn.onclick = function() {
+            choiceBtn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('첫 만남 선택:', choice.text);
                 handleFirstMeetingChoice(choice);
             };
 
@@ -139,7 +151,8 @@ function showFirstMeetingScenario(characterId) {
         });
 
         showModal('action-modal');
-    }, 100);
+        console.log('첫 만남 모달 표시됨');
+    }, 200);
 }
 
 function handleFirstMeetingChoice(choice) {
@@ -255,18 +268,19 @@ function createActionButtons() {
     choicesArea.innerHTML = '';
 
     const actions = [
-        { id: 'date', name: '데이트하기', icon: '💑', handler: showDateMenu },
-        { id: 'gift', name: '선물하기', icon: '🎁', handler: showGiftMenu },
-        { id: 'talk', name: '대화하기', icon: '💬', handler: showTalkMenu },
-        { id: 'work', name: '알바하기', icon: '💼', handler: doWork },
-        { id: 'rest', name: '휴식하기', icon: '😴', handler: doRest },
-        { id: 'propose', name: '프로포즈', icon: '💍', handler: attemptProposal }
+        { id: 'date', name: '데이트하기', icon: '💑', handler: 'showDateMenu' },
+        { id: 'gift', name: '선물하기', icon: '🎁', handler: 'showGiftMenu' },
+        { id: 'talk', name: '대화하기', icon: '💬', handler: 'showTalkMenu' },
+        { id: 'work', name: '알바하기', icon: '💼', handler: 'doWork' },
+        { id: 'rest', name: '휴식하기', icon: '😴', handler: 'doRest' },
+        { id: 'propose', name: '프로포즈', icon: '💍', handler: 'attemptProposal' }
     ];
 
     actions.forEach(action => {
         const button = document.createElement('button');
         button.className = 'action-choice-btn';
         button.id = `action-${action.id}`;
+        button.setAttribute('data-handler', action.handler);
 
         button.innerHTML = `
             <div class="action-icon">${action.icon}</div>
@@ -275,15 +289,29 @@ function createActionButtons() {
             </div>
         `;
 
-        // 간단한 onclick 핸들러 사용
-        button.onclick = function() {
-            if (!this.disabled && !this.classList.contains('disabled')) {
-                action.handler();
-            }
-        };
-
         choicesArea.appendChild(button);
     });
+
+    // 이벤트 위임 방식으로 클릭 처리
+    choicesArea.onclick = function(e) {
+        const button = e.target.closest('.action-choice-btn');
+        if (!button) return;
+
+        if (button.disabled || button.classList.contains('disabled')) {
+            console.log('버튼이 비활성화되어 있습니다:', button.id);
+            return;
+        }
+
+        const handler = button.getAttribute('data-handler');
+        console.log('버튼 클릭:', button.id, '핸들러:', handler);
+
+        // 핸들러 실행
+        if (typeof window[handler] === 'function') {
+            window[handler]();
+        } else {
+            console.error('핸들러를 찾을 수 없습니다:', handler);
+        }
+    };
 
     updateActionButtons();
 }
@@ -330,8 +358,10 @@ function updateActionButtons() {
 // 데이트 시스템
 // ============================================
 function showDateMenu() {
-    // 기존 모달 완전히 닫기
-    closeModal('action-modal');
+    console.log('showDateMenu 호출됨');
+
+    // 모든 모달 강제 닫기
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
 
     setTimeout(() => {
         const modal = createActionModal('데이트 장소 선택', '어디로 데이트를 갈까요?');
@@ -341,6 +371,7 @@ function showDateMenu() {
         Object.values(DATE_LOCATIONS).forEach(location => {
             const option = document.createElement('div');
             option.className = 'action-option';
+            option.style.cursor = 'pointer';
 
             const canAfford = gameState.money >= location.cost && gameState.stamina >= location.stamina;
             if (!canAfford) option.classList.add('disabled');
@@ -357,8 +388,11 @@ function showDateMenu() {
                 </div>
             `;
 
-            option.onclick = function() {
+            option.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 if (!this.classList.contains('disabled')) {
+                    console.log('데이트 장소 선택:', location.id);
                     selectDateLocation(location.id);
                 }
             };
@@ -367,7 +401,8 @@ function showDateMenu() {
         });
 
         showModal('action-modal');
-    }, 50);
+        console.log('데이트 메뉴 표시됨');
+    }, 100);
 }
 
 function selectDateLocation(locationId) {
@@ -394,8 +429,10 @@ function selectDateLocation(locationId) {
 // 선물 시스템
 // ============================================
 function showGiftMenu() {
-    // 기존 모달 완전히 닫기
-    closeModal('action-modal');
+    console.log('showGiftMenu 호출됨');
+
+    // 모든 모달 강제 닫기
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
 
     setTimeout(() => {
         const modal = createActionModal('선물 선택', '무엇을 선물할까요?');
@@ -405,6 +442,7 @@ function showGiftMenu() {
         Object.values(GIFT_ITEMS).forEach(gift => {
             const option = document.createElement('div');
             option.className = 'action-option';
+            option.style.cursor = 'pointer';
 
             const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
             if (!canAfford) option.classList.add('disabled');
@@ -418,8 +456,11 @@ function showGiftMenu() {
                 </div>
             `;
 
-            option.onclick = function() {
+            option.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 if (!this.classList.contains('disabled')) {
+                    console.log('선물 선택:', gift.id);
                     giveGift(gift.id);
                 }
             };
@@ -428,7 +469,8 @@ function showGiftMenu() {
         });
 
         showModal('action-modal');
-    }, 50);
+        console.log('선물 메뉴 표시됨');
+    }, 100);
 }
 
 function giveGift(giftId) {
@@ -469,8 +511,10 @@ function giveGift(giftId) {
 // 대화 시스템
 // ============================================
 function showTalkMenu() {
-    // 기존 모달 완전히 닫기
-    closeModal('action-modal');
+    console.log('showTalkMenu 호출됨');
+
+    // 모든 모달 강제 닫기
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
 
     setTimeout(() => {
         const modal = createActionModal('대화 주제 선택', '무엇에 대해 이야기할까요?');
@@ -480,6 +524,7 @@ function showTalkMenu() {
         Object.values(TALK_TOPICS).forEach(topic => {
             const option = document.createElement('div');
             option.className = 'action-option';
+            option.style.cursor = 'pointer';
 
             const canTalk = gameState.stamina >= topic.stamina;
             const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
@@ -496,8 +541,11 @@ function showTalkMenu() {
                 </div>
             `;
 
-            option.onclick = function() {
+            option.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 if (!this.classList.contains('disabled')) {
+                    console.log('대화 주제 선택:', topic.id);
                     selectTalkTopic(topic.id);
                 }
             };
@@ -506,7 +554,8 @@ function showTalkMenu() {
         });
 
         showModal('action-modal');
-    }, 50);
+        console.log('대화 메뉴 표시됨');
+    }, 100);
 }
 
 function selectTalkTopic(topicId) {
@@ -537,13 +586,18 @@ function showScenario(scenario, sourceData, actionType) {
     scenario.choices.forEach((choice, index) => {
         const choiceBtn = document.createElement('button');
         choiceBtn.className = 'choice-option-btn';
+        choiceBtn.style.cursor = 'pointer';
+        choiceBtn.style.pointerEvents = 'auto';
 
         choiceBtn.innerHTML = `
             <span class="choice-number">${index + 1}.</span>
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.onclick = function() {
+        choiceBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('시나리오 선택:', choice.text);
             selectChoice(choice, sourceData, actionType);
         };
 
@@ -1048,13 +1102,18 @@ function triggerCrisisEvent() {
     event.choices.forEach((choice, index) => {
         const choiceBtn = document.createElement('button');
         choiceBtn.className = 'choice-option-btn';
+        choiceBtn.style.cursor = 'pointer';
+        choiceBtn.style.pointerEvents = 'auto';
 
         choiceBtn.innerHTML = `
             <span class="choice-number">${index + 1}.</span>
             <span class="choice-text">${choice.text}</span>
         `;
 
-        choiceBtn.onclick = function() {
+        choiceBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('위기 이벤트 선택:', choice.text);
             handleCrisisChoice(choice, event);
         };
 
