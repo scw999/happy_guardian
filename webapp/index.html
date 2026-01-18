@@ -152,18 +152,54 @@
             </div>
         </div>
 
-        <!-- 호감도 바 -->
-        <div class="affection-bar-container">
-            <div class="affection-label">
-                <span>호감도</span>
-                <span id="affection-percentage">50%</span>
-            </div>
-            <div class="affection-bar">
-                <div id="affection-fill" class="affection-fill" style="width: 50%">
-                    <div class="affection-shine"></div>
+        <!-- 자원 바 영역 -->
+        <div class="resources-container">
+            <!-- 호감도 -->
+            <div class="resource-bar-wrapper">
+                <div class="resource-label">
+                    <span>💖 호감도</span>
+                    <span id="affection-percentage" class="resource-value">50%</span>
+                </div>
+                <div class="resource-bar affection-bar">
+                    <div id="affection-fill" class="resource-fill affection-fill" style="width: 50%"></div>
                 </div>
             </div>
-            <div class="affection-status">
+
+            <!-- 돈 -->
+            <div class="resource-bar-wrapper">
+                <div class="resource-label">
+                    <span>💰 돈</span>
+                    <span id="money-value" class="resource-value">100</span>
+                </div>
+                <div class="resource-bar money-bar">
+                    <div id="money-fill" class="resource-fill money-fill" style="width: 10%"></div>
+                </div>
+            </div>
+
+            <!-- 체력 -->
+            <div class="resource-bar-wrapper">
+                <div class="resource-label">
+                    <span>⚡ 체력</span>
+                    <span id="stamina-value" class="resource-value">100</span>
+                </div>
+                <div class="resource-bar stamina-bar">
+                    <div id="stamina-fill" class="resource-fill stamina-fill" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <!-- 나의 기분 -->
+            <div class="resource-bar-wrapper">
+                <div class="resource-label">
+                    <span>😊 나의 기분</span>
+                    <span id="mood-value" class="resource-value">50</span>
+                </div>
+                <div class="resource-bar mood-bar">
+                    <div id="mood-fill" class="resource-fill mood-fill" style="width: 50%"></div>
+                </div>
+            </div>
+
+            <!-- 관계 상태 -->
+            <div class="relationship-status-display">
                 <span id="relationship-status">알아가는 중</span>
             </div>
         </div>
@@ -177,27 +213,18 @@
                 </div>
             </div>
 
-            <!-- 대화/이벤트 영역 -->
+            <!-- 상태 메시지 영역 -->
             <div class="dialogue-area">
                 <div class="dialogue-box">
-                    <div class="speaker-name" id="speaker-name">서윤아</div>
                     <div class="dialogue-text" id="dialogue-text">
-                        안녕하세요. 처음 뵙겠습니다.
+                        무엇을 할까요?
                     </div>
                 </div>
             </div>
 
             <!-- 액션 버튼 영역 -->
-            <div class="action-area" id="action-area">
-                <button class="action-btn" onclick="nextScene()">
-                    <span>다음</span>
-                    <span class="btn-arrow">▶</span>
-                </button>
-            </div>
-
-            <!-- 선택지 영역 -->
-            <div class="choices-area" id="choices-area" style="display: none;">
-                <!-- 선택지가 동적으로 생성됨 -->
+            <div class="choices-area" id="choices-area">
+                <!-- 액션 버튼이 동적으로 생성됨 -->
             </div>
         </div>
 

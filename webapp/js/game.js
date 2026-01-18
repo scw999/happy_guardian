@@ -1,12 +1,67 @@
 // 게임 상태
 let gameState = {
     character: null,
-    affection: 50, // 호감도 (0-100)
-    day: 1,
-    maxDays: 30,
-    currentScene: 0,
-    story: [],
+    affection: 50,        // 호감도 (0-100)
+    money: 100,           // 돈 (0-999)
+    stamina: 100,         // 체력 (0-100)
+    myMood: 50,          // 나의 기분 (0-100)
+    turn: 1,              // 현재 턴
+    maxTurns: 30,         // 최대 턴
+    lastInteraction: 0,   // 마지막 상호작용 턴
     isGameOver: false
+};
+
+// 액션 정의
+const ACTIONS = {
+    date: {
+        name: '데이트하기',
+        icon: '💑',
+        description: '함께 시간을 보냅니다',
+        costs: { money: 30, stamina: 20 },
+        gains: { affection: 15, myMood: 10 },
+        requiredMoney: 30,
+        requiredStamina: 20
+    },
+    talk: {
+        name: '대화하기',
+        icon: '💬',
+        description: '따뜻한 대화를 나눕니다',
+        costs: { stamina: 10 },
+        gains: { affection: 10 },
+        requiredStamina: 10
+    },
+    gift: {
+        name: '선물하기',
+        icon: '🎁',
+        description: '마음을 담은 선물을 줍니다',
+        costs: { money: 50 },
+        gains: { affection: 25, myMood: 5 },
+        requiredMoney: 50
+    },
+    work: {
+        name: '일하기',
+        icon: '💼',
+        description: '돈을 벌지만 피곤합니다',
+        costs: { stamina: 30, myMood: 10 },
+        gains: { money: 60 },
+        requiredStamina: 30
+    },
+    rest: {
+        name: '휴식하기',
+        icon: '😴',
+        description: '체력을 회복합니다',
+        costs: {},
+        gains: { stamina: 40 },
+        requiredStamina: 0
+    },
+    hobby: {
+        name: '취미/게임',
+        icon: '🎮',
+        description: '나만의 시간을 가집니다',
+        costs: { money: 15 },
+        gains: { myMood: 25, stamina: -5 },
+        requiredMoney: 15
+    }
 };
 
 // 화면 전환
@@ -40,443 +95,282 @@ function closeRules() {
 // 캐릭터 선택
 function selectCharacter(characterId) {
     const character = CHARACTERS[characterId];
+
+    // 게임 상태 초기화
     gameState.character = character;
     gameState.affection = character.startScore;
-    gameState.day = 1;
-    gameState.currentScene = 0;
+    gameState.money = 100;
+    gameState.stamina = 100;
+    gameState.myMood = 50;
+    gameState.turn = 1;
+    gameState.lastInteraction = 0;
     gameState.isGameOver = false;
-
-    // 스토리 생성
-    generateStory();
 
     // 게임 화면 초기화 및 시작
     initGameScreen();
     showScreen('game-screen');
-
-    // 첫 장면 시작
-    showScene();
-}
-
-// 스토리 생성 (30일 분량)
-function generateStory() {
-    gameState.story = [];
-
-    // 인트로 (Day 1-3)
-    gameState.story.push({
-        day: 1,
-        type: 'intro',
-        speaker: gameState.character.fullName,
-        text: `안녕하세요. 저는 ${gameState.character.fullName}입니다. ${gameState.character.quote}`,
-        choices: [
-            {text: '반갑습니다! 잘 부탁드려요.', effect: 5},
-            {text: '(미소) 잘 부탁드립니다.', effect: 8},
-            {text: '네, 안녕하세요.', effect: 3}
-        ]
-    });
-
-    gameState.story.push({
-        day: 2,
-        type: 'date',
-        speaker: gameState.character.fullName,
-        text: '오늘 날씨가 정말 좋네요. 같이 산책할까요?',
-        choices: [
-            {text: '좋아요! 어디로 갈까요?', effect: 10},
-            {text: '산책보다는 카페 가는 게 어때요?', effect: 7},
-            {text: '피곤한데... 다음에 하면 안 될까요?', effect: -15}
-        ]
-    });
-
-    gameState.story.push({
-        day: 3,
-        type: 'talk',
-        speaker: gameState.character.fullName,
-        text: '요즘 취미가 뭐예요? 저는 ${character의 취미}를 좋아해요.',
-        choices: [
-            {text: '저도 그거 좋아해요! 같이 해봐요.', effect: 12},
-            {text: '잘 모르는데 알려줄 수 있어요?', effect: 8},
-            {text: '저는 다른 걸 좋아해요.', effect: 2}
-        ]
-    });
-
-    // 발전 단계 (Day 4-15)
-    const midEvents = [
-        {
-            type: 'special',
-            speaker: gameState.character.fullName,
-            text: '나 살쪘나요? 요즘 거울 볼 때마다 그런 것 같아서...',
-            choices: [
-                {text: '아니에요, 전혀 안 쪘어요!', effect: 8},
-                {text: '조금? 그래도 귀여워요.', effect: -20},
-                {text: '원래도 예뻤고 지금도 예뻐요.', effect: 15},
-                {text: '운동 같이 할까요?', effect: -18}
-            ]
-        },
-        {
-            type: 'special',
-            speaker: gameState.character.fullName,
-            text: '제 친구가 예쁘다고 생각하세요?',
-            choices: [
-                {text: '네, 예쁘네요.', effect: -40},
-                {text: '잘 모르겠는데요?', effect: 5},
-                {text: '당신이 제일 예뻐요.', effect: 20},
-                {text: '친구로 봐서 잘 모르겠어요.', effect: 12}
-            ]
-        },
-        {
-            type: 'talk',
-            speaker: gameState.character.fullName,
-            text: '우리 처음 만난 날 기억나요?',
-            choices: [
-                {text: '음... 언제였더라?', effect: -20},
-                {text: '물론이죠! (정확한 날짜)', effect: 25},
-                {text: '그때 입었던 옷도 기억나요.', effect: 30},
-                {text: '기억 안 나지만 행복했어요.', effect: 10}
-            ]
-        },
-        {
-            type: 'crisis',
-            speaker: gameState.character.fullName,
-            text: '휴대폰 좀 봐도 될까요?',
-            choices: [
-                {text: '왜요? (방어적)', effect: -15},
-                {text: '네, 보세요. (자연스럽게)', effect: 20},
-                {text: '나도 당신 거 봐도 돼요?', effect: -10},
-                {text: '숨길 거 없어요. (건네주며)', effect: 25}
-            ]
-        },
-        {
-            type: 'date',
-            speaker: gameState.character.fullName,
-            text: '오늘 뭐 먹을까요? 저는 이탈리안이 당기는데...',
-            choices: [
-                {text: '좋아요! 이탈리안 먹어요.', effect: 12},
-                {text: '한식이 더 나을 것 같은데요.', effect: 3},
-                {text: '당신이 좋으면 저도 좋아요.', effect: 10},
-                {text: '이탈리안 먹고 한식은 다음에!', effect: 20}
-            ]
-        },
-        {
-            type: 'talk',
-            speaker: gameState.character.fullName,
-            text: '저... 요즘 회사에서 힘든 일이 있어서...',
-            choices: [
-                {text: '당신도 잘못한 게 있겠죠.', effect: -30},
-                {text: '힘들었겠어요. 괜찮아요?', effect: 15},
-                {text: '어떻게 된 건지 얘기해봐요.', effect: 20},
-                {text: '직접 만나서 위로해드릴게요.', effect: 28}
-            ]
-        },
-        {
-            type: 'special',
-            speaker: gameState.character.fullName,
-            text: '우리 관계 어떻게 생각하세요?',
-            choices: [
-                {text: '잘 되고 있는 것 같은데요?', effect: 5},
-                {text: '가끔 힘들지만 행복해요.', effect: 18},
-                {text: '당신은 어떻게 생각해요?', effect: -10},
-                {text: '부족한 점 말해주세요. 고칠게요.', effect: 22}
-            ]
-        },
-        {
-            type: 'crisis',
-            speaker: gameState.character.fullName,
-            text: '왜 이제야 답장하는 거예요? (읽씹 2시간)',
-            choices: [
-                {text: '미안해요. 회의 중이었어요.', effect: 5},
-                {text: '정말 미안해요. 바로 연락했어요.', effect: 12},
-                {text: '나도 바쁘거든요?', effect: -25},
-                {text: '앞으로 이런 일 없을게요.', effect: 15}
-            ]
-        },
-        {
-            type: 'date',
-            speaker: gameState.character.fullName,
-            text: '오늘 친구들 약속 있는데... 당신도 보고 싶어요.',
-            choices: [
-                {text: '친구들 만나세요. 전 괜찮아요.', effect: 18},
-                {text: '저랑 있어줘요.', effect: -12},
-                {text: '친구들 만나고 저녁에 봐요.', effect: 22},
-                {text: '친구가 더 중요하구나...', effect: -25}
-            ]
-        },
-        {
-            type: 'talk',
-            speaker: gameState.character.fullName,
-            text: '1년 후에 우리 뭐 하고 있을까요?',
-            choices: [
-                {text: '글쎄요... 모르겠는데요.', effect: -15},
-                {text: '지금처럼 행복하겠죠.', effect: 12},
-                {text: '여행도 가고 더 알아가고 있겠죠.', effect: 20},
-                {text: '결혼도 생각해봤어요.', effect: gameState.affection >= 60 ? 30 : -20}
-            ]
-        },
-        {
-            type: 'special',
-            speaker: gameState.character.fullName,
-            text: '감기 걸려서 힘들어요...',
-            choices: [
-                {text: '푹 쉬세요. (문자만)', effect: 5},
-                {text: '약이랑 죽 사갈게요!', effect: 30},
-                {text: '전화로 위로해드릴게요.', effect: 12},
-                {text: '다 나을 때까지 기다릴게요.', effect: -10}
-            ]
-        }
-    ];
-
-    for (let i = 4; i <= 15; i++) {
-        const event = midEvents[(i - 4) % midEvents.length];
-        gameState.story.push({
-            day: i,
-            ...event
-        });
-    }
-
-    // 심화 단계 (Day 16-25)
-    for (let i = 16; i <= 25; i++) {
-        gameState.story.push({
-            day: i,
-            type: 'deepening',
-            speaker: gameState.character.fullName,
-            text: getRandomDialogue(i),
-            choices: getRandomChoices()
-        });
-    }
-
-    // 클라이맥스 (Day 26-29)
-    gameState.story.push({
-        day: 26,
-        type: 'climax',
-        speaker: gameState.character.fullName,
-        text: '우리... 계속 함께할 수 있을까요?',
-        choices: [
-            {text: '당연하죠!', effect: 20},
-            {text: '평생 함께하고 싶어요.', effect: 35},
-            {text: '글쎄요... 잘 모르겠어요.', effect: -40}
-        ]
-    });
-
-    gameState.story.push({
-        day: 27,
-        type: 'date',
-        speaker: gameState.character.fullName,
-        text: '오늘 정말 특별한 날이에요. 어디 가고 싶은 곳 있어요?',
-        choices: [
-            {text: '당신이 좋아하는 곳으로 가요.', effect: 15},
-            {text: '둘만의 특별한 장소 찾아봐요.', effect: 25},
-            {text: '집에서 편하게 있어요.', effect: 10}
-        ]
-    });
-
-    gameState.story.push({
-        day: 28,
-        type: 'confession',
-        speaker: gameState.character.fullName,
-        text: '저... 말하고 싶은 게 있어요. 당신을...',
-        choices: [
-            {text: '저도 사랑해요.', effect: 30},
-            {text: '(손을 잡으며) 저도요.', effect: 35},
-            {text: '무슨 말인지 알아요.', effect: 25}
-        ]
-    });
-
-    // 엔딩 (Day 30)
-    gameState.story.push({
-        day: 30,
-        type: 'ending',
-        speaker: gameState.character.fullName,
-        text: '30일 동안 정말 행복했어요. 앞으로도 계속 함께해주시겠어요?',
-        choices: [
-            {text: '물론이에요. 평생 함께해요.', effect: 50},
-            {text: '(프러포즈) 나와 결혼해줄래요?', effect: 100}
-        ]
-    });
-}
-
-// 랜덤 대사 생성
-function getRandomDialogue(day) {
-    const dialogues = [
-        '오늘 하루 어땠어요?',
-        '요즘 생각이 많아요...',
-        '당신과 있으면 시간이 빨리 가는 것 같아요.',
-        '제 이야기 들어줄 수 있어요?',
-        '오늘 뭐 하고 싶으세요?',
-        '당신 생각하면 미소가 나와요.',
-        '우리 관계가 더 발전한 것 같아요.',
-        '당신은 제게 정말 소중한 사람이에요.'
-    ];
-    return dialogues[day % dialogues.length];
-}
-
-// 랜덤 선택지 생성
-function getRandomChoices() {
-    return [
-        {text: '저도 그래요. 당신이 정말 좋아요.', effect: 15},
-        {text: '무슨 일 있어요? 얘기해봐요.', effect: 12},
-        {text: '저도 같은 마음이에요.', effect: 10},
-        {text: '함께 있으면 행복해요.', effect: 18}
-    ];
+    updateAllResources();
+    updateCharacterMood();
 }
 
 // 게임 화면 초기화
 function initGameScreen() {
     // 캐릭터 정보 표시
     document.getElementById('char-name-display').textContent = gameState.character.fullName;
-    document.getElementById('speaker-name').textContent = gameState.character.fullName;
 
     // 포트레이트 이미지 설정
-    const portraitImage = document.getElementById('portrait-image');
-    portraitImage.src = gameState.character.image;
-    portraitImage.alt = gameState.character.fullName;
+    updateCharacterMood();
 
-    // 포트레이트 컨테이너 클래스 설정
-    const portraitContainer = document.getElementById('character-portrait');
-    portraitContainer.className = 'portrait-container ' + gameState.character.id;
+    // 액션 버튼 생성
+    createActionButtons();
+}
 
-    // 호감도 및 날짜 업데이트
+// 액션 버튼 생성
+function createActionButtons() {
+    const choicesArea = document.getElementById('choices-area');
+    choicesArea.innerHTML = '';
+
+    Object.keys(ACTIONS).forEach(actionKey => {
+        const action = ACTIONS[actionKey];
+        const button = document.createElement('button');
+        button.className = 'action-choice-btn';
+        button.id = `action-${actionKey}`;
+        button.onclick = () => performAction(actionKey);
+
+        // 비용과 효과 표시
+        let costText = [];
+        if (action.costs.money) costText.push(`💰-${action.costs.money}`);
+        if (action.costs.stamina) costText.push(`⚡-${action.costs.stamina}`);
+        if (action.costs.myMood) costText.push(`😊-${action.costs.myMood}`);
+
+        let gainText = [];
+        if (action.gains.money) gainText.push(`💰+${action.gains.money}`);
+        if (action.gains.stamina) gainText.push(`⚡+${action.gains.stamina}`);
+        if (action.gains.myMood) gainText.push(`😊+${action.gains.myMood}`);
+        if (action.gains.affection) gainText.push(`💖+${action.gains.affection}`);
+
+        button.innerHTML = `
+            <div class="action-icon">${action.icon}</div>
+            <div class="action-info">
+                <div class="action-name">${action.name}</div>
+                <div class="action-cost">${costText.join(' ')}</div>
+                <div class="action-gain">${gainText.join(' ')}</div>
+            </div>
+        `;
+
+        choicesArea.appendChild(button);
+    });
+
+    updateActionButtons();
+}
+
+// 액션 실행
+function performAction(actionKey) {
+    const action = ACTIONS[actionKey];
+
+    // 필수 자원 확인
+    if (action.requiredMoney && gameState.money < action.requiredMoney) {
+        showFeedback('돈이 부족합니다!', 'error');
+        return;
+    }
+    if (action.requiredStamina && gameState.stamina < action.requiredStamina) {
+        showFeedback('체력이 부족합니다!', 'error');
+        return;
+    }
+
+    // 자원 소비
+    if (action.costs.money) gameState.money -= action.costs.money;
+    if (action.costs.stamina) gameState.stamina -= action.costs.stamina;
+    if (action.costs.myMood) gameState.myMood -= action.costs.myMood;
+
+    // 자원 획득
+    if (action.gains.money) gameState.money += action.gains.money;
+    if (action.gains.stamina) gameState.stamina += action.gains.stamina;
+    if (action.gains.myMood) gameState.myMood += action.gains.myMood;
+    if (action.gains.affection) {
+        let affectionGain = action.gains.affection;
+
+        // 캐릭터별 보너스 적용
+        if (actionKey === 'date' && gameState.character.id === 'positive') {
+            affectionGain *= 1.2; // 긍정녀는 데이트 좋아함
+        }
+        if (actionKey === 'talk' && gameState.character.id === 'career') {
+            affectionGain *= 1.3; // 커리어우먼은 대화 선호
+        }
+        if (actionKey === 'gift' && gameState.character.id === 'perfectionist') {
+            affectionGain *= 1.3; // 완벽주의는 고급 선물 선호
+        }
+
+        gameState.affection += Math.round(affectionGain);
+    }
+
+    // 상호작용 액션인 경우 마지막 상호작용 시간 업데이트
+    if (actionKey === 'date' || actionKey === 'talk' || actionKey === 'gift') {
+        gameState.lastInteraction = gameState.turn;
+    }
+
+    // 자원 제한 적용
+    gameState.money = Math.max(0, Math.min(999, gameState.money));
+    gameState.stamina = Math.max(0, Math.min(100, gameState.stamina));
+    gameState.myMood = Math.max(0, Math.min(100, gameState.myMood));
+    gameState.affection = Math.max(0, Math.min(100, gameState.affection));
+
+    // 피드백 표시
+    showFeedback(`${action.name} 완료!`, 'success');
+
+    // 턴 진행
+    nextTurn();
+}
+
+// 다음 턴
+function nextTurn() {
+    gameState.turn++;
+
+    // 방치 페널티 체크
+    const turnsSinceInteraction = gameState.turn - gameState.lastInteraction;
+    if (turnsSinceInteraction > 3) {
+        const neglectPenalty = (turnsSinceInteraction - 3) * 5;
+        gameState.affection -= neglectPenalty;
+
+        // 캐릭터별 방치 민감도
+        if (gameState.character.id === 'perfectionist') {
+            gameState.affection -= neglectPenalty * 0.5; // 완벽주의는 더 민감
+        }
+        if (gameState.character.id === 'positive') {
+            gameState.affection -= neglectPenalty * 0.3; // 긍정녀는 덜 민감
+        }
+
+        gameState.affection = Math.max(0, gameState.affection);
+        if (neglectPenalty > 0) {
+            showFeedback(`너무 오래 방치했습니다... (-${Math.round(neglectPenalty * 1.5)}💖)`, 'warning');
+        }
+    }
+
+    // 게임 오버 체크
+    if (gameState.affection <= 0) {
+        gameOver();
+        return;
+    }
+
+    // 턴 종료 체크
+    if (gameState.turn > gameState.maxTurns) {
+        endGame();
+        return;
+    }
+
+    // UI 업데이트
+    updateAllResources();
+    updateCharacterMood();
+    updateActionButtons();
+}
+
+// 모든 자원 업데이트
+function updateAllResources() {
+    // 턴 표시
+    document.getElementById('day-number').textContent = gameState.turn;
+    document.querySelector('.day-total').textContent = ` / ${gameState.maxTurns}`;
+
+    // 호감도
     updateAffection();
-    updateDay();
+
+    // 돈
+    document.getElementById('money-value').textContent = gameState.money;
+    document.getElementById('money-fill').style.width = (gameState.money / 999 * 100) + '%';
+
+    // 체력
+    document.getElementById('stamina-value').textContent = gameState.stamina;
+    document.getElementById('stamina-fill').style.width = gameState.stamina + '%';
+
+    // 나의 기분
+    document.getElementById('mood-value').textContent = gameState.myMood;
+    document.getElementById('mood-fill').style.width = gameState.myMood + '%';
 }
 
 // 호감도 업데이트
 function updateAffection() {
     gameState.affection = Math.max(0, Math.min(100, gameState.affection));
 
-    document.getElementById('affection-percentage').textContent = gameState.affection + '%';
+    document.getElementById('affection-percentage').textContent = Math.round(gameState.affection) + '%';
     document.getElementById('affection-fill').style.width = gameState.affection + '%';
 
     // 관계 상태 텍스트
     let status = '';
-    if (gameState.affection <= 20) status = '위기 - 이별 직전';
-    else if (gameState.affection <= 40) status = '불안정 - 관계 개선 필요';
-    else if (gameState.affection <= 60) status = '알아가는 중';
-    else if (gameState.affection <= 80) status = '좋은 관계';
-    else status = '진정한 사랑';
+    if (gameState.affection >= 80) status = '💕 최고의 연인';
+    else if (gameState.affection >= 60) status = '💖 사랑하는 사이';
+    else if (gameState.affection >= 40) status = '💗 좋아하는 사이';
+    else if (gameState.affection >= 20) status = '💙 알아가는 중';
+    else status = '💔 위기 상황';
 
     document.getElementById('relationship-status').textContent = status;
-
-    // 게임 오버 체크
-    if (gameState.affection <= 0) {
-        setTimeout(() => gameOver('bad'), 1000);
-    }
 }
 
-// 날짜 업데이트
-function updateDay() {
-    document.getElementById('day-number').textContent = gameState.day;
-}
+// 캐릭터 기분 이미지 업데이트
+function updateCharacterMood() {
+    const portraitImage = document.getElementById('portrait-image');
+    const baseImage = gameState.character.image.replace('.jpg', '');
 
-// 장면 표시
-function showScene() {
-    if (gameState.currentScene >= gameState.story.length) {
-        // 스토리 끝 - 엔딩 판정
-        endGame();
-        return;
+    let moodSuffix = '-normal';
+    if (gameState.affection >= 70) {
+        moodSuffix = '-happy';
+    } else if (gameState.affection < 35) {
+        moodSuffix = '-unhappy';
     }
 
-    const scene = gameState.story[gameState.currentScene];
-
-    // 날짜 업데이트
-    gameState.day = scene.day;
-    updateDay();
-
-    // 대사 표시
-    document.getElementById('speaker-name').textContent = scene.speaker;
-    document.getElementById('dialogue-text').textContent = scene.text;
-
-    // 선택지가 있으면 선택지 표시, 없으면 다음 버튼
-    if (scene.choices && scene.choices.length > 0) {
-        showChoices(scene.choices);
-    } else {
-        showNextButton();
-    }
+    portraitImage.src = baseImage + moodSuffix + '.jpg';
+    portraitImage.onerror = function() {
+        // 이미지가 없으면 기본 이미지 사용
+        this.src = gameState.character.image;
+        this.onerror = null;
+    };
 }
 
-// 선택지 표시
-function showChoices(choices) {
-    document.getElementById('action-area').style.display = 'none';
-    const choicesArea = document.getElementById('choices-area');
-    choicesArea.style.display = 'flex';
-    choicesArea.innerHTML = '';
+// 액션 버튼 활성화/비활성화
+function updateActionButtons() {
+    Object.keys(ACTIONS).forEach(actionKey => {
+        const action = ACTIONS[actionKey];
+        const button = document.getElementById(`action-${actionKey}`);
+        if (!button) return;
 
-    choices.forEach((choice, index) => {
-        const button = document.createElement('button');
-        button.className = 'choice-btn';
-        button.innerHTML = `
-            <span class="choice-number">${index + 1}.</span>
-            ${choice.text}
-        `;
-        button.onclick = () => selectChoice(choice);
-        choicesArea.appendChild(button);
+        const canAfford =
+            (!action.requiredMoney || gameState.money >= action.requiredMoney) &&
+            (!action.requiredStamina || gameState.stamina >= action.requiredStamina);
+
+        if (canAfford) {
+            button.classList.remove('disabled');
+            button.disabled = false;
+        } else {
+            button.classList.add('disabled');
+            button.disabled = true;
+        }
     });
 }
 
-// 다음 버튼 표시
-function showNextButton() {
-    document.getElementById('choices-area').style.display = 'none';
-    document.getElementById('action-area').style.display = 'block';
-}
-
-// 선택지 선택
-function selectChoice(choice) {
-    // 호감도 변화
-    let effect = choice.effect;
-
-    // 캐릭터별 보정
-    if (gameState.character.id === 'perfectionist') {
-        if (effect > 0) effect = Math.floor(effect * 1.2);
-        if (effect < 0) effect = Math.floor(effect * 1.5);
-    } else if (gameState.character.id === 'positive') {
-        if (effect < 0) effect = Math.floor(effect * 0.7);
-    } else if (gameState.character.id === 'career') {
-        const isTalkRelated = gameState.story[gameState.currentScene].type === 'talk';
-        if (isTalkRelated && effect > 0) effect = Math.floor(effect * 1.3);
-    }
-
-    gameState.affection += effect;
-    updateAffection();
-
-    // 결과 피드백 표시
-    showFeedback(effect);
-
-    // 다음 장면으로
-    setTimeout(() => {
-        nextScene();
-    }, 1500);
-}
-
 // 피드백 표시
-function showFeedback(effect) {
-    const feedbackText = effect > 0
-        ? `호감도 ${effect > 0 ? '+' : ''}${effect}!`
-        : `호감도 ${effect}...`;
-
-    const color = effect > 0 ? '#44ff88' : '#ff4444';
-
-    // 대화 텍스트 임시 변경
+function showFeedback(message, type = 'info') {
     const dialogueText = document.getElementById('dialogue-text');
     const originalText = dialogueText.textContent;
-    dialogueText.textContent = feedbackText;
-    dialogueText.style.color = color;
+
+    dialogueText.textContent = message;
+
+    if (type === 'success') {
+        dialogueText.style.color = '#44ff88';
+    } else if (type === 'error') {
+        dialogueText.style.color = '#ff4444';
+    } else if (type === 'warning') {
+        dialogueText.style.color = '#ffaa44';
+    }
+
     dialogueText.style.fontWeight = 'bold';
-    dialogueText.style.fontSize = '1.5rem';
 
     setTimeout(() => {
-        dialogueText.textContent = originalText;
+        dialogueText.textContent = `턴 ${gameState.turn} / ${gameState.maxTurns}`;
         dialogueText.style.color = '';
         dialogueText.style.fontWeight = '';
-        dialogueText.style.fontSize = '';
-    }, 1500);
-}
-
-// 다음 장면
-function nextScene() {
-    gameState.currentScene++;
-    showScene();
+    }, 2000);
 }
 
 // 게임 종료
 function endGame() {
-    // 호감도에 따라 엔딩 결정
     let endingType = '';
     let endingTitle = '';
     let endingMessage = '';
@@ -502,8 +396,8 @@ function endGame() {
     showEnding(endingType, endingTitle, endingMessage);
 }
 
-// 게임 오버 (호감도 0)
-function gameOver(type) {
+// 게임 오버
+function gameOver() {
     gameState.isGameOver = true;
     const endingTitle = '💔 게임 오버 - 이별';
     const endingMessage = `호감도가 0이 되어 ${gameState.character.fullName}와(과) 이별했습니다. 다시 도전해보세요!`;
@@ -514,13 +408,23 @@ function gameOver(type) {
 function showEnding(type, title, message) {
     document.getElementById('ending-title').textContent = title;
     document.getElementById('ending-message').textContent = message;
-    document.getElementById('final-affection').textContent = gameState.affection + '%';
-    document.getElementById('final-days').textContent = gameState.day + '일';
+    document.getElementById('final-affection').textContent = Math.round(gameState.affection) + '%';
+    document.getElementById('final-days').textContent = gameState.turn + '턴';
 
     // 엔딩 이미지 설정
     const endingImage = document.getElementById('ending-image');
-    endingImage.src = gameState.character.image;
-    endingImage.alt = gameState.character.fullName;
+    const baseImage = gameState.character.image.replace('.jpg', '');
+
+    if (type === 'true' || type === 'good') {
+        endingImage.src = baseImage + '-happy.jpg';
+    } else {
+        endingImage.src = baseImage + '-unhappy.jpg';
+    }
+
+    endingImage.onerror = function() {
+        this.src = gameState.character.image;
+        this.onerror = null;
+    };
 
     // 엔딩 포트레이트 테두리 색상 설정
     const endingPortrait = document.getElementById('ending-portrait');
@@ -541,22 +445,12 @@ function showEnding(type, title, message) {
     showScreen('ending-screen');
 }
 
-// 다시 시작
+// 게임 재시작
 function restartGame() {
-    showScreen('character-select-screen');
+    selectCharacter(gameState.character.id);
 }
 
 // 메인으로
 function backToMain() {
     showScreen('main-screen');
 }
-
-// 메뉴 토글
-function toggleMenu() {
-    showRules();
-}
-
-// 초기화
-document.addEventListener('DOMContentLoaded', () => {
-    showScreen('main-screen');
-});
