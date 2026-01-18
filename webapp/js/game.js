@@ -126,11 +126,14 @@ function handleFirstMeetingChoice(choice) {
 
     let message = `첫 만남이 인상적이었습니다!\n\n"${gameState.character.fullName}과(와)의 관계가 시작되었습니다."`;
 
-    showResult(message, affectionChange, trustChange);
+    // 모달을 닫은 후 약간의 딜레이를 주고 결과 표시
+    setTimeout(() => {
+        showResult(message, affectionChange, trustChange);
 
-    // 히스토리 업데이트
-    addHistory();
-    updateAllUI();
+        // 히스토리 업데이트
+        addHistory();
+        updateAllUI();
+    }, 100);
 }
 
 function initGameScreen() {
@@ -147,6 +150,7 @@ function updateAllUI() {
     updateResources();
     updateCharacterMood();
     updateActionButtons();
+    updateMiniCalendar();
 }
 
 function updateDDay() {
@@ -1055,6 +1059,42 @@ function recordActivity(activityType, activityIcon) {
 // ============================================
 // 달력 시스템
 // ============================================
+function updateMiniCalendar() {
+    const container = document.getElementById('mini-calendar-days');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    // 30일치 달력 생성
+    for (let day = 1; day <= 30; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'mini-calendar-day';
+        dayElement.textContent = day;
+
+        if (day === gameState.day) {
+            dayElement.classList.add('today');
+        } else if (day < gameState.day) {
+            dayElement.classList.add('past');
+        } else if (day > gameState.day) {
+            dayElement.classList.add('future');
+        }
+
+        // 활동이 있는 날 표시
+        if (gameState.dailyActivities[day] && gameState.dailyActivities[day].length > 0) {
+            dayElement.classList.add('has-activity');
+        }
+
+        // 클릭 이벤트 - 모달 달력 열기
+        if (day <= gameState.day) {
+            dayElement.addEventListener('click', () => {
+                showCalendar();
+            });
+        }
+
+        container.appendChild(dayElement);
+    }
+}
+
 function showCalendar() {
     const container = document.getElementById('calendar-container');
     container.innerHTML = '';

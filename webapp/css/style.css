@@ -479,6 +479,73 @@ body {
     color: var(--primary-pink);
 }
 
+/* 미니 달력 */
+.mini-calendar-container {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(255,105,180,0.3);
+}
+
+.mini-calendar-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--primary-pink);
+    margin-bottom: 10px;
+}
+
+.mini-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+}
+
+.mini-calendar-day {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,105,180,0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.mini-calendar-day:hover {
+    background: rgba(255,105,180,0.1);
+    border-color: var(--primary-pink);
+    transform: scale(1.1);
+}
+
+.mini-calendar-day.today {
+    background: rgba(255,105,180,0.3);
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 10px rgba(255,105,180,0.5);
+}
+
+.mini-calendar-day.past {
+    background: rgba(255,255,255,0.08);
+}
+
+.mini-calendar-day.future {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.mini-calendar-day.has-activity::after {
+    content: '•';
+    position: absolute;
+    bottom: 2px;
+    color: var(--primary-pink);
+    font-size: 1rem;
+}
+
 /* 메인 게임 영역 */
 .game-main-area {
     flex: 1;
@@ -499,8 +566,8 @@ body {
 }
 
 .portrait-container {
-    width: 350px;
-    height: 350px;
+    width: 600px;
+    height: 600px;
     position: relative;
     border-radius: 50%;
     overflow: hidden;
@@ -965,8 +1032,12 @@ body {
     }
 
     .portrait-container {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .mini-calendar-days {
+        grid-template-columns: repeat(6, 1fr);
     }
 
     .portrait-icon {
