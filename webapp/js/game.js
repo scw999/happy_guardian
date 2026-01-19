@@ -7,6 +7,7 @@ let gameState = {
     trust: 30,
     money: 300000,  // 초기 자금 30만원으로 감소
     stamina: 100,
+    mental: 100,  // 멘탈 수치 추가 (0이 되면 게임 오버)
     day: 1,
     dDay: 30,
     startDate: null,
@@ -143,7 +144,8 @@ function showGameObjective() {
 
                     <h3 style="margin-top: 20px;">💪 자원 관리</h3>
                     <ul style="line-height: 1.8;">
-                        <li><strong>체력</strong>: 매일 80으로 회복, 모든 행동에 필요</li>
+                        <li><strong>체력</strong>: 모든 행동에 필요, 휴식으로 회복</li>
+                        <li><strong>멘탈</strong>: 거절이나 안 좋은 반응 시 감소, 0이 되면 게임 오버!</li>
                         <li><strong>신뢰도</strong>: 깊은 대화와 일관된 행동으로 상승</li>
                         <li><strong>돈</strong>: 다양한 방법으로 벌거나 데이트/선물에 사용</li>
                     </ul>
@@ -270,6 +272,18 @@ function updateResources() {
     gameState.stamina = Math.max(0, Math.min(100, gameState.stamina));
     document.getElementById('stamina-value').textContent = gameState.stamina;
     document.getElementById('stamina-fill').style.width = gameState.stamina + '%';
+
+    gameState.mental = Math.max(0, Math.min(100, gameState.mental));
+    document.getElementById('mental-value').textContent = gameState.mental;
+    document.getElementById('mental-fill').style.width = gameState.mental + '%';
+
+    // 멘탈이 0이 되면 게임 오버
+    if (gameState.mental <= 0 && !gameState.isGameOver) {
+        gameState.isGameOver = true;
+        setTimeout(() => {
+            showMentalGameOver();
+        }, 500);
+    }
 
     updateRelationshipStatus();
 }
@@ -460,8 +474,9 @@ function selectDateLocation(index) {
         gameState.stamina -= 50;  // 체력 급감 (40 → 50으로 증가)
         gameState.affection -= 8;  // 호감도 감소 (5 → 8로 증가)
         gameState.trust -= 5;  // 신뢰도 감소 (3 → 5로 증가)
+        gameState.mental -= 25;  // 멘탈 감소 (거절로 인한 정신적 충격)
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-50 체력, -8 호감도, -5 신뢰도)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-50 체력, -8 호감도, -5 신뢰도, -25 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
         updateAllUI();
         return;
     }
@@ -659,14 +674,23 @@ function showTalkMenu() {
                     // 체력 표시: 실제 소비 체력만 표시
                     let staminaDisplay = `⚡ ${actualStamina}`;
 
+                    let clickHandler = '';
+                    if (canTalk && meetsRequirement) {
+                        clickHandler = `selectTalkTopic(${idx})`;
+                    } else if (!canTalk) {
+                        clickHandler = `alert('체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})')`;
+                    } else if (!meetsRequirement) {
+                        clickHandler = `alert('호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)')`;
+                    }
+
                     return `
-                        <div class="action-option ${disabled}" onclick="${(canTalk && meetsRequirement) ? `selectTalkTopic(${idx})` : ''}">
+                        <div class="action-option ${disabled}" onclick="${clickHandler}">
                             <div class="option-icon">${topic.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${topic.name}</div>
                                 <div class="option-desc">${topic.description}</div>
                                 <div class="option-cost">${staminaDisplay}</div>
-                                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
+                                ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection}% 필요 (현재: ${Math.round(gameState.affection)}%)</div>` : ''}
                             </div>
                         </div>
                     `;
@@ -944,6 +968,13 @@ window.selectMultiStageChoice = function(index) {
         }
     }
 
+    // 멘탈 감소 로직 (안 좋은 반응을 받았을 때)
+    if (affectionGain < 0 || trustGain < 0) {
+        const totalNegative = Math.abs(Math.min(0, affectionGain)) + Math.abs(Math.min(0, trustGain));
+        const mentalLoss = Math.round(totalNegative * 0.8);  // 부정적 반응에 비례해서 멘탈 감소
+        gameState.mental -= mentalLoss;
+    }
+
     // 누적
     gameState.multiStage.totalAffection += affectionGain;
     gameState.multiStage.totalTrust += trustGain;
@@ -1123,7 +1154,7 @@ function showSkinshipMenu() {
                 <p>어떤 스킨십을 시도하시겠어요?</p>
                 <p style="font-size: 0.85rem; color: #ffaa00; margin-bottom: 15px;">
                     ⚠️ 호감도가 낮으면 거절당할 수 있습니다!<br>
-                    거절 시: 체력 -10, 호감도 -10, 신뢰도 -15
+                    거절 시: 체력 -10, 호감도 -10, 신뢰도 -15, 멘탈 -20
                 </p>
                 ${skinshipOptions.map((skinship, idx) => {
                     const canTry = gameState.affection >= skinship.minAffection &&
@@ -1234,8 +1265,9 @@ window.attemptSkinship = function(index) {
         gameState.stamina -= 10;  // 추가 체력 손실
         gameState.affection -= 10;
         gameState.trust -= 15;
+        gameState.mental -= 20;  // 멘탈 감소 (거절로 인한 정신적 충격)
 
-        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n체력 -10, 호감도 -10, 신뢰도 -15\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n체력 -10, 호감도 -10, 신뢰도 -15, 멘탈 -20\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
     }
 
     updateAllUI();
@@ -1346,15 +1378,16 @@ function showStockInvestment(work) {
             <div class="modal-body">
                 <p>투자할 금액을 선택하세요:</p>
                 <p style="font-size: 0.9rem; color: #ffaa00;">⚠️ 손실 가능: -50% ~ +100%</p>
+                <p style="font-size: 0.85rem; color: #aaa; margin-top: 5px;">현재 보유 자금: ${formatMoney(gameState.money)}</p>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-                    <button class="menu-btn" onclick="executeStock(50000)" ${gameState.money >= 50000 ? '' : 'disabled'}>
-                        5만원 투자
+                    <button class="menu-btn" onclick="${gameState.money >= 50000 ? 'executeStock(50000)' : 'warnInsufficientFunds(50000)'}" ${gameState.money >= 50000 ? '' : 'style="opacity: 0.6;"'}>
+                        5만원 투자 ${gameState.money >= 50000 ? '' : '(자금 부족)'}
                     </button>
-                    <button class="menu-btn" onclick="executeStock(100000)" ${gameState.money >= 100000 ? '' : 'disabled'}>
-                        10만원 투자
+                    <button class="menu-btn" onclick="${gameState.money >= 100000 ? 'executeStock(100000)' : 'warnInsufficientFunds(100000)'}" ${gameState.money >= 100000 ? '' : 'style="opacity: 0.6;"'}>
+                        10만원 투자 ${gameState.money >= 100000 ? '' : '(자금 부족)'}
                     </button>
-                    <button class="menu-btn" onclick="executeStock(200000)" ${gameState.money >= 200000 ? '' : 'disabled'}>
-                        20만원 투자
+                    <button class="menu-btn" onclick="${gameState.money >= 200000 ? 'executeStock(200000)' : 'warnInsufficientFunds(200000)'}" ${gameState.money >= 200000 ? '' : 'style="opacity: 0.6;"'}>
+                        20만원 투자 ${gameState.money >= 200000 ? '' : '(자금 부족)'}
                     </button>
                     <button class="menu-btn" onclick="closeStockModal()">취소</button>
                 </div>
@@ -1363,6 +1396,11 @@ function showStockInvestment(work) {
     `;
     document.body.appendChild(modal);
 }
+
+window.warnInsufficientFunds = function(requiredAmount) {
+    const shortage = requiredAmount - gameState.money;
+    alert(`자금이 부족합니다!\n필요 금액: ${formatMoney(requiredAmount)}\n현재 보유: ${formatMoney(gameState.money)}\n부족 금액: ${formatMoney(shortage)}`);
+};
 
 window.executeStock = function(investment) {
     if (gameState.money < investment) {
@@ -1399,13 +1437,120 @@ window.closeStockModal = function() {
 };
 
 function doRest() {
-    gameState.stamina = 80;  // 체력 80으로만 회복 (난이도 상승)
-
-    recordActivity('rest', '😴');
-
-    showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0);
-    nextDay();
+    showRestMenu();
 }
+
+function showRestMenu() {
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>😴 휴식하기</h2>
+                <button class="close-btn" onclick="closeModal('rest-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>어떻게 휴식을 취하시겠습니까?</p>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+                    <div class="action-option" onclick="selectRestOption('sleep')">
+                        <div class="option-icon">🛏️</div>
+                        <div class="option-info">
+                            <div class="option-name">잠자기</div>
+                            <div class="option-desc">푹 자고 일어나면 내일이 됩니다</div>
+                            <div class="action-gain">⚡ 체력 +80, 🧠 멘탈 +30</div>
+                        </div>
+                    </div>
+                    <div class="action-option" onclick="selectRestOption('game')">
+                        <div class="option-icon">🎮</div>
+                        <div class="option-info">
+                            <div class="option-name">게임하기</div>
+                            <div class="option-desc">게임을 하며 스트레스를 풉니다</div>
+                            <div class="action-cost">⚡ 체력 -20</div>
+                            <div class="action-gain">🧠 멘탈 +50</div>
+                        </div>
+                    </div>
+                    <div class="action-option" onclick="selectRestOption('exercise')">
+                        <div class="option-icon">🏃</div>
+                        <div class="option-info">
+                            <div class="option-name">운동하기</div>
+                            <div class="option-desc">가볍게 운동하며 기분전환을 합니다</div>
+                            <div class="action-cost">⚡ 체력 -30</div>
+                            <div class="action-gain">🧠 멘탈 +40, 💪 건강 증진</div>
+                        </div>
+                    </div>
+                    <div class="action-option" onclick="selectRestOption('meditation')">
+                        <div class="option-icon">🧘</div>
+                        <div class="option-info">
+                            <div class="option-name">명상하기</div>
+                            <div class="option-desc">마음을 가라앉히고 명상합니다</div>
+                            <div class="action-cost">⚡ 체력 -10</div>
+                            <div class="action-gain">🧠 멘탈 +35, 💖 호감도 +2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    let modal = document.getElementById('rest-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'rest-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('rest-modal');
+}
+
+window.selectRestOption = function(option) {
+    closeModal('rest-modal');
+
+    switch(option) {
+        case 'sleep':
+            gameState.stamina = Math.min(100, gameState.stamina + 80);
+            gameState.mental = Math.min(100, gameState.mental + 30);
+            recordActivity('rest', '😴');
+            showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0, '⚡+80, 🧠+30');
+            nextDay();
+            break;
+
+        case 'game':
+            if (gameState.stamina < 20) {
+                alert('체력이 부족합니다! (필요: 20)');
+                return;
+            }
+            gameState.stamina -= 20;
+            gameState.mental = Math.min(100, gameState.mental + 50);
+            recordActivity('rest', '🎮');
+            showResult('게임을 하며 스트레스를 풀었습니다!', 0, 0, '⚡-20, 🧠+50');
+            break;
+
+        case 'exercise':
+            if (gameState.stamina < 30) {
+                alert('체력이 부족합니다! (필요: 30)');
+                return;
+            }
+            gameState.stamina -= 30;
+            gameState.mental = Math.min(100, gameState.mental + 40);
+            recordActivity('rest', '🏃');
+            showResult('운동을 하며 기분전환을 했습니다!', 0, 0, '⚡-30, 🧠+40');
+            break;
+
+        case 'meditation':
+            if (gameState.stamina < 10) {
+                alert('체력이 부족합니다! (필요: 10)');
+                return;
+            }
+            gameState.stamina -= 10;
+            gameState.mental = Math.min(100, gameState.mental + 35);
+            gameState.affection = Math.min(100, gameState.affection + 2);
+            recordActivity('rest', '🧘');
+            showResult('명상을 통해 마음의 평온을 찾았습니다.', 2, 0, '⚡-10, 🧠+35');
+            break;
+    }
+
+    updateAllUI();
+};
 
 // ============================================
 // 결과 표시
@@ -1718,6 +1863,14 @@ function endGame() {
     showEnding(endingType, title, message);
 }
 
+function showMentalGameOver() {
+    const endingType = 'gameover';
+    const title = '😵 게임 오버 - 멘탈 붕괴';
+    const message = `정신적으로 너무 힘들어서 더 이상 관계를 이어갈 수 없게 되었습니다...\n\n데이트 거절, 안 좋은 반응, 스킨십 거절 등으로 인한 스트레스가 쌓여 멘탈이 무너졌습니다.\n\n휴식을 취하며 멘탈을 관리하는 것도 중요합니다!`;
+
+    showEnding(endingType, title, message);
+}
+
 function showEnding(type, title, message, isProposal = false) {
     document.getElementById('ending-title').textContent = title;
     document.getElementById('ending-message').textContent = message;
@@ -1789,6 +1942,70 @@ function showGameMenu() {
 }
 
 // ============================================
+// 신뢰도 정보 표시
+// ============================================
+function showTrustInfo() {
+    const html = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🤝 신뢰도란?</h2>
+                <button class="close-btn" onclick="closeModal('trust-info-modal')">✕</button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                <div class="guide-section">
+                    <h3>📊 신뢰도의 역할</h3>
+                    <p>신뢰도는 상대방이 당신을 얼마나 믿고 의지하는지를 나타냅니다.</p>
+                    <p>호감도만큼 중요한 지표이며, 다음과 같은 영향을 미칩니다:</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💍 프로포즈 성공률</h3>
+                    <ul>
+                        <li><strong>신뢰도 80% 이상</strong>: 프로포즈 성공 확률 매우 높음</li>
+                        <li><strong>신뢰도 60-79%</strong>: 프로포즈 성공 가능</li>
+                        <li><strong>신뢰도 60% 미만</strong>: 프로포즈 거절 위험</li>
+                    </ul>
+                    <p class="warning">⚠️ 호감도가 높아도 신뢰도가 낮으면 프로포즈가 거절될 수 있습니다!</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🎯 엔딩 판정</h3>
+                    <ul>
+                        <li><strong>퍼펙트 엔딩</strong>: 호감도 100% + 신뢰도 85% 이상</li>
+                        <li><strong>트루 엔딩</strong>: 호감도 100% + 신뢰도 70% 이상</li>
+                        <li><strong>굿 엔딩</strong>: 호감도 100% + 신뢰도 70% 미만</li>
+                    </ul>
+                    <p>신뢰도가 높을수록 더 좋은 엔딩을 볼 수 있습니다!</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💡 신뢰도 올리는 방법</h3>
+                    <ul>
+                        <li><strong>대화하기</strong>: 진솔하고 깊이 있는 대화 (특히 가치관, 미래)</li>
+                        <li><strong>선물하기</strong>: 의미 있는 선물</li>
+                        <li><strong>데이트</strong>: 진심 어린 데이트</li>
+                        <li><strong>일관된 행동</strong>: 약속을 지키고 성실하게 대하기</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal('trust-info-modal')">확인</button>
+            </div>
+        </div>
+    `;
+
+    let modal = document.getElementById('trust-info-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'trust-info-modal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = html;
+    showModal('trust-info-modal');
+}
+
 // 게임 중 도움말
 // ============================================
 function showInGameHelp() {

@@ -346,7 +346,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
 .sidebar-header {
@@ -472,6 +472,15 @@ body {
 
 #stamina-value {
     color: #4169E1;
+}
+
+/* 멘탈 바 */
+.mental-fill {
+    background: linear-gradient(90deg, #9370DB, #BA55D3);
+}
+
+#mental-value {
+    color: #9370DB;
 }
 
 /* 신뢰도 바 */
@@ -648,7 +657,8 @@ body {
     border: 2px solid rgba(255,105,180,0.3);
     border-radius: 10px;
     padding: 12px;
-    margin: 15px;
+    margin: 15px 10px;
+    overflow: visible;
 }
 
 .calendar-display-header {
@@ -663,6 +673,7 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 6px;
+    width: 100%;
 }
 
 .calendar-display-day {
@@ -678,8 +689,9 @@ body {
     position: relative;
     transition: all 0.3s ease;
     cursor: pointer;
-    padding: 6px 4px;
+    padding: 4px 2px;
     overflow: visible;
+    min-width: 0;
 }
 
 .calendar-display-day:hover {
@@ -913,8 +925,12 @@ body {
 
 .ending-container {
     text-align: center;
-    max-width: 600px;
+    max-width: 900px;
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .ending-portrait {
@@ -957,13 +973,17 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
 }
 
 .ending-stats {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 40px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .ending-stat {
@@ -988,12 +1008,16 @@ body {
     line-height: 1.8;
     margin-bottom: 40px;
     color: var(--text-dim);
+    text-align: center;
+    width: 100%;
 }
 
 .ending-buttons {
     display: flex;
     gap: 20px;
     justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .ending-btn {
@@ -1483,6 +1507,19 @@ body {
 /* 유틸리티 */
 .hidden {
     display: none !important;
+}
+
+/* 정보 아이콘 */
+.info-icon {
+    font-size: 0.85rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    margin-left: 5px;
+}
+
+.info-icon:hover {
+    opacity: 1;
 }
 
 /* 카루셀 네비게이션 버튼 */

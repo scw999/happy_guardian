@@ -186,7 +186,7 @@
                     <!-- 신뢰도 -->
                     <div class="resource-bar-wrapper">
                         <div class="resource-label">
-                            <span>🤝 신뢰도</span>
+                            <span>🤝 신뢰도 <span class="info-icon" onclick="showTrustInfo()" title="신뢰도 정보">ℹ️</span></span>
                             <span id="trust-percentage" class="resource-value">30%</span>
                         </div>
                         <div class="resource-bar trust-bar">
@@ -213,6 +213,17 @@
                         </div>
                         <div class="resource-bar stamina-bar">
                             <div id="stamina-fill" class="resource-fill stamina-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <!-- 멘탈 -->
+                    <div class="resource-bar-wrapper">
+                        <div class="resource-label">
+                            <span>🧠 멘탈</span>
+                            <span id="mental-value" class="resource-value">100</span>
+                        </div>
+                        <div class="resource-bar mental-bar">
+                            <div id="mental-fill" class="resource-fill mental-fill" style="width: 100%"></div>
                         </div>
                     </div>
 
