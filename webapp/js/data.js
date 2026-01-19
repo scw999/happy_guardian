@@ -42,6 +42,14 @@ const CHARACTERS = {
             highCostBonus: 1.5,      // 고비용 데이트 보너스
             lowCostPenalty: 0.5,     // 저비용 데이트 페널티
             mistakePenalty: 2.0      // 실수 시 페널티 2배
+        },
+        talkTypePreferences: {
+            // 긍정적: 정중하고 배려 있는 대화 선호
+            'listen': 1.3, 'help': 1.4, 'caring': 1.5, 'respectful': 1.5, 'supportive': 1.4,
+            'romantic': 1.3, 'appreciative': 1.3, 'encouraging': 1.3,
+            // 매우 싫어함: 무례하고 경솔한 태도
+            'dismissive': 0.3, 'sarcastic': 0.2, 'rude': 0.2, 'criticizing': 0.3,
+            'judgmental': 0.2, 'cynical': 0.2, 'distracted': 0.3, 'uninterested': 0.3
         }
     },
     positive: {
@@ -83,6 +91,15 @@ const CHARACTERS = {
             lowCostBonus: 1.3,       // 저비용 데이트 효율 좋음
             neglectPenalty: 5,       // 3일 이상 방치 시 매일 -5
             forgivingNature: true    // 실수에 관대
+        },
+        talkTypePreferences: {
+            // 긍정적: 재미있고 활기찬 대화 선호
+            'enthusiastic': 1.5, 'playful': 1.5, 'engaging': 1.4, 'bonding': 1.5,
+            'inclusive': 1.4, 'participating': 1.4, 'encouraging': 1.5, 'active': 1.4,
+            'appreciative': 1.3, 'interested': 1.3, 'curious': 1.3,
+            // 약간 싫어함: 부정적 태도 (하지만 관대함)
+            'dismissive': 0.6, 'rude': 0.6, 'cynical': 0.6, 'judgmental': 0.6,
+            'criticizing': 0.7, 'sarcastic': 0.7
         }
     },
     tsundere: {
@@ -124,6 +141,15 @@ const CHARACTERS = {
             delayedEffect: true,     // 효과가 다음 날 반영
             stableScore: true,       // 점수 변동 적음
             tsundereBonus: 1.2       // 특정 상황에서 보너스
+        },
+        talkTypePreferences: {
+            // 선호: 장난스럽고 은근한 대화 (직접적 로맨틱은 부끄러워함)
+            'playful': 1.4, 'teasing': 1.5, 'balanced': 1.4, 'sharing': 1.3,
+            'curious': 1.3, 'interested': 1.3, 'deflecting': 1.2,
+            // 부끄러워함: 너무 직접적인 로맨틱 (하지만 싫어하지는 않음)
+            'romantic': 0.9, 'direct_romantic': 0.8, 'generous': 0.85,
+            // 싫어함: 무례하고 공격적인 태도
+            'rude': 0.4, 'sarcastic': 0.4, 'dismissive': 0.5, 'judgmental': 0.5
         }
     },
     career: {
@@ -165,6 +191,17 @@ const CHARACTERS = {
             talkBonus: 1.5,          // 대화 효과 1.5배
             logicRequired: true,     // 논리적 대화 선호
             mistakePenalty: 1.5      // 비논리적 대화 시 페널티
+        },
+        talkTypePreferences: {
+            // 매우 선호: 논리적이고 직접적인 대화
+            'logical': 1.6, 'direct': 1.5, 'honest': 1.6, 'promise': 1.5,
+            'balanced': 1.4, 'explain': 1.4, 'ask': 1.4, 'honest_negative': 1.5,
+            'critical_constructive': 1.5, 'realistic': 1.4,
+            // 중립: 감정적이지만 논리적인 접근
+            'supportive': 1.0, 'caring': 1.0, 'respectful': 1.1,
+            // 싫어함: 지나치게 감정적이거나 논리 없는 태도
+            'romantic': 0.7, 'overly_emotional': 0.6, 'quick_reassure': 0.5,
+            'dismissive': 0.4, 'deflecting': 0.5, 'excuse': 0.6
         }
     }
 };
@@ -1660,6 +1697,51 @@ const TALK_TOPICS = {
                     { text: '"아쉽네요. 다음 기회에 꼭 하세요"', affection: 12, trust: 16, type: 'comfort' },
                     { text: '"제가 기분 풀어드릴게요. 뭐 하고 싶어요?"', affection: 18, trust: 18, type: 'caring' },
                     { text: '"그럴 수도 있죠" 무덤덤하게 반응한다', affection: -8, trust: -10, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'daily_ex_mention',
+                situation: '무심코 전 애인 이야기가 나왔습니다. "전에 사귀던 사람이 이런 걸 좋아했었는데..." 상대방의 표정이 미묘하게 변합니다.',
+                choices: [
+                    { text: '"아, 그랬구나... 근데 지금은 당신이랑 있으니까 더 좋아요"', affection: -5, trust: 10, type: 'recover' },
+                    { text: '"미안해요, 별 뜻 없이 한 말이에요" 사과한다', affection: -3, trust: 15, type: 'apologize' },
+                    { text: '"왜요? 과거 이야기는 안 돼요?" 방어적으로 나온다', affection: -18, trust: -25, type: 'defensive' }
+                ]
+            },
+            {
+                id: 'daily_appearance_critique',
+                situation: '상대방이 오늘 새로 한 헤어스타일을 보여줍니다. 솔직히 말하면... 별로 안 어울립니다. "어때요? 바꿔봤어요!"',
+                choices: [
+                    { text: '"당신은 뭘 해도 예쁘죠. 이것도 잘 어울려요"', affection: 12, trust: -8, type: 'white_lie' },
+                    { text: '"색다른데요? 적응하면 더 좋아 보일 것 같아요"', affection: 8, trust: 18, type: 'honest' },
+                    { text: '"솔직히... 전 스타일이 더 좋았어요"', affection: -10, trust: 22, type: 'too_honest' }
+                ]
+            },
+            {
+                id: 'daily_money_talk',
+                situation: '상대방이 요즘 돈 관리에 대해 고민이 많다고 합니다. "저축도 하고 싶고, 투자도 해보고 싶은데 뭐부터 해야 할지 모르겠어요..."',
+                choices: [
+                    { text: '"제가 아는 방법 알려드릴게요. 같이 공부해요"', affection: 15, trust: 20, type: 'supportive' },
+                    { text: '"어려운 문제네요. 전문가 상담 받아보는 게 어때요?"', affection: 8, trust: 16, type: 'realistic' },
+                    { text: '"돈 문제는 각자 알아서 하는 게 나아요"', affection: -12, trust: -18, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'daily_criticism_handling',
+                situation: '상대방이 말합니다. "아까 제 말에 대답이 좀 차가웠던 것 같은데... 기분 나쁜 일 있었어요?" 당신은 방금 전 대화에서 조금 퉁명스럽게 대답했습니다.',
+                choices: [
+                    { text: '"아, 미안해요. 그냥 다른 생각하느라... 기분 나쁜 건 아니에요"', affection: 10, trust: 18, type: 'honest' },
+                    { text: '"그랬어요? 제가 그랬나... 앞으로 조심할게요"', affection: 12, trust: 20, type: 'apologize' },
+                    { text: '"그게 그렇게 신경 쓰였어요?" 불편한 듯 반응한다', affection: -15, trust: -22, type: 'defensive' }
+                ]
+            },
+            {
+                id: 'daily_political_view',
+                situation: '뉴스를 보다가 사회 이슈에 대한 이야기가 나왔습니다. 상대방과 당신의 의견이 꽤 다릅니다. "저는 이렇게 생각하는데, 당신은 어떻게 생각해요?"',
+                choices: [
+                    { text: '"그런 견해도 있네요. 저는 조금 다르게 생각하는데..."', affection: 5, trust: 20, type: 'respectful_disagree' },
+                    { text: '"그 부분은 동의하기 어렵네요" 솔직하게 말한다', affection: -8, trust: 18, type: 'honest_negative' },
+                    { text: '"그게 맞는 거 아니에요. 제 생각이 더 합리적이에요"', affection: -20, trust: -28, type: 'confrontational' }
                 ]
             }
         ]

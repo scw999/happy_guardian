@@ -652,10 +652,10 @@ function showTalkMenu() {
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
                     const disabled = (canTalk && meetsRequirement) ? '' : 'disabled';
 
-                    // 체력 표시: 기본 비용 또는 기본 비용 → 증가된 비용
-                    let staminaDisplay = `⚡ ${topic.stamina}`;
+                    // 체력 표시: 기본 비용 또는 증가된 비용
+                    let staminaDisplay = `⚡ ${actualStamina}`;
                     if (talkCount > 1) {
-                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina} (대화 ${talkCount}회차)`;
+                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina}`;
                     }
 
                     return `
@@ -691,10 +691,9 @@ function showTalkMenu() {
 function selectTalkTopic(index) {
     const topic = window.currentTopics[index];
 
-    // 대화 전체 횟수 추적 (주제 무관)
+    // 대화 전체 횟수 계산 (증가는 finishMultiStage에서)
     const actionKey = 'talk';
-    gameState.dailyActionCounts[actionKey] = (gameState.dailyActionCounts[actionKey] || 0) + 1;
-    const talkCount = gameState.dailyActionCounts[actionKey];
+    const talkCount = (gameState.dailyActionCounts[actionKey] || 0) + 1;
 
     // 대화 횟수에 따라 체력 배수 증가 (1번째: 1배, 2번째: 2배, 3번째: 3배...)
     let staminaCost = topic.stamina * talkCount;
@@ -828,7 +827,7 @@ window.selectScenarioChoice = function(index) {
     affectionGain = Math.round(affectionGain * difficultyMult);
     trustGain = Math.round(trustGain * difficultyMult);
 
-    const preference = getPreferenceMultiplier(sourceData.id, actionType);
+    const preference = getPreferenceMultiplier(sourceData.id, actionType, choice.type);
     affectionGain = Math.round(affectionGain * preference);
     trustGain = Math.round(trustGain * preference);
 
@@ -926,8 +925,8 @@ window.selectMultiStageChoice = function(index) {
     affectionGain = Math.round(affectionGain * difficultyMult);
     trustGain = Math.round(trustGain * difficultyMult);
 
-    // 선호도 배수
-    const preference = getPreferenceMultiplier(location.id, type);
+    // 선호도 배수 (주제 + 대화 타입)
+    const preference = getPreferenceMultiplier(location.id, type, choice.type);
     affectionGain = Math.round(affectionGain * preference);
     trustGain = Math.round(trustGain * preference);
 
@@ -1063,16 +1062,24 @@ function finishMultiStage() {
     checkDayEnd();
 }
 
-function getPreferenceMultiplier(itemId, actionType) {
+function getPreferenceMultiplier(itemId, actionType, choiceType) {
     if (!gameState.character.preferences) return 1.0;
 
+    let multiplier = 1.0;
+
     if (actionType === 'date') {
-        return gameState.character.preferences.dates[itemId] || 1.0;
+        multiplier = gameState.character.preferences.dates[itemId] || 1.0;
     } else if (actionType === 'talk') {
-        return gameState.character.preferences.talks[itemId] || 1.0;
+        multiplier = gameState.character.preferences.talks[itemId] || 1.0;
     }
 
-    return 1.0;
+    // 대화 타입 선호도 추가 적용
+    if (actionType === 'talk' && choiceType && gameState.character.talkTypePreferences) {
+        const typeMultiplier = gameState.character.talkTypePreferences[choiceType] || 1.0;
+        multiplier *= typeMultiplier;
+    }
+
+    return multiplier;
 }
 
 function getBiorhythmMultiplier() {
