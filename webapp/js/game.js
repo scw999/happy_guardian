@@ -1688,7 +1688,8 @@ function attemptProposal() {
         message = `${gameState.character.fullName}이(가) 당황하며 거절했습니다...`;
     }
 
-    showEnding(endingType, title, message);
+    // 프로포즈 엔딩이므로 큰 이미지 표시
+    showEnding(endingType, title, message, true);
 }
 
 function endGame() {
@@ -1717,7 +1718,7 @@ function endGame() {
     showEnding(endingType, title, message);
 }
 
-function showEnding(type, title, message) {
+function showEnding(type, title, message, isProposal = false) {
     document.getElementById('ending-title').textContent = title;
     document.getElementById('ending-message').textContent = message;
     document.getElementById('final-affection').textContent = Math.round(gameState.affection) + '%';
@@ -1750,6 +1751,13 @@ function showEnding(type, title, message) {
     const color = colors[type] || '#ff4444';
     endingPortrait.style.borderColor = color;
     endingPortrait.style.boxShadow = `0 0 50px ${color}80`;
+
+    // 프로포즈 엔딩인 경우 큰 이미지 적용
+    if (isProposal) {
+        endingPortrait.classList.add('proposal-ending');
+    } else {
+        endingPortrait.classList.remove('proposal-ending');
+    }
 
     showScreen('ending-screen');
 }

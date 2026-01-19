@@ -928,6 +928,14 @@ body {
     box-shadow: 0 0 50px rgba(255,105,180,0.8);
 }
 
+/* 프로포즈 엔딩 시 큰 이미지 (4배 크기) */
+.ending-portrait.proposal-ending {
+    width: 800px;
+    height: 800px;
+    border-width: 10px;
+    box-shadow: 0 0 100px rgba(255,105,180,1);
+}
+
 .ending-char-image {
     width: 100%;
     height: 100%;
