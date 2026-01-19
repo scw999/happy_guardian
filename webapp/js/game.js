@@ -643,13 +643,10 @@ function showTalkMenu() {
             <div class="modal-body">
                 <p>무엇에 대해 이야기할까요?</p>
                 ${topics.map((topic, idx) => {
-                    // 이 주제로 오늘 대화한 횟수 계산
-                    const repeatCount = (gameState.dailyActionCounts['talk_' + topic.id] || 0) + 1;
-                    // 반복 페널티 적용된 체력 계산
-                    let actualStamina = topic.stamina;
-                    if (repeatCount > 1) {
-                        actualStamina = Math.round(topic.stamina * (1 + (repeatCount - 1) * 5.0));
-                    }
+                    // 오늘 대화한 전체 횟수 계산 (주제 무관)
+                    const talkCount = (gameState.dailyActionCounts['talk'] || 0) + 1;
+                    // 대화 횟수에 따라 체력 배수 증가 (1번째: 1배, 2번째: 2배, 3번째: 3배...)
+                    let actualStamina = topic.stamina * talkCount;
 
                     const canTalk = gameState.stamina >= actualStamina;
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
@@ -657,8 +654,8 @@ function showTalkMenu() {
 
                     // 체력 표시: 기본 비용 또는 기본 비용 → 증가된 비용
                     let staminaDisplay = `⚡ ${topic.stamina}`;
-                    if (repeatCount > 1) {
-                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina} (${repeatCount}회차)`;
+                    if (talkCount > 1) {
+                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina} (대화 ${talkCount}회차)`;
                     }
 
                     return `
@@ -694,16 +691,13 @@ function showTalkMenu() {
 function selectTalkTopic(index) {
     const topic = window.currentTopics[index];
 
-    // 반복 행동 추적 및 추가 체력 소모
-    const actionKey = 'talk_' + topic.id;
+    // 대화 전체 횟수 추적 (주제 무관)
+    const actionKey = 'talk';
     gameState.dailyActionCounts[actionKey] = (gameState.dailyActionCounts[actionKey] || 0) + 1;
-    const repeatCount = gameState.dailyActionCounts[actionKey];
+    const talkCount = gameState.dailyActionCounts[actionKey];
 
-    // 반복 횟수에 따라 추가 체력 소모 (500%씩 증가 - 1번째: 기본, 2번째: 6배, 3번째: 11배)
-    let staminaCost = topic.stamina;
-    if (repeatCount > 1) {
-        staminaCost = Math.round(topic.stamina * (1 + (repeatCount - 1) * 5.0));
-    }
+    // 대화 횟수에 따라 체력 배수 증가 (1번째: 1배, 2번째: 2배, 3번째: 3배...)
+    let staminaCost = topic.stamina * talkCount;
 
     if (gameState.stamina < staminaCost) {
         alert('체력이 부족합니다!');

@@ -4725,6 +4725,141 @@ const CRISIS_EVENTS = [
             { text: '"잠깐만요, 거의 끝났어요" 계속한다.', affection: -15, trust: -20, type: 'continue' },
             { text: '"조금만 기다려주세요" 부탁한다.', affection: -8, trust: -10, type: 'ask_wait' }
         ]
+    },
+    {
+        id: 'insensitive_comment',
+        situation: '상대방이 새로 산 옷을 입고 왔는데, 무심코 "별로네요"라고 말했습니다.',
+        choices: [
+            { text: '"농담이에요! 정말 잘 어울려요" 즉시 정정한다.', affection: -5, trust: 0, type: 'joke' },
+            { text: '"미안해요, 솔직한 게 좋을 것 같아서..." 변명한다.', affection: -18, trust: -15, type: 'excuse' },
+            { text: '진심으로 사과하고 왜 기분이 상했는지 듣는다.', affection: -8, trust: 12, type: 'apologize' }
+        ]
+    },
+    {
+        id: 'secret_revealed',
+        situation: '상대방이 비밀로 부탁한 이야기를 친구들에게 말한 것을 들켰습니다.',
+        choices: [
+            { text: '"중요한 비밀인 줄 몰랐어요" 변명한다.', affection: -20, trust: -30, type: 'excuse' },
+            { text: '진심으로 사과하고 다시는 그러지 않겠다고 약속한다.', affection: -12, trust: -18, type: 'apologize' },
+            { text: '"그 정도는 괜찮지 않아요?" 대수롭지 않게 여긴다.', affection: -30, trust: -40, type: 'dismiss' }
+        ]
+    },
+    {
+        id: 'comparison_comment',
+        situation: '무심코 "친구는 이렇게 하던데?"라며 상대방과 다른 사람을 비교했습니다.',
+        choices: [
+            { text: '"비교한 게 아니라 그냥 이야기한 거예요" 해명한다.', affection: -15, trust: -18, type: 'excuse' },
+            { text: '"미안해요, 당신이 제일 좋아요" 즉시 사과한다.', affection: -5, trust: 5, type: 'apologize' },
+            { text: '침묵하며 왜 기분이 나빴는지 진지하게 듣는다.', affection: -8, trust: 15, type: 'listen' }
+        ]
+    },
+    {
+        id: 'lack_of_interest',
+        situation: '상대방이 몇 주간 준비한 발표에 대해 이야기하는데, 당신은 딴생각을 하고 있었습니다.',
+        choices: [
+            { text: '"죄송해요, 다시 말씀해주세요" 솔직하게 인정한다.', affection: -10, trust: 8, type: 'honest' },
+            { text: '들은 척하며 "잘했겠네요" 대충 넘긴다.', affection: -22, trust: -25, type: 'pretend' },
+            { text: '"요즘 제가 좀 피곤해서..." 변명한다.', affection: -15, trust: -12, type: 'excuse' }
+        ]
+    },
+    {
+        id: 'no_help_offered',
+        situation: '상대방이 이사를 하는데, 당신은 "바쁘다"며 도와주지 않았습니다.',
+        choices: [
+            { text: '"정말 급한 일이 있었어요" 사정을 설명한다.', affection: -12, trust: -15, type: 'explain' },
+            { text: '늦게라도 달려가서 도와준다.', affection: -5, trust: 15, type: 'help_late' },
+            { text: '"이사 업체 부르면 되잖아요" 대수롭지 않게 말한다.', affection: -28, trust: -35, type: 'dismiss' }
+        ]
+    },
+    {
+        id: 'lie_caught',
+        situation: '어제 "야근"한다고 했는데, 친구들과 술 마신 게 SNS로 들통났습니다.',
+        choices: [
+            { text: '진심으로 사과하고 왜 거짓말했는지 설명한다.', affection: -15, trust: -25, type: 'apologize' },
+            { text: '"야근 끝나고 잠깐 만난 거예요" 둘러댄다.', affection: -25, trust: -40, type: 'more_lies' },
+            { text: '"가끔은 제 시간도 필요해요" 솔직하게 말한다.', affection: -10, trust: -15, type: 'honest' }
+        ]
+    },
+    {
+        id: 'broken_promise',
+        situation: '약속했던 여행을 갑자기 취소했습니다. 상대방은 이미 모든 준비를 끝냈습니다.',
+        choices: [
+            { text: '진심으로 사과하고 다른 날짜를 다시 잡는다.', affection: -10, trust: -12, type: 'reschedule' },
+            { text: '"어쩔 수 없었어요" 변명만 한다.', affection: -25, trust: -30, type: 'excuse' },
+            { text: '준비한 것에 대해 보상하고 다음엔 꼭 가겠다고 약속한다.', affection: -5, trust: -8, money: -300000, type: 'compensate' }
+        ]
+    },
+    {
+        id: 'rude_to_family',
+        situation: '상대방의 가족 모임에서 무례한 태도를 보였습니다.',
+        choices: [
+            { text: '"원래 제 성격이 이래요" 대수롭지 않게 넘긴다.', affection: -35, trust: -40, type: 'dismiss' },
+            { text: '진심으로 사과하고 다음엔 조심하겠다고 약속한다.', affection: -15, trust: -18, type: 'apologize' },
+            { text: '"너무 긴장했어요" 솔직하게 말하며 사과한다.', affection: -10, trust: -8, type: 'honest' }
+        ]
+    },
+    {
+        id: 'selfish_decision',
+        situation: '상대방과 상의 없이 혼자 중요한 결정을 내렸습니다.',
+        choices: [
+            { text: '"당신도 좋아할 줄 알았어요" 변명한다.', affection: -20, trust: -25, type: 'excuse' },
+            { text: '미안하다며 함께 다시 결정하자고 한다.', affection: -8, trust: 5, type: 'redo' },
+            { text: '"이미 결정한 건데..." 고집을 부린다.', affection: -30, trust: -35, type: 'stubborn' }
+        ]
+    },
+    {
+        id: 'ignore_feelings',
+        situation: '상대방이 화나서 이야기하는데, "왜 이렇게 예민해?"라고 말했습니다.',
+        choices: [
+            { text: '진심으로 사과하고 다시 이야기를 들어준다.', affection: -12, trust: -8, type: 'apologize' },
+            { text: '"사실 그렇잖아요" 계속 방어적으로 나온다.', affection: -32, trust: -38, type: 'defensive' },
+            { text: '왜 화가 났는지 진지하게 물어본다.', affection: -8, trust: 10, type: 'ask' }
+        ]
+    },
+    {
+        id: 'forgot_important_event',
+        situation: '상대방의 중요한 시험/면접일을 깜빡하고 연락도 안 했습니다.',
+        choices: [
+            { text: '"요즘 너무 바빴어요" 변명한다.', affection: -20, trust: -22, type: 'excuse' },
+            { text: '진심으로 사과하고 어떻게 됐는지 물어본다.', affection: -8, trust: -5, type: 'apologize' },
+            { text: '"다음엔 기억할게요" 가볍게 넘긴다.', affection: -25, trust: -28, type: 'dismiss' }
+        ]
+    },
+    {
+        id: 'jealousy_overreaction',
+        situation: '상대방이 이성 친구와 이야기하는 것을 보고 심하게 질투했습니다.',
+        choices: [
+            { text: '진심으로 사과하고 믿는다고 말한다.', affection: -8, trust: -15, type: 'apologize' },
+            { text: '"그래도 기분 나빴어요" 계속 삐진다.', affection: -18, trust: -25, type: 'sulk' },
+            { text: '"앞으로 이성 친구 좀 조심해주세요" 요구한다.', affection: -22, trust: -30, type: 'demand' }
+        ]
+    },
+    {
+        id: 'credit_stealing',
+        situation: '상대방이 도와준 일을 혼자 한 것처럼 다른 사람들에게 말했습니다.',
+        choices: [
+            { text: '즉시 바로잡고 상대방의 공로를 인정한다.', affection: -5, trust: 0, type: 'correct' },
+            { text: '"실수였어요" 나중에 변명한다.', affection: -20, trust: -30, type: 'excuse' },
+            { text: '"같이 한 거잖아요" 대수롭지 않게 여긴다.', affection: -28, trust: -38, type: 'dismiss' }
+        ]
+    },
+    {
+        id: 'harsh_criticism',
+        situation: '상대방의 취미나 관심사를 "시간 낭비"라고 비판했습니다.',
+        choices: [
+            { text: '"걱정돼서 그런 거예요" 해명한다.', affection: -18, trust: -15, type: 'excuse' },
+            { text: '진심으로 사과하고 앞으로 존중하겠다고 약속한다.', affection: -10, trust: -8, type: 'apologize' },
+            { text: '"사실이잖아요" 계속 주장한다.', affection: -35, trust: -40, type: 'insist' }
+        ]
+    },
+    {
+        id: 'attention_seeking',
+        situation: '상대방이 힘든 이야기를 하는데, "저도 힘들어요"라며 화제를 돌렸습니다.',
+        choices: [
+            { text: '"미안해요, 당신 이야기를 들을게요" 다시 돌린다.', affection: -8, trust: 5, type: 'refocus' },
+            { text: '계속 자신의 이야기를 한다.', affection: -25, trust: -30, type: 'continue' },
+            { text: '"같이 힘들어요" 공감하려 한다.', affection: -12, trust: -10, type: 'empathy_attempt' }
+        ]
     }
 ];
 
