@@ -1297,7 +1297,7 @@ const TALK_TOPICS = {
         id: 'daily',
         name: '일상 이야기',
         icon: '☀️',
-        stamina: 15,
+        stamina: 10,  // 가벼운 일상 대화
         baseAffection: 2,
         baseTrust: 2,
         description: '오늘 있었던 일을 나눕니다',
@@ -1668,7 +1668,7 @@ const TALK_TOPICS = {
         id: 'comfort',
         name: '위로하기',
         icon: '🤗',
-        stamina: 15,
+        stamina: 18,  // 감성적 대화, 체력 더 소모
         baseAffection: 2,
         baseTrust: 3,
         description: '힘든 일을 들어주고 위로합니다',
@@ -2030,7 +2030,7 @@ const TALK_TOPICS = {
         id: 'future',
         name: '미래 계획',
         icon: '🌟',
-        stamina: 15,
+        stamina: 22,  // 진지한 미래 대화, 체력 많이 소모
         baseAffection: 3,
         baseTrust: 4,
         description: '앞으로의 계획과 꿈을 이야기합니다',
@@ -2393,7 +2393,7 @@ const TALK_TOPICS = {
         id: 'humor',
         name: '농담/유머',
         icon: '😄',
-        stamina: 15,
+        stamina: 12,  // 가벼운 유머, 중간 수준
         baseAffection: 3,  // 대폭 감소 (8 → 3)
         baseTrust: 1,  // 대폭 감소 (3 → 1)
         description: '즐거운 농담으로 분위기를 띄웁니다',
@@ -2778,6 +2778,1474 @@ const TALK_TOPICS = {
                     { text: '"당신이 해준 음식"', affection: 20, trust: 18, type: 'sweet', successRate: 0.7 },
                     { text: '황당한 메뉴로 웃긴다', affection: 16, trust: 14, type: 'funny', successRate: 0.7 },
                     { text: '"무서운 질문이네요"', affection: -8, trust: -10, type: 'dark', successRate: 0.5 }
+                ]
+            }
+        ]
+    },
+    hobby: {
+        id: 'hobby',
+        name: '취미 이야기',
+        icon: '🎨',
+        stamina: 14,
+        baseAffection: 3,
+        baseTrust: 3,
+        description: '서로의 취미와 관심사를 나눕니다',
+        scenarios: [
+            {
+                id: 'hobby_painting',
+                situation: '"그림 그리는 것 좋아해요" 라고 말합니다.',
+                choices: [
+                    { text: '"어떤 그림 그리세요? 보고 싶어요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"저도 배워보고 싶어요. 가르쳐주세요"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"그림은 잘 모르겠어요"', affection: -8, trust: -10, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'hobby_photography',
+                situation: '"사진 찍는 게 취미예요"',
+                choices: [
+                    { text: '"제 사진도 찍어주세요"', affection: 16, trust: 14, type: 'request' },
+                    { text: '"어떤 사진 주로 찍으세요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"요즘 누가 사진을..."', affection: -12, trust: -14, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_guitar',
+                situation: '"기타 치는 거 배우고 있어요"',
+                choices: [
+                    { text: '"언젠가 제게 연주해주세요"', affection: 16, trust: 14, type: 'romantic' },
+                    { text: '"어떤 곡 연습하세요?"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"시끄럽지 않나요?"', affection: -15, trust: -18, type: 'rude' }
+                ]
+            },
+            {
+                id: 'hobby_cooking',
+                situation: '"요리하는 게 정말 재미있어요"',
+                choices: [
+                    { text: '"언젠가 같이 요리해요"', affection: 18, trust: 16, type: 'together' },
+                    { text: '"어떤 요리 잘하세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"저는 먹기만 할게요"', affection: -8, trust: -10, type: 'lazy' }
+                ]
+            },
+            {
+                id: 'hobby_reading',
+                situation: '"독서가 취미예요. 요즘 재미있는 책 읽고 있어요"',
+                choices: [
+                    { text: '"어떤 책이에요? 추천해주세요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"같이 독서 모임 할까요?"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"책은 지루해요"', affection: -12, trust: -15, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_gaming',
+                situation: '"게임하는 거 좋아해요"',
+                choices: [
+                    { text: '"같이 할 수 있는 게임 있어요?"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"어떤 게임 하세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"게임은 시간 낭비예요"', affection: -18, trust: -20, type: 'critical' }
+                ]
+            },
+            {
+                id: 'hobby_yoga',
+                situation: '"요가 배우기 시작했어요"',
+                choices: [
+                    { text: '"건강에 좋죠. 대단해요"', affection: 14, trust: 16, type: 'supportive' },
+                    { text: '"저도 같이 배울까요?"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"힘들지 않아요?"', affection: -6, trust: -8, type: 'doubting' }
+                ]
+            },
+            {
+                id: 'hobby_baking',
+                situation: '"베이킹이 취미예요. 빵 만드는 게 재미있어요"',
+                choices: [
+                    { text: '"맛보고 싶어요!"', affection: 16, trust: 14, type: 'excited' },
+                    { text: '"어떤 빵 만드세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"단 거 별로 안 좋아해요"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_hiking',
+                situation: '"등산하는 거 좋아해요"',
+                choices: [
+                    { text: '"같이 가요! 어디 좋은 곳 있어요?"', affection: 18, trust: 16, type: 'enthusiastic' },
+                    { text: '"건강하시겠어요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"저는 집이 좋은데..."', affection: -12, trust: -14, type: 'lazy' }
+                ]
+            },
+            {
+                id: 'hobby_collecting',
+                situation: '"피규어 수집하는 게 취미예요"',
+                choices: [
+                    { text: '"어떤 거 모으세요? 보여주세요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"열정이 멋져요"', affection: 14, trust: 16, type: 'supportive' },
+                    { text: '"돈 낭비 아니에요?"', affection: -20, trust: -22, type: 'critical' }
+                ]
+            },
+            {
+                id: 'hobby_dance',
+                situation: '"춤추는 게 좋아요"',
+                choices: [
+                    { text: '"같이 춤춰요!"', affection: 18, trust: 14, type: 'join' },
+                    { text: '"어떤 춤 추세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"저는 춤 못 춰요"', affection: -8, trust: -10, type: 'refuse' }
+                ]
+            },
+            {
+                id: 'hobby_gardening',
+                situation: '"식물 키우는 게 취미예요"',
+                choices: [
+                    { text: '"무슨 식물 키우세요?"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"저도 배우고 싶어요"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"저는 식물 다 죽여요"', affection: -6, trust: -8, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_writing',
+                situation: '"글쓰기가 취미예요"',
+                choices: [
+                    { text: '"어떤 글 쓰세요? 읽어보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"멋져요. 언젠가 책 내세요"', affection: 14, trust: 16, type: 'encouraging' },
+                    { text: '"글쓰기는 어려워요"', affection: -6, trust: -8, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_running',
+                situation: '"러닝이 취미예요"',
+                choices: [
+                    { text: '"같이 뛸까요?"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"건강하시겠어요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"힘들지 않아요?"', affection: -6, trust: -8, type: 'doubting' }
+                ]
+            },
+            {
+                id: 'hobby_board_games',
+                situation: '"보드게임 좋아해요"',
+                choices: [
+                    { text: '"같이 해요! 무슨 게임 좋아하세요?"', affection: 18, trust: 16, type: 'enthusiastic' },
+                    { text: '"재미있겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"유치한 거 아니에요?"', affection: -15, trust: -18, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_fishing',
+                situation: '"낚시하는 게 좋아요"',
+                choices: [
+                    { text: '"같이 가요. 가르쳐주세요"', affection: 16, trust: 16, type: 'join' },
+                    { text: '"여유로워 보여요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"지루하지 않아요?"', affection: -12, trust: -14, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_knitting',
+                situation: '"뜨개질이 취미예요"',
+                choices: [
+                    { text: '"제게도 뭔가 만들어주세요"', affection: 16, trust: 14, type: 'request' },
+                    { text: '"손재주가 좋으시네요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"할머니 취미 아니에요?"', affection: -18, trust: -20, type: 'rude' }
+                ]
+            },
+            {
+                id: 'hobby_cycling',
+                situation: '"자전거 타는 게 좋아요"',
+                choices: [
+                    { text: '"같이 라이딩 가요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"어디 타러 가세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried' }
+                ]
+            },
+            {
+                id: 'hobby_pottery',
+                situation: '"도자기 만드는 거 배우고 있어요"',
+                choices: [
+                    { text: '"멋져요! 작품 보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"같이 배울 수 있을까요?"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"어려울 것 같은데..."', affection: -8, trust: -10, type: 'doubting' }
+                ]
+            },
+            {
+                id: 'hobby_astronomy',
+                situation: '"천체 관측이 취미예요"',
+                choices: [
+                    { text: '"같이 별 보러 가요!"', affection: 20, trust: 18, type: 'romantic' },
+                    { text: '"로맨틱하네요"', affection: 16, trust: 14, type: 'positive' },
+                    { text: '"밤에 춥지 않아요?"', affection: -6, trust: -8, type: 'practical' }
+                ]
+            },
+            {
+                id: 'hobby_podcast',
+                situation: '"팟캐스트 듣는 게 좋아요"',
+                choices: [
+                    { text: '"어떤 거 들으세요? 추천해주세요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"같이 들어요"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"그런 게 재미있어요?"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_volunteering',
+                situation: '"봉사활동하는 게 보람차요"',
+                choices: [
+                    { text: '"존경스러워요. 같이 할 수 있을까요?"', affection: 18, trust: 20, type: 'respectful' },
+                    { text: '"어떤 봉사하세요?"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"시간 많으시네요"', affection: -15, trust: -18, type: 'sarcastic' }
+                ]
+            },
+            {
+                id: 'hobby_magic',
+                situation: '"마술 배우는 게 취미예요"',
+                choices: [
+                    { text: '"보여주세요! 신기할 것 같아요"', affection: 18, trust: 16, type: 'excited' },
+                    { text: '"어떤 마술 할 수 있어요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"트릭일 뿐이잖아요"', affection: -15, trust: -18, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_coding',
+                situation: '"프로그래밍이 취미예요"',
+                choices: [
+                    { text: '"멋져요! 뭘 만드세요?"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"저도 배워보고 싶어요"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"너무 어려워요"', affection: -8, trust: -10, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_language',
+                situation: '"외국어 공부하는 게 재미있어요"',
+                choices: [
+                    { text: '"어떤 언어요? 같이 배워요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"대단하시네요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"필요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_animals',
+                situation: '"동물 보호소에서 봉사해요"',
+                choices: [
+                    { text: '"같이 가도 될까요?"', affection: 18, trust: 18, type: 'join' },
+                    { text: '"착하시네요"', affection: 14, trust: 16, type: 'compliment' },
+                    { text: '"냄새 안 나요?"', affection: -18, trust: -20, type: 'rude' }
+                ]
+            },
+            {
+                id: 'hobby_model',
+                situation: '"프라모델 조립하는 게 취미예요"',
+                choices: [
+                    { text: '"어떤 거 만드세요? 보여주세요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"집중력이 좋으시네요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"애들 장난감 아니에요?"', affection: -18, trust: -20, type: 'rude' }
+                ]
+            },
+            {
+                id: 'hobby_meditation',
+                situation: '"명상하는 게 취미예요"',
+                choices: [
+                    { text: '"저도 배우고 싶어요"', affection: 16, trust: 16, type: 'join' },
+                    { text: '"평화로워 보여요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"그냥 가만히 있는 거 아니에요?"', affection: -12, trust: -14, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_singing',
+                situation: '"노래 부르는 거 좋아해요"',
+                choices: [
+                    { text: '"같이 노래방 가요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"어떤 노래 좋아하세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"저는 음치예요"', affection: -6, trust: -8, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_investment',
+                situation: '"주식 투자 공부하고 있어요"',
+                choices: [
+                    { text: '"현명하시네요. 조언 부탁해요"', affection: 14, trust: 18, type: 'respectful' },
+                    { text: '"어떻게 공부하세요?"', affection: 12, trust: 16, type: 'curious' },
+                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried' }
+                ]
+            },
+            {
+                id: 'hobby_wine',
+                situation: '"와인 공부하는 게 취미예요"',
+                choices: [
+                    { text: '"멋져요! 추천해주세요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"같이 와인 시음회 가요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"술은 별로예요"', affection: -12, trust: -14, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_camping',
+                situation: '"캠핑 다니는 게 좋아요"',
+                choices: [
+                    { text: '"같이 가요! 언제 갈까요?"', affection: 20, trust: 18, type: 'enthusiastic' },
+                    { text: '"자연 속에서 좋겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"불편하지 않아요?"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_coffee',
+                situation: '"커피 로스팅이 취미예요"',
+                choices: [
+                    { text: '"맛보고 싶어요!"', affection: 16, trust: 16, type: 'excited' },
+                    { text: '"전문가시네요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"그냥 사 먹으면 안 돼요?"', affection: -15, trust: -18, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_escape_room',
+                situation: '"방탈출 게임 좋아해요"',
+                choices: [
+                    { text: '"같이 도전해요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"재미있겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"갇히는 거 무서워요"', affection: -8, trust: -10, type: 'scared' }
+                ]
+            },
+            {
+                id: 'hobby_calligraphy',
+                situation: '"서예가 취미예요"',
+                choices: [
+                    { text: '"멋져요. 작품 보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"저도 배우고 싶어요"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"요즘 누가 그런 걸..."', affection: -18, trust: -20, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_vlog',
+                situation: '"브이로그 찍는 게 취미예요"',
+                choices: [
+                    { text: '"보고 싶어요! 어디서 볼 수 있어요?"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"같이 찍어요"', affection: 18, trust: 14, type: 'join' },
+                    { text: '"부끄럽지 않아요?"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'hobby_skateboard',
+                situation: '"스케이트보드 타는 게 취미예요"',
+                choices: [
+                    { text: '"멋져요! 가르쳐주세요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"조심하세요"', affection: 12, trust: 14, type: 'worried' },
+                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried_negative' }
+                ]
+            },
+            {
+                id: 'hobby_diy',
+                situation: '"DIY 공예가 취미예요"',
+                choices: [
+                    { text: '"뭘 만드셨어요? 보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"같이 만들어요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"그냥 사는 게 낫지 않아요?"', affection: -15, trust: -18, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'hobby_tea',
+                situation: '"차 공부하는 게 취미예요"',
+                choices: [
+                    { text: '"같이 차 마셔요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"어떤 차 좋아하세요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"커피가 더 낫지 않아요?"', affection: -12, trust: -14, type: 'dismissive' }
+                ]
+            }
+        ]
+    },
+    memories: {
+        id: 'memories',
+        name: '추억 나누기',
+        icon: '📸',
+        stamina: 16,
+        baseAffection: 4,
+        baseTrust: 5,
+        description: '과거의 소중한 기억들을 함께 나눕니다',
+        minAffection: 30,
+        scenarios: [
+            {
+                id: 'memories_childhood_home',
+                situation: '"어릴 때 살던 집이 그리워요"',
+                choices: [
+                    { text: '"어떤 집이었는지 이야기해줘요"', affection: 16, trust: 18, type: 'listen' },
+                    { text: '"언젠가 같이 가볼까요?"', affection: 18, trust: 16, type: 'romantic' },
+                    { text: '"과거는 과거예요"', affection: -12, trust: -15, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_first_love',
+                situation: '"첫사랑 이야기 궁금해요?"',
+                choices: [
+                    { text: '"듣고 싶어요. 이야기해줘요"', affection: 14, trust: 20, type: 'open' },
+                    { text: '"과거보다 현재가 중요해요"', affection: 12, trust: 16, type: 'present_focus' },
+                    { text: '"듣기 싫은데요"', affection: -10, trust: -12, type: 'jealous' }
+                ]
+            },
+            {
+                id: 'memories_best_friend',
+                situation: '"어릴 때 제일 친한 친구 있었어요"',
+                choices: [
+                    { text: '"어떤 친구였는지 궁금해요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"지금도 연락해요?"', affection: 12, trust: 16, type: 'curious' },
+                    { text: '"옛날 친구 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                ]
+            },
+            {
+                id: 'memories_family_trip',
+                situation: '"가족 여행 갔던 기억이 나요"',
+                choices: [
+                    { text: '"어디 갔었는지 이야기해줘요"', affection: 16, trust: 18, type: 'listen' },
+                    { text: '"좋은 추억이네요"', affection: 14, trust: 16, type: 'positive' },
+                    { text: '"가족 얘기는 지루해요"', affection: -15, trust: -18, type: 'rude' }
+                ]
+            },
+            {
+                id: 'memories_graduation',
+                situation: '"졸업식 날이 기억나요"',
+                choices: [
+                    { text: '"그때 기분이 어땠어요?"', affection: 14, trust: 18, type: 'empathetic' },
+                    { text: '"저도 그때가 생각나요"', affection: 16, trust: 16, type: 'relate' },
+                    { text: '"그게 중요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_pet',
+                situation: '"어릴 때 키우던 강아지가 그리워요"',
+                choices: [
+                    { text: '"어떤 강아지였어요?"', affection: 16, trust: 18, type: 'caring' },
+                    { text: '"많이 그리우시겠어요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"동물일 뿐이에요"', affection: -20, trust: -22, type: 'cold' }
+                ]
+            },
+            {
+                id: 'memories_teacher',
+                situation: '"은사님 생각이 나요"',
+                choices: [
+                    { text: '"어떤 분이셨는지 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"연락드려보는 게 어때요?"', affection: 16, trust: 16, type: 'suggest' },
+                    { text: '"선생님 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                ]
+            },
+            {
+                id: 'memories_first_concert',
+                situation: '"처음 간 콘서트가 기억나요"',
+                choices: [
+                    { text: '"누구 콘서트였어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"재미있었겠어요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"그런 거 돈 아까워요"', affection: -15, trust: -18, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_accident',
+                situation: '"어릴 때 다친 적 있어요"',
+                choices: [
+                    { text: '"괜찮았어요? 어떻게 됐어요?"', affection: 16, trust: 20, type: 'concerned' },
+                    { text: '"많이 아팠겠어요"', affection: 14, trust: 18, type: 'empathetic' },
+                    { text: '"조심하지 그랬어요"', affection: -12, trust: -15, type: 'blame' }
+                ]
+            },
+            {
+                id: 'memories_birthday',
+                situation: '"어릴 때 생일 파티 기억나요"',
+                choices: [
+                    { text: '"어떤 파티였는지 이야기해줘요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"행복한 기억이네요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"옛날 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                ]
+            },
+            {
+                id: 'memories_embarrassing',
+                situation: '"창피했던 기억이 있어요"',
+                choices: [
+                    { text: '"괜찮아요. 누구나 그래요"', affection: 18, trust: 20, type: 'comforting' },
+                    { text: '"뭐였는지 궁금해요"', affection: 12, trust: 14, type: 'curious' },
+                    { text: '웃으며 놀린다', affection: -15, trust: -18, type: 'mock' }
+                ]
+            },
+            {
+                id: 'memories_achievement',
+                situation: '"상 받았던 기억이 나요"',
+                choices: [
+                    { text: '"대단하시네요! 뭐였어요?"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"자랑스러우시겠어요"', affection: 14, trust: 14, type: 'supportive' },
+                    { text: '"별거 아니었나봐요"', affection: -18, trust: -20, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_move',
+                situation: '"이사 많이 다녔어요"',
+                choices: [
+                    { text: '"힘들었겠어요"', affection: 16, trust: 18, type: 'empathetic' },
+                    { text: '"어디어디 살았어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"그래서요?"', affection: -10, trust: -12, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'memories_festival',
+                situation: '"학교 축제가 그리워요"',
+                choices: [
+                    { text: '"어떤 축제였는지 이야기해줘요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"재미있었겠어요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"축제가 뭐가 좋아요?"', affection: -12, trust: -14, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_grandparent',
+                situation: '"할머니/할아버지 생각이 나요"',
+                choices: [
+                    { text: '"어떤 분이셨는지 이야기해줘요"', affection: 16, trust: 20, type: 'caring' },
+                    { text: '손을 잡아준다', affection: 20, trust: 22, type: 'comforting' },
+                    { text: '"슬픈 얘기는..."', affection: -15, trust: -18, type: 'avoid' }
+                ]
+            },
+            {
+                id: 'memories_hobby_start',
+                situation: '"이 취미를 시작한 계기가 있어요"',
+                choices: [
+                    { text: '"궁금해요. 이야기해줘요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"특별한 이야기네요"', affection: 14, trust: 16, type: 'positive' },
+                    { text: '"그냥 시작한 거 아니에요?"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_failure',
+                situation: '"실패했던 기억이 있어요"',
+                choices: [
+                    { text: '"그래도 배운 게 있을 거예요"', affection: 18, trust: 20, type: 'supportive' },
+                    { text: '"힘들었겠어요"', affection: 16, trust: 18, type: 'empathetic' },
+                    { text: '"그러니까 조심하지..."', affection: -18, trust: -20, type: 'blame' }
+                ]
+            },
+            {
+                id: 'memories_friendship_end',
+                situation: '"친구랑 멀어진 적 있어요"',
+                choices: [
+                    { text: '"슬프셨겠어요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"무슨 일이었어요?"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"그럴 수도 있죠"', affection: -10, trust: -12, type: 'cold' }
+                ]
+            },
+            {
+                id: 'memories_award',
+                situation: '"대회에서 우승한 적 있어요"',
+                choices: [
+                    { text: '"대단하시네요!"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"어떤 대회였어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"자랑하시네요"', affection: -15, trust: -18, type: 'sarcastic' }
+                ]
+            },
+            {
+                id: 'memories_first_job',
+                situation: '"첫 직장이 기억나요"',
+                choices: [
+                    { text: '"어땠어요? 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"힘들었겠어요"', affection: 16, trust: 16, type: 'empathetic' },
+                    { text: '"다들 그래요"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_regret',
+                situation: '"후회되는 일이 있어요"',
+                choices: [
+                    { text: '"괜찮아요. 누구나 그래요"', affection: 20, trust: 22, type: 'comforting' },
+                    { text: '"지금이라도 만회할 수 있어요"', affection: 18, trust: 20, type: 'encouraging' },
+                    { text: '"그때 왜 그랬어요?"', affection: -18, trust: -20, type: 'blame' }
+                ]
+            },
+            {
+                id: 'memories_old_photo',
+                situation: '옛날 사진을 보여줍니다.',
+                choices: [
+                    { text: '"귀여우시네요"', affection: 18, trust: 16, type: 'cute' },
+                    { text: '"많이 변하셨네요"', affection: 12, trust: 14, type: 'honest' },
+                    { text: '"왜 이렇게 변했어요?"', affection: -15, trust: -18, type: 'rude' }
+                ]
+            },
+            {
+                id: 'memories_old_house',
+                situation: '"옛날 집 앞을 지나갔어요"',
+                choices: [
+                    { text: '"감회가 새로우시겠어요"', affection: 16, trust: 18, type: 'understanding' },
+                    { text: '"어떤 기분이었어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"그게 중요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_bully',
+                situation: '"학교 다닐 때 힘든 일 있었어요"',
+                choices: [
+                    { text: '"많이 힘들었겠어요" 위로한다', affection: 20, trust: 24, type: 'comforting' },
+                    { text: '손을 잡아준다', affection: 22, trust: 26, type: 'supportive' },
+                    { text: '"왜 말 안 했어요?"', affection: -12, trust: -15, type: 'blame' }
+                ]
+            },
+            {
+                id: 'memories_dream_job',
+                situation: '"어릴 때 꿈이 있었어요"',
+                choices: [
+                    { text: '"뭐였는지 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"지금이라도 도전할 수 있어요"', affection: 18, trust: 20, type: 'encouraging' },
+                    { text: '"꿈은 꿈일 뿐이에요"', affection: -18, trust: -20, type: 'harsh' }
+                ]
+            },
+            {
+                id: 'memories_performance',
+                situation: '"무대에 섰던 기억이 있어요"',
+                choices: [
+                    { text: '"멋지셨겠어요!"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"어떤 무대였어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"떨리지 않았어요?"', affection: 10, trust: 12, type: 'question' }
+                ]
+            },
+            {
+                id: 'memories_lost_item',
+                situation: '"소중한 물건을 잃어버린 적 있어요"',
+                choices: [
+                    { text: '"슬프셨겠어요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"무슨 물건이었어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"조심하지 그랬어요"', affection: -15, trust: -18, type: 'blame' }
+                ]
+            },
+            {
+                id: 'memories_holiday',
+                situation: '"명절 때 기억이 나요"',
+                choices: [
+                    { text: '"어떤 추억이 있으세요?"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"좋은 기억이네요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"명절은 피곤해요"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_promise',
+                situation: '"어릴 때 한 약속이 있어요"',
+                choices: [
+                    { text: '"지켰어요?"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"어떤 약속이었어요?"', affection: 12, trust: 16, type: 'interested' },
+                    { text: '"어릴 때 약속은..."', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'memories_sports_day',
+                situation: '"운동회 때 기억이 나요"',
+                choices: [
+                    { text: '"재미있었겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"어떤 종목 했어요?"', affection: 12, trust: 14, type: 'curious' },
+                    { text: '"그런 거 싫었어요"', affection: -8, trust: -10, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_mentor',
+                situation: '"저에게 영향 준 분이 있어요"',
+                choices: [
+                    { text: '"어떤 분이셨는지 궁금해요"', affection: 16, trust: 20, type: 'interested' },
+                    { text: '"좋은 만남이었네요"', affection: 14, trust: 18, type: 'positive' },
+                    { text: '"그래서요?"', affection: -12, trust: -14, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'memories_sick',
+                situation: '"어릴 때 많이 아팠어요"',
+                choices: [
+                    { text: '"많이 힘들었겠어요"', affection: 18, trust: 22, type: 'empathetic' },
+                    { text: '"지금은 건강하시니 다행이에요"', affection: 16, trust: 20, type: 'positive' },
+                    { text: '"그래서 약하신 거예요?"', affection: -20, trust: -22, type: 'insensitive' }
+                ]
+            },
+            {
+                id: 'memories_talent',
+                situation: '"숨은 재능이 있었어요"',
+                choices: [
+                    { text: '"뭐였어요? 보여주세요"', affection: 16, trust: 16, type: 'excited' },
+                    { text: '"대단하시네요"', affection: 14, trust: 14, type: 'impressed' },
+                    { text: '"지금은 못 하시나봐요"', affection: -15, trust: -18, type: 'sarcastic' }
+                ]
+            },
+            {
+                id: 'memories_snow',
+                situation: '"눈 오는 날 추억이 있어요"',
+                choices: [
+                    { text: '"이야기해줘요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"로맨틱하네요"', affection: 16, trust: 14, type: 'romantic' },
+                    { text: '"눈은 불편해요"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_camp',
+                situation: '"수련회 갔던 기억이 나요"',
+                choices: [
+                    { text: '"재미있었어요?"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"무슨 일 있었어요?"', affection: 12, trust: 14, type: 'interested' },
+                    { text: '"그런 거 싫어요"', affection: -8, trust: -10, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_dance',
+                situation: '"학예회 때 춤췄어요"',
+                choices: [
+                    { text: '"보고 싶어요"', affection: 16, trust: 14, type: 'excited' },
+                    { text: '"멋지셨겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"창피하지 않았어요?"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'memories_rebellion',
+                situation: '"반항기가 있었어요"',
+                choices: [
+                    { text: '"어떻게 지나갔어요?"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"다들 그런 시기 있죠"', affection: 16, trust: 16, type: 'understanding' },
+                    { text: '"부모님 힘들으셨겠네요"', affection: -12, trust: -14, type: 'judgmental' }
+                ]
+            },
+            {
+                id: 'memories_rescue',
+                situation: '"누군가를 도운 기억이 있어요"',
+                choices: [
+                    { text: '"멋지시네요!"', affection: 18, trust: 20, type: 'impressed' },
+                    { text: '"어떻게 도왔어요?"', affection: 16, trust: 18, type: 'curious' },
+                    { text: '"위험하지 않았어요?"', affection: 12, trust: 14, type: 'worried' }
+                ]
+            },
+            {
+                id: 'memories_treasure',
+                situation: '"보물 찾기 했던 기억이 나요"',
+                choices: [
+                    { text: '"재미있었겠어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"찾았어요?"', affection: 12, trust: 12, type: 'curious' },
+                    { text: '"유치하네요"', affection: -15, trust: -18, type: 'dismissive' }
+                ]
+            }
+        ]
+    },
+    values: {
+        id: 'values',
+        name: '가치관',
+        icon: '💭',
+        stamina: 20,
+        baseAffection: 2,
+        baseTrust: 6,
+        description: '인생관과 가치관에 대해 깊이 이야기합니다',
+        minAffection: 50,
+        scenarios: [
+            {
+                id: 'values_success',
+                situation: '"성공이 뭐라고 생각해요?"',
+                choices: [
+                    { text: '"행복한 것이 성공이죠"', affection: 16, trust: 20, type: 'happiness' },
+                    { text: '"자신의 목표를 이루는 것"', affection: 14, trust: 22, type: 'achievement' },
+                    { text: '"돈과 명예"', affection: -10, trust: -12, type: 'materialistic' }
+                ]
+            },
+            {
+                id: 'values_money',
+                situation: '"돈이 중요해요, 아니면 사랑?"',
+                choices: [
+                    { text: '"사랑이 우선이죠"', affection: 20, trust: 18, type: 'love' },
+                    { text: '"둘 다 중요해요"', affection: 12, trust: 20, type: 'balanced' },
+                    { text: '"돈 없이는 사랑도 없어요"', affection: -15, trust: -18, type: 'money' }
+                ]
+            },
+            {
+                id: 'values_honesty',
+                situation: '"진실이 항상 옳을까요?"',
+                choices: [
+                    { text: '"상황에 따라 다르죠"', affection: 12, trust: 22, type: 'situational' },
+                    { text: '"진실이 최우선이에요"', affection: 10, trust: 26, type: 'honest' },
+                    { text: '"거짓말도 필요해요"', affection: -8, trust: -20, type: 'dishonest' }
+                ]
+            },
+            {
+                id: 'values_family',
+                situation: '"가족이 제일 중요해요?"',
+                choices: [
+                    { text: '"당연하죠"', affection: 18, trust: 24, type: 'family_first' },
+                    { text: '"가족도 중요하지만 나도 중요해요"', affection: 14, trust: 20, type: 'balanced' },
+                    { text: '"제 인생이 우선이에요"', affection: -12, trust: -15, type: 'selfish' }
+                ]
+            },
+            {
+                id: 'values_friendship',
+                situation: '"친구 관계를 어떻게 봐요?"',
+                choices: [
+                    { text: '"평생 소중히 해야죠"', affection: 16, trust: 22, type: 'loyal' },
+                    { text: '"서로 도움이 되면 좋죠"', affection: 12, trust: 18, type: 'practical' },
+                    { text: '"필요할 때만 만나요"', affection: -10, trust: -15, type: 'opportunistic' }
+                ]
+            },
+            {
+                id: 'values_forgiveness',
+                situation: '"용서하기 어려운 일도 용서해야 할까요?"',
+                choices: [
+                    { text: '"용서는 자신을 위한 것이에요"', affection: 16, trust: 24, type: 'forgiving' },
+                    { text: '"잘못에 따라 다르죠"', affection: 14, trust: 22, type: 'conditional' },
+                    { text: '"용서 못 할 것도 있어요"', affection: 12, trust: 20, type: 'strict' }
+                ]
+            },
+            {
+                id: 'values_justice',
+                situation: '"정의가 뭐라고 생각해요?"',
+                choices: [
+                    { text: '"약자를 보호하는 것"', affection: 18, trust: 24, type: 'protection' },
+                    { text: '"공정한 것"', affection: 16, trust: 26, type: 'fairness' },
+                    { text: '"힘이 정의예요"', affection: -15, trust: -20, type: 'power' }
+                ]
+            },
+            {
+                id: 'values_work_life',
+                situation: '"일과 삶의 균형, 어떻게 생각해요?"',
+                choices: [
+                    { text: '"삶이 우선이죠"', affection: 18, trust: 20, type: 'life' },
+                    { text: '"균형이 중요해요"', affection: 16, trust: 24, type: 'balance' },
+                    { text: '"일을 열심히 해야죠"', affection: 10, trust: 18, type: 'work' }
+                ]
+            },
+            {
+                id: 'values_change',
+                situation: '"사람은 변할 수 있을까요?"',
+                choices: [
+                    { text: '"노력하면 변할 수 있어요"', affection: 18, trust: 24, type: 'optimistic' },
+                    { text: '"어렵지만 가능해요"', affection: 14, trust: 22, type: 'realistic' },
+                    { text: '"사람은 안 변해요"', affection: -10, trust: -12, type: 'pessimistic' }
+                ]
+            },
+            {
+                id: 'values_happiness',
+                situation: '"행복이 뭐라고 생각해요?"',
+                choices: [
+                    { text: '"사랑하는 사람들과 함께 있는 것"', affection: 22, trust: 24, type: 'relationship' },
+                    { text: '"자신이 원하는 것을 하는 것"', affection: 16, trust: 22, type: 'freedom' },
+                    { text: '"돈과 안정"', affection: -8, trust: -10, type: 'material' }
+                ]
+            },
+            {
+                id: 'values_loyalty',
+                situation: '"충성과 정직함 중 뭐가 더 중요해요?"',
+                choices: [
+                    { text: '"정직함이요"', affection: 14, trust: 28, type: 'honesty' },
+                    { text: '"상황에 따라 다르죠"', affection: 12, trust: 24, type: 'situational' },
+                    { text: '"충성이 우선이에요"', affection: 16, trust: 20, type: 'loyalty' }
+                ]
+            },
+            {
+                id: 'values_nature',
+                situation: '"환경 보호, 어떻게 생각해요?"',
+                choices: [
+                    { text: '"정말 중요해요. 실천하려고 해요"', affection: 18, trust: 24, type: 'active' },
+                    { text: '"중요하다고 생각해요"', affection: 14, trust: 20, type: 'aware' },
+                    { text: '"별로 신경 안 써요"', affection: -15, trust: -18, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'values_religion',
+                situation: '"종교가 필요하다고 생각해요?"',
+                choices: [
+                    { text: '"개인의 선택이에요"', affection: 18, trust: 26, type: 'respectful' },
+                    { text: '"도움이 될 수 있죠"', affection: 14, trust: 22, type: 'positive' },
+                    { text: '"필요없어요"', affection: -10, trust: -12, type: 'negative' }
+                ]
+            },
+            {
+                id: 'values_sacrifice',
+                situation: '"사랑하는 사람을 위해 희생할 수 있어요?"',
+                choices: [
+                    { text: '"당연하죠"', affection: 24, trust: 26, type: 'devoted' },
+                    { text: '"상황에 따라요"', affection: 16, trust: 24, type: 'conditional' },
+                    { text: '"제가 우선이에요"', affection: -15, trust: -18, type: 'selfish' }
+                ]
+            },
+            {
+                id: 'values_truth',
+                situation: '"작은 거짓말도 안 된다고 생각해요?"',
+                choices: [
+                    { text: '"상황에 따라 다르죠"', affection: 16, trust: 24, type: 'flexible' },
+                    { text: '"거짓말은 안 좋아요"', affection: 14, trust: 28, type: 'honest' },
+                    { text: '"필요하면 괜찮아요"', affection: -8, trust: -20, type: 'lenient' }
+                ]
+            },
+            {
+                id: 'values_education',
+                situation: '"교육이 중요하다고 생각해요?"',
+                choices: [
+                    { text: '"정말 중요하죠"', affection: 16, trust: 24, type: 'important' },
+                    { text: '"경험도 중요해요"', affection: 18, trust: 22, type: 'balanced' },
+                    { text: '"별로 중요하지 않아요"', affection: -12, trust: -15, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'values_pride',
+                situation: '"자존심과 사랑 중 뭐가 중요해요?"',
+                choices: [
+                    { text: '"사랑이 우선이죠"', affection: 22, trust: 24, type: 'love' },
+                    { text: '"둘 다 중요해요"', affection: 14, trust: 22, type: 'balanced' },
+                    { text: '"자존심이요"', affection: -15, trust: -18, type: 'pride' }
+                ]
+            },
+            {
+                id: 'values_tradition',
+                situation: '"전통을 지키는 게 중요해요?"',
+                choices: [
+                    { text: '"의미 있는 것은 지켜야죠"', affection: 16, trust: 24, type: 'selective' },
+                    { text: '"중요하지만 변화도 필요해요"', affection: 18, trust: 26, type: 'progressive' },
+                    { text: '"별로 중요하지 않아요"', affection: -10, trust: -12, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'values_equality',
+                situation: '"남녀 평등, 어떻게 생각해요?"',
+                choices: [
+                    { text: '"당연히 평등해야죠"', affection: 20, trust: 28, type: 'equal' },
+                    { text: '"역할이 다를 뿐이에요"', affection: 12, trust: 20, type: 'different' },
+                    { text: '"남자/여자가 우위예요"', affection: -25, trust: -30, type: 'sexist' }
+                ]
+            },
+            {
+                id: 'values_age',
+                situation: '"나이가 중요하다고 생각해요?"',
+                choices: [
+                    { text: '"중요하지 않아요"', affection: 18, trust: 22, type: 'irrelevant' },
+                    { text: '"어느 정도는 고려해야죠"', affection: 14, trust: 24, type: 'moderate' },
+                    { text: '"중요해요"', affection: -10, trust: -12, type: 'important' }
+                ]
+            },
+            {
+                id: 'values_privacy',
+                situation: '"프라이버시가 얼마나 중요해요?"',
+                choices: [
+                    { text: '"정말 중요해요"', affection: 14, trust: 28, type: 'important' },
+                    { text: '"적당히 필요해요"', affection: 16, trust: 24, type: 'moderate' },
+                    { text: '"숨길 게 뭐 있어요?"', affection: -12, trust: -15, type: 'dismissive' }
+                ]
+            },
+            {
+                id: 'values_wealth',
+                situation: '"부자가 되고 싶어요?"',
+                choices: [
+                    { text: '"행복하면 돼요"', affection: 20, trust: 22, type: 'content' },
+                    { text: '"안정적이면 좋겠어요"', affection: 16, trust: 24, type: 'stable' },
+                    { text: '"꼭 부자 되고 싶어요"', affection: -8, trust: -10, type: 'greedy' }
+                ]
+            },
+            {
+                id: 'values_fame',
+                situation: '"유명해지고 싶어요?"',
+                choices: [
+                    { text: '"아니요, 평범이 좋아요"', affection: 18, trust: 24, type: 'humble' },
+                    { text: '"조금은요"', affection: 14, trust: 20, type: 'moderate' },
+                    { text: '"꼭 유명해지고 싶어요"', affection: -10, trust: -12, type: 'fame_seeking' }
+                ]
+            },
+            {
+                id: 'values_revenge',
+                situation: '"복수하는 게 정당화될 수 있을까요?"',
+                choices: [
+                    { text: '"복수는 해결책이 아니에요"', affection: 20, trust: 26, type: 'forgiving' },
+                    { text: '"상황에 따라 다르죠"', affection: 14, trust: 22, type: 'situational' },
+                    { text: '"눈에는 눈"', affection: -12, trust: -15, type: 'vengeful' }
+                ]
+            },
+            {
+                id: 'values_charity',
+                situation: '"기부를 자주 해요?"',
+                choices: [
+                    { text: '"할 수 있을 때 해요"', affection: 18, trust: 24, type: 'charitable' },
+                    { text: '"가끔요"', affection: 14, trust: 20, type: 'occasional' },
+                    { text: '"제 돈이 우선이에요"', affection: -15, trust: -18, type: 'selfish' }
+                ]
+            },
+            {
+                id: 'values_competition',
+                situation: '"경쟁이 필요하다고 생각해요?"',
+                choices: [
+                    { text: '"협력이 더 중요해요"', affection: 18, trust: 24, type: 'cooperative' },
+                    { text: '"적당한 경쟁은 필요해요"', affection: 16, trust: 26, type: 'balanced' },
+                    { text: '"경쟁이 발전시켜요"', affection: 12, trust: 22, type: 'competitive' }
+                ]
+            },
+            {
+                id: 'values_past',
+                situation: '"과거를 잊어야 할까요?"',
+                choices: [
+                    { text: '"배우고 앞으로 나아가야죠"', affection: 18, trust: 26, type: 'learn' },
+                    { text: '"완전히 잊긴 어려워요"', affection: 16, trust: 24, type: 'realistic' },
+                    { text: '"과거는 과거예요"', affection: 12, trust: 20, type: 'forward' }
+                ]
+            },
+            {
+                id: 'values_risk',
+                situation: '"위험을 감수할 가치가 있을까요?"',
+                choices: [
+                    { text: '"신중하게 판단해야죠"', affection: 16, trust: 26, type: 'careful' },
+                    { text: '"때로는 필요해요"', affection: 18, trust: 24, type: 'moderate' },
+                    { text: '"안전이 우선이에요"', affection: 14, trust: 22, type: 'safe' }
+                ]
+            },
+            {
+                id: 'values_beauty',
+                situation: '"외모가 얼마나 중요해요?"',
+                choices: [
+                    { text: '"내면이 더 중요하죠"', affection: 22, trust: 26, type: 'inner' },
+                    { text: '"둘 다 중요해요"', affection: 16, trust: 24, type: 'balanced' },
+                    { text: '"외모가 중요해요"', affection: -15, trust: -18, type: 'shallow' }
+                ]
+            },
+            {
+                id: 'values_promises',
+                situation: '"약속은 꼭 지켜야 할까요?"',
+                choices: [
+                    { text: '"당연하죠"', affection: 18, trust: 30, type: 'reliable' },
+                    { text: '"최선을 다해야죠"', affection: 16, trust: 28, type: 'effort' },
+                    { text: '"상황 따라요"', affection: -10, trust: -20, type: 'unreliable' }
+                ]
+            },
+            {
+                id: 'values_ambition',
+                situation: '"야망이 있어요?"',
+                choices: [
+                    { text: '"행복한 삶이 목표예요"', affection: 18, trust: 22, type: 'content' },
+                    { text: '"이루고 싶은 게 있어요"', affection: 16, trust: 26, type: 'ambitious' },
+                    { text: '"큰 욕심 없어요"', affection: 12, trust: 18, type: 'passive' }
+                ]
+            },
+            {
+                id: 'values_independence',
+                situation: '"독립성이 중요해요?"',
+                choices: [
+                    { text: '"중요하지만 의지할 수도 있어야죠"', affection: 18, trust: 26, type: 'balanced' },
+                    { text: '"정말 중요해요"', affection: 14, trust: 28, type: 'independent' },
+                    { text: '"서로 의지하는 게 좋아요"', affection: 20, trust: 22, type: 'interdependent' }
+                ]
+            },
+            {
+                id: 'values_spontaneity',
+                situation: '"계획적인 게 좋아요, 즉흥적인 게 좋아요?"',
+                choices: [
+                    { text: '"둘 다 좋아요"', affection: 18, trust: 24, type: 'flexible' },
+                    { text: '"계획적인 게 좋아요"', affection: 14, trust: 26, type: 'planned' },
+                    { text: '"즉흥적인 게 재미있어요"', affection: 16, trust: 20, type: 'spontaneous' }
+                ]
+            },
+            {
+                id: 'values_perfection',
+                situation: '"완벽주의자예요?"',
+                choices: [
+                    { text: '"아니요, 적당히가 좋아요"', affection: 16, trust: 22, type: 'relaxed' },
+                    { text: '"어느 정도요"', affection: 14, trust: 24, type: 'moderate' },
+                    { text: '"완벽해야 해요"', affection: -10, trust: -12, type: 'perfectionist' }
+                ]
+            },
+            {
+                id: 'values_humor',
+                situation: '"유머감각이 중요해요?"',
+                choices: [
+                    { text: '"정말 중요하죠"', affection: 20, trust: 22, type: 'important' },
+                    { text: '"있으면 좋죠"', affection: 16, trust: 20, type: 'nice' },
+                    { text: '"별로 안 중요해요"', affection: -12, trust: -14, type: 'serious' }
+                ]
+            },
+            {
+                id: 'values_animals',
+                situation: '"동물 권리를 어떻게 생각해요?"',
+                choices: [
+                    { text: '"정말 중요해요"', affection: 20, trust: 26, type: 'advocate' },
+                    { text: '"보호받아야죠"', affection: 16, trust: 24, type: 'supportive' },
+                    { text: '"별로 신경 안 써요"', affection: -18, trust: -20, type: 'indifferent' }
+                ]
+            },
+            {
+                id: 'values_growth',
+                situation: '"자기계발이 중요해요?"',
+                choices: [
+                    { text: '"정말 중요하죠"', affection: 16, trust: 26, type: 'growth' },
+                    { text: '"적당히요"', affection: 14, trust: 22, type: 'moderate' },
+                    { text: '"현재가 좋아요"', affection: 12, trust: 18, type: 'content' }
+                ]
+            },
+            {
+                id: 'values_loyalty_test',
+                situation: '"친구가 잘못했을 때 편들어줘야 해요?"',
+                choices: [
+                    { text: '"잘못은 잘못이에요"', affection: 14, trust: 28, type: 'principled' },
+                    { text: '"상황 봐서요"', affection: 16, trust: 24, type: 'situational' },
+                    { text: '"당연히 편들어야죠"', affection: 18, trust: 20, type: 'loyal' }
+                ]
+            },
+            {
+                id: 'values_death',
+                situation: '"죽음에 대해 어떻게 생각해요?"',
+                choices: [
+                    { text: '"자연스러운 것이에요"', affection: 16, trust: 24, type: 'accepting' },
+                    { text: '"무섭지만 피할 수 없죠"', affection: 14, trust: 22, type: 'realistic' },
+                    { text: '"생각하기 싫어요"', affection: 12, trust: 18, type: 'avoiding' }
+                ]
+            },
+            {
+                id: 'values_legacy',
+                situation: '"무엇을 남기고 싶어요?"',
+                choices: [
+                    { text: '"좋은 기억이요"', affection: 20, trust: 24, type: 'memories' },
+                    { text: '"긍정적 영향이요"', affection: 18, trust: 26, type: 'impact' },
+                    { text: '"별로 생각 안 해봤어요"', affection: 10, trust: 18, type: 'indifferent' }
+                ]
+            }
+        ]
+    },
+    lifestyle: {
+        id: 'lifestyle',
+        name: '일상 취향',
+        icon: '☕',
+        stamina: 13,
+        baseAffection: 3,
+        baseTrust: 3,
+        description: '일상의 작은 취향들을 공유합니다',
+        scenarios: [
+            {
+                id: 'lifestyle_morning',
+                situation: '"아침형인가요 저녁형인가요?"',
+                choices: [
+                    { text: '"아침형이에요. 당신은요?"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"저녁형이에요"', affection: 14, trust: 14, type: 'night' },
+                    { text: '"둘 다 힘들어요"', affection: -6, trust: -8, type: 'neither' }
+                ]
+            },
+            {
+                id: 'lifestyle_coffee',
+                situation: '"커피 좋아해요?"',
+                choices: [
+                    { text: '"네, 매일 마셔요"', affection: 14, trust: 14, type: 'love' },
+                    { text: '"가끔요"', affection: 12, trust: 12, type: 'sometimes' },
+                    { text: '"안 마셔요"', affection: 10, trust: 10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_sleep',
+                situation: '"몇 시에 자요?"',
+                choices: [
+                    { text: '"일찍 자요"', affection: 14, trust: 14, type: 'early' },
+                    { text: '"늦게 자요"', affection: 12, trust: 12, type: 'late' },
+                    { text: '"불규칙해요"', affection: 10, trust: 10, type: 'irregular' }
+                ]
+            },
+            {
+                id: 'lifestyle_exercise',
+                situation: '"운동 자주 해요?"',
+                choices: [
+                    { text: '"네, 규칙적으로 해요"', affection: 16, trust: 16, type: 'regular' },
+                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"안 해요"', affection: -6, trust: -8, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_food',
+                situation: '"매운 음식 좋아해요?"',
+                choices: [
+                    { text: '"정말 좋아해요!"', affection: 14, trust: 14, type: 'love' },
+                    { text: '"적당히요"', affection: 12, trust: 12, type: 'moderate' },
+                    { text: '"못 먹어요"', affection: 10, trust: 10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_music',
+                situation: '"음악 자주 들어요?"',
+                choices: [
+                    { text: '"항상 들어요"', affection: 16, trust: 14, type: 'always' },
+                    { text: '"가끔요"', affection: 14, trust: 12, type: 'sometimes' },
+                    { text: '"별로 안 들어요"', affection: -6, trust: -8, type: 'rarely' }
+                ]
+            },
+            {
+                id: 'lifestyle_weather',
+                situation: '"어떤 날씨 좋아해요?"',
+                choices: [
+                    { text: '"화창한 날이요"', affection: 14, trust: 12, type: 'sunny' },
+                    { text: '"비 오는 날이요"', affection: 16, trust: 14, type: 'rainy' },
+                    { text: '"눈 오는 날이요"', affection: 18, trust: 16, type: 'snowy' }
+                ]
+            },
+            {
+                id: 'lifestyle_season',
+                situation: '"좋아하는 계절이 있어요?"',
+                choices: [
+                    { text: '"봄이요"', affection: 16, trust: 14, type: 'spring' },
+                    { text: '"여름이요"', affection: 14, trust: 12, type: 'summer' },
+                    { text: '"가을이요"', affection: 16, trust: 14, type: 'fall' }
+                ]
+            },
+            {
+                id: 'lifestyle_indoor',
+                situation: '"집순이/집돌이예요?"',
+                choices: [
+                    { text: '"네, 집이 좋아요"', affection: 14, trust: 14, type: 'homebody' },
+                    { text: '"밖이 좋아요"', affection: 16, trust: 14, type: 'outdoor' },
+                    { text: '"둘 다 좋아요"', affection: 18, trust: 16, type: 'both' }
+                ]
+            },
+            {
+                id: 'lifestyle_movie',
+                situation: '"영화관 vs 집에서 넷플릭스?"',
+                choices: [
+                    { text: '"영화관이 좋아요"', affection: 16, trust: 14, type: 'theater' },
+                    { text: '"집에서 편하게요"', affection: 14, trust: 14, type: 'home' },
+                    { text: '"둘 다 좋아요"', affection: 18, trust: 16, type: 'both' }
+                ]
+            },
+            {
+                id: 'lifestyle_shower',
+                situation: '"아침 샤워 vs 저녁 샤워?"',
+                choices: [
+                    { text: '"아침이요"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"저녁이요"', affection: 14, trust: 14, type: 'evening' },
+                    { text: '"둘 다 해요"', affection: 16, trust: 16, type: 'both' }
+                ]
+            },
+            {
+                id: 'lifestyle_cleaning',
+                situation: '"청소 자주 해요?"',
+                choices: [
+                    { text: '"매일 해요"', affection: 18, trust: 18, type: 'daily' },
+                    { text: '"주기적으로요"', affection: 16, trust: 16, type: 'regular' },
+                    { text: '"가끔..."', affection: -8, trust: -10, type: 'rarely' }
+                ]
+            },
+            {
+                id: 'lifestyle_phone',
+                situation: '"스마트폰 사용 시간이 얼마나 돼요?"',
+                choices: [
+                    { text: '"많이 써요"', affection: 10, trust: 12, type: 'heavy' },
+                    { text: '"적당히요"', affection: 16, trust: 16, type: 'moderate' },
+                    { text: '"별로 안 써요"', affection: 14, trust: 14, type: 'light' }
+                ]
+            },
+            {
+                id: 'lifestyle_sns',
+                situation: '"SNS 자주 해요?"',
+                choices: [
+                    { text: '"네, 자주요"', affection: 12, trust: 12, type: 'active' },
+                    { text: '"가끔 봐요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"안 해요"', affection: 16, trust: 16, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_shopping',
+                situation: '"쇼핑 좋아해요?"',
+                choices: [
+                    { text: '"정말 좋아해요"', affection: 14, trust: 12, type: 'love' },
+                    { text: '"필요할 때만요"', affection: 16, trust: 16, type: 'practical' },
+                    { text: '"싫어요"', affection: 12, trust: 14, type: 'dislike' }
+                ]
+            },
+            {
+                id: 'lifestyle_cooking_home',
+                situation: '"집에서 요리 자주 해요?"',
+                choices: [
+                    { text: '"거의 매일요"', affection: 18, trust: 18, type: 'often' },
+                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 해요"', affection: -6, trust: -8, type: 'rarely' }
+                ]
+            },
+            {
+                id: 'lifestyle_delivery',
+                situation: '"배달 음식 자주 시켜요?"',
+                choices: [
+                    { text: '"자주요"', affection: 10, trust: 10, type: 'often' },
+                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 해요"', affection: 16, trust: 16, type: 'rarely' }
+                ]
+            },
+            {
+                id: 'lifestyle_pet_home',
+                situation: '"반려동물 키워요?"',
+                choices: [
+                    { text: '"네, 키워요"', affection: 16, trust: 16, type: 'yes' },
+                    { text: '"키우고 싶어요"', affection: 18, trust: 14, type: 'want' },
+                    { text: '"아니요"', affection: 10, trust: 10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_plant',
+                situation: '"식물 키워요?"',
+                choices: [
+                    { text: '"네, 여러 개요"', affection: 16, trust: 16, type: 'yes' },
+                    { text: '"키우고 싶어요"', affection: 14, trust: 14, type: 'want' },
+                    { text: '"다 죽여요..."', affection: -6, trust: -8, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_color',
+                situation: '"좋아하는 색이 있어요?"',
+                choices: [
+                    { text: '"파란색이요"', affection: 14, trust: 12, type: 'blue' },
+                    { text: '"빨간색이요"', affection: 14, trust: 12, type: 'red' },
+                    { text: '"검은색이요"', affection: 12, trust: 12, type: 'black' }
+                ]
+            },
+            {
+                id: 'lifestyle_temperature',
+                situation: '"더운 거 좋아해요, 추운 거?"',
+                choices: [
+                    { text: '"더운 게 좋아요"', affection: 14, trust: 12, type: 'hot' },
+                    { text: '"추운 게 좋아요"', affection: 14, trust: 12, type: 'cold' },
+                    { text: '"적당한 게 좋아요"', affection: 16, trust: 14, type: 'moderate' }
+                ]
+            },
+            {
+                id: 'lifestyle_dessert',
+                situation: '"디저트 좋아해요?"',
+                choices: [
+                    { text: '"정말 좋아해요!"', affection: 16, trust: 14, type: 'love' },
+                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"별로예요"', affection: -6, trust: -8, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_alcohol',
+                situation: '"술 자주 마셔요?"',
+                choices: [
+                    { text: '"가끔 마셔요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 마셔요"', affection: 16, trust: 16, type: 'rarely' },
+                    { text: '"자주 마셔요"', affection: -8, trust: -10, type: 'often' }
+                ]
+            },
+            {
+                id: 'lifestyle_driving',
+                situation: '"운전 좋아해요?"',
+                choices: [
+                    { text: '"네, 좋아해요"', affection: 14, trust: 14, type: 'yes' },
+                    { text: '"할 줄만 알아요"', affection: 12, trust: 12, type: 'can' },
+                    { text: '"못 해요"', affection: 10, trust: 10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_public_transport',
+                situation: '"대중교통 vs 차?"',
+                choices: [
+                    { text: '"대중교통이요"', affection: 14, trust: 14, type: 'public' },
+                    { text: '"차요"', affection: 14, trust: 14, type: 'car' },
+                    { text: '"걸어요"', affection: 16, trust: 16, type: 'walk' }
+                ]
+            },
+            {
+                id: 'lifestyle_earlybird',
+                situation: '"일찍 일어나는 편이에요?"',
+                choices: [
+                    { text: '"네, 새벽형이에요"', affection: 16, trust: 16, type: 'early' },
+                    { text: '"적당히요"', affection: 14, trust: 14, type: 'moderate' },
+                    { text: '"늦게 일어나요"', affection: -6, trust: -8, type: 'late' }
+                ]
+            },
+            {
+                id: 'lifestyle_planning',
+                situation: '"계획 세우는 거 좋아해요?"',
+                choices: [
+                    { text: '"정말 좋아해요"', affection: 16, trust: 18, type: 'yes' },
+                    { text: '"필요할 때만요"', affection: 14, trust: 16, type: 'sometimes' },
+                    { text: '"즉흥적인 게 좋아요"', affection: 12, trust: 12, type: 'spontaneous' }
+                ]
+            },
+            {
+                id: 'lifestyle_saving',
+                situation: '"저축 잘해요?"',
+                choices: [
+                    { text: '"네, 계획적이에요"', affection: 18, trust: 22, type: 'yes' },
+                    { text: '"노력 중이에요"', affection: 16, trust: 20, type: 'trying' },
+                    { text: '"잘 못해요..."', affection: -8, trust: -10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_fashion',
+                situation: '"패션에 관심 있어요?"',
+                choices: [
+                    { text: '"정말 관심 많아요"', affection: 14, trust: 12, type: 'yes' },
+                    { text: '"적당히요"', affection: 16, trust: 14, type: 'moderate' },
+                    { text: '"별로예요"', affection: -6, trust: -8, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_perfume',
+                situation: '"향수 뿌려요?"',
+                choices: [
+                    { text: '"매일 뿌려요"', affection: 16, trust: 14, type: 'daily' },
+                    { text: '"특별한 날만요"', affection: 14, trust: 14, type: 'special' },
+                    { text: '"안 뿌려요"', affection: 10, trust: 10, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_organization',
+                situation: '"정리정돈 잘해요?"',
+                choices: [
+                    { text: '"완벽하게 해요"', affection: 18, trust: 20, type: 'perfect' },
+                    { text: '"적당히요"', affection: 16, trust: 18, type: 'moderate' },
+                    { text: '"잘 못해요..."', affection: -10, trust: -12, type: 'messy' }
+                ]
+            },
+            {
+                id: 'lifestyle_noise',
+                situation: '"조용한 게 좋아요?"',
+                choices: [
+                    { text: '"네, 조용한 게 좋아요"', affection: 14, trust: 16, type: 'quiet' },
+                    { text: '"적당한 소음은 괜찮아요"', affection: 16, trust: 14, type: 'moderate' },
+                    { text: '"시끄러운 게 좋아요"', affection: 12, trust: 10, type: 'noisy' }
+                ]
+            },
+            {
+                id: 'lifestyle_reading_time',
+                situation: '"언제 책 읽어요?"',
+                choices: [
+                    { text: '"자기 전이요"', affection: 16, trust: 16, type: 'night' },
+                    { text: '"아침이요"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"안 읽어요"', affection: -6, trust: -8, type: 'no' }
+                ]
+            },
+            {
+                id: 'lifestyle_weekend',
+                situation: '"주말에 뭐 해요?"',
+                choices: [
+                    { text: '"쉬어요"', affection: 14, trust: 14, type: 'rest' },
+                    { text: '"나가서 놀아요"', affection: 16, trust: 14, type: 'out' },
+                    { text: '"일해요"', affection: -8, trust: -10, type: 'work' }
+                ]
+            },
+            {
+                id: 'lifestyle_stress',
+                situation: '"스트레스 어떻게 풀어요?"',
+                choices: [
+                    { text: '"운동해요"', affection: 18, trust: 18, type: 'exercise' },
+                    { text: '"영화 봐요"', affection: 16, trust: 16, type: 'movie' },
+                    { text: '"자요"', affection: 14, trust: 14, type: 'sleep' }
+                ]
+            },
+            {
+                id: 'lifestyle_social',
+                situation: '"사교적인 편이에요?"',
+                choices: [
+                    { text: '"네, 사람 만나는 거 좋아요"', affection: 16, trust: 14, type: 'social' },
+                    { text: '"적당히요"', affection: 14, trust: 14, type: 'moderate' },
+                    { text: '"혼자 있는 게 좋아요"', affection: 12, trust: 14, type: 'introvert' }
+                ]
+            },
+            {
+                id: 'lifestyle_punctual',
+                situation: '"시간 잘 지켜요?"',
+                choices: [
+                    { text: '"항상 일찍 가요"', affection: 20, trust: 24, type: 'early' },
+                    { text: '"정각에 가요"', affection: 18, trust: 22, type: 'ontime' },
+                    { text: '"가끔 늦어요..."', affection: -12, trust: -15, type: 'late' }
+                ]
+            },
+            {
+                id: 'lifestyle_smartphone',
+                situation: '"스마트폰 없으면 불안해요?"',
+                choices: [
+                    { text: '"괜찮아요"', affection: 16, trust: 18, type: 'fine' },
+                    { text: '"조금 불안해요"', affection: 14, trust: 16, type: 'anxious' },
+                    { text: '"정말 불안해요"', affection: -8, trust: -10, type: 'very_anxious' }
+                ]
+            },
+            {
+                id: 'lifestyle_communication',
+                situation: '"전화 vs 문자?"',
+                choices: [
+                    { text: '"전화가 좋아요"', affection: 16, trust: 16, type: 'call' },
+                    { text: '"문자가 좋아요"', affection: 14, trust: 14, type: 'text' },
+                    { text: '"둘 다 괜찮아요"', affection: 18, trust: 18, type: 'both' }
+                ]
+            },
+            {
+                id: 'lifestyle_routine',
+                situation: '"루틴이 있어요?"',
+                choices: [
+                    { text: '"네, 철저해요"', affection: 16, trust: 20, type: 'strict' },
+                    { text: '"적당히요"', affection: 14, trust: 18, type: 'moderate' },
+                    { text: '"없어요"', affection: -6, trust: -8, type: 'no' }
                 ]
             }
         ]

@@ -643,16 +643,31 @@ function showTalkMenu() {
             <div class="modal-body">
                 <p>무엇에 대해 이야기할까요?</p>
                 ${topics.map((topic, idx) => {
-                    const canTalk = gameState.stamina >= topic.stamina;
+                    // 이 주제로 오늘 대화한 횟수 계산
+                    const repeatCount = (gameState.dailyActionCounts['talk_' + topic.id] || 0) + 1;
+                    // 반복 페널티 적용된 체력 계산
+                    let actualStamina = topic.stamina;
+                    if (repeatCount > 1) {
+                        actualStamina = Math.round(topic.stamina * (1 + (repeatCount - 1) * 5.0));
+                    }
+
+                    const canTalk = gameState.stamina >= actualStamina;
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
                     const disabled = (canTalk && meetsRequirement) ? '' : 'disabled';
+
+                    // 체력 표시: 기본 비용 또는 기본 비용 → 증가된 비용
+                    let staminaDisplay = `⚡ ${topic.stamina}`;
+                    if (repeatCount > 1) {
+                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina} (${repeatCount}회차)`;
+                    }
+
                     return `
                         <div class="action-option ${disabled}" onclick="${(canTalk && meetsRequirement) ? `selectTalkTopic(${idx})` : ''}">
                             <div class="option-icon">${topic.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${topic.name}</div>
                                 <div class="option-desc">${topic.description}</div>
-                                <div class="option-cost">⚡ ${topic.stamina}</div>
+                                <div class="option-cost">${staminaDisplay}</div>
                                 ${topic.minAffection ? `<div class="option-requirement">호감도 ${topic.minAffection} 필요</div>` : ''}
                             </div>
                         </div>
@@ -679,12 +694,23 @@ function showTalkMenu() {
 function selectTalkTopic(index) {
     const topic = window.currentTopics[index];
 
-    if (gameState.stamina < topic.stamina) {
+    // 반복 행동 추적 및 추가 체력 소모
+    const actionKey = 'talk_' + topic.id;
+    gameState.dailyActionCounts[actionKey] = (gameState.dailyActionCounts[actionKey] || 0) + 1;
+    const repeatCount = gameState.dailyActionCounts[actionKey];
+
+    // 반복 횟수에 따라 추가 체력 소모 (500%씩 증가 - 1번째: 기본, 2번째: 6배, 3번째: 11배)
+    let staminaCost = topic.stamina;
+    if (repeatCount > 1) {
+        staminaCost = Math.round(topic.stamina * (1 + (repeatCount - 1) * 5.0));
+    }
+
+    if (gameState.stamina < staminaCost) {
         alert('체력이 부족합니다!');
         return;
     }
 
-    gameState.stamina -= topic.stamina;
+    gameState.stamina -= staminaCost;
 
     // 사용한 시나리오 추적
     const topicKey = topic.id;
@@ -1782,6 +1808,12 @@ function showInGameHelp() {
                         <li>3번째: <strong>11배</strong> 체력 소모</li>
                     </ul>
                     <li>⚠️ <strong>같은 액션 반복은 사실상 불가능!</strong> 다양한 행동을 하세요</li>
+                    <li>📌 <strong>대화 주제별로도 페널티 적용!</strong></li>
+                    <ul>
+                        <li>같은 주제로 대화하면 체력이 급증합니다</li>
+                        <li>예: 일상 이야기 (10 체력) → 다시 일상 이야기 (60 체력!)</li>
+                        <li>다양한 주제로 대화하세요 (8가지 주제 활용)</li>
+                    </ul>
                     <li>체력이 0이 되면 자동으로 잠들기</li>
                     <li>휴식으로 체력 회복 (50 회복)</li>
                 </ul>
