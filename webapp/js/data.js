@@ -113,9 +113,9 @@ const CHARACTERS = {
         quote: '"별로... 안 좋은데... (좋아)"',
         birthday: { month: 11, day: 11 },  // 11월 11일 (빼빼로데이)
         difficulty: 3,
-        difficultyMultiplier: 0.65,  // 보통 - 호감도/신뢰도 상승 65%만 적용
-        startAffection: 10,  // 2배 이하로 감소 (20 → 10)
-        startTrust: 5,  // 2배 이하로 감소 (10 → 5)
+        difficultyMultiplier: 0.50,  // 보통 - 호감도/신뢰도 상승 50%만 적용 (난이도 상향)
+        startAffection: 5,  // 시작 호감도 감소 (10 → 5, 난이도 상향)
+        startTrust: 3,  // 시작 신뢰도 감소 (5 → 3, 난이도 상향)
         preferences: {
             dates: {
                 walk: 1.1,
@@ -4875,9 +4875,9 @@ const CRISIS_EVENTS = [
         id: 'rude_to_family',
         situation: '상대방의 가족 모임에서 무례한 태도를 보였습니다.',
         choices: [
-            { text: '"원래 제 성격이 이래요" 대수롭지 않게 넘긴다.', affection: -35, trust: -40, type: 'dismiss' },
-            { text: '진심으로 사과하고 다음엔 조심하겠다고 약속한다.', affection: -15, trust: -18, type: 'apologize' },
-            { text: '"너무 긴장했어요" 솔직하게 말하며 사과한다.', affection: -10, trust: -8, type: 'honest' }
+            { text: '"원래 제 성격이 이래요" 대수롭지 않게 넘긴다.', affection: -20, trust: -25, type: 'dismiss' },
+            { text: '진심으로 사과하고 다음엔 조심하겠다고 약속한다.', affection: -10, trust: -12, type: 'apologize' },
+            { text: '"너무 긴장했어요" 솔직하게 말하며 사과한다.', affection: -5, trust: -5, type: 'honest' }
         ]
     },
     {
