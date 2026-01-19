@@ -1343,72 +1343,72 @@ const TALK_TOPICS = {
                 id: 'daily_work',
                 situation: '오늘 회사에서 힘든 일이 있었다고 합니다.',
                 choices: [
-                    { text: '"그래서 어떻게 했어요?" 진심으로 물어본다', affection: 6, trust: 15, type: 'listen' },
-                    { text: '"제가 도와드릴 수 있을까요?"', affection: 7, trust: 18, type: 'help' },
-                    { text: '"다 그런 거 아니에요?" 대수롭지 않게 넘긴다', affection: -5, trust: -8, type: 'dismissive' }
+                    { text: '"그래서 어떻게 했어요? 정말 힘드셨겠어요. 괜찮으세요?" 진심으로 걱정하며 물어본다', affection: 6, trust: 15, type: 'listen' },
+                    { text: '"제가 뭐라도 도와드릴 수 있을까요? 말씀만 하시면 언제든지 달려갈게요"', affection: 7, trust: 18, type: 'help' },
+                    { text: '"회사 생활이 원래 다 그런 거 아니에요? 너무 예민하게 받아들이시는 거 아닌가..." 대수롭지 않게 넘긴다', affection: -5, trust: -8, type: 'dismissive' }
                 ]
             },
             {
                 id: 'daily_hobby',
                 situation: '요즘 새로운 취미를 시작했다고 합니다.',
                 choices: [
-                    { text: '"재밌겠다! 더 얘기해줘요"', affection: 7, trust: 10, type: 'interest' },
-                    { text: '"저도 함께 해도 될까요?"', affection: 9, trust: 15, type: 'join' },
-                    { text: '"시간 많으시네요" 비꼬는 투로 말한다', affection: -8, trust: -12, type: 'sarcastic' }
+                    { text: '"오 재밌겠다! 구체적으로 어떤 건데요? 더 자세히 얘기해줘요!" 흥미롭게 반응한다', affection: 7, trust: 10, type: 'interest' },
+                    { text: '"우와, 저도 예전부터 관심 있었는데... 혹시 저도 함께 해도 될까요? 같이 하면 더 재미있을 것 같아요"', affection: 9, trust: 15, type: 'join' },
+                    { text: '"그런 거 하실 시간이 있으세요? 시간 많으시네요..." 비꼬는 투로 말한다', affection: -8, trust: -12, type: 'sarcastic' }
                 ]
             },
             {
                 id: 'daily_food',
                 situation: '오늘 점심으로 무엇을 먹었는지 물어봅니다.',
                 choices: [
-                    { text: '메뉴를 자세히 설명하며 같이 먹으러 가자고 한다', affection: 9, trust: 12, type: 'enthusiastic' },
-                    { text: '간단히 대답하고 상대방은 뭘 먹었는지 물어본다', affection: 7, trust: 15, type: 'balanced' },
-                    { text: '"별로 중요한 거 아니잖아요"', affection: -6, trust: -10, type: 'rude' }
+                    { text: '"저는 파스타 먹었어요! 정말 맛있었는데, 다음에 같이 가서 먹어요. 당신도 분명 좋아하실 거예요" 흥미롭게 이야기하며 같이 먹으러 가자고 제안한다', affection: 9, trust: 12, type: 'enthusiastic' },
+                    { text: '"저는 간단하게 김밥 먹었어요. 그나저나 당신은 뭐 드셨어요? 맛있게 드셨나요?" 간단히 대답하고 상대방 이야기에 관심을 보인다', affection: 7, trust: 15, type: 'balanced' },
+                    { text: '"그런 게 뭐가 중요해요? 별로 중요한 얘기 아니잖아요" 시큰둥하게 반응한다', affection: -6, trust: -10, type: 'rude' }
                 ]
             },
             {
                 id: 'daily_weather',
                 situation: '"오늘 날씨 정말 좋지 않아요?"라고 말합니다.',
                 choices: [
-                    { text: '"그러게요, 이런 날은 산책하기 딱이죠"', affection: 7, trust: 10, type: 'agree' },
-                    { text: '"당신이랑 함께라면 날씨는 중요하지 않아요"', affection: 10, trust: 8, type: 'romantic' },
-                    { text: '휴대폰만 보며 "네" 라고만 답한다', affection: -7, trust: -15, type: 'distracted' }
+                    { text: '"그러게요, 정말 화창하네요. 이런 날은 밖에 나가서 산책하기 딱 좋은 것 같아요"', affection: 7, trust: 10, type: 'agree' },
+                    { text: '"날씨가 좋든 안 좋든, 당신이랑 함께 있으면 그게 제일 좋은 날씨죠" 로맨틱하게 말한다', affection: 10, trust: 8, type: 'romantic' },
+                    { text: '휴대폰만 보면서 "네... 그러네요..." 무성의하게 답하고 계속 핸드폰만 본다', affection: -7, trust: -15, type: 'distracted' }
                 ]
             },
             {
                 id: 'daily_friend',
                 situation: '친구와 만나서 재미있는 일이 있었다고 얘기합니다.',
                 choices: [
-                    { text: '"어떤 친구예요? 소개시켜줄래요?"', affection: 8, trust: 12, type: 'curious' },
-                    { text: '"재밌었겠다! 다음엔 저도 같이 가도 될까요?"', affection: 10, trust: 15, type: 'inclusive' },
-                    { text: '"친구 만나느라 바쁘시네요..." 삐친 듯이 말한다', affection: -10, trust: -12, type: 'jealous' }
+                    { text: '"오, 어떤 친구예요? 어떻게 알게 된 사이인지 궁금한데, 언젠가 저한테도 소개시켜줄래요?"', affection: 8, trust: 12, type: 'curious' },
+                    { text: '"우와 정말 재밌었겠다! 다음에 친구들 만날 때 저도 같이 가도 될까요? 저도 함께하고 싶어요"', affection: 10, trust: 15, type: 'inclusive' },
+                    { text: '"요즘 친구 만나느라 바쁘시네요... 저랑 보내는 시간보다 더 많은 거 아니에요?" 삐친 듯이 말한다', affection: -10, trust: -12, type: 'jealous' }
                 ]
             },
             {
                 id: 'daily_family',
                 situation: '가족 이야기를 꺼냅니다. "우리 부모님이..."',
                 choices: [
-                    { text: '"정말요? 부모님 뵙고 싶네요"', affection: 12, trust: 20, type: 'respectful' },
-                    { text: '"가족이 소중하시구나. 멋지네요"', affection: 9, trust: 15, type: 'supportive' },
-                    { text: '"아, 네..." 관심 없는 듯 반응한다', affection: -8, trust: -18, type: 'uninterested' }
+                    { text: '"정말요? 가족분들 이야기 들으니 너무 좋네요. 기회가 되면 부모님도 꼭 뵙고 싶어요"', affection: 12, trust: 20, type: 'respectful' },
+                    { text: '"당신 가족 이야기 들으면 항상 느끼는 건데, 가족을 정말 소중히 여기시는 것 같아요. 그런 모습 정말 멋있어요"', affection: 9, trust: 15, type: 'supportive' },
+                    { text: '"아, 네... 그렇군요..." 별로 관심 없다는 듯이 건성으로 반응한다', affection: -8, trust: -18, type: 'uninterested' }
                 ]
             },
             {
                 id: 'daily_tired_morning',
                 situation: '"오늘 아침에 늦잠자서 정신없었어요"',
                 choices: [
-                    { text: '"다음엔 제가 모닝콜 해드릴까요?" 웃으며 말한다', affection: 10, trust: 8, type: 'playful' },
-                    { text: '"피곤하셨나봐요. 충분히 주무셨어요?"', affection: 8, trust: 12, type: 'caring' },
-                    { text: '"시간 관리 좀 하세요"', affection: -12, trust: -15, type: 'criticizing' }
+                    { text: '"하하, 그러셨구나. 다음엔 제가 모닝콜 해드릴까요? 매일 아침 깨워드릴 수 있어요" 웃으며 장난스럽게 말한다', affection: 10, trust: 8, type: 'playful' },
+                    { text: '"많이 피곤하셨나봐요. 어젯밤에 늦게 주무셨나요? 오늘 충분히 쉬셨으면 좋겠어요"', affection: 8, trust: 12, type: 'caring' },
+                    { text: '"시간 관리를 좀 하셔야죠. 매번 그러시면 곤란한데요" 핀잔을 준다', affection: -12, trust: -15, type: 'criticizing' }
                 ]
             },
             {
                 id: 'daily_shopping',
                 situation: '오늘 쇼핑하다가 마음에 드는 물건을 봤다고 합니다.',
                 choices: [
-                    { text: '"뭔데요? 같이 보러 갈까요?"', affection: 10, trust: 10, type: 'interested' },
-                    { text: '"사고 싶으면 사세요. 제가 사드릴게요"', affection: 12, trust: 8, type: 'generous' },
-                    { text: '"또요? 돈 많이 쓰시네"', affection: -15, trust: -10, type: 'judgmental' }
+                    { text: '"오, 뭔데요? 어떤 거예요? 궁금한데, 나중에 시간 나면 같이 보러 갈까요?"', affection: 10, trust: 10, type: 'interested' },
+                    { text: '"정말요? 그럼 사고 싶으시면 사세요. 제가 선물로 사드릴게요. 어떤 거예요?" 선뜻 제안한다', affection: 12, trust: 8, type: 'generous' },
+                    { text: '"요즘 또 쇼핑하셨어요? 돈 좀 아껴 쓰시는 게 어때요? 너무 많이 쓰시는 거 아니에요?" 잔소리한다', affection: -15, trust: -10, type: 'judgmental' }
                 ]
             },
             {

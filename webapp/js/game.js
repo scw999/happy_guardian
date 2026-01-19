@@ -466,6 +466,10 @@ function selectDateLocation(index) {
         return;
     }
 
+    // 데이트 수락! 체력 회복
+    gameState.stamina += 10;  // 데이트 수락으로 기쁨
+    alert(`💖 ${gameState.character.fullName}이(가) 데이트를 수락했습니다!\n\n기쁜 마음에 체력이 10 회복되었습니다! (+10 체력)`);
+
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
 
@@ -652,11 +656,8 @@ function showTalkMenu() {
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
                     const disabled = (canTalk && meetsRequirement) ? '' : 'disabled';
 
-                    // 체력 표시: 기본 비용 또는 증가된 비용
+                    // 체력 표시: 실제 소비 체력만 표시
                     let staminaDisplay = `⚡ ${actualStamina}`;
-                    if (talkCount > 1) {
-                        staminaDisplay = `⚡ ${topic.stamina} → ${actualStamina}`;
-                    }
 
                     return `
                         <div class="action-option ${disabled}" onclick="${(canTalk && meetsRequirement) ? `selectTalkTopic(${idx})` : ''}">
