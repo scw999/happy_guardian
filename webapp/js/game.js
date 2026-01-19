@@ -1727,14 +1727,21 @@ function showEnding(type, title, message, isProposal = false) {
     const endingImage = document.getElementById('ending-image');
     const baseImage = gameState.character.image.replace('-normal.jpg', '');
 
+    // 트루엔딩 이상일 때 전용 이미지 사용
     if (type === 'perfect' || type === 'true') {
-        endingImage.src = baseImage + '-happy.jpg';
+        endingImage.src = baseImage + '-true-ending.jpg';
     } else {
         endingImage.src = baseImage + '-unhappy.jpg';
     }
 
+    // 이미지 로드 실패 시 폴백
     endingImage.onerror = function() {
-        this.src = gameState.character.image;
+        // 트루엔딩 이미지가 없으면 happy 이미지로 폴백
+        if ((type === 'perfect' || type === 'true') && this.src.includes('-true-ending.jpg')) {
+            this.src = baseImage + '-happy.jpg';
+        } else {
+            this.src = gameState.character.image;
+        }
         this.onerror = null;
     };
 
