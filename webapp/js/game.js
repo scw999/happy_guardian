@@ -77,6 +77,7 @@ function selectCharacter(characterId) {
         trust: character.startTrust,
         money: 300000,  // 초기 자금 30만원
         stamina: 100,
+        mental: 100,  // 멘탈 수치 추가
         day: 1,
         dDay: 30,
         startDate: new Date(),
@@ -273,6 +274,10 @@ function updateResources() {
     document.getElementById('stamina-value').textContent = gameState.stamina;
     document.getElementById('stamina-fill').style.width = gameState.stamina + '%';
 
+    // 멘탈이 undefined이거나 NaN이면 100으로 초기화
+    if (gameState.mental === undefined || isNaN(gameState.mental)) {
+        gameState.mental = 100;
+    }
     gameState.mental = Math.max(0, Math.min(100, gameState.mental));
     document.getElementById('mental-value').textContent = gameState.mental;
     document.getElementById('mental-fill').style.width = gameState.mental + '%';
