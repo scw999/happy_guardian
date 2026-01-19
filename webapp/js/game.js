@@ -1464,7 +1464,7 @@ function showRestMenu() {
                         <div class="option-info">
                             <div class="option-name">잠자기</div>
                             <div class="option-desc">푹 자고 일어나면 내일이 됩니다</div>
-                            <div class="action-gain">⚡ 체력 +80, 🧠 멘탈 +30</div>
+                            <div class="action-gain">⚡ 체력 +80, 🧠 멘탈 +5</div>
                         </div>
                     </div>
                     <div class="action-option" onclick="selectRestOption('game')">
@@ -1517,9 +1517,9 @@ window.selectRestOption = function(option) {
     switch(option) {
         case 'sleep':
             gameState.stamina = Math.min(100, gameState.stamina + 80);
-            gameState.mental = Math.min(100, gameState.mental + 30);
+            gameState.mental = Math.min(100, gameState.mental + 5);
             recordActivity('rest', '😴');
-            showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0, '⚡+80, 🧠+30');
+            showResult('푹 쉬었습니다. 내일이 되었습니다.', 0, 0, '⚡+80, 🧠+5');
             nextDay();
             break;
 
