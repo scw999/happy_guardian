@@ -2875,299 +2875,299 @@ const TALK_TOPICS = {
         scenarios: [
             {
                 id: 'hobby_painting',
-                situation: '"그림 그리는 것 좋아해요" 라고 말합니다.',
+                situation: '"저 그림 그리는 걸 정말 좋아하거든요. 주로 수채화로 풍경화 그리는데, 막 집중하다 보면 시간 가는 줄도 모르겠더라고요. 그림 그릴 때만큼은 모든 걱정을 잊을 수 있어서 좋아요"',
                 choices: [
-                    { text: '"어떤 그림 그리세요? 보고 싶어요"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"저도 배워보고 싶어요. 가르쳐주세요"', affection: 16, trust: 14, type: 'join' },
-                    { text: '"그림은 잘 모르겠어요"', affection: -8, trust: -10, type: 'indifferent' }
+                    { text: '"우와 그림을 그리시는구나! 어떤 풍경을 주로 그리시는지 정말 궁금한데요. 작품들 언젠가 보여주실 수 있나요? 정말 보고 싶어요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"저도 그림 정말 배워보고 싶었어요. 혹시 제게 기초부터 가르쳐주실 수 있을까요? 당신한테 배우면 재미있게 배울 수 있을 것 같아요"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"음... 그림은 솔직히 잘 모르겠어요. 제가 예술적 감각이 없어서 그런지 그런 건 잘 이해가 안 가더라고요"', affection: -8, trust: -10, type: 'indifferent' }
                 ]
             },
             {
                 id: 'hobby_photography',
-                situation: '"사진 찍는 게 취미예요"',
+                situation: '"저 사진 찍는 게 취미거든요. 일상의 순간들을 카메라에 담는 게 너무 좋아요. 특히 골든아워 때 빛을 잡아내는 그 느낌이 정말 짜릿해요"',
                 choices: [
-                    { text: '"제 사진도 찍어주세요"', affection: 16, trust: 14, type: 'request' },
-                    { text: '"어떤 사진 주로 찍으세요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"요즘 누가 사진을..."', affection: -12, trust: -14, type: 'dismissive' }
+                    { text: '"우와 멋있는데요! 그럼 언젠가 제 사진도 예쁘게 찍어주실 수 있나요? 당신이 찍으면 정말 잘 나올 것 같아요"', affection: 16, trust: 14, type: 'request' },
+                    { text: '"어떤 사진을 주로 찍으시는지 궁금한데요. 풍경 위주세요, 아니면 인물도 찍으세요? 작품들 정말 보고 싶어요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"요즘 시대에 누가 카메라로 사진을 찍어요... 스마트폰이면 충분하지 않나요? 뭐가 다른지 모르겠는데요"', affection: -12, trust: -14, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_guitar',
-                situation: '"기타 치는 거 배우고 있어요"',
+                situation: '"요즘 기타 치는 거 배우고 있어요. 아직 초보지만 코드 하나하나 익혀가는 재미가 있더라고요. 언젠가는 좋아하는 노래 완벽하게 연주하고 싶어요"',
                 choices: [
-                    { text: '"언젠가 제게 연주해주세요"', affection: 16, trust: 14, type: 'romantic' },
-                    { text: '"어떤 곡 연습하세요?"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"시끄럽지 않나요?"', affection: -15, trust: -18, type: 'rude' }
+                    { text: '"우와 낭만적인데요! 언젠가 저한테만 특별히 연주해주실 수 있나요? 당신이 기타 치는 모습 상상만 해도 설레는걸요"', affection: 16, trust: 14, type: 'romantic' },
+                    { text: '"어떤 곡을 연습하고 계세요? 좋아하는 장르가 있나요? 저도 음악 이야기 듣는 거 정말 좋아하거든요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"집에서 기타 치면 시끄럽지 않아요? 이웃들이 싫어하지 않나요? 좀 소음 공해일 것 같은데요"', affection: -15, trust: -18, type: 'rude' }
                 ]
             },
             {
                 id: 'hobby_cooking',
-                situation: '"요리하는 게 정말 재미있어요"',
+                situation: '"저 요리하는 게 정말 재미있어요. 새로운 레시피 도전하고, 맛있게 만들어서 사람들이 맛있다고 할 때 정말 뿌듯하거든요. 요리는 창작 활동이라고 생각해요"',
                 choices: [
-                    { text: '"언젠가 같이 요리해요"', affection: 18, trust: 16, type: 'together' },
-                    { text: '"어떤 요리 잘하세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"저는 먹기만 할게요"', affection: -8, trust: -10, type: 'lazy' }
+                    { text: '"우와 멋지네요! 언젠가 우리 같이 요리해봐요. 함께 만들어서 같이 먹으면 정말 재미있을 것 같아요. 당신과 함께하는 요리 시간, 생각만 해도 설레요"', affection: 18, trust: 16, type: 'together' },
+                    { text: '"어떤 요리를 가장 잘하세요? 전문 분야가 있나요? 어떤 음식을 제일 좋아해서 만드시는지 궁금해요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"아 좋네요. 그럼 당신이 요리하고 저는 맛있게 먹기만 할게요. 저는 요리 재능이 없어서 먹는 것만 잘하거든요"', affection: -8, trust: -10, type: 'lazy' }
                 ]
             },
             {
                 id: 'hobby_reading',
-                situation: '"독서가 취미예요. 요즘 재미있는 책 읽고 있어요"',
+                situation: '"독서가 취미예요. 요즘 재미있는 책 읽고 있는데, 읽다 보면 완전히 그 세계에 빠져들거든요. 책 속 인물들과 함께 웃고 울고, 그런 경험이 너무 좋아요"',
                 choices: [
-                    { text: '"어떤 책이에요? 추천해주세요"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"같이 독서 모임 할까요?"', affection: 14, trust: 16, type: 'join' },
-                    { text: '"책은 지루해요"', affection: -12, trust: -15, type: 'dismissive' }
+                    { text: '"우와 어떤 책이에요? 정말 궁금한데요. 저한테도 추천해주실 수 있나요? 당신이 좋아하는 책이라면 저도 꼭 읽어보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"그럼 우리 같이 독서 모임 해볼까요? 같은 책 읽고 서로 이야기 나누면 정말 재미있을 것 같아요. 당신과 책 이야기 나누고 싶어요"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"음... 책은 솔직히 좀 지루한 것 같은데요. 글자만 잔뜩 있고, 그걸 끝까지 읽는 게 쉽지 않더라고요"', affection: -12, trust: -15, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_gaming',
-                situation: '"게임하는 거 좋아해요"',
+                situation: '"저 게임하는 거 진짜 좋아해요. 게임 속 세계에서 모험하고 퀘스트 깨는 게 너무 재미있거든요. 스트레스도 풀리고 친구들이랑 같이하면 더 재미있어요"',
                 choices: [
-                    { text: '"같이 할 수 있는 게임 있어요?"', affection: 16, trust: 14, type: 'join' },
-                    { text: '"어떤 게임 하세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"게임은 시간 낭비예요"', affection: -18, trust: -20, type: 'critical' }
+                    { text: '"오 좋네요! 혹시 우리 같이 할 수 있는 게임 있을까요? 당신이랑 같이 게임하면 정말 재미있을 것 같은데요. 초보도 할 수 있는 거 추천해주세요!"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"어떤 게임을 주로 하세요? 장르가 있나요? 저도 게임 이야기 듣는 거 좋아하는데 얘기해주세요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"게임은 솔직히 시간 낭비 아닌가요? 그 시간에 더 생산적인 일을 하는 게 낫지 않을까요? 게임은 좀 유치한 것 같은데요"', affection: -18, trust: -20, type: 'critical' }
                 ]
             },
             {
                 id: 'hobby_yoga',
-                situation: '"요가 배우기 시작했어요"',
+                situation: '"요즘 요가를 배우기 시작했어요. 처음엔 몸이 뻣뻣해서 힘들었는데, 점점 유연해지는 게 느껴져서 신기해요. 명상하면서 마음도 차분해지고 정말 좋아요"',
                 choices: [
-                    { text: '"건강에 좋죠. 대단해요"', affection: 14, trust: 16, type: 'supportive' },
-                    { text: '"저도 같이 배울까요?"', affection: 16, trust: 14, type: 'join' },
-                    { text: '"힘들지 않아요?"', affection: -6, trust: -8, type: 'doubting' }
+                    { text: '"우와 정말 좋은 취미네요! 건강에도 좋고 마음도 편안해질 것 같아요. 꾸준히 하시는 거 보면 정말 대단하신 것 같아요"', affection: 14, trust: 16, type: 'supportive' },
+                    { text: '"저도 요가 배워보고 싶었는데 같이 배울까요? 당신이랑 같이하면 더 재미있게 배울 수 있을 것 같아요. 초보도 할 수 있죠?"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"요가 그거 많이 힘들지 않아요? 몸 꺾고 그런 거 하는 거잖아요. 저는 좀 무리인 것 같은데..."', affection: -6, trust: -8, type: 'doubting' }
                 ]
             },
             {
                 id: 'hobby_baking',
-                situation: '"베이킹이 취미예요. 빵 만드는 게 재미있어요"',
+                situation: '"베이킹이 취미예요. 빵이랑 쿠키 만드는 게 정말 재미있거든요. 반죽하고 굽는 과정도 좋고, 오븐에서 갓 나온 빵 향기는 정말 환상적이에요"',
                 choices: [
-                    { text: '"맛보고 싶어요!"', affection: 16, trust: 14, type: 'excited' },
-                    { text: '"어떤 빵 만드세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"단 거 별로 안 좋아해요"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"우와 정말 맛있을 것 같아요! 언젠가 당신이 만든 빵 꼭 맛보고 싶어요. 당신 손으로 직접 만든 거라면 정말 특별할 것 같아요!"', affection: 16, trust: 14, type: 'excited' },
+                    { text: '"어떤 빵을 주로 만드세요? 식빵이요, 아니면 페이스트리 같은 것도 만드시나요? 베이킹 이야기 더 듣고 싶어요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"음... 저는 사실 단 거 별로 안 좋아하는데요. 빵이랑 쿠키는 좀 달아서 별로 선호하지 않아요"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_hiking',
-                situation: '"등산하는 거 좋아해요"',
+                situation: '"저 등산하는 거 정말 좋아해요. 산 정상에 올라가서 맑은 공기 마시고 경치 보면 모든 스트레스가 날아가는 기분이에요. 자연 속에 있으면 정말 힐링돼요"',
                 choices: [
-                    { text: '"같이 가요! 어디 좋은 곳 있어요?"', affection: 18, trust: 16, type: 'enthusiastic' },
-                    { text: '"건강하시겠어요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"저는 집이 좋은데..."', affection: -12, trust: -14, type: 'lazy' }
+                    { text: '"우와 저도 등산 좋아해요! 같이 가요! 어디 좋은 산 있으세요? 당신이랑 같이 산 오르면 정말 재미있을 것 같아요. 언제 갈까요?"', affection: 18, trust: 16, type: 'enthusiastic' },
+                    { text: '"등산하시는 분들 정말 건강하시더라고요. 규칙적으로 하시나봐요? 체력도 좋으실 것 같아요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"음... 저는 집에 있는 게 더 좋은데요. 산 올라가는 거 힘들고 땀나고... 집이 최고 아닌가요?"', affection: -12, trust: -14, type: 'lazy' }
                 ]
             },
             {
                 id: 'hobby_collecting',
-                situation: '"피규어 수집하는 게 취미예요"',
+                situation: '"저 피규어 수집하는 게 취미예요. 좋아하는 캐릭터들 모으고 진열해놓으면 정말 뿌듯하거든요. 하나하나 모으는 재미가 있어요"',
                 choices: [
-                    { text: '"어떤 거 모으세요? 보여주세요"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"열정이 멋져요"', affection: 14, trust: 16, type: 'supportive' },
-                    { text: '"돈 낭비 아니에요?"', affection: -20, trust: -22, type: 'critical' }
+                    { text: '"우와 어떤 피규어 모으시는지 정말 궁금한데요! 컬렉션 보여주실 수 있어요? 당신이 좋아하는 캐릭터들 정말 보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"피규어 수집이라니 정말 멋진 취미네요. 좋아하는 걸 모으는 열정이 정말 멋있어요. 그런 열정 있는 모습 좋아요"', affection: 14, trust: 16, type: 'supportive' },
+                    { text: '"피규어요? 그거 모으는데 돈이 엄청 들지 않아요? 솔직히 돈 낭비 아닌가요? 그냥 보기만 하는 건데..."', affection: -20, trust: -22, type: 'critical' }
                 ]
             },
             {
                 id: 'hobby_dance',
-                situation: '"춤추는 게 좋아요"',
+                situation: '"저 춤추는 게 정말 좋아요. 음악에 맞춰 몸을 움직이면 스트레스도 풀리고 정말 자유로운 기분이 들어요. 춤출 때가 제일 행복해요"',
                 choices: [
-                    { text: '"같이 춤춰요!"', affection: 18, trust: 14, type: 'join' },
-                    { text: '"어떤 춤 추세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"저는 춤 못 춰요"', affection: -8, trust: -10, type: 'refuse' }
+                    { text: '"우와 멋있는데요! 저랑 같이 춤춰봐요! 저도 춤 좋아하거든요. 당신이랑 같이 음악 틀고 춤추면 정말 재미있을 것 같아요!"', affection: 18, trust: 14, type: 'join' },
+                    { text: '"어떤 장르의 춤을 추세요? K-pop이요, 아니면 힙합? 춤추시는 모습 한번 보고 싶은데요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"저는 춤을 정말 못 춰요. 리듬감도 없고 몸치라서... 춤은 제 스타일이 아닌 것 같아요"', affection: -8, trust: -10, type: 'refuse' }
                 ]
             },
             {
                 id: 'hobby_gardening',
-                situation: '"식물 키우는 게 취미예요"',
+                situation: '"저 식물 키우는 게 취미예요. 매일 물 주고 돌보면서 조금씩 자라는 모습 보면 정말 뿌듯해요. 생명을 키운다는 게 참 의미있더라고요"',
                 choices: [
-                    { text: '"무슨 식물 키우세요?"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"저도 배우고 싶어요"', affection: 16, trust: 14, type: 'join' },
-                    { text: '"저는 식물 다 죽여요"', affection: -6, trust: -8, type: 'negative' }
+                    { text: '"우와 어떤 식물들을 키우시는지 궁금해요. 화초요, 아니면 허브 같은 것도 키우세요? 식물 이야기 더 들려주세요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"저도 식물 키우는 거 배워보고 싶어요. 저한테도 가르쳐주실 수 있나요? 초보자도 키울 수 있는 식물 추천해주세요"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"저는 식물 키우면 항상 다 죽여요. 물 주는 타이밍도 모르겠고... 식물 키우는 건 제 재능이 아닌 것 같아요"', affection: -6, trust: -8, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_writing',
-                situation: '"글쓰기가 취미예요"',
+                situation: '"저 글쓰기가 취미예요. 제 생각이나 느낌을 글로 표현하는 게 정말 좋거든요. 일기도 쓰고 가끔은 짧은 소설도 써요. 글 쓸 때만큼은 정말 자유로워요"',
                 choices: [
-                    { text: '"어떤 글 쓰세요? 읽어보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"멋져요. 언젠가 책 내세요"', affection: 14, trust: 16, type: 'encouraging' },
-                    { text: '"글쓰기는 어려워요"', affection: -6, trust: -8, type: 'dismissive' }
+                    { text: '"우와 정말 멋진데요! 어떤 글들을 쓰시는지 궁금해요. 언젠가 당신이 쓴 글 읽어보고 싶어요. 보여주실 수 있나요?"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"글쓰기 정말 멋진 취미예요. 계속 쓰시다가 언젠가 책도 내시면 좋겠어요. 당신이라면 충분히 가능할 것 같아요"', affection: 14, trust: 16, type: 'encouraging' },
+                    { text: '"글쓰기는 정말 어려운 것 같아요. 저는 뭘 써야 할지도 모르겠고... 그런 재능이 없는 것 같아요"', affection: -6, trust: -8, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_running',
-                situation: '"러닝이 취미예요"',
+                situation: '"저 러닝이 취미예요. 아침마다 달리기하는데, 맑은 공기 마시면서 뛰면 하루가 정말 상쾌하게 시작돼요. 몸도 건강해지고 머리도 맑아져요"',
                 choices: [
-                    { text: '"같이 뛸까요?"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"건강하시겠어요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"힘들지 않아요?"', affection: -6, trust: -8, type: 'doubting' }
+                    { text: '"우와 좋은 습관이네요! 저랑 같이 뛸까요? 당신이랑 함께 러닝하면 더 재미있을 것 같아요. 언제 같이 뛰어봐요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"아침마다 달리기하시는 거 정말 대단하세요. 건강도 좋으시고 의지도 강하신 것 같아요. 존경스러워요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"매일 달리기요? 힘들지 않으세요? 저는 조금만 뛰어도 힘든데... 어떻게 매일 하시는지 모르겠어요"', affection: -6, trust: -8, type: 'doubting' }
                 ]
             },
             {
                 id: 'hobby_board_games',
-                situation: '"보드게임 좋아해요"',
+                situation: '"저 보드게임 정말 좋아해요. 친구들이랑 모여서 게임하면서 전략 짜고 경쟁하는 게 너무 재미있거든요. 승부욕도 생기고 좋아요"',
                 choices: [
-                    { text: '"같이 해요! 무슨 게임 좋아하세요?"', affection: 18, trust: 16, type: 'enthusiastic' },
-                    { text: '"재미있겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"유치한 거 아니에요?"', affection: -15, trust: -18, type: 'dismissive' }
+                    { text: '"오 저도 보드게임 좋아해요! 같이 해요! 어떤 게임을 제일 좋아하세요? 추천해주시면 같이 해봐요. 정말 재미있을 것 같아요!"', affection: 18, trust: 16, type: 'enthusiastic' },
+                    { text: '"보드게임 재미있죠. 사람들이랑 같이 하는 게임이라 더 재미있는 것 같아요. 전략 게임 같은 거 좋아하시나요?"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"보드게임이요? 그거 좀 유치한 거 아니에요? 애들이나 하는 거 같은데... 왜 어른이 보드게임을 해요?"', affection: -15, trust: -18, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_fishing',
-                situation: '"낚시하는 게 좋아요"',
+                situation: '"저 낚시하는 게 정말 좋아요. 강이나 바다에 앉아서 낚싯대 드리우고 있으면 마음이 정말 편안해져요. 여유롭고 힐링되는 시간이에요"',
                 choices: [
-                    { text: '"같이 가요. 가르쳐주세요"', affection: 16, trust: 16, type: 'join' },
-                    { text: '"여유로워 보여요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"지루하지 않아요?"', affection: -12, trust: -14, type: 'negative' }
+                    { text: '"낚시 정말 좋은 취미네요. 저도 한번 같이 가보고 싶어요. 처음이라 서툴겠지만 가르쳐주실 수 있나요? 같이 가고 싶어요"', affection: 16, trust: 16, type: 'join' },
+                    { text: '"낚시하시는 분들 보면 정말 여유로워 보이더라고요. 바쁜 일상에서 벗어나 자연 속에 있으면 좋을 것 같아요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"낚시요? 그냥 앉아서 기다리기만 하는 거 아니에요? 저는 좀 지루할 것 같은데... 뭐가 재미있는지 모르겠어요"', affection: -12, trust: -14, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_knitting',
-                situation: '"뜨개질이 취미예요"',
+                situation: '"저 뜨개질이 취미예요. 털실로 무언가를 만들어가는 과정이 정말 재미있거든요. 목도리나 모자 같은 거 만들면 뿌듯해요"',
                 choices: [
-                    { text: '"제게도 뭔가 만들어주세요"', affection: 16, trust: 14, type: 'request' },
-                    { text: '"손재주가 좋으시네요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"할머니 취미 아니에요?"', affection: -18, trust: -20, type: 'rude' }
+                    { text: '"우와 손재주가 정말 좋으시네요! 언젠가 저한테도 뭔가 만들어주실 수 있나요? 당신이 직접 만든 거라면 정말 특별할 것 같아요"', affection: 16, trust: 14, type: 'request' },
+                    { text: '"뜨개질 정말 섬세한 작업이잖아요. 손재주도 좋으시고 인내심도 있으신 것 같아요. 정말 멋져요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"뜨개질이요? 그거 할머니들이나 하는 거 아니에요? 요즘 시대에 누가 뜨개질을 해요... 좀 올드한 취미네요"', affection: -18, trust: -20, type: 'rude' }
                 ]
             },
             {
                 id: 'hobby_cycling',
-                situation: '"자전거 타는 게 좋아요"',
+                situation: '"저 자전거 타는 게 정말 좋아요. 바람 맞으며 달리는 그 기분이 너무 상쾌하거든요. 주말이면 한강이나 좋은 코스 찾아서 라이딩해요"',
                 choices: [
-                    { text: '"같이 라이딩 가요!"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"어디 타러 가세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried' }
+                    { text: '"우와 저도 자전거 타는 거 좋아해요! 같이 라이딩 가요! 어디 좋은 코스 있으세요? 함께 달리면 정말 재미있을 것 같아요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"자전거 라이딩 좋죠. 주로 어디로 타러 가세요? 한강이요, 아니면 다른 곳도 가시나요? 코스 궁금해요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"자전거 타는 거 위험하지 않아요? 차도에서 사고도 많이 나고... 조심하셔야 할 것 같은데요"', affection: -8, trust: -10, type: 'worried' }
                 ]
             },
             {
                 id: 'hobby_pottery',
-                situation: '"도자기 만드는 거 배우고 있어요"',
+                situation: '"저 요즘 도자기 만드는 거 배우고 있어요. 물레 돌리면서 흙으로 형태 만들어가는 게 정말 신기하고 재미있어요. 창작하는 기분이 들어요"',
                 choices: [
-                    { text: '"멋져요! 작품 보고 싶어요"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"같이 배울 수 있을까요?"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"어려울 것 같은데..."', affection: -8, trust: -10, type: 'doubting' }
+                    { text: '"우와 정말 멋진 취미네요! 도자기 작품 정말 보고 싶어요. 어떤 걸 만드셨는지 보여주실 수 있나요? 당신이 만든 작품 궁금해요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"저도 도자기 만들기 배워보고 싶었어요. 같이 배울 수 있을까요? 물레 돌리는 거 한번 해보고 싶은데 같이하면 재미있을 것 같아요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"도자기요? 그거 엄청 어려울 것 같은데요... 물레도 돌려야 하고 섬세해야 할 것 같고... 저는 못 할 것 같아요"', affection: -8, trust: -10, type: 'doubting' }
                 ]
             },
             {
                 id: 'hobby_astronomy',
-                situation: '"천체 관측이 취미예요"',
+                situation: '"저 천체 관측이 취미예요. 밤하늘의 별들을 망원경으로 보면 정말 신비로워요. 우주의 광활함 앞에서 경외감이 들어요"',
                 choices: [
-                    { text: '"같이 별 보러 가요!"', affection: 20, trust: 18, type: 'romantic' },
-                    { text: '"로맨틱하네요"', affection: 16, trust: 14, type: 'positive' },
-                    { text: '"밤에 춥지 않아요?"', affection: -6, trust: -8, type: 'practical' }
+                    { text: '"우와 정말 낭만적인데요! 저랑 같이 별 보러 가요! 밤하늘 보면서 당신과 함께 있으면 정말 특별할 것 같아요. 언제 갈까요?"', affection: 20, trust: 18, type: 'romantic' },
+                    { text: '"천체 관측이라니 정말 로맨틱한 취미네요. 별자리 같은 것도 잘 아시나요? 밤하늘 이야기 듣고 싶어요"', affection: 16, trust: 14, type: 'positive' },
+                    { text: '"밤에 밖에 나가는 거 춥지 않아요? 겨울에는 특히 추울 텐데... 실내에 있는 게 낫지 않나요?"', affection: -6, trust: -8, type: 'practical' }
                 ]
             },
             {
                 id: 'hobby_podcast',
-                situation: '"팟캐스트 듣는 게 좋아요"',
+                situation: '"저 팟캐스트 듣는 게 정말 좋아요. 출퇴근 시간이나 운동할 때 들으면 시간도 잘 가고 재미있거든요. 다양한 이야기 듣는 게 좋아요"',
                 choices: [
-                    { text: '"어떤 거 들으세요? 추천해주세요"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"같이 들어요"', affection: 16, trust: 14, type: 'join' },
-                    { text: '"그런 게 재미있어요?"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"팟캐스트 좋죠! 어떤 채널 주로 들으세요? 저한테도 추천해주실 수 있나요? 당신이 좋아하는 거라면 저도 들어보고 싶어요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"오 그럼 우리 같은 팟캐스트 같이 들어봐요. 같이 듣고 이야기 나누면 재미있을 것 같아요. 추천해주세요!"', affection: 16, trust: 14, type: 'join' },
+                    { text: '"팟캐스트요? 그런 게 재미있어요? 그냥 누가 떠드는 거 들으면 뭐가 좋은지 모르겠는데... 지루할 것 같은데요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_volunteering',
-                situation: '"봉사활동하는 게 보람차요"',
+                situation: '"저 봉사활동하는 게 정말 보람차요. 도움이 필요한 분들께 조금이라도 도움을 드릴 수 있다는 게 뿌듯해요. 의미있는 시간을 보내는 기분이에요"',
                 choices: [
-                    { text: '"존경스러워요. 같이 할 수 있을까요?"', affection: 18, trust: 20, type: 'respectful' },
-                    { text: '"어떤 봉사하세요?"', affection: 14, trust: 18, type: 'curious' },
-                    { text: '"시간 많으시네요"', affection: -15, trust: -18, type: 'sarcastic' }
+                    { text: '"정말 존경스러워요. 정말 멋진 일 하시네요. 저도 같이 봉사활동 할 수 있을까요? 당신처럼 의미있는 일 하고 싶어요"', affection: 18, trust: 20, type: 'respectful' },
+                    { text: '"어떤 봉사활동을 하시는지 궁금해요. 어디서 어떤 활동을 하시나요? 봉사 이야기 더 듣고 싶어요"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"봉사활동이요? 시간 정말 많으시나봐요. 바쁜데 그런 걸 할 여유가 있다는 게 부럽네요"', affection: -15, trust: -18, type: 'sarcastic' }
                 ]
             },
             {
                 id: 'hobby_magic',
-                situation: '"마술 배우는 게 취미예요"',
+                situation: '"저 마술 배우는 게 취미예요. 사람들 놀라게 하고 신기해하는 모습 보면 정말 뿌듯하거든요. 트릭 연습하는 것도 재미있어요"',
                 choices: [
-                    { text: '"보여주세요! 신기할 것 같아요"', affection: 18, trust: 16, type: 'excited' },
-                    { text: '"어떤 마술 할 수 있어요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"트릭일 뿐이잖아요"', affection: -15, trust: -18, type: 'dismissive' }
+                    { text: '"우와 정말 신기할 것 같아요! 저한테도 한번 보여주세요! 마술 보고 싶어요. 당신이 하는 마술이라면 정말 특별할 것 같아요!"', affection: 18, trust: 16, type: 'excited' },
+                    { text: '"마술이라니 멋지네요! 어떤 마술을 할 수 있으세요? 카드 마술이요, 아니면 다른 것도 하시나요? 궁금해요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"마술이요? 어차피 다 트릭이고 속임수잖아요. 알고 나면 별거 아닌 거 같은데... 뭐가 재미있는지 모르겠어요"', affection: -15, trust: -18, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_coding',
-                situation: '"프로그래밍이 취미예요"',
+                situation: '"저 프로그래밍이 취미예요. 코드 짜서 뭔가 만들어내는 게 정말 재미있거든요. 아이디어를 직접 구현할 수 있다는 게 좋아요"',
                 choices: [
-                    { text: '"멋져요! 뭘 만드세요?"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"저도 배워보고 싶어요"', affection: 14, trust: 16, type: 'join' },
-                    { text: '"너무 어려워요"', affection: -8, trust: -10, type: 'negative' }
+                    { text: '"우와 정말 멋지네요! 어떤 프로그램이나 앱을 만드시는지 궁금해요. 작품들 보여주실 수 있나요? 정말 대단하신 것 같아요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"저도 프로그래밍 배워보고 싶었는데 저한테도 가르쳐주실 수 있나요? 당신한테 배우면 재미있게 배울 수 있을 것 같아요"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"프로그래밍은 너무 어려워 보여요. 코드도 복잡하고... 저는 절대 못 할 것 같은데 어떻게 그걸 하시는지 모르겠어요"', affection: -8, trust: -10, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_language',
-                situation: '"외국어 공부하는 게 재미있어요"',
+                situation: '"저 외국어 공부하는 게 정말 재미있어요. 새로운 언어를 배우면서 다른 문화도 이해하게 되는 게 신기하고 좋아요"',
                 choices: [
-                    { text: '"어떤 언어요? 같이 배워요"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"대단하시네요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"필요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"우와 어떤 언어를 공부하시는지 궁금해요! 저도 외국어 배우고 싶었는데 같이 공부할까요? 함께 배우면 더 재미있을 것 같아요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"외국어 공부하시는 거 정말 대단하세요. 언어 배우는 건 쉽지 않은데 열정이 있으시네요. 멋있어요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"외국어 공부요? 그거 필요해요? 번역기도 있고... 굳이 힘들게 배울 이유가 있나요? 시간 낭비 같은데요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_animals',
-                situation: '"동물 보호소에서 봉사해요"',
+                situation: '"저 동물 보호소에서 봉사활동 해요. 버려진 동물들 돌보면서 보람을 느껴요. 작은 생명들에게 도움을 줄 수 있어서 행복해요"',
                 choices: [
-                    { text: '"같이 가도 될까요?"', affection: 18, trust: 18, type: 'join' },
-                    { text: '"착하시네요"', affection: 14, trust: 16, type: 'compliment' },
-                    { text: '"냄새 안 나요?"', affection: -18, trust: -20, type: 'rude' }
+                    { text: '"정말 멋진 일 하시네요! 저도 같이 가도 될까요? 동물들 돌보는 일 같이하고 싶어요. 언제 봉사하러 가시나요?"', affection: 18, trust: 18, type: 'join' },
+                    { text: '"동물 보호소 봉사라니 정말 착하시네요. 생명을 아끼는 마음이 정말 아름다워요. 존경스러워요"', affection: 14, trust: 16, type: 'compliment' },
+                    { text: '"동물 보호소요? 냄새 많이 나지 않아요? 털도 날리고... 좀 더러울 것 같은데 어떻게 그런 걸 하세요?"', affection: -18, trust: -20, type: 'rude' }
                 ]
             },
             {
                 id: 'hobby_model',
-                situation: '"프라모델 조립하는 게 취미예요"',
+                situation: '"저 프라모델 조립하는 게 취미예요. 작은 부품들을 하나하나 조립해서 완성하면 정말 뿌듯해요. 집중력도 필요하고 재미있어요"',
                 choices: [
-                    { text: '"어떤 거 만드세요? 보여주세요"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"집중력이 좋으시네요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"애들 장난감 아니에요?"', affection: -18, trust: -20, type: 'rude' }
+                    { text: '"우와 어떤 프라모델을 만드시는지 정말 궁금해요! 완성작들 보여주실 수 있나요? 당신의 컬렉션 정말 보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"프라모델 조립하시는 거 보면 집중력도 좋으시고 손재주도 있으신 것 같아요. 섬세한 작업이라 대단하신 것 같아요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"프라모델이요? 그거 애들 장난감 아니에요? 어른이 왜 그런 걸 해요... 좀 유치한 취미 같은데요"', affection: -18, trust: -20, type: 'rude' }
                 ]
             },
             {
                 id: 'hobby_meditation',
-                situation: '"명상하는 게 취미예요"',
+                situation: '"저 명상하는 게 취미예요. 조용히 앉아서 호흡에 집중하다 보면 마음이 정말 평화로워져요. 스트레스도 많이 줄어들고 좋아요"',
                 choices: [
-                    { text: '"저도 배우고 싶어요"', affection: 16, trust: 16, type: 'join' },
-                    { text: '"평화로워 보여요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"그냥 가만히 있는 거 아니에요?"', affection: -12, trust: -14, type: 'dismissive' }
+                    { text: '"명상 정말 좋은 습관이네요. 저도 배워보고 싶어요. 어떻게 시작하면 좋을까요? 저한테도 가르쳐주실 수 있나요?"', affection: 16, trust: 16, type: 'join' },
+                    { text: '"명상하시는 분들 보면 정말 평화로워 보이더라고요. 마음도 차분하시고 좋으실 것 같아요. 멋진 취미예요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"명상이요? 그거 그냥 가만히 앉아있는 거 아니에요? 뭐가 특별한지 모르겠는데... 지루할 것 같은데요"', affection: -12, trust: -14, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_singing',
-                situation: '"노래 부르는 거 좋아해요"',
+                situation: '"저 노래 부르는 거 정말 좋아해요. 스트레스 풀 때도 노래하고, 기분 좋을 때도 노래해요. 노래방 가면 시간 가는 줄 몰라요"',
                 choices: [
-                    { text: '"같이 노래방 가요!"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"어떤 노래 좋아하세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"저는 음치예요"', affection: -6, trust: -8, type: 'negative' }
+                    { text: '"저도 노래 좋아해요! 우리 같이 노래방 가요! 당신이랑 같이 노래 부르면 정말 재미있을 것 같아요. 언제 갈까요?"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"노래 좋아하시는구나. 어떤 장르의 노래를 주로 부르세요? 좋아하는 가수 있으세요? 노래 이야기 듣고 싶어요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"저는 음치라서 노래를 잘 못 불러요... 노래방 가면 창피하고... 노래는 제 스타일이 아닌 것 같아요"', affection: -6, trust: -8, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_investment',
-                situation: '"주식 투자 공부하고 있어요"',
+                situation: '"저 주식 투자 공부하고 있어요. 경제 흐름도 이해하게 되고 재테크에 관심이 생겨서 배우는 중이에요. 미래를 위한 준비라고 생각해요"',
                 choices: [
-                    { text: '"현명하시네요. 조언 부탁해요"', affection: 14, trust: 18, type: 'respectful' },
-                    { text: '"어떻게 공부하세요?"', affection: 12, trust: 16, type: 'curious' },
-                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried' }
+                    { text: '"우와 정말 현명하신 것 같아요. 저도 재테크에 관심 있는데 조언 좀 부탁드려도 될까요? 어떻게 공부하시는지 궁금해요"', affection: 14, trust: 18, type: 'respectful' },
+                    { text: '"주식 투자 공부하시는 거 대단하세요. 어떻게 공부하세요? 책 읽으세요, 아니면 다른 방법도 있나요? 궁금해요"', affection: 12, trust: 16, type: 'curious' },
+                    { text: '"주식 투자요? 위험하지 않아요? 손해 보면 어떡하려고... 주식은 좀 무서운 것 같은데 왜 하시는지 모르겠어요"', affection: -8, trust: -10, type: 'worried' }
                 ]
             },
             {
                 id: 'hobby_wine',
-                situation: '"와인 공부하는 게 취미예요"',
+                situation: '"저 와인 공부하는 게 취미예요. 다양한 와인 맛보면서 산지나 품종에 따라 달라지는 풍미를 음미하는 게 정말 재미있어요"',
                 choices: [
-                    { text: '"멋져요! 추천해주세요"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"같이 와인 시음회 가요"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"술은 별로예요"', affection: -12, trust: -14, type: 'negative' }
+                    { text: '"우와 정말 고급스러운 취미네요! 저한테도 좋은 와인 추천해주실 수 있나요? 당신이 추천하는 와인 꼭 마셔보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"와인 시음회 같은 거 가시나요? 저도 와인에 관심 있는데 같이 와인 시음회 가면 재미있을 것 같아요. 같이 가요!"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"와인이요? 저는 술을 별로 안 좋아하는데요... 와인도 술이잖아요. 술은 좀 별로인 것 같아요"', affection: -12, trust: -14, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_camping',
-                situation: '"캠핑 다니는 게 좋아요"',
+                situation: '"저 캠핑 다니는 게 정말 좋아요. 자연 속에서 텐트 치고 별 보면서 캠프파이어하는 그 느낌이 최고예요. 힐링되는 시간이에요"',
                 choices: [
-                    { text: '"같이 가요! 언제 갈까요?"', affection: 20, trust: 18, type: 'enthusiastic' },
-                    { text: '"자연 속에서 좋겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"불편하지 않아요?"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"우와 캠핑 정말 좋죠! 저도 정말 좋아해요. 같이 가요! 언제 갈까요? 당신이랑 캠핑 가면 정말 재미있을 것 같아요!"', affection: 20, trust: 18, type: 'enthusiastic' },
+                    { text: '"캠핑 좋죠. 자연 속에서 시간 보내면 정말 힐링되는 것 같아요. 어디로 주로 가시나요? 추천 장소 있으세요?"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"캠핑요? 불편하지 않아요? 씻기도 힘들고 벌레도 많고... 저는 호텔이 훨씬 나은 것 같은데요"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_coffee',
-                situation: '"커피 로스팅이 취미예요"',
+                situation: '"저 커피 로스팅이 취미예요. 생두를 직접 볶아서 원하는 맛을 만들어내는 게 정말 재미있거든요. 커피 향 정말 좋아요"',
                 choices: [
-                    { text: '"맛보고 싶어요!"', affection: 16, trust: 16, type: 'excited' },
-                    { text: '"전문가시네요"', affection: 14, trust: 14, type: 'compliment' },
-                    { text: '"그냥 사 먹으면 안 돼요?"', affection: -15, trust: -18, type: 'dismissive' }
+                    { text: '"우와 정말 전문적인데요! 당신이 직접 로스팅한 커피 꼭 맛보고 싶어요. 언젠가 제게도 내려주실 수 있나요? 기대돼요!"', affection: 16, trust: 16, type: 'excited' },
+                    { text: '"커피 로스팅까지 하시다니 정말 전문가시네요. 커피에 대해 정말 많이 아시는 것 같아요. 멋있어요"', affection: 14, trust: 14, type: 'compliment' },
+                    { text: '"직접 로스팅까지 해요? 그냥 카페에서 사 먹으면 편한데... 왜 굳이 힘들게 직접 하시는지 모르겠어요"', affection: -15, trust: -18, type: 'dismissive' }
                 ]
             },
             {
@@ -3274,317 +3274,317 @@ const TALK_TOPICS = {
             },
             {
                 id: 'memories_graduation',
-                situation: '"졸업식 날이 기억나요"',
+                situation: '"졸업식 날이 문득 기억나요. 친구들과 마지막으로 같은 교실에 앉아있던 그 순간, 기쁘기도 하고 아쉽기도 했었어요. 그때의 떨림이 아직도 생생해요"',
                 choices: [
-                    { text: '"그때 기분이 어땠어요?"', affection: 14, trust: 18, type: 'empathetic' },
-                    { text: '"저도 그때가 생각나요"', affection: 16, trust: 16, type: 'relate' },
-                    { text: '"그게 중요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"그때 기분이 어땠는지 더 자세히 이야기해줄래요? 졸업식은 정말 특별한 순간이잖아요. 당신의 그 순간이 궁금해요"', affection: 14, trust: 18, type: 'empathetic' },
+                    { text: '"저도 졸업식 때가 정말 생각나요. 그 복잡한 감정들... 기쁘면서도 슬프고. 정말 공감돼요. 우리 비슷한 경험을 했나봐요"', affection: 16, trust: 16, type: 'relate' },
+                    { text: '"졸업식이요? 그게 그렇게 중요한 일인가요? 어차피 다 지나간 일인데... 옛날 얘기 그만하고 다른 얘기 해요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_pet',
-                situation: '"어릴 때 키우던 강아지가 그리워요"',
+                situation: '"어릴 때 키우던 강아지가 가끔 생각나요. 정말 귀엽고 착했거든요. 함께했던 시간들이 너무 소중한 추억이에요. 지금도 그리워요"',
                 choices: [
-                    { text: '"어떤 강아지였어요?"', affection: 16, trust: 18, type: 'caring' },
-                    { text: '"많이 그리우시겠어요"', affection: 18, trust: 20, type: 'empathetic' },
-                    { text: '"동물일 뿐이에요"', affection: -20, trust: -22, type: 'cold' }
+                    { text: '"어떤 강아지였는지 더 이야기해줘요. 이름은 뭐였어요? 어떤 모습이었는지 정말 궁금해요. 당신에게 소중한 친구였나봐요"', affection: 16, trust: 18, type: 'caring' },
+                    { text: '"정말 많이 그리우시겠어요. 함께했던 시간이 소중했나봐요. 그런 추억이 있다는 게 정말 특별한 것 같아요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"동물일 뿐인데 뭐가 그렇게 그리워요? 어차피 반려동물은 다 그런 거 아닌가요? 너무 오버하는 것 같은데요"', affection: -20, trust: -22, type: 'cold' }
                 ]
             },
             {
                 id: 'memories_teacher',
-                situation: '"은사님 생각이 나요"',
+                situation: '"문득 은사님 생각이 나요. 정말 많은 걸 가르쳐주셨던 분이에요. 그분이 아니었으면 지금의 제가 없었을 거예요"',
                 choices: [
-                    { text: '"어떤 분이셨는지 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
-                    { text: '"연락드려보는 게 어때요?"', affection: 16, trust: 16, type: 'suggest' },
-                    { text: '"선생님 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                    { text: '"어떤 분이셨는지 더 자세히 이야기해줘요. 당신에게 어떤 영향을 주셨는지 정말 궁금해요. 소중한 인연이었나봐요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"감사한 분이시네요. 한번 연락드려보는 게 어때요? 은사님도 당신 소식 궁금해하실 것 같아요"', affection: 16, trust: 16, type: 'suggest' },
+                    { text: '"선생님 얘기는 좀... 지루한데요. 학창 시절 이야기 그만하고 다른 재미있는 얘기 없어요?"', affection: -8, trust: -10, type: 'uninterested' }
                 ]
             },
             {
                 id: 'memories_first_concert',
-                situation: '"처음 간 콘서트가 기억나요"',
+                situation: '"처음 간 콘서트가 아직도 기억나요. 좋아하는 가수를 직접 보고 라이브 음악을 들었던 그 순간이 정말 짜릿했어요. 평생 잊지 못할 추억이에요"',
                 choices: [
-                    { text: '"누구 콘서트였어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"재미있었겠어요"', affection: 12, trust: 14, type: 'positive' },
-                    { text: '"그런 거 돈 아까워요"', affection: -15, trust: -18, type: 'negative' }
+                    { text: '"우와 누구 콘서트였는지 궁금한데요! 어떤 가수였어요? 그때 기분이 어땠는지 더 이야기해줘요. 정말 특별한 경험이었나봐요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"처음 콘서트는 정말 특별하죠. 그 떨림과 감동... 정말 재미있었겠어요. 저도 그런 경험 있어서 공감돼요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"콘서트요? 그런 거 가는 게 돈 아깝지 않아요? TV로 보면 되는데 왜 굳이 비싼 돈 내고 가는지 모르겠어요"', affection: -15, trust: -18, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_accident',
-                situation: '"어릴 때 다친 적 있어요"',
+                situation: '"어릴 때 넘어져서 크게 다친 적이 있어요. 병원에 실려가고 정말 무서웠던 기억이 나요. 지금 생각해도 아찔해요"',
                 choices: [
-                    { text: '"괜찮았어요? 어떻게 됐어요?"', affection: 16, trust: 20, type: 'concerned' },
-                    { text: '"많이 아팠겠어요"', affection: 14, trust: 18, type: 'empathetic' },
-                    { text: '"조심하지 그랬어요"', affection: -12, trust: -15, type: 'blame' }
+                    { text: '"어머 정말요? 많이 다쳤었나봐요. 괜찮았어요? 그때 어떻게 됐는지 더 이야기해줘요. 정말 걱정되네요"', affection: 16, trust: 20, type: 'concerned' },
+                    { text: '"어릴 때 다쳤던 거 정말 무섭고 많이 아팠겠어요. 지금은 다 나으셨으니 다행이에요. 힘든 경험이었겠네요"', affection: 14, trust: 18, type: 'empathetic' },
+                    { text: '"그러게 뛰어다닐 때 조심하지 그랬어요. 넘어질 줄 알면서 왜 조심 안 했어요? 본인 잘못도 있는 거 아니에요?"', affection: -12, trust: -15, type: 'blame' }
                 ]
             },
             {
                 id: 'memories_birthday',
-                situation: '"어릴 때 생일 파티 기억나요"',
+                situation: '"어릴 때 생일 파티 했던 기억이 나요. 친구들 다 모이고 케이크에 촛불 끄고... 그때가 정말 행복했어요"',
                 choices: [
-                    { text: '"어떤 파티였는지 이야기해줘요"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"행복한 기억이네요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"옛날 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                    { text: '"우와 어떤 파티였는지 더 자세히 이야기해줘요. 무슨 선물 받았어요? 친구들이랑 뭐 하고 놀았어요? 듣고 싶어요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"정말 행복한 기억이네요. 생일 파티는 언제나 특별하죠. 그런 따뜻한 추억이 있다는 게 정말 좋은 것 같아요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"옛날 생일 파티 얘기는 좀... 지루한데요. 그런 어릴 때 이야기 말고 다른 재미있는 얘기 없어요?"', affection: -8, trust: -10, type: 'uninterested' }
                 ]
             },
             {
                 id: 'memories_embarrassing',
-                situation: '"창피했던 기억이 있어요"',
+                situation: '"정말 창피했던 기억이 있어요. 지금 생각해도 얼굴이 빨개져요. 그때는 정말 땅에 묻히고 싶었어요"',
                 choices: [
-                    { text: '"괜찮아요. 누구나 그래요"', affection: 18, trust: 20, type: 'comforting' },
-                    { text: '"뭐였는지 궁금해요"', affection: 12, trust: 14, type: 'curious' },
-                    { text: '웃으며 놀린다', affection: -15, trust: -18, type: 'mock' }
+                    { text: '"괜찮아요. 누구나 그런 순간 있어요. 저도 비슷한 경험 있어요. 지나고 나면 다 추억이 되는 거예요"', affection: 18, trust: 20, type: 'comforting' },
+                    { text: '"어떤 일이었는지 궁금한데... 말하기 싫으면 안 해도 돼요. 하지만 이야기해주면 들을게요"', affection: 12, trust: 14, type: 'curious' },
+                    { text: '웃으며 "에이 그게 뭐라고 그래요? 재미있네요" 하고 놀린다', affection: -15, trust: -18, type: 'mock' }
                 ]
             },
             {
                 id: 'memories_achievement',
-                situation: '"상 받았던 기억이 나요"',
+                situation: '"학창 시절에 상을 받았던 기억이 나요. 정말 열심히 준비했었거든요. 상장 받을 때 너무 뿌듯했어요"',
                 choices: [
-                    { text: '"대단하시네요! 뭐였어요?"', affection: 16, trust: 16, type: 'impressed' },
-                    { text: '"자랑스러우시겠어요"', affection: 14, trust: 14, type: 'supportive' },
-                    { text: '"별거 아니었나봐요"', affection: -18, trust: -20, type: 'dismissive' }
+                    { text: '"우와 정말 대단하시네요! 무슨 상이었어요? 어떤 분야에서 상을 받으셨는지 정말 궁금해요. 멋있어요!"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"열심히 노력한 결과네요. 정말 자랑스러우시겠어요. 그런 성취가 있다는 게 정말 멋진 것 같아요"', affection: 14, trust: 14, type: 'supportive' },
+                    { text: '"상이요? 뭐 별거 아니었나봐요. 학교 상 같은 건 요즘 다들 받잖아요. 그게 그렇게 대단한가요?"', affection: -18, trust: -20, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_move',
-                situation: '"이사 많이 다녔어요"',
+                situation: '"어릴 때 이사를 정말 많이 다녔어요. 새로운 학교에 적응하고 친구들 새로 사귀는 게 쉽지 않았어요. 지금은 그것도 좋은 경험이었다고 생각하지만요"',
                 choices: [
-                    { text: '"힘들었겠어요"', affection: 16, trust: 18, type: 'empathetic' },
-                    { text: '"어디어디 살았어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"그래서요?"', affection: -10, trust: -12, type: 'indifferent' }
+                    { text: '"정말 힘들었겠어요. 계속 새로운 환경에 적응해야 했다니... 당신 정말 강한 사람인 것 같아요. 잘 견뎌내셨네요"', affection: 16, trust: 18, type: 'empathetic' },
+                    { text: '"우와 이사를 많이 다니셨네요. 어디어디 사셨어요? 다양한 곳에서 살아보신 경험 정말 궁금해요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"이사 많이 다녔다고요? 그래서요? 그게 뭐 대수인가요? 다들 이사 정도는 하잖아요"', affection: -10, trust: -12, type: 'indifferent' }
                 ]
             },
             {
                 id: 'memories_festival',
-                situation: '"학교 축제가 그리워요"',
+                situation: '"학교 축제가 가끔 그리워요. 친구들이랑 준비하고 공연도 하고... 그때가 정말 즐거웠거든요. 학창 시절의 가장 행복한 추억이에요"',
                 choices: [
-                    { text: '"어떤 축제였는지 이야기해줘요"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"재미있었겠어요"', affection: 12, trust: 14, type: 'positive' },
-                    { text: '"축제가 뭐가 좋아요?"', affection: -12, trust: -14, type: 'negative' }
+                    { text: '"어떤 축제였는지 더 자세히 이야기해줘요. 무슨 공연 하셨어요? 친구들이랑 어떤 걸 준비했는지 정말 궁금해요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"학교 축제는 정말 재미있죠. 친구들과 함께 만들어가는 추억... 정말 특별한 시간이었을 것 같아요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"학교 축제요? 그게 뭐가 좋아요? 시끄럽고 정신없고... 저는 그런 거 별로 좋아하지 않는데요"', affection: -12, trust: -14, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_grandparent',
-                situation: '"할머니/할아버지 생각이 나요"',
+                situation: '"가끔 할머니 할아버지 생각이 나요. 정말 많이 보고 싶어요. 어릴 때 정말 잘해주셨거든요"',
                 choices: [
-                    { text: '"어떤 분이셨는지 이야기해줘요"', affection: 16, trust: 20, type: 'caring' },
-                    { text: '손을 잡아준다', affection: 20, trust: 22, type: 'comforting' },
-                    { text: '"슬픈 얘기는..."', affection: -15, trust: -18, type: 'avoid' }
+                    { text: '"어떤 분이셨는지 더 이야기해줘요. 당신에게 정말 소중한 분이셨나봐요. 듣고 싶어요"', affection: 16, trust: 20, type: 'caring' },
+                    { text: '조용히 다가가서 손을 잡아주며 위로한다', affection: 20, trust: 22, type: 'comforting' },
+                    { text: '"슬픈 얘기는 좀... 그런 이야기 하면 분위기 다운되잖아요. 다른 밝은 얘기 해요"', affection: -15, trust: -18, type: 'avoid' }
                 ]
             },
             {
                 id: 'memories_hobby_start',
-                situation: '"이 취미를 시작한 계기가 있어요"',
+                situation: '"제가 이 취미를 시작하게 된 특별한 계기가 있어요. 우연히 시작했지만 제 인생을 바꾼 것 같아요"',
                 choices: [
-                    { text: '"궁금해요. 이야기해줘요"', affection: 16, trust: 18, type: 'interested' },
-                    { text: '"특별한 이야기네요"', affection: 14, trust: 16, type: 'positive' },
-                    { text: '"그냥 시작한 거 아니에요?"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"정말 궁금한데요. 어떤 계기였는지 이야기해줘요. 당신의 인생을 바꾼 순간이 정말 궁금해요"', affection: 16, trust: 18, type: 'interested' },
+                    { text: '"인생을 바꾼 취미라니 정말 특별한 이야기네요. 그런 의미있는 경험이 있다는 게 멋져요"', affection: 14, trust: 16, type: 'positive' },
+                    { text: '"계기요? 그냥 시작한 거 아니에요? 뭐 특별한 이유가 있어야 취미를 시작해요? 너무 거창한데요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_failure',
-                situation: '"실패했던 기억이 있어요"',
+                situation: '"크게 실패했던 기억이 있어요. 정말 열심히 준비했는데 결과가 좋지 않았어요. 그때 정말 힘들었거든요"',
                 choices: [
-                    { text: '"그래도 배운 게 있을 거예요"', affection: 18, trust: 20, type: 'supportive' },
-                    { text: '"힘들었겠어요"', affection: 16, trust: 18, type: 'empathetic' },
-                    { text: '"그러니까 조심하지..."', affection: -18, trust: -20, type: 'blame' }
+                    { text: '"힘들었겠지만 그 과정에서 분명 배운 게 있을 거예요. 실패도 성장의 일부니까요. 당신은 정말 대단해요"', affection: 18, trust: 20, type: 'supportive' },
+                    { text: '"정말 많이 힘들었겠어요. 열심히 했는데 결과가 안 좋으면 정말 속상하죠. 당신 마음 충분히 이해해요"', affection: 16, trust: 18, type: 'empathetic' },
+                    { text: '"그러니까 더 조심하지 그랬어요. 준비를 제대로 했으면 그렇게 안 됐을 텐데... 아쉽네요"', affection: -18, trust: -20, type: 'blame' }
                 ]
             },
             {
                 id: 'memories_friendship_end',
-                situation: '"친구랑 멀어진 적 있어요"',
+                situation: '"정말 친했던 친구랑 멀어진 적이 있어요. 연락도 끊기고... 가끔 그 친구 생각나요. 좀 슬프네요"',
                 choices: [
-                    { text: '"슬프셨겠어요"', affection: 18, trust: 20, type: 'empathetic' },
-                    { text: '"무슨 일이었어요?"', affection: 14, trust: 18, type: 'curious' },
-                    { text: '"그럴 수도 있죠"', affection: -10, trust: -12, type: 'cold' }
+                    { text: '"정말 슬프셨겠어요. 친한 친구와 멀어지는 건 정말 힘든 일이죠. 당신 마음 충분히 이해해요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"무슨 일이 있었는지 말하기 싫으면 안 해도 돼요. 하지만 이야기하고 싶으면 들을게요"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"친구랑 멀어지는 거요? 그럴 수도 있죠 뭐. 사람 관계는 다 그런 거 아니에요? 너무 심각하게 생각하지 마세요"', affection: -10, trust: -12, type: 'cold' }
                 ]
             },
             {
                 id: 'memories_award',
-                situation: '"대회에서 우승한 적 있어요"',
+                situation: '"옛날에 대회에서 우승한 적이 있어요. 정말 열심히 준비해서 1등 했을 때 너무 기뻤거든요"',
                 choices: [
-                    { text: '"대단하시네요!"', affection: 16, trust: 16, type: 'impressed' },
-                    { text: '"어떤 대회였어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"자랑하시네요"', affection: -15, trust: -18, type: 'sarcastic' }
+                    { text: '"우와 정말 대단하시네요! 우승이라니! 어떤 대회였는지 정말 궁금해요. 축하드려요!"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"어떤 대회였어요? 1등 하려면 정말 실력이 좋으셔야 했을 텐데 대단하세요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"아 우승 자랑하시네요. 뭐 그렇게 대단한 대회였나요? 옛날 일 가지고 자랑하시는 거 보니..."', affection: -15, trust: -18, type: 'sarcastic' }
                 ]
             },
             {
                 id: 'memories_first_job',
-                situation: '"첫 직장이 기억나요"',
+                situation: '"첫 직장이 아직도 기억나요. 정말 설레기도 하고 떨리기도 했어요. 사회 첫발을 내딛던 그 순간이 생생해요"',
                 choices: [
-                    { text: '"어땠어요? 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
-                    { text: '"힘들었겠어요"', affection: 16, trust: 16, type: 'empathetic' },
-                    { text: '"다들 그래요"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"첫 직장은 정말 특별하죠. 어땠는지 더 이야기해줘요. 어떤 일을 하셨어요? 그때 이야기 듣고 싶어요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"첫 직장은 정말 힘들고 적응하기 어려웠을 것 같아요. 잘 견뎌내셨네요. 대단하세요"', affection: 16, trust: 16, type: 'empathetic' },
+                    { text: '"첫 직장이요? 뭐 다들 그런 거 있잖아요. 누구나 첫 직장 있고 다들 겪는 일인데... 특별할 게 없는데요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_regret',
-                situation: '"후회되는 일이 있어요"',
+                situation: '"정말 후회되는 일이 있어요. 그때 다르게 했더라면... 하는 생각이 가끔 들어요"',
                 choices: [
-                    { text: '"괜찮아요. 누구나 그래요"', affection: 20, trust: 22, type: 'comforting' },
-                    { text: '"지금이라도 만회할 수 있어요"', affection: 18, trust: 20, type: 'encouraging' },
-                    { text: '"그때 왜 그랬어요?"', affection: -18, trust: -20, type: 'blame' }
+                    { text: '"괜찮아요. 누구나 후회하는 일이 있어요. 그때는 그게 최선이었을 거예요. 자책하지 마세요"', affection: 20, trust: 22, type: 'comforting' },
+                    { text: '"후회가 되시나봐요. 하지만 지금이라도 만회할 수 있는 방법이 있을 거예요. 아직 늦지 않았어요"', affection: 18, trust: 20, type: 'encouraging' },
+                    { text: '"그때 왜 그렇게 하셨어요? 조금만 더 생각하셨으면 후회 안 하셨을 텐데... 아쉽네요"', affection: -18, trust: -20, type: 'blame' }
                 ]
             },
             {
                 id: 'memories_old_photo',
-                situation: '옛날 사진을 보여줍니다.',
+                situation: '"이거 제 옛날 사진이에요" 하며 어린 시절 사진을 보여줍니다.',
                 choices: [
-                    { text: '"귀여우시네요"', affection: 18, trust: 16, type: 'cute' },
-                    { text: '"많이 변하셨네요"', affection: 12, trust: 14, type: 'honest' },
-                    { text: '"왜 이렇게 변했어요?"', affection: -15, trust: -18, type: 'rude' }
+                    { text: '"우와 정말 귀여우시네요! 어릴 때도 정말 예쁘셨네요. 지금도 그때 모습이 남아있는 것 같아요"', affection: 18, trust: 16, type: 'cute' },
+                    { text: '"옛날 사진이네요. 지금과는 많이 변하셨네요. 세월이 흐른 게 느껴져요. 추억이 많으시겠어요"', affection: 12, trust: 14, type: 'honest' },
+                    { text: '"어 근데 왜 이렇게 많이 변했어요? 지금하고 너무 다른데요? 예전이 더 나은 것 같은데..."', affection: -15, trust: -18, type: 'rude' }
                 ]
             },
             {
                 id: 'memories_old_house',
-                situation: '"옛날 집 앞을 지나갔어요"',
+                situation: '"오늘 우연히 옛날 살던 집 앞을 지나갔어요. 정말 오랜만이었거든요. 여러 생각이 들더라고요"',
                 choices: [
-                    { text: '"감회가 새로우시겠어요"', affection: 16, trust: 18, type: 'understanding' },
-                    { text: '"어떤 기분이었어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"그게 중요해요?"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"정말 감회가 새로우셨겠어요. 옛날 살던 집을 보면 추억들이 많이 떠오르죠. 어떤 기분이셨어요?"', affection: 16, trust: 18, type: 'understanding' },
+                    { text: '"옛날 집 앞을 지나가셨구나. 어떤 기분이었는지 궁금해요. 좋았어요, 아니면 좀 슬펐어요?"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"옛날 집 앞 지나간 게 그렇게 중요해요? 그냥 집일 뿐인데... 뭐가 그렇게 감회가 새로워요?"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_bully',
-                situation: '"학교 다닐 때 힘든 일 있었어요"',
+                situation: '"학교 다닐 때 정말 힘든 일이 있었어요. 아직도 그때 생각하면... 말하기 좀 그래요"',
                 choices: [
-                    { text: '"많이 힘들었겠어요" 위로한다', affection: 20, trust: 24, type: 'comforting' },
-                    { text: '손을 잡아준다', affection: 22, trust: 26, type: 'supportive' },
-                    { text: '"왜 말 안 했어요?"', affection: -12, trust: -15, type: 'blame' }
+                    { text: '"정말 많이 힘들었겠어요. 괜찮아요, 이제는 다 지나간 일이에요" 하며 따뜻하게 위로한다', affection: 20, trust: 24, type: 'comforting' },
+                    { text: '말없이 다가가 손을 잡아주며 곁에 있어준다', affection: 22, trust: 26, type: 'supportive' },
+                    { text: '"그때 왜 말을 안 했어요? 주변에 도움을 요청하지... 그냥 참고만 있었어요? 이해가 안 가네요"', affection: -12, trust: -15, type: 'blame' }
                 ]
             },
             {
                 id: 'memories_dream_job',
-                situation: '"어릴 때 꿈이 있었어요"',
+                situation: '"어릴 때 꿈이 있었어요. 지금은 다른 일을 하고 있지만 가끔 그 꿈이 생각나요"',
                 choices: [
-                    { text: '"뭐였는지 이야기해줘요"', affection: 14, trust: 18, type: 'interested' },
-                    { text: '"지금이라도 도전할 수 있어요"', affection: 18, trust: 20, type: 'encouraging' },
-                    { text: '"꿈은 꿈일 뿐이에요"', affection: -18, trust: -20, type: 'harsh' }
+                    { text: '"어떤 꿈이었는지 이야기해줘요. 당신의 꿈이 정말 궁금해요. 어릴 때는 뭐가 되고 싶으셨어요?"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"아직 늦지 않았어요. 지금이라도 그 꿈에 도전해볼 수 있어요. 언제든 시작할 수 있어요"', affection: 18, trust: 20, type: 'encouraging' },
+                    { text: '"어릴 때 꿈이요? 꿈은 그냥 꿈일 뿐이에요. 현실을 받아들이는 게 중요하죠. 이루지 못한 꿈에 연연하지 마세요"', affection: -18, trust: -20, type: 'harsh' }
                 ]
             },
             {
                 id: 'memories_performance',
-                situation: '"무대에 섰던 기억이 있어요"',
+                situation: '"옛날에 무대에 섰던 기억이 있어요. 많은 사람들 앞에서 공연했었거든요. 정말 떨렸지만 잊을 수 없는 경험이에요"',
                 choices: [
-                    { text: '"멋지셨겠어요!"', affection: 16, trust: 16, type: 'impressed' },
-                    { text: '"어떤 무대였어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"떨리지 않았어요?"', affection: 10, trust: 12, type: 'question' }
+                    { text: '"우와 정말 멋지셨겠어요! 무대에 서는 건 정말 대단한 일이에요. 용기도 있으시고 멋있으세요!"', affection: 16, trust: 16, type: 'impressed' },
+                    { text: '"어떤 무대였는지 궁금해요. 무슨 공연이었어요? 어떤 기분이었는지 더 이야기해줘요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"무대에 서는 거 정말 떨리지 않았어요? 저는 사람들 앞에 서면 너무 떨려서 못할 것 같은데..."', affection: 10, trust: 12, type: 'question' }
                 ]
             },
             {
                 id: 'memories_lost_item',
-                situation: '"소중한 물건을 잃어버린 적 있어요"',
+                situation: '"정말 소중한 물건을 잃어버린 적이 있어요. 아직도 그 물건이 생각나요. 정말 소중했는데..."',
                 choices: [
-                    { text: '"슬프셨겠어요"', affection: 18, trust: 20, type: 'empathetic' },
-                    { text: '"무슨 물건이었어요?"', affection: 14, trust: 16, type: 'curious' },
-                    { text: '"조심하지 그랬어요"', affection: -15, trust: -18, type: 'blame' }
+                    { text: '"정말 슬프셨겠어요. 소중한 걸 잃어버리면 정말 마음 아프죠. 충분히 이해해요"', affection: 18, trust: 20, type: 'empathetic' },
+                    { text: '"어떤 물건이었는지 물어봐도 될까요? 정말 소중했나봐요. 이야기해주고 싶으면 들을게요"', affection: 14, trust: 16, type: 'curious' },
+                    { text: '"물건을 조심하지 그랬어요. 소중한 거면 더 잘 챙겼어야죠. 본인 잘못도 있는 거 아니에요?"', affection: -15, trust: -18, type: 'blame' }
                 ]
             },
             {
                 id: 'memories_holiday',
-                situation: '"명절 때 기억이 나요"',
+                situation: '"명절 때 가족들과 모였던 기억이 나요. 다 같이 모여서 음식 먹고 이야기하던 그 따뜻한 분위기가 그리워요"',
                 choices: [
-                    { text: '"어떤 추억이 있으세요?"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"좋은 기억이네요"', affection: 12, trust: 14, type: 'positive' },
-                    { text: '"명절은 피곤해요"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"어떤 추억들이 있으세요? 명절 이야기 더 듣고 싶어요. 가족들과 뭐 하고 놀았어요?"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"정말 좋은 기억이네요. 가족과 함께한 명절은 정말 특별하죠. 따뜻한 추억이 많으시겠어요"', affection: 12, trust: 14, type: 'positive' },
+                    { text: '"명절이요? 저는 명절 별로 안 좋아하는데요. 피곤하고 할 일도 많고... 뭐가 좋은지 모르겠어요"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_promise',
-                situation: '"어릴 때 한 약속이 있어요"',
+                situation: '"어릴 때 친구들과 한 약속이 있어요. 나중에 꼭 다시 만나자고 약속했었거든요"',
                 choices: [
-                    { text: '"지켰어요?"', affection: 14, trust: 18, type: 'curious' },
-                    { text: '"어떤 약속이었어요?"', affection: 12, trust: 16, type: 'interested' },
-                    { text: '"어릴 때 약속은..."', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"그 약속 지키셨어요? 친구들과 다시 만나셨나요? 정말 궁금해요"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"어떤 약속이었는지 더 이야기해줘요. 어릴 때 약속은 정말 순수하고 특별하죠"', affection: 12, trust: 16, type: 'interested' },
+                    { text: '"어릴 때 약속이요? 그런 거 다 안 지켜지잖아요. 어릴 때 약속은 그냥 그런 거예요"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_sports_day',
-                situation: '"운동회 때 기억이 나요"',
+                situation: '"학교 운동회 때가 기억나요. 친구들과 같이 달리기도 하고 응원도 하고... 정말 신났었어요"',
                 choices: [
-                    { text: '"재미있었겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"어떤 종목 했어요?"', affection: 12, trust: 14, type: 'curious' },
-                    { text: '"그런 거 싫었어요"', affection: -8, trust: -10, type: 'negative' }
+                    { text: '"운동회 정말 재미있죠! 어떤 경기했어요? 상 받으신 적 있어요? 이야기 더 듣고 싶어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"어떤 종목에 나가셨어요? 달리기요, 아니면 다른 거요? 운동 잘하셨나봐요"', affection: 12, trust: 14, type: 'curious' },
+                    { text: '"운동회요? 저는 그런 거 정말 싫었는데... 더럽고 힘들고, 왜 그런 걸 하는지 모르겠어요"', affection: -8, trust: -10, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_mentor',
-                situation: '"저에게 영향 준 분이 있어요"',
+                situation: '"제 인생에 큰 영향을 준 멘토가 있어요. 그분이 아니었으면 지금의 제가 없었을 거예요"',
                 choices: [
-                    { text: '"어떤 분이셨는지 궁금해요"', affection: 16, trust: 20, type: 'interested' },
-                    { text: '"좋은 만남이었네요"', affection: 14, trust: 18, type: 'positive' },
-                    { text: '"그래서요?"', affection: -12, trust: -14, type: 'indifferent' }
+                    { text: '"어떤 분이셨는지 정말 궁금해요. 당신에게 어떤 영향을 주셨는지 더 이야기해줘요"', affection: 16, trust: 20, type: 'interested' },
+                    { text: '"정말 좋은 만남이었네요. 그런 멘토를 만나셨다는 게 정말 행운인 것 같아요"', affection: 14, trust: 18, type: 'positive' },
+                    { text: '"멘토요? 그래서요? 그런 사람 만나는 거 뭐 대단한 일이에요? 다들 인생에 영향 주는 사람 있잖아요"', affection: -12, trust: -14, type: 'indifferent' }
                 ]
             },
             {
                 id: 'memories_sick',
-                situation: '"어릴 때 많이 아팠어요"',
+                situation: '"어릴 때 정말 많이 아팠어요. 자주 병원 다니고... 부모님도 정말 걱정 많이 하셨어요"',
                 choices: [
-                    { text: '"많이 힘들었겠어요"', affection: 18, trust: 22, type: 'empathetic' },
-                    { text: '"지금은 건강하시니 다행이에요"', affection: 16, trust: 20, type: 'positive' },
-                    { text: '"그래서 약하신 거예요?"', affection: -20, trust: -22, type: 'insensitive' }
+                    { text: '"정말 많이 힘들었겠어요. 어릴 때 아프면 더 힘들죠. 당신도 부모님도 많이 힘드셨겠어요"', affection: 18, trust: 22, type: 'empathetic' },
+                    { text: '"그랬구나... 지금은 건강하시니 정말 다행이에요. 많이 나아지셨네요. 이제 괜찮으시죠?"', affection: 16, trust: 20, type: 'positive' },
+                    { text: '"어릴 때 많이 아팠어요? 그래서 지금 체력이 약하신 거예요? 그런 영향이 아직도 있나요?"', affection: -20, trust: -22, type: 'insensitive' }
                 ]
             },
             {
                 id: 'memories_talent',
-                situation: '"숨은 재능이 있었어요"',
+                situation: '"사실 저 숨은 재능이 하나 있었어요. 지금은 잘 안 하지만 그때는 꽤 잘했었거든요"',
                 choices: [
-                    { text: '"뭐였어요? 보여주세요"', affection: 16, trust: 16, type: 'excited' },
-                    { text: '"대단하시네요"', affection: 14, trust: 14, type: 'impressed' },
-                    { text: '"지금은 못 하시나봐요"', affection: -15, trust: -18, type: 'sarcastic' }
+                    { text: '"우와 뭐였는지 정말 궁금해요! 한번 보여주실 수 있나요? 당신의 재능 정말 보고 싶어요!"', affection: 16, trust: 16, type: 'excited' },
+                    { text: '"숨은 재능이라니 정말 대단하시네요. 어떤 재능이었어요? 이야기 더 듣고 싶어요"', affection: 14, trust: 14, type: 'impressed' },
+                    { text: '"숨은 재능이요? 그럼 지금은 못 하시나봐요. 그럼 그냥 옛날 얘기일 뿐이네요"', affection: -15, trust: -18, type: 'sarcastic' }
                 ]
             },
             {
                 id: 'memories_snow',
-                situation: '"눈 오는 날 추억이 있어요"',
+                situation: '"눈 오는 날 특별한 추억이 있어요. 하얀 눈이 내리는 날, 정말 아름다웠던 순간이 있었거든요"',
                 choices: [
-                    { text: '"이야기해줘요"', affection: 14, trust: 16, type: 'interested' },
-                    { text: '"로맨틱하네요"', affection: 16, trust: 14, type: 'romantic' },
-                    { text: '"눈은 불편해요"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"우와 어떤 추억인지 정말 궁금해요. 이야기해줘요. 눈 오는 날 추억은 정말 특별하잖아요"', affection: 14, trust: 16, type: 'interested' },
+                    { text: '"눈 오는 날 추억이라니 정말 로맨틱하네요. 상상만 해도 아름다울 것 같아요. 멋진 기억이네요"', affection: 16, trust: 14, type: 'romantic' },
+                    { text: '"눈이요? 저는 눈 오면 정말 불편한데요. 춥고 미끄럽고... 뭐가 좋은지 모르겠어요"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_camp',
-                situation: '"수련회 갔던 기억이 나요"',
+                situation: '"학창 시절 수련회 갔던 기억이 나요. 친구들과 밤새 떠들고 놀고... 정말 즐거웠어요"',
                 choices: [
-                    { text: '"재미있었어요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"무슨 일 있었어요?"', affection: 12, trust: 14, type: 'interested' },
-                    { text: '"그런 거 싫어요"', affection: -8, trust: -10, type: 'negative' }
+                    { text: '"수련회 정말 재미있죠! 어땠어요? 무슨 활동했어요? 이야기 더 듣고 싶어요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"친구들과 함께한 수련회... 무슨 재미있는 일이 있었어요? 특별한 에피소드 있으세요?"', affection: 12, trust: 14, type: 'interested' },
+                    { text: '"수련회요? 저는 그런 거 정말 싫었는데... 단체 생활 불편하고 집이 더 좋은데 왜 가는지 모르겠어요"', affection: -8, trust: -10, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_dance',
-                situation: '"학예회 때 춤췄어요"',
+                situation: '"학예회 때 춤을 췄던 기억이 나요. 무대에서 춤추면서 정말 긴장했었는데 재미있었어요"',
                 choices: [
-                    { text: '"보고 싶어요"', affection: 16, trust: 14, type: 'excited' },
-                    { text: '"멋지셨겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"창피하지 않았어요?"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"우와 춤추시는 모습 정말 보고 싶어요! 어떤 춤이었어요? 지금도 그 춤 출 수 있으세요?"', affection: 16, trust: 14, type: 'excited' },
+                    { text: '"학예회 무대라니 정말 멋지셨겠어요. 많은 사람들 앞에서 춤추는 거 대단해요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"무대에서 춤추는 거 창피하지 않았어요? 저라면 정말 못 했을 것 같은데..."', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'memories_rebellion',
-                situation: '"반항기가 있었어요"',
+                situation: '"사춘기 때 반항기가 있었어요. 부모님이랑 많이 싸우기도 했고... 지금 생각하면 좀 미안해요"',
                 choices: [
-                    { text: '"어떻게 지나갔어요?"', affection: 14, trust: 18, type: 'curious' },
-                    { text: '"다들 그런 시기 있죠"', affection: 16, trust: 16, type: 'understanding' },
-                    { text: '"부모님 힘들으셨겠네요"', affection: -12, trust: -14, type: 'judgmental' }
+                    { text: '"그 시기를 어떻게 지나오셨어요? 어떻게 극복하셨는지 궁금해요. 누구나 그런 시기 있잖아요"', affection: 14, trust: 18, type: 'curious' },
+                    { text: '"다들 그런 시기 있죠. 자연스러운 과정이에요. 지금은 부모님과 관계가 좋으시죠?"', affection: 16, trust: 16, type: 'understanding' },
+                    { text: '"반항기요? 부모님이 정말 힘드셨겠네요. 자식이 그러면 정말 속상하셨을 텐데..."', affection: -12, trust: -14, type: 'judgmental' }
                 ]
             },
             {
                 id: 'memories_rescue',
-                situation: '"누군가를 도운 기억이 있어요"',
+                situation: '"옛날에 누군가를 도와준 기억이 있어요. 위급한 상황이었는데 제가 도울 수 있어서 다행이었어요"',
                 choices: [
-                    { text: '"멋지시네요!"', affection: 18, trust: 20, type: 'impressed' },
-                    { text: '"어떻게 도왔어요?"', affection: 16, trust: 18, type: 'curious' },
-                    { text: '"위험하지 않았어요?"', affection: 12, trust: 14, type: 'worried' }
+                    { text: '"우와 정말 멋지시네요! 용감하시기도 하고... 정말 대단한 일 하셨어요. 존경스러워요!"', affection: 18, trust: 20, type: 'impressed' },
+                    { text: '"어떻게 도와주셨는지 궁금해요. 어떤 상황이었어요? 정말 대단하신 것 같아요"', affection: 16, trust: 18, type: 'curious' },
+                    { text: '"도와주는 건 좋은데 위험하지 않았어요? 자칫 큰일 날 뻔했을 수도 있는데..."', affection: 12, trust: 14, type: 'worried' }
                 ]
             },
             {
                 id: 'memories_treasure',
-                situation: '"보물 찾기 했던 기억이 나요"',
+                situation: '"어릴 때 친구들과 보물찾기 놀이 했던 기억이 나요. 진짜 보물은 아니었지만 정말 재미있었어요"',
                 choices: [
-                    { text: '"재미있었겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"찾았어요?"', affection: 12, trust: 12, type: 'curious' },
-                    { text: '"유치하네요"', affection: -15, trust: -18, type: 'dismissive' }
+                    { text: '"보물찾기 정말 재미있죠! 결국 보물 찾으셨어요? 어떤 보물이었는지 궁금해요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"보물 찾으셨어요? 친구들과 어디서 찾으셨어요? 재미있었겠어요"', affection: 12, trust: 12, type: 'curious' },
+                    { text: '"보물찾기요? 그거 좀 유치한 놀이 아니에요? 어린애들이나 하는 거 같은데..."', affection: -15, trust: -18, type: 'dismissive' }
                 ]
             }
         ]
@@ -3646,317 +3646,317 @@ const TALK_TOPICS = {
             },
             {
                 id: 'values_forgiveness',
-                situation: '"용서하기 어려운 일도 용서해야 할까요?"',
+                situation: '"용서하기 정말 어려운 일도 용서해야 할까요? 어떤 사람들은 용서해야 한다고 하고, 어떤 사람들은 용서할 수 없는 일도 있다고 하잖아요. 당신은 어떻게 생각하세요?"',
                 choices: [
-                    { text: '"용서는 자신을 위한 것이에요"', affection: 16, trust: 24, type: 'forgiving' },
-                    { text: '"잘못에 따라 다르죠"', affection: 14, trust: 22, type: 'conditional' },
-                    { text: '"용서 못 할 것도 있어요"', affection: 12, trust: 20, type: 'strict' }
+                    { text: '"용서는 결국 자신을 위한 것이라고 생각해요. 용서하지 않으면 자신만 힘들어지잖아요. 마음의 평화를 위해서라도 용서하는 게 좋다고 봐요"', affection: 16, trust: 24, type: 'forgiving' },
+                    { text: '"잘못의 종류와 정도에 따라 다르다고 생각해요. 실수는 용서할 수 있지만, 고의로 큰 피해를 준 건 쉽게 용서하기 어렵죠. 상황을 봐야 해요"', affection: 14, trust: 22, type: 'conditional' },
+                    { text: '"솔직히 용서할 수 없는 일도 분명히 있다고 생각해요. 어떤 잘못은 너무 크고 심각해서 용서할 수가 없어요. 억지로 용서할 필요는 없죠"', affection: 12, trust: 20, type: 'strict' }
                 ]
             },
             {
                 id: 'values_justice',
-                situation: '"정의가 뭐라고 생각해요?"',
+                situation: '"당신은 정의가 뭐라고 생각하세요? 사람마다 정의의 기준이 다 다르잖아요. 저는 당신의 생각이 정말 궁금해요"',
                 choices: [
-                    { text: '"약자를 보호하는 것"', affection: 18, trust: 24, type: 'protection' },
-                    { text: '"공정한 것"', affection: 16, trust: 26, type: 'fairness' },
-                    { text: '"힘이 정의예요"', affection: -15, trust: -20, type: 'power' }
+                    { text: '"정의는 약자를 보호하는 것이라고 생각해요. 힘없는 사람들을 지켜주고 그들의 권리를 보장해주는 게 진정한 정의죠"', affection: 18, trust: 24, type: 'protection' },
+                    { text: '"저는 공정함이 정의라고 봐요. 모든 사람을 공평하게 대우하고 규칙을 똑같이 적용하는 것, 그게 정의의 본질이라고 생각해요"', affection: 16, trust: 26, type: 'fairness' },
+                    { text: '"현실적으로 보면 힘이 곧 정의예요. 힘있는 사람이 정의를 정하고 세상을 움직이잖아요. 이상보다는 현실이 중요하죠"', affection: -15, trust: -20, type: 'power' }
                 ]
             },
             {
                 id: 'values_work_life',
-                situation: '"일과 삶의 균형, 어떻게 생각해요?"',
+                situation: '"일과 삶의 균형에 대해 어떻게 생각하세요? 요즘 워라밸이 중요하다고들 하는데, 당신은 어느 쪽이 더 중요하다고 생각해요?"',
                 choices: [
-                    { text: '"삶이 우선이죠"', affection: 18, trust: 20, type: 'life' },
-                    { text: '"균형이 중요해요"', affection: 16, trust: 24, type: 'balance' },
-                    { text: '"일을 열심히 해야죠"', affection: 10, trust: 18, type: 'work' }
+                    { text: '"저는 삶이 우선이라고 생각해요. 일은 삶을 위한 수단이지 목적이 아니잖아요. 가족, 건강, 행복이 더 중요하죠"', affection: 18, trust: 20, type: 'life' },
+                    { text: '"둘 다 중요하니까 균형이 정말 중요하다고 봐요. 일도 열심히 하되 개인 시간도 확보하는 게 건강한 삶이라고 생각해요"', affection: 16, trust: 24, type: 'balance' },
+                    { text: '"일을 열심히 해야 한다고 생각해요. 젊을 때 열심히 일해야 나중에 여유를 가질 수 있죠. 지금은 일에 집중하는 게 맞아요"', affection: 10, trust: 18, type: 'work' }
                 ]
             },
             {
                 id: 'values_change',
-                situation: '"사람은 변할 수 있을까요?"',
+                situation: '"사람은 정말 변할 수 있을까요? 어떤 사람들은 사람은 절대 안 변한다고 하고, 어떤 사람들은 노력하면 변할 수 있다고 하잖아요"',
                 choices: [
-                    { text: '"노력하면 변할 수 있어요"', affection: 18, trust: 24, type: 'optimistic' },
-                    { text: '"어렵지만 가능해요"', affection: 14, trust: 22, type: 'realistic' },
-                    { text: '"사람은 안 변해요"', affection: -10, trust: -12, type: 'pessimistic' }
+                    { text: '"저는 노력하면 충분히 변할 수 있다고 믿어요. 사람은 배우고 성장하는 존재니까요. 자신을 바꾸려는 의지만 있으면 가능해요"', affection: 18, trust: 24, type: 'optimistic' },
+                    { text: '"변하기는 어렵지만 불가능하지는 않다고 봐요. 시간이 걸리고 노력이 필요하지만, 진심으로 변하려고 하면 조금씩 바뀔 수 있어요"', affection: 14, trust: 22, type: 'realistic' },
+                    { text: '"솔직히 사람은 잘 안 변해요. 타고난 성격이나 습관은 쉽게 바뀌지 않죠. 변한다고 해도 일시적일 뿐이에요"', affection: -10, trust: -12, type: 'pessimistic' }
                 ]
             },
             {
                 id: 'values_happiness',
-                situation: '"행복이 뭐라고 생각해요?"',
+                situation: '"당신에게 행복이란 무엇인가요? 행복의 기준은 사람마다 정말 다르잖아요. 당신은 어떨 때 가장 행복한가요?"',
                 choices: [
-                    { text: '"사랑하는 사람들과 함께 있는 것"', affection: 22, trust: 24, type: 'relationship' },
-                    { text: '"자신이 원하는 것을 하는 것"', affection: 16, trust: 22, type: 'freedom' },
-                    { text: '"돈과 안정"', affection: -8, trust: -10, type: 'material' }
+                    { text: '"저는 사랑하는 사람들과 함께 있을 때가 가장 행복해요. 가족, 친구, 연인과 함께 웃고 이야기하는 그 순간들이 진정한 행복이라고 생각해요"', affection: 22, trust: 24, type: 'relationship' },
+                    { text: '"자신이 원하는 것을 자유롭게 할 수 있을 때가 행복한 것 같아요. 하고 싶은 일을 하며 살아가는 것, 그게 행복이죠"', affection: 16, trust: 22, type: 'freedom' },
+                    { text: '"솔직히 경제적 안정과 돈이 있을 때 행복하다고 생각해요. 돈이 있어야 하고 싶은 것도 하고 불안하지 않잖아요"', affection: -8, trust: -10, type: 'material' }
                 ]
             },
             {
                 id: 'values_loyalty',
-                situation: '"충성과 정직함 중 뭐가 더 중요해요?"',
+                situation: '"충성과 정직함 중에 뭐가 더 중요하다고 생각하세요? 가끔 둘이 충돌할 때가 있잖아요. 그럴 때 어떤 걸 선택하시나요?"',
                 choices: [
-                    { text: '"정직함이요"', affection: 14, trust: 28, type: 'honesty' },
-                    { text: '"상황에 따라 다르죠"', affection: 12, trust: 24, type: 'situational' },
-                    { text: '"충성이 우선이에요"', affection: 16, trust: 20, type: 'loyalty' }
+                    { text: '"저는 정직함이 더 중요하다고 봐요. 아무리 가까운 사이라도 거짓말은 안 되죠. 진실을 말하는 게 옳다고 생각해요"', affection: 14, trust: 28, type: 'honesty' },
+                    { text: '"상황에 따라 다르다고 생각해요. 대부분은 정직해야 하지만, 때로는 상대를 지키기 위해 충성이 우선일 때도 있죠"', affection: 12, trust: 24, type: 'situational' },
+                    { text: '"충성이 우선이라고 봐요. 내 편 사람은 끝까지 지켜줘야 한다고 생각해요. 가족이나 친구에 대한 충성이 더 중요하죠"', affection: 16, trust: 20, type: 'loyalty' }
                 ]
             },
             {
                 id: 'values_nature',
-                situation: '"환경 보호, 어떻게 생각해요?"',
+                situation: '"환경 보호에 대해 어떻게 생각하세요? 요즘 환경 문제가 정말 심각하다고들 하잖아요. 당신은 실천하고 계신가요?"',
                 choices: [
-                    { text: '"정말 중요해요. 실천하려고 해요"', affection: 18, trust: 24, type: 'active' },
-                    { text: '"중요하다고 생각해요"', affection: 14, trust: 20, type: 'aware' },
-                    { text: '"별로 신경 안 써요"', affection: -15, trust: -18, type: 'indifferent' }
+                    { text: '"환경 보호는 정말 중요하다고 생각해요. 저도 일회용품 줄이고 분리수거 철저히 하려고 노력하고 있어요. 우리가 실천해야죠"', affection: 18, trust: 24, type: 'active' },
+                    { text: '"중요하다고 생각은 해요. 환경을 지켜야 한다는 건 알지만 실천하기가 쉽지는 않더라고요. 할 수 있는 만큼 하려고 해요"', affection: 14, trust: 20, type: 'aware' },
+                    { text: '"솔직히 별로 신경 안 써요. 개인이 아무리 노력해도 큰 변화는 없을 것 같고, 불편한 것만 늘어나는 것 같아서요"', affection: -15, trust: -18, type: 'indifferent' }
                 ]
             },
             {
                 id: 'values_religion',
-                situation: '"종교가 필요하다고 생각해요?"',
+                situation: '"종교가 사람에게 필요하다고 생각하세요? 종교가 있는 게 좋을까요, 없어도 괜찮을까요?"',
                 choices: [
-                    { text: '"개인의 선택이에요"', affection: 18, trust: 26, type: 'respectful' },
-                    { text: '"도움이 될 수 있죠"', affection: 14, trust: 22, type: 'positive' },
-                    { text: '"필요없어요"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"종교는 개인의 선택이라고 생각해요. 필요한 사람도 있고 아닌 사람도 있죠. 각자의 선택을 존중해야 한다고 봐요"', affection: 18, trust: 26, type: 'respectful' },
+                    { text: '"종교가 사람들에게 위안과 희망을 줄 수 있다고 봐요. 믿음이 있으면 힘든 순간을 극복하는 데 도움이 될 수 있죠"', affection: 14, trust: 22, type: 'positive' },
+                    { text: '"저는 종교가 꼭 필요하다고 생각하지 않아요. 종교 없이도 충분히 잘 살 수 있다고 봐요"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'values_sacrifice',
-                situation: '"사랑하는 사람을 위해 희생할 수 있어요?"',
+                situation: '"당신은 사랑하는 사람을 위해 희생할 수 있나요? 자신의 것을 포기하면서까지 상대를 위할 수 있을까요?"',
                 choices: [
-                    { text: '"당연하죠"', affection: 24, trust: 26, type: 'devoted' },
-                    { text: '"상황에 따라요"', affection: 16, trust: 24, type: 'conditional' },
-                    { text: '"제가 우선이에요"', affection: -15, trust: -18, type: 'selfish' }
+                    { text: '"당연히 할 수 있어요. 진정으로 사랑하는 사람이라면 어떤 희생도 감수할 수 있다고 생각해요. 그 사람의 행복이 제 행복이니까요"', affection: 24, trust: 26, type: 'devoted' },
+                    { text: '"상황에 따라 다를 것 같아요. 합리적인 범위 내에서는 희생할 수 있지만, 제 삶 전체를 포기할 순 없죠. 균형이 중요해요"', affection: 16, trust: 24, type: 'conditional' },
+                    { text: '"솔직히 저 자신이 우선이에요. 남을 위해 희생하는 건 결국 자신만 힘들어지는 것 같아요. 제 삶이 먼저라고 생각해요"', affection: -15, trust: -18, type: 'selfish' }
                 ]
             },
             {
                 id: 'values_truth',
-                situation: '"작은 거짓말도 안 된다고 생각해요?"',
+                situation: '"작은 거짓말도 절대 하면 안 된다고 생각하세요? 아니면 때로는 선의의 거짓말이 필요하다고 보시나요?"',
                 choices: [
-                    { text: '"상황에 따라 다르죠"', affection: 16, trust: 24, type: 'flexible' },
-                    { text: '"거짓말은 안 좋아요"', affection: 14, trust: 28, type: 'honest' },
-                    { text: '"필요하면 괜찮아요"', affection: -8, trust: -20, type: 'lenient' }
+                    { text: '"상황에 따라 다르다고 생각해요. 대부분은 진실을 말해야 하지만, 상대를 위한 작은 거짓말은 때로 필요할 수도 있죠"', affection: 16, trust: 24, type: 'flexible' },
+                    { text: '"거짓말은 크든 작든 좋지 않다고 봐요. 작은 거짓말이 쌓이면 신뢰가 무너지잖아요. 솔직하게 사는 게 최선이에요"', affection: 14, trust: 28, type: 'honest' },
+                    { text: '"필요하다면 거짓말도 괜찮다고 생각해요. 모든 걸 솔직하게 말하면 상처받는 사람도 있고, 사회생활에 문제가 생기죠"', affection: -8, trust: -20, type: 'lenient' }
                 ]
             },
             {
                 id: 'values_education',
-                situation: '"교육이 중요하다고 생각해요?"',
+                situation: '"교육이 정말 중요하다고 생각하세요? 학력이나 학교 교육이 인생에서 얼마나 중요할까요?"',
                 choices: [
-                    { text: '"정말 중요하죠"', affection: 16, trust: 24, type: 'important' },
-                    { text: '"경험도 중요해요"', affection: 18, trust: 22, type: 'balanced' },
-                    { text: '"별로 중요하지 않아요"', affection: -12, trust: -15, type: 'dismissive' }
+                    { text: '"교육은 정말 중요하다고 생각해요. 배움을 통해 성장하고 더 나은 기회를 얻을 수 있죠. 교육에 투자하는 건 가치있어요"', affection: 16, trust: 24, type: 'important' },
+                    { text: '"교육도 중요하지만 경험도 똑같이 중요하다고 봐요. 학교에서 배우는 것과 실제 경험을 통해 배우는 것, 둘 다 필요해요"', affection: 18, trust: 22, type: 'balanced' },
+                    { text: '"교육이 별로 중요하지 않다고 봐요. 학력보다는 실력이고, 학교보다는 실전 경험이 더 중요한 것 같아요"', affection: -12, trust: -15, type: 'dismissive' }
                 ]
             },
             {
                 id: 'values_pride',
-                situation: '"자존심과 사랑 중 뭐가 중요해요?"',
+                situation: '"자존심과 사랑, 둘 중 하나를 선택해야 한다면 어떤 걸 선택하시겠어요? 가끔은 둘이 충돌할 때가 있잖아요"',
                 choices: [
-                    { text: '"사랑이 우선이죠"', affection: 22, trust: 24, type: 'love' },
-                    { text: '"둘 다 중요해요"', affection: 14, trust: 22, type: 'balanced' },
-                    { text: '"자존심이요"', affection: -15, trust: -18, type: 'pride' }
+                    { text: '"저는 사랑이 우선이라고 생각해요. 자존심 때문에 사랑을 잃는 건 정말 어리석은 일이죠. 사랑하는 사람 앞에선 자존심 내려놓을 수 있어요"', affection: 22, trust: 24, type: 'love' },
+                    { text: '"둘 다 중요하다고 봐요. 사랑도 소중하지만 자존심도 지켜야 해요. 둘 사이에서 균형을 잘 맞추는 게 중요하다고 생각해요"', affection: 14, trust: 22, type: 'balanced' },
+                    { text: '"자존심이 더 중요해요. 자존심 없이 사는 건 정말 힘들거든요. 사랑도 좋지만 자신의 자존심을 지키는 게 우선이라고 봐요"', affection: -15, trust: -18, type: 'pride' }
                 ]
             },
             {
                 id: 'values_tradition',
-                situation: '"전통을 지키는 게 중요해요?"',
+                situation: '"전통을 지키는 게 중요하다고 생각하세요? 요즘은 전통보다 변화가 더 중요하다고 하는 사람들도 많잖아요"',
                 choices: [
-                    { text: '"의미 있는 것은 지켜야죠"', affection: 16, trust: 24, type: 'selective' },
-                    { text: '"중요하지만 변화도 필요해요"', affection: 18, trust: 26, type: 'progressive' },
-                    { text: '"별로 중요하지 않아요"', affection: -10, trust: -12, type: 'dismissive' }
+                    { text: '"의미 있는 전통은 지켜야 한다고 생각해요. 우리의 정체성이고 역사니까요. 하지만 시대에 맞지 않는 건 바꿔야죠"', affection: 16, trust: 24, type: 'selective' },
+                    { text: '"전통도 중요하지만 변화도 필요하다고 봐요. 전통을 바탕으로 하되 현대에 맞게 발전시켜 나가는 게 좋다고 생각해요"', affection: 18, trust: 26, type: 'progressive' },
+                    { text: '"전통은 별로 중요하지 않다고 봐요. 시대가 변했는데 옛날 방식을 고집할 필요가 있나요? 새로운 게 더 낫죠"', affection: -10, trust: -12, type: 'dismissive' }
                 ]
             },
             {
                 id: 'values_equality',
-                situation: '"남녀 평등, 어떻게 생각해요?"',
+                situation: '"남녀 평등에 대해 어떻게 생각하세요? 요즘 이 주제로 많이 이야기하잖아요. 당신의 솔직한 생각이 궁금해요"',
                 choices: [
-                    { text: '"당연히 평등해야죠"', affection: 20, trust: 28, type: 'equal' },
-                    { text: '"역할이 다를 뿐이에요"', affection: 12, trust: 20, type: 'different' },
-                    { text: '"남자/여자가 우위예요"', affection: -25, trust: -30, type: 'sexist' }
+                    { text: '"당연히 평등해야죠. 성별에 관계없이 모든 사람은 동등한 권리와 기회를 가져야 한다고 생각해요. 차별은 절대 안 돼요"', affection: 20, trust: 28, type: 'equal' },
+                    { text: '"평등은 중요하지만 남녀의 역할이 다를 수는 있다고 봐요. 차이를 인정하되 차별하지 않는 게 중요하죠"', affection: 12, trust: 20, type: 'different' },
+                    { text: '"솔직히 남자와 여자는 다르고, 어느 한쪽이 더 우위에 있다고 생각해요. 자연스러운 질서라고 봐요"', affection: -25, trust: -30, type: 'sexist' }
                 ]
             },
             {
                 id: 'values_age',
-                situation: '"나이가 중요하다고 생각해요?"',
+                situation: '"사람 관계에서 나이가 중요하다고 생각하세요? 나이 차이가 많이 나도 친구나 연인이 될 수 있을까요?"',
                 choices: [
-                    { text: '"중요하지 않아요"', affection: 18, trust: 22, type: 'irrelevant' },
-                    { text: '"어느 정도는 고려해야죠"', affection: 14, trust: 24, type: 'moderate' },
-                    { text: '"중요해요"', affection: -10, trust: -12, type: 'important' }
+                    { text: '"나이는 전혀 중요하지 않다고 생각해요. 서로 통하면 되는 거지, 나이가 뭐가 중요한가요? 숫자일 뿐이에요"', affection: 18, trust: 22, type: 'irrelevant' },
+                    { text: '"나이가 어느 정도는 고려되어야 한다고 봐요. 너무 차이 나면 세대 차이로 소통이 어려울 수 있으니까요"', affection: 14, trust: 24, type: 'moderate' },
+                    { text: '"나이는 정말 중요해요. 비슷한 나이끼리 만나는 게 가장 자연스럽고 좋다고 생각해요"', affection: -10, trust: -12, type: 'important' }
                 ]
             },
             {
                 id: 'values_privacy',
-                situation: '"프라이버시가 얼마나 중요해요?"',
+                situation: '"프라이버시가 얼마나 중요하다고 생각하세요? 친한 사이라도 개인 공간이 필요할까요?"',
                 choices: [
-                    { text: '"정말 중요해요"', affection: 14, trust: 28, type: 'important' },
-                    { text: '"적당히 필요해요"', affection: 16, trust: 24, type: 'moderate' },
-                    { text: '"숨길 게 뭐 있어요?"', affection: -12, trust: -15, type: 'dismissive' }
+                    { text: '"프라이버시는 정말 중요해요. 아무리 가까운 사이라도 개인만의 공간과 비밀은 존중받아야 한다고 생각해요"', affection: 14, trust: 28, type: 'important' },
+                    { text: '"적당한 프라이버시는 필요하다고 봐요. 너무 많이 숨기면 안 좋지만, 어느 정도 개인 공간은 있어야죠"', affection: 16, trust: 24, type: 'moderate' },
+                    { text: '"진짜 친한 사이라면 숨길 게 뭐 있어요? 다 공유하는 게 좋다고 생각하는데요. 프라이버시는 별로 중요하지 않아요"', affection: -12, trust: -15, type: 'dismissive' }
                 ]
             },
             {
                 id: 'values_wealth',
-                situation: '"부자가 되고 싶어요?"',
+                situation: '"당신은 부자가 되고 싶으세요? 돈이 많으면 행복할 것 같나요?"',
                 choices: [
-                    { text: '"행복하면 돼요"', affection: 20, trust: 22, type: 'content' },
-                    { text: '"안정적이면 좋겠어요"', affection: 16, trust: 24, type: 'stable' },
-                    { text: '"꼭 부자 되고 싶어요"', affection: -8, trust: -10, type: 'greedy' }
+                    { text: '"부자가 되는 것보다 행복하게 사는 게 더 중요해요. 돈이 많다고 꼭 행복한 건 아니잖아요. 적당히 있으면 돼요"', affection: 20, trust: 22, type: 'content' },
+                    { text: '"경제적으로 안정적이면 좋겠어요. 부자까지는 아니어도 걱정 없이 살 정도는 되었으면 해요"', affection: 16, trust: 24, type: 'stable' },
+                    { text: '"네, 정말 부자가 되고 싶어요. 돈이 있어야 하고 싶은 거 다 하고 자유롭게 살 수 있잖아요"', affection: -8, trust: -10, type: 'greedy' }
                 ]
             },
             {
                 id: 'values_fame',
-                situation: '"유명해지고 싶어요?"',
+                situation: '"유명해지고 싶은 마음이 있으세요? 많은 사람들에게 알려지는 거 어떻게 생각해요?"',
                 choices: [
-                    { text: '"아니요, 평범이 좋아요"', affection: 18, trust: 24, type: 'humble' },
-                    { text: '"조금은요"', affection: 14, trust: 20, type: 'moderate' },
-                    { text: '"꼭 유명해지고 싶어요"', affection: -10, trust: -12, type: 'fame_seeking' }
+                    { text: '"아니요, 전혀요. 저는 평범하게 사는 게 훨씬 좋아요. 유명해지면 불편한 것만 많을 것 같아요"', affection: 18, trust: 24, type: 'humble' },
+                    { text: '"조금은 그런 마음이 있어요. 제가 하는 일로 인정받고 싶은 마음은 있거든요. 하지만 과하게 유명해지고 싶지는 않아요"', affection: 14, trust: 20, type: 'moderate' },
+                    { text: '"네, 정말 유명해지고 싶어요. 많은 사람들에게 알려지고 주목받는 삶을 살고 싶어요"', affection: -10, trust: -12, type: 'fame_seeking' }
                 ]
             },
             {
                 id: 'values_revenge',
-                situation: '"복수하는 게 정당화될 수 있을까요?"',
+                situation: '"복수하는 게 정당화될 수 있다고 생각하세요? 잘못한 사람에게 똑같이 갚아주는 것에 대해 어떻게 생각해요?"',
                 choices: [
-                    { text: '"복수는 해결책이 아니에요"', affection: 20, trust: 26, type: 'forgiving' },
-                    { text: '"상황에 따라 다르죠"', affection: 14, trust: 22, type: 'situational' },
-                    { text: '"눈에는 눈"', affection: -12, trust: -15, type: 'vengeful' }
+                    { text: '"복수는 해결책이 아니라고 생각해요. 복수는 또 다른 복수를 낳을 뿐이죠. 용서하고 앞으로 나아가는 게 더 나아요"', affection: 20, trust: 26, type: 'forgiving' },
+                    { text: '"상황에 따라 다르다고 봐요. 어떤 잘못은 정당한 대가를 치러야 한다고 생각해요. 하지만 과도한 복수는 안 돼죠"', affection: 14, trust: 22, type: 'situational' },
+                    { text: '"눈에는 눈, 이에는 이라고 봐요. 잘못한 만큼 똑같이 갚아줘야 한다고 생각해요. 그게 공평한 거죠"', affection: -12, trust: -15, type: 'vengeful' }
                 ]
             },
             {
                 id: 'values_charity',
-                situation: '"기부를 자주 해요?"',
+                situation: '"기부나 자선 활동을 자주 하시는 편이에요? 남을 돕는 것에 대해 어떻게 생각하세요?"',
                 choices: [
-                    { text: '"할 수 있을 때 해요"', affection: 18, trust: 24, type: 'charitable' },
-                    { text: '"가끔요"', affection: 14, trust: 20, type: 'occasional' },
-                    { text: '"제 돈이 우선이에요"', affection: -15, trust: -18, type: 'selfish' }
+                    { text: '"할 수 있을 때 하려고 노력해요. 여유가 있을 때 어려운 사람들을 돕는 건 정말 의미있는 일이라고 생각해요"', affection: 18, trust: 24, type: 'charitable' },
+                    { text: '"가끔 해요. 자주는 못 하지만 기회가 되면 기부나 봉사를 하려고 해요. 도움이 필요한 사람들 도와야죠"', affection: 14, trust: 20, type: 'occasional' },
+                    { text: '"솔직히 제 돈과 시간이 우선이에요. 내가 먼저 잘 살아야 남도 도울 수 있다고 생각해요"', affection: -15, trust: -18, type: 'selfish' }
                 ]
             },
             {
                 id: 'values_competition',
-                situation: '"경쟁이 필요하다고 생각해요?"',
+                situation: '"경쟁이 꼭 필요하다고 생각하세요? 아니면 협력이 더 중요할까요?"',
                 choices: [
-                    { text: '"협력이 더 중요해요"', affection: 18, trust: 24, type: 'cooperative' },
-                    { text: '"적당한 경쟁은 필요해요"', affection: 16, trust: 26, type: 'balanced' },
-                    { text: '"경쟁이 발전시켜요"', affection: 12, trust: 22, type: 'competitive' }
+                    { text: '"협력이 경쟁보다 훨씬 중요하다고 봐요. 함께 협력하면 더 큰 성과를 낼 수 있어요. 경쟁은 사람을 지치게 해요"', affection: 18, trust: 24, type: 'cooperative' },
+                    { text: '"적당한 경쟁은 필요하다고 생각해요. 경쟁이 있어야 발전하고 성장할 수 있죠. 하지만 과도한 경쟁은 해로워요"', affection: 16, trust: 26, type: 'balanced' },
+                    { text: '"경쟁이 사람을 발전시킨다고 생각해요. 경쟁이 없으면 나태해지죠. 경쟁은 꼭 필요해요"', affection: 12, trust: 22, type: 'competitive' }
                 ]
             },
             {
                 id: 'values_past',
-                situation: '"과거를 잊어야 할까요?"',
+                situation: '"과거를 잊어야 할까요, 아니면 기억해야 할까요? 과거에 대해 어떻게 생각하세요?"',
                 choices: [
-                    { text: '"배우고 앞으로 나아가야죠"', affection: 18, trust: 26, type: 'learn' },
-                    { text: '"완전히 잊긴 어려워요"', affection: 16, trust: 24, type: 'realistic' },
-                    { text: '"과거는 과거예요"', affection: 12, trust: 20, type: 'forward' }
+                    { text: '"과거에서 배우고 앞으로 나아가야 한다고 봐요. 과거는 교훈이지 짐이 아니에요. 배우고 성장하는 게 중요해요"', affection: 18, trust: 26, type: 'learn' },
+                    { text: '"완전히 잊기는 어렵다고 생각해요. 과거는 우리의 일부니까요. 하지만 과거에 얽매이지 않으려고 노력해야죠"', affection: 16, trust: 24, type: 'realistic' },
+                    { text: '"과거는 그냥 과거일 뿐이에요. 빨리 잊고 현재와 미래에 집중하는 게 낫다고 생각해요"', affection: 12, trust: 20, type: 'forward' }
                 ]
             },
             {
                 id: 'values_risk',
-                situation: '"위험을 감수할 가치가 있을까요?"',
+                situation: '"위험을 감수할 가치가 있다고 생각하세요? 안전한 선택과 모험적인 선택 중 어떤 걸 선호하세요?"',
                 choices: [
-                    { text: '"신중하게 판단해야죠"', affection: 16, trust: 26, type: 'careful' },
-                    { text: '"때로는 필요해요"', affection: 18, trust: 24, type: 'moderate' },
-                    { text: '"안전이 우선이에요"', affection: 14, trust: 22, type: 'safe' }
+                    { text: '"위험을 감수하기 전에 신중하게 판단해야 한다고 봐요. 무모한 모험은 안 되지만, 계산된 리스크는 필요할 수 있어요"', affection: 16, trust: 26, type: 'careful' },
+                    { text: '"때로는 위험을 감수할 필요가 있다고 생각해요. 새로운 기회를 잡으려면 리스크를 받아들여야 할 때도 있죠"', affection: 18, trust: 24, type: 'moderate' },
+                    { text: '"안전이 우선이라고 봐요. 위험한 선택보다는 안전하고 확실한 길을 가는 게 훨씬 나아요"', affection: 14, trust: 22, type: 'safe' }
                 ]
             },
             {
                 id: 'values_beauty',
-                situation: '"외모가 얼마나 중요해요?"',
+                situation: '"사람을 볼 때 외모가 얼마나 중요하다고 생각하세요? 외모와 내면 중 뭐가 더 중요할까요?"',
                 choices: [
-                    { text: '"내면이 더 중요하죠"', affection: 22, trust: 26, type: 'inner' },
-                    { text: '"둘 다 중요해요"', affection: 16, trust: 24, type: 'balanced' },
-                    { text: '"외모가 중요해요"', affection: -15, trust: -18, type: 'shallow' }
+                    { text: '"내면이 훨씬 더 중요하다고 생각해요. 외모는 시간이 지나면 변하지만, 성격이나 가치관은 그 사람의 본질이잖아요"', affection: 22, trust: 26, type: 'inner' },
+                    { text: '"둘 다 중요하다고 봐요. 외모도 신경 써야 하고, 내면도 아름다워야 해요. 균형이 중요하죠"', affection: 16, trust: 24, type: 'balanced' },
+                    { text: '"솔직히 외모가 중요하다고 생각해요. 첫인상도 중요하고, 외모가 경쟁력이 되는 사회잖아요"', affection: -15, trust: -18, type: 'shallow' }
                 ]
             },
             {
                 id: 'values_promises',
-                situation: '"약속은 꼭 지켜야 할까요?"',
+                situation: '"약속은 반드시 지켜야 할까요? 어떤 상황에서도 약속을 지키는 게 중요할까요?"',
                 choices: [
-                    { text: '"당연하죠"', affection: 18, trust: 30, type: 'reliable' },
-                    { text: '"최선을 다해야죠"', affection: 16, trust: 28, type: 'effort' },
-                    { text: '"상황 따라요"', affection: -10, trust: -20, type: 'unreliable' }
+                    { text: '"당연히 지켜야죠. 약속은 신뢰의 기본이에요. 약속을 지키지 않으면 신뢰를 잃게 되고, 그게 가장 중요한 거예요"', affection: 18, trust: 30, type: 'reliable' },
+                    { text: '"최선을 다해 지키려고 노력해야 한다고 봐요. 물론 불가피한 상황도 있지만, 약속은 최대한 지켜야 해요"', affection: 16, trust: 28, type: 'effort' },
+                    { text: '"상황에 따라 다르다고 봐요. 때로는 약속을 못 지킬 수도 있죠. 너무 약속에 얽매일 필요는 없어요"', affection: -10, trust: -20, type: 'unreliable' }
                 ]
             },
             {
                 id: 'values_ambition',
-                situation: '"야망이 있어요?"',
+                situation: '"당신은 큰 야망이 있으세요? 인생에서 꼭 이루고 싶은 큰 목표가 있나요?"',
                 choices: [
-                    { text: '"행복한 삶이 목표예요"', affection: 18, trust: 22, type: 'content' },
-                    { text: '"이루고 싶은 게 있어요"', affection: 16, trust: 26, type: 'ambitious' },
-                    { text: '"큰 욕심 없어요"', affection: 12, trust: 18, type: 'passive' }
+                    { text: '"저는 행복하게 사는 게 목표예요. 거창한 야망보다는 일상에서의 작은 행복들이 더 중요하다고 생각해요"', affection: 18, trust: 22, type: 'content' },
+                    { text: '"네, 이루고 싶은 게 있어요. 목표를 향해 노력하는 과정이 의미있다고 생각해요. 야망이 저를 성장시켜요"', affection: 16, trust: 26, type: 'ambitious' },
+                    { text: '"큰 욕심은 없어요. 그냥 평범하게 살면 된다고 생각해요. 야망이 있으면 스트레스만 받는 것 같아요"', affection: 12, trust: 18, type: 'passive' }
                 ]
             },
             {
                 id: 'values_independence',
-                situation: '"독립성이 중요해요?"',
+                situation: '"독립성이 얼마나 중요하다고 생각하세요? 혼자서도 잘 살 수 있어야 할까요?"',
                 choices: [
-                    { text: '"중요하지만 의지할 수도 있어야죠"', affection: 18, trust: 26, type: 'balanced' },
-                    { text: '"정말 중요해요"', affection: 14, trust: 28, type: 'independent' },
-                    { text: '"서로 의지하는 게 좋아요"', affection: 20, trust: 22, type: 'interdependent' }
+                    { text: '"독립성도 중요하지만 서로 의지할 수도 있어야 한다고 봐요. 혼자 다 하는 것보다 함께 나누는 게 더 좋아요"', affection: 18, trust: 26, type: 'balanced' },
+                    { text: '"독립성은 정말 중요해요. 누구에게도 의지하지 않고 스스로 설 수 있어야 한다고 생각해요"', affection: 14, trust: 28, type: 'independent' },
+                    { text: '"서로 의지하고 사는 게 더 좋다고 봐요. 혼자 사는 것보다 함께 의지하며 사는 게 더 따뜻하고 행복해요"', affection: 20, trust: 22, type: 'interdependent' }
                 ]
             },
             {
                 id: 'values_spontaneity',
-                situation: '"계획적인 게 좋아요, 즉흥적인 게 좋아요?"',
+                situation: '"계획적인 삶과 즉흥적인 삶 중 어떤 게 더 좋다고 생각하세요? 당신은 어떤 스타일이에요?"',
                 choices: [
-                    { text: '"둘 다 좋아요"', affection: 18, trust: 24, type: 'flexible' },
-                    { text: '"계획적인 게 좋아요"', affection: 14, trust: 26, type: 'planned' },
-                    { text: '"즉흥적인 게 재미있어요"', affection: 16, trust: 20, type: 'spontaneous' }
+                    { text: '"둘 다 좋은 것 같아요. 때로는 계획대로, 때로는 즉흥적으로. 상황에 따라 유연하게 대처하는 게 최고죠"', affection: 18, trust: 24, type: 'flexible' },
+                    { text: '"계획적인 게 좋아요. 미리 계획하고 준비하면 불안하지 않고 안정적이에요. 즉흥은 좀 불안해요"', affection: 14, trust: 26, type: 'planned' },
+                    { text: '"즉흥적인 게 훨씬 재미있어요. 계획 없이 그때그때 결정하는 게 자유롭고 신나요. 계획은 답답해요"', affection: 16, trust: 20, type: 'spontaneous' }
                 ]
             },
             {
                 id: 'values_perfection',
-                situation: '"완벽주의자예요?"',
+                situation: '"당신은 완벽주의자인가요? 모든 일을 완벽하게 하려고 하는 편이에요?"',
                 choices: [
-                    { text: '"아니요, 적당히가 좋아요"', affection: 16, trust: 22, type: 'relaxed' },
-                    { text: '"어느 정도요"', affection: 14, trust: 24, type: 'moderate' },
-                    { text: '"완벽해야 해요"', affection: -10, trust: -12, type: 'perfectionist' }
+                    { text: '"아니요, 완벽주의자는 아니에요. 적당히 하는 게 좋다고 봐요. 너무 완벽하려고 하면 스트레스만 받아요"', affection: 16, trust: 22, type: 'relaxed' },
+                    { text: '"어느 정도는 완벽주의적인 것 같아요. 중요한 일은 제대로 하려고 노력하지만, 모든 걸 완벽하게 하지는 않아요"', affection: 14, trust: 24, type: 'moderate' },
+                    { text: '"네, 완벽주의자예요. 모든 일을 완벽하게 하려고 해요. 완벽하지 않으면 마음이 불편해요"', affection: -10, trust: -12, type: 'perfectionist' }
                 ]
             },
             {
                 id: 'values_humor',
-                situation: '"유머감각이 중요해요?"',
+                situation: '"유머감각이 중요하다고 생각하세요? 저는 힘들 때도 웃으면서 넘길 수 있는 사람이 멋있다고 생각하거든요. 함께 웃을 수 있는 게 정말 소중한 것 같아요"',
                 choices: [
-                    { text: '"정말 중요하죠"', affection: 20, trust: 22, type: 'important' },
-                    { text: '"있으면 좋죠"', affection: 16, trust: 20, type: 'nice' },
-                    { text: '"별로 안 중요해요"', affection: -12, trust: -14, type: 'serious' }
+                    { text: '"정말 공감해요! 유머감각 있는 사람이 정말 매력적이죠. 함께 웃을 수 있다는 건 정말 중요한 것 같아요. 당신처럼 밝은 사람 정말 좋아요"', affection: 20, trust: 22, type: 'important' },
+                    { text: '"있으면 좋긴 하죠. 근데 무조건 필수는 아니고, 상황에 따라 진지할 때도 있어야 한다고 생각해요. 적절히 균형 잡는 게 중요한 것 같아요"', affection: 16, trust: 20, type: 'nice' },
+                    { text: '"음... 저는 유머보다 진지하고 깊이 있는 대화가 더 좋은데요. 너무 농담만 하면 오히려 진정성이 없어 보여서 별로예요"', affection: -12, trust: -14, type: 'serious' }
                 ]
             },
             {
                 id: 'values_animals',
-                situation: '"동물 권리를 어떻게 생각해요?"',
+                situation: '"동물 권리에 대해 어떻게 생각하세요? 요즘 동물 학대 뉴스 보면 정말 마음이 아프거든요. 동물들도 존중받을 권리가 있다고 생각해요"',
                 choices: [
-                    { text: '"정말 중요해요"', affection: 20, trust: 26, type: 'advocate' },
-                    { text: '"보호받아야죠"', affection: 16, trust: 24, type: 'supportive' },
-                    { text: '"별로 신경 안 써요"', affection: -18, trust: -20, type: 'indifferent' }
+                    { text: '"정말 공감해요! 동물들도 우리와 같은 생명인데 학대받는 건 절대 안 되죠. 동물 권리 보호를 위해 우리가 더 적극적으로 나서야 한다고 생각해요"', affection: 20, trust: 26, type: 'advocate' },
+                    { text: '"맞아요, 동물들도 당연히 보호받아야죠. 불필요한 고통은 주지 말아야 하고, 복지를 고려해야 한다고 생각해요"', affection: 16, trust: 24, type: 'supportive' },
+                    { text: '"음... 그건 좀 과한 것 같은데요. 동물은 동물이고 사람은 사람이잖아요. 그렇게까지 신경 쓸 필요는 없다고 봐요"', affection: -18, trust: -20, type: 'indifferent' }
                 ]
             },
             {
                 id: 'values_growth',
-                situation: '"자기계발이 중요해요?"',
+                situation: '"자기계발이 중요하다고 생각하세요? 저는 계속 성장하고 발전하는 게 삶의 의미라고 생각해요. 어제보다 나은 오늘을 만들어가는 게 좋거든요"',
                 choices: [
-                    { text: '"정말 중요하죠"', affection: 16, trust: 26, type: 'growth' },
-                    { text: '"적당히요"', affection: 14, trust: 22, type: 'moderate' },
-                    { text: '"현재가 좋아요"', affection: 12, trust: 18, type: 'content' }
+                    { text: '"정말 공감해요! 저도 계속 배우고 성장하는 걸 좋아해요. 현재에 안주하지 않고 더 나은 사람이 되려고 노력하는 게 정말 중요하다고 생각해요"', affection: 16, trust: 26, type: 'growth' },
+                    { text: '"적당히는 필요한 것 같아요. 너무 무리하게 자기계발에 집중하면 지칠 수도 있으니까요. 균형있게 발전하면서도 쉴 땐 쉬는 게 좋죠"', affection: 14, trust: 22, type: 'moderate' },
+                    { text: '"저는 지금 현재 모습이 좋은데요. 굳이 변화하려고 애쓰지 않아도 된다고 생각해요. 있는 그대로의 모습으로 살아가는 것도 괜찮잖아요"', affection: 12, trust: 18, type: 'content' }
                 ]
             },
             {
                 id: 'values_loyalty_test',
-                situation: '"친구가 잘못했을 때 편들어줘야 해요?"',
+                situation: '"친구가 명백히 잘못했을 때도 친구 편을 들어줘야 할까요? 의리도 중요하지만 잘못된 건 잘못됐다고 말해줘야 하는 것 아닐까요? 당신은 어떻게 생각하세요?"',
                 choices: [
-                    { text: '"잘못은 잘못이에요"', affection: 14, trust: 28, type: 'principled' },
-                    { text: '"상황 봐서요"', affection: 16, trust: 24, type: 'situational' },
-                    { text: '"당연히 편들어야죠"', affection: 18, trust: 20, type: 'loyal' }
+                    { text: '"잘못은 잘못이라고 말해줘야죠. 진짜 친구라면 잘못된 행동을 바로잡아줘야 한다고 생각해요. 무조건 편드는 건 진정한 우정이 아니에요"', affection: 14, trust: 28, type: 'principled' },
+                    { text: '"상황을 봐야 할 것 같아요. 경우에 따라서는 먼저 편들어주고 나중에 따로 이야기할 수도 있고, 바로 말해줄 수도 있죠. 유연하게 대처하는 게 중요해요"', affection: 16, trust: 24, type: 'situational' },
+                    { text: '"친구라면 당연히 편들어줘야죠. 일단 밖에서는 친구 편을 들어주고 믿어줘야 한다고 생각해요. 의리가 가장 중요하니까요"', affection: 18, trust: 20, type: 'loyal' }
                 ]
             },
             {
                 id: 'values_death',
-                situation: '"죽음에 대해 어떻게 생각해요?"',
+                situation: '"죽음에 대해서는 어떻게 생각하세요? 누구나 겪게 되는 일이지만 막상 생각하면 두렵기도 하잖아요. 때로는 삶의 유한함이 우리를 더 성장하게 만드는 것 같기도 해요"',
                 choices: [
-                    { text: '"자연스러운 것이에요"', affection: 16, trust: 24, type: 'accepting' },
-                    { text: '"무섭지만 피할 수 없죠"', affection: 14, trust: 22, type: 'realistic' },
-                    { text: '"생각하기 싫어요"', affection: 12, trust: 18, type: 'avoiding' }
+                    { text: '"죽음은 자연스러운 삶의 일부라고 생각해요. 두려워하기보다는 받아들이고, 그렇기에 현재를 더 소중히 여기며 살아야 한다고 봐요"', affection: 16, trust: 24, type: 'accepting' },
+                    { text: '"솔직히 무섭긴 하지만 피할 수 없는 거잖아요. 그래서 후회 없이 살려고 노력하는 편이에요. 언젠가 올 그날을 위해 잘 준비하며 살아야겠죠"', affection: 14, trust: 22, type: 'realistic' },
+                    { text: '"그런 건 생각하기 싫어요. 너무 무겁고 우울한 주제 아닌가요? 아직 먼 미래의 일이니까 굳이 지금 고민할 필요는 없다고 생각해요"', affection: 12, trust: 18, type: 'avoiding' }
                 ]
             },
             {
                 id: 'values_legacy',
-                situation: '"무엇을 남기고 싶어요?"',
+                situation: '"이 세상을 떠날 때 무엇을 남기고 싶으세요? 저는 가끔 생각해요. 내가 살다 간 흔적이 무엇일지, 사람들이 나를 어떻게 기억할지. 당신은 어떤 걸 남기고 싶나요?"',
                 choices: [
-                    { text: '"좋은 기억이요"', affection: 20, trust: 24, type: 'memories' },
-                    { text: '"긍정적 영향이요"', affection: 18, trust: 26, type: 'impact' },
-                    { text: '"별로 생각 안 해봤어요"', affection: 10, trust: 18, type: 'indifferent' }
+                    { text: '"좋은 기억을 남기고 싶어요. 제가 만난 사람들이 저와 함께한 시간을 행복하게 기억해주면 그것만으로도 충분할 것 같아요"', affection: 20, trust: 24, type: 'memories' },
+                    { text: '"세상에 긍정적인 영향을 남기고 싶어요. 누군가의 삶을 조금이라도 더 나아지게 만들었다면, 그게 제가 남길 수 있는 가장 의미 있는 유산이 될 것 같아요"', affection: 18, trust: 26, type: 'impact' },
+                    { text: '"그런 건 별로 생각해본 적 없는데요. 너무 먼 미래의 일이고, 그냥 현재를 열심히 살면 되는 거 아닌가요? 딱히 뭘 남겨야겠다는 생각은 없어요"', affection: 10, trust: 18, type: 'indifferent' }
                 ]
             }
         ]
@@ -3972,362 +3972,362 @@ const TALK_TOPICS = {
         scenarios: [
             {
                 id: 'lifestyle_morning',
-                situation: '"아침형인가요 저녁형인가요?"',
+                situation: '"저는 완전 아침형 인간이에요. 해 뜨면 눈이 떠지거든요. 새벽 공기가 정말 상쾌하더라고요. 당신은 아침형인가요 저녁형인가요?"',
                 choices: [
-                    { text: '"아침형이에요. 당신은요?"', affection: 14, trust: 14, type: 'morning' },
-                    { text: '"저녁형이에요"', affection: 14, trust: 14, type: 'night' },
-                    { text: '"둘 다 힘들어요"', affection: -6, trust: -8, type: 'neither' }
+                    { text: '"저도 아침형이에요! 아침에 일찍 일어나서 여유롭게 하루를 시작하는 게 정말 좋더라고요. 우리 잘 맞는 것 같네요!"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"저는 완전 저녁형이에요. 밤에 더 집중도 잘 되고 활동적이 되거든요. 아침에는 정말 일어나기 힘들어요"', affection: 14, trust: 14, type: 'night' },
+                    { text: '"음... 저는 아침도 저녁도 다 힘든데요. 언제든 일찍 일어나는 건 힘들고, 밤늦게까지 깨어있는 것도 힘들어요"', affection: -6, trust: -8, type: 'neither' }
                 ]
             },
             {
                 id: 'lifestyle_coffee',
-                situation: '"커피 좋아해요?"',
+                situation: '"커피 좋아하세요? 저는 하루에 커피 한두 잔은 꼭 마셔야 하는 사람이거든요. 아침에 커피 향 맡으면 하루가 시작되는 느낌이에요"',
                 choices: [
-                    { text: '"네, 매일 마셔요"', affection: 14, trust: 14, type: 'love' },
-                    { text: '"가끔요"', affection: 12, trust: 12, type: 'sometimes' },
-                    { text: '"안 마셔요"', affection: 10, trust: 10, type: 'no' }
+                    { text: '"저도 커피 정말 좋아해요! 매일 마시는데, 특히 아메리카노가 좋더라고요. 커피 없으면 하루를 못 시작하겠어요"', affection: 14, trust: 14, type: 'love' },
+                    { text: '"가끔 마시는 편이에요. 피곤할 때나 특별한 날에만 마시는데, 너무 자주 마시면 카페인에 의존하게 될 것 같아서요"', affection: 12, trust: 12, type: 'sometimes' },
+                    { text: '"저는 커피 안 마셔요. 카페인이 체질에 안 맞아서 마시면 잠을 못 자더라고요. 그냥 물이나 차가 좋아요"', affection: 10, trust: 10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_sleep',
-                situation: '"몇 시에 자요?"',
+                situation: '"보통 몇 시에 주무세요? 저는 건강을 위해서 일찍 자려고 노력하는 편이에요. 잠을 충분히 자야 다음 날 컨디션이 좋더라고요"',
                 choices: [
-                    { text: '"일찍 자요"', affection: 14, trust: 14, type: 'early' },
-                    { text: '"늦게 자요"', affection: 12, trust: 12, type: 'late' },
-                    { text: '"불규칙해요"', affection: 10, trust: 10, type: 'irregular' }
+                    { text: '"저도 일찍 자요. 보통 밤 10시나 11시쯤 자는 편이에요. 충분한 수면이 정말 중요하다고 생각해서 일찍 자려고 노력해요"', affection: 14, trust: 14, type: 'early' },
+                    { text: '"저는 좀 늦게 자는 편이에요. 밤 12시 넘어서 자는데, 밤 시간이 제일 집중도 잘 되고 조용해서 좋거든요"', affection: 12, trust: 12, type: 'late' },
+                    { text: '"제 수면 시간은 좀 불규칙해요. 어떤 날은 일찍 자고 어떤 날은 늦게 자고, 딱히 정해진 시간이 없어요"', affection: 10, trust: 10, type: 'irregular' }
                 ]
             },
             {
                 id: 'lifestyle_exercise',
-                situation: '"운동 자주 해요?"',
+                situation: '"운동 자주 하시는 편이에요? 저는 건강 관리도 하고 스트레스 해소도 할 겸 꾸준히 운동하려고 노력해요. 운동하면 기분도 좋아지더라고요"',
                 choices: [
-                    { text: '"네, 규칙적으로 해요"', affection: 16, trust: 16, type: 'regular' },
-                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"안 해요"', affection: -6, trust: -8, type: 'no' }
+                    { text: '"네, 저도 규칙적으로 운동해요! 일주일에 3-4번은 꼭 하는데, 운동하고 나면 몸도 가벼워지고 정신도 맑아져서 정말 좋아요"', affection: 16, trust: 16, type: 'regular' },
+                    { text: '"가끔 하는 편이에요. 시간 날 때 산책하거나 간단한 스트레칭 정도 하는데, 규칙적으로는 못하고 있어요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"저는 운동 잘 안 해요. 하려고 마음먹어도 귀찮아서 계속 미루게 되더라고요. 운동은 정말 제 체질이 아닌 것 같아요"', affection: -6, trust: -8, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_food',
-                situation: '"매운 음식 좋아해요?"',
+                situation: '"매운 음식 좋아하세요? 저는 매운 거 먹으면 스트레스가 풀리는 느낌이에요. 떡볶이, 마라탕 같은 거 정말 좋아하거든요"',
                 choices: [
-                    { text: '"정말 좋아해요!"', affection: 14, trust: 14, type: 'love' },
-                    { text: '"적당히요"', affection: 12, trust: 12, type: 'moderate' },
-                    { text: '"못 먹어요"', affection: 10, trust: 10, type: 'no' }
+                    { text: '"저도 매운 음식 정말 좋아해요! 매운맛의 그 짜릿한 느낌이 좋더라고요. 같이 맛집 탐방하면 정말 재미있겠어요!"', affection: 14, trust: 14, type: 'love' },
+                    { text: '"적당히 매운 건 괜찮아요. 너무 맵지 않으면 먹을 수 있는데, 정말 매운 건 좀 부담스러워요. 적당한 게 최고죠"', affection: 12, trust: 12, type: 'moderate' },
+                    { text: '"저는 매운 거 못 먹어요. 조금만 매워도 힘들더라고요. 맵지 않은 음식이 좋아요. 매운 음식은 정말 체질에 안 맞아요"', affection: 10, trust: 10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_music',
-                situation: '"음악 자주 들어요?"',
+                situation: '"음악 자주 들으시나요? 저는 항상 이어폰 끼고 다니는 편이에요. 출퇴근할 때도, 집에서 쉴 때도 음악이 있으면 기분이 좋아지더라고요"',
                 choices: [
-                    { text: '"항상 들어요"', affection: 16, trust: 14, type: 'always' },
-                    { text: '"가끔요"', affection: 14, trust: 12, type: 'sometimes' },
-                    { text: '"별로 안 들어요"', affection: -6, trust: -8, type: 'rarely' }
+                    { text: '"저도 항상 음악 들어요! 음악 없이는 못 살 것 같아요. 상황마다 듣는 플레이리스트도 다르고, 음악이 삶에 정말 큰 부분이에요"', affection: 16, trust: 14, type: 'always' },
+                    { text: '"가끔 들어요. 기분이 좋을 때나 특별한 순간에 음악을 듣는 편이에요. 항상 듣지는 않지만 필요할 때 찾게 되더라고요"', affection: 14, trust: 12, type: 'sometimes' },
+                    { text: '"저는 음악을 별로 안 들어요. 조용한 게 더 편하고, 음악이 없어도 전혀 불편하지 않거든요. 소음이라고 느껴질 때도 있어요"', affection: -6, trust: -8, type: 'rarely' }
                 ]
             },
             {
                 id: 'lifestyle_weather',
-                situation: '"어떤 날씨 좋아해요?"',
+                situation: '"어떤 날씨를 가장 좋아하세요? 저는 날씨에 따라 기분이 많이 달라지는 편이거든요. 날씨가 좋으면 마음도 밝아지는 것 같아요"',
                 choices: [
-                    { text: '"화창한 날이요"', affection: 14, trust: 12, type: 'sunny' },
-                    { text: '"비 오는 날이요"', affection: 16, trust: 14, type: 'rainy' },
-                    { text: '"눈 오는 날이요"', affection: 18, trust: 16, type: 'snowy' }
+                    { text: '"화창한 날이 제일 좋아요! 맑은 하늘 보면 기분이 정말 좋아지고, 밖에 나가고 싶어져요. 햇살 가득한 날이 최고죠"', affection: 14, trust: 12, type: 'sunny' },
+                    { text: '"저는 비 오는 날이 좋아요. 빗소리 들으면 마음이 차분해지고 감성적이 되거든요. 창밖 빗방울 보는 것도 좋고요"', affection: 16, trust: 14, type: 'rainy' },
+                    { text: '"눈 오는 날이 제일 좋아요! 하얗게 쌓인 눈 보면 정말 설레거든요. 겨울 특유의 그 포근하고 낭만적인 분위기가 너무 좋아요"', affection: 18, trust: 16, type: 'snowy' }
                 ]
             },
             {
                 id: 'lifestyle_season',
-                situation: '"좋아하는 계절이 있어요?"',
+                situation: '"가장 좋아하는 계절이 있으세요? 각 계절마다 특별한 매력이 있잖아요. 저는 계절이 바뀔 때마다 새로운 설렘을 느끼는 것 같아요"',
                 choices: [
-                    { text: '"봄이요"', affection: 16, trust: 14, type: 'spring' },
-                    { text: '"여름이요"', affection: 14, trust: 12, type: 'summer' },
-                    { text: '"가을이요"', affection: 16, trust: 14, type: 'fall' }
+                    { text: '"봄이 제일 좋아요! 꽃이 피고 따뜻해지는 게 정말 좋거든요. 겨울이 끝나고 새로운 시작을 하는 느낌이 들어서 설레요"', affection: 16, trust: 14, type: 'spring' },
+                    { text: '"여름이요! 뜨거운 햇살과 시원한 바다가 생각나는 계절이죠. 활기차고 역동적인 분위기가 정말 좋아요"', affection: 14, trust: 12, type: 'summer' },
+                    { text: '"가을이 최고예요. 선선한 바람과 단풍, 그리고 감성적인 분위기가 너무 좋아요. 가을 하늘 보면 마음이 편안해지더라고요"', affection: 16, trust: 14, type: 'fall' }
                 ]
             },
             {
                 id: 'lifestyle_indoor',
-                situation: '"집순이/집돌이예요?"',
+                situation: '"집에 있는 걸 좋아하세요, 아니면 밖에 나가는 걸 좋아하세요? 저는 집에서 편하게 쉬는 것도 좋지만, 가끔은 밖에 나가서 새로운 것들을 경험하는 것도 좋더라고요"',
                 choices: [
-                    { text: '"네, 집이 좋아요"', affection: 14, trust: 14, type: 'homebody' },
-                    { text: '"밖이 좋아요"', affection: 16, trust: 14, type: 'outdoor' },
-                    { text: '"둘 다 좋아요"', affection: 18, trust: 16, type: 'both' }
+                    { text: '"저는 완전 집순이/집돌이예요. 집이 제일 편하고 좋아요. 밖에 나가는 것보다 집에서 쉬거나 취미 생활 하는 게 훨씬 좋거든요"', affection: 14, trust: 14, type: 'homebody' },
+                    { text: '"저는 밖에 나가는 게 좋아요! 집에만 있으면 답답해서 못 견디겠더라고요. 밖에서 활동하고 사람들 만나는 걸 좋아해요"', affection: 16, trust: 14, type: 'outdoor' },
+                    { text: '"둘 다 좋아요! 상황에 따라 집에서 쉴 때도 있고, 밖에 나갈 때도 있어요. 균형있게 즐기는 게 제일 좋은 것 같아요"', affection: 18, trust: 16, type: 'both' }
                 ]
             },
             {
                 id: 'lifestyle_movie',
-                situation: '"영화관 vs 집에서 넷플릭스?"',
+                situation: '"영화 볼 때 영화관에 가는 걸 좋아하세요, 아니면 집에서 넷플릭스 보는 걸 좋아하세요? 각각 장점이 있는 것 같아요"',
                 choices: [
-                    { text: '"영화관이 좋아요"', affection: 16, trust: 14, type: 'theater' },
-                    { text: '"집에서 편하게요"', affection: 14, trust: 14, type: 'home' },
-                    { text: '"둘 다 좋아요"', affection: 18, trust: 16, type: 'both' }
+                    { text: '"영화관이 좋아요! 큰 화면에 좋은 음향으로 보는 게 정말 좋거든요. 영화관 특유의 분위기와 몰입감이 최고죠"', affection: 16, trust: 14, type: 'theater' },
+                    { text: '"저는 집에서 편하게 보는 게 좋아요. 일시정지도 자유롭고, 간식도 마음껏 먹을 수 있잖아요. 편안한 게 최고예요"', affection: 14, trust: 14, type: 'home' },
+                    { text: '"둘 다 좋아요! 큰 영화는 영화관에서 보고, 평범한 영화는 집에서 봐요. 상황에 맞게 선택하는 게 좋은 것 같아요"', affection: 18, trust: 16, type: 'both' }
                 ]
             },
             {
                 id: 'lifestyle_shower',
-                situation: '"아침 샤워 vs 저녁 샤워?"',
+                situation: '"아침에 샤워하는 걸 좋아하세요, 아니면 저녁에 하는 걸 좋아하세요? 저는 샤워 시간이 하루 중 가장 편안한 시간이에요"',
                 choices: [
-                    { text: '"아침이요"', affection: 14, trust: 14, type: 'morning' },
-                    { text: '"저녁이요"', affection: 14, trust: 14, type: 'evening' },
-                    { text: '"둘 다 해요"', affection: 16, trust: 16, type: 'both' }
+                    { text: '"저는 아침에 샤워해요. 아침 샤워하면 잠이 확 깨고 상쾌하게 하루를 시작할 수 있어서 좋아요. 개운한 느낌이 최고죠"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"저는 저녁에 샤워해요. 하루 동안 쌓인 피로를 씻어내고 편하게 잠들 수 있어서 좋거든요. 따뜻한 물로 긴장을 풀어요"', affection: 14, trust: 14, type: 'evening' },
+                    { text: '"저는 아침 저녁 둘 다 해요. 아침엔 간단히 개운하게, 저녁엔 여유롭게 하루를 정리하는 느낌으로 샤워하죠"', affection: 16, trust: 16, type: 'both' }
                 ]
             },
             {
                 id: 'lifestyle_cleaning',
-                situation: '"청소 자주 해요?"',
+                situation: '"청소 자주 하시는 편이에요? 저는 깨끗한 공간에 있어야 마음도 편해지는 타입이거든요. 정리정돈된 공간이 집중력도 높여주는 것 같아요"',
                 choices: [
-                    { text: '"매일 해요"', affection: 18, trust: 18, type: 'daily' },
-                    { text: '"주기적으로요"', affection: 16, trust: 16, type: 'regular' },
-                    { text: '"가끔..."', affection: -8, trust: -10, type: 'rarely' }
+                    { text: '"저도 매일 청소해요! 조금이라도 먼지나 지저분한 게 보이면 바로 치우는 편이에요. 깨끗한 환경이 정말 중요하죠"', affection: 18, trust: 18, type: 'daily' },
+                    { text: '"주기적으로 하는 편이에요. 일주일에 한두 번 정도 제대로 청소하고, 평소에는 간단하게 정리하는 정도예요"', affection: 16, trust: 16, type: 'regular' },
+                    { text: '"음... 가끔 하는 편이에요. 청소가 좀 귀찮아서 미루다가 정말 지저분해지면 그때 하게 되더라고요"', affection: -8, trust: -10, type: 'rarely' }
                 ]
             },
             {
                 id: 'lifestyle_phone',
-                situation: '"스마트폰 사용 시간이 얼마나 돼요?"',
+                situation: '"하루에 스마트폰을 얼마나 사용하세요? 요즘은 스마트폰 없이는 살 수 없는 시대잖아요. 저도 가끔 사용 시간 보면 놀랄 때가 있어요"',
                 choices: [
-                    { text: '"많이 써요"', affection: 10, trust: 12, type: 'heavy' },
-                    { text: '"적당히요"', affection: 16, trust: 16, type: 'moderate' },
-                    { text: '"별로 안 써요"', affection: 14, trust: 14, type: 'light' }
+                    { text: '"저는 많이 쓰는 편이에요. 하루에 5-6시간 이상은 쓰는 것 같아요. SNS도 보고, 영상도 보고, 거의 손에서 떨어지지 않네요"', affection: 10, trust: 12, type: 'heavy' },
+                    { text: '"적당히 쓰는 편이에요. 하루 2-3시간 정도? 필요할 때만 쓰려고 노력하는데, 그래도 생각보다 많이 쓰는 것 같아요"', affection: 16, trust: 16, type: 'moderate' },
+                    { text: '"별로 안 써요. 하루 1시간 정도? 꼭 필요한 용도로만 쓰고, 나머지 시간엔 다른 활동을 하는 편이에요"', affection: 14, trust: 14, type: 'light' }
                 ]
             },
             {
                 id: 'lifestyle_sns',
-                situation: '"SNS 자주 해요?"',
+                situation: '"SNS 자주 하시는 편이에요? 인스타, 페북, 트위터 같은 거요. 저는 가끔 친구들 소식 보는 정도예요"',
                 choices: [
-                    { text: '"네, 자주요"', affection: 12, trust: 12, type: 'active' },
-                    { text: '"가끔 봐요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"안 해요"', affection: 16, trust: 16, type: 'no' }
+                    { text: '"네, 자주 해요. 매일 업로드하고 다른 사람들 게시물도 자주 보는 편이에요. SNS로 소통하는 게 좋더라고요"', affection: 12, trust: 12, type: 'active' },
+                    { text: '"가끔 보는 편이에요. 친구들 소식 확인하거나 재미있는 콘텐츠 볼 때만 들어가요. 자주 하지는 않아요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"저는 SNS 안 해요. 계정은 있는데 거의 안 들어가요. 직접 만나서 소통하는 게 더 좋은 것 같아서요"', affection: 16, trust: 16, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_shopping',
-                situation: '"쇼핑 좋아해요?"',
+                situation: '"쇼핑하는 거 좋아하세요? 옷이나 물건 사러 다니는 거요. 저는 필요한 걸 사는 건 좋은데, 그냥 구경만 다니는 건 좀 힘들더라고요"',
                 choices: [
-                    { text: '"정말 좋아해요"', affection: 14, trust: 12, type: 'love' },
-                    { text: '"필요할 때만요"', affection: 16, trust: 16, type: 'practical' },
-                    { text: '"싫어요"', affection: 12, trust: 14, type: 'dislike' }
+                    { text: '"저는 쇼핑 정말 좋아해요! 새로운 물건 구경하고 고르는 게 정말 재미있어요. 쇼핑하면 스트레스도 풀리고 기분이 좋아져요"', affection: 14, trust: 12, type: 'love' },
+                    { text: '"필요할 때만 쇼핑하는 편이에요. 꼭 사야 할 게 있을 때만 가고, 윈도우 쇼핑은 별로 안 하는 편이에요. 실용적으로 접근해요"', affection: 16, trust: 16, type: 'practical' },
+                    { text: '"쇼핑 싫어해요. 사람 많고 복잡한 곳 가는 게 힘들고, 고르는 것도 귀찮더라고요. 온라인으로 빠르게 사는 게 좋아요"', affection: 12, trust: 14, type: 'dislike' }
                 ]
             },
             {
                 id: 'lifestyle_cooking_home',
-                situation: '"집에서 요리 자주 해요?"',
+                situation: '"집에서 요리 자주 하시나요? 저는 건강도 챙기고 돈도 아낄 겸 가능하면 집에서 해먹으려고 노력하는 편이에요"',
                 choices: [
-                    { text: '"거의 매일요"', affection: 18, trust: 18, type: 'often' },
-                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"거의 안 해요"', affection: -6, trust: -8, type: 'rarely' }
+                    { text: '"거의 매일 해요! 직접 만들어 먹는 게 건강에도 좋고 맛도 제 입맛에 맞출 수 있어서 좋아요. 요리하는 것도 즐거워요"', affection: 18, trust: 18, type: 'often' },
+                    { text: '"가끔 해요. 시간 여유 있을 때 간단한 거 해먹는 정도예요. 매일 하기는 좀 힘들고, 편할 때만 하는 편이에요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 해요. 요리 실력도 별로고 귀찮아서요. 배달 시키거나 사먹는 게 훨씬 편하더라고요"', affection: -6, trust: -8, type: 'rarely' }
                 ]
             },
             {
                 id: 'lifestyle_delivery',
-                situation: '"배달 음식 자주 시켜요?"',
+                situation: '"배달 음식 자주 시키는 편이에요? 요즘은 배달 앱이 너무 편해서 유혹이 많잖아요. 저도 가끔 피곤할 때 시키곤 해요"',
                 choices: [
-                    { text: '"자주요"', affection: 10, trust: 10, type: 'often' },
-                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"거의 안 해요"', affection: 16, trust: 16, type: 'rarely' }
+                    { text: '"저는 자주 시켜먹어요. 일주일에 3-4번은 시키는 것 같아요. 요리하기 귀찮을 때 배달이 정말 편하더라고요"', affection: 10, trust: 10, type: 'often' },
+                    { text: '"가끔 시키는 편이에요. 일주일에 한두 번? 정말 피곤하거나 특별한 날에만 시켜먹고, 보통은 직접 해먹어요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 시켜요. 건강도 걱정되고 비용도 아까워서요. 집에서 만들어 먹는 게 더 좋은 것 같아요"', affection: 16, trust: 16, type: 'rarely' }
                 ]
             },
             {
                 id: 'lifestyle_pet_home',
-                situation: '"반려동물 키워요?"',
+                situation: '"반려동물 키우고 계세요? 저는 동물을 정말 좋아하는데, 아직 여건이 안 돼서 못 키우고 있어요. 언젠가 꼭 키우고 싶어요"',
                 choices: [
-                    { text: '"네, 키워요"', affection: 16, trust: 16, type: 'yes' },
-                    { text: '"키우고 싶어요"', affection: 18, trust: 14, type: 'want' },
-                    { text: '"아니요"', affection: 10, trust: 10, type: 'no' }
+                    { text: '"네, 키우고 있어요! 강아지(고양이)가 있는데 정말 귀엽고 사랑스러워요. 함께 있으면 힐링이 되고, 가족 같은 존재예요"', affection: 16, trust: 16, type: 'yes' },
+                    { text: '"아직 안 키우는데 정말 키우고 싶어요. 동물을 좋아해서 언젠가 여건이 되면 꼭 입양하고 싶어요. 책임감 있게 잘 키울 자신 있어요"', affection: 18, trust: 14, type: 'want' },
+                    { text: '"아니요, 키우지 않아요. 동물은 좋아하는데 키우는 건 부담스러워서요. 돌보는 게 쉽지 않을 것 같아요"', affection: 10, trust: 10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_plant',
-                situation: '"식물 키워요?"',
+                situation: '"집에서 식물 키우시나요? 저는 초록 식물들 보면 마음이 편안해지더라고요. 공기도 좋아지고, 인테리어 효과도 있고요"',
                 choices: [
-                    { text: '"네, 여러 개요"', affection: 16, trust: 16, type: 'yes' },
-                    { text: '"키우고 싶어요"', affection: 14, trust: 14, type: 'want' },
-                    { text: '"다 죽여요..."', affection: -6, trust: -8, type: 'no' }
+                    { text: '"네, 여러 개 키워요! 집에 식물이 많은데 하나하나 물 주고 돌보는 게 정말 재미있어요. 자라는 모습 보면 뿌듯하고 애정이 가요"', affection: 16, trust: 16, type: 'yes' },
+                    { text: '"키우고 싶은데 아직 못 키웠어요. 잘 죽인다는 말도 들어서 망설여지는데, 관리하기 쉬운 것부터 시작해보고 싶어요"', affection: 14, trust: 14, type: 'want' },
+                    { text: '"식물은 다 죽여요... 물을 줘도 안 줘도 잘 안 자라더라고요. 식물 키우는 재능이 없는 것 같아요. 포기했어요"', affection: -6, trust: -8, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_color',
-                situation: '"좋아하는 색이 있어요?"',
+                situation: '"특별히 좋아하는 색깔이 있으세요? 저는 색깔에 따라 기분도 달라지는 것 같아요. 옷이나 소품 살 때도 좋아하는 색 위주로 사게 되더라고요"',
                 choices: [
-                    { text: '"파란색이요"', affection: 14, trust: 12, type: 'blue' },
-                    { text: '"빨간색이요"', affection: 14, trust: 12, type: 'red' },
-                    { text: '"검은색이요"', affection: 12, trust: 12, type: 'black' }
+                    { text: '"파란색이요! 시원하고 차분한 느낌이 좋아요. 하늘색부터 네이비까지 파란색 계열을 정말 좋아해요"', affection: 14, trust: 12, type: 'blue' },
+                    { text: '"빨간색이요! 강렬하고 정열적인 느낌이 좋거든요. 기분도 올라가고 활기찬 느낌이 들어서 좋아요"', affection: 14, trust: 12, type: 'red' },
+                    { text: '"검은색이요. 어디든 잘 어울리고 깔끔한 느낌이 좋아요. 시크하고 세련된 분위기가 마음에 들어요"', affection: 12, trust: 12, type: 'black' }
                 ]
             },
             {
                 id: 'lifestyle_temperature',
-                situation: '"더운 거 좋아해요, 추운 거?"',
+                situation: '"더운 날씨를 좋아하세요, 아니면 추운 날씨를 좋아하세요? 저는 온도에 민감한 편이라 날씨에 따라 컨디션이 많이 달라져요"',
                 choices: [
-                    { text: '"더운 게 좋아요"', affection: 14, trust: 12, type: 'hot' },
-                    { text: '"추운 게 좋아요"', affection: 14, trust: 12, type: 'cold' },
-                    { text: '"적당한 게 좋아요"', affection: 16, trust: 14, type: 'moderate' }
+                    { text: '"더운 게 좋아요! 추운 건 정말 싫어서 겨울이 힘들어요. 여름에 땀 흘리는 게 추운 거보다 훨씬 나아요"', affection: 14, trust: 12, type: 'hot' },
+                    { text: '"추운 게 좋아요. 더우면 아무것도 하기 싫어지는데, 추우면 옷으로 조절할 수 있잖아요. 시원한 날씨가 최고예요"', affection: 14, trust: 12, type: 'cold' },
+                    { text: '"적당한 온도가 제일 좋아요. 너무 덥지도 춥지도 않은 봄이나 가을 날씨가 정말 좋더라고요. 딱 좋은 게 최고죠"', affection: 16, trust: 14, type: 'moderate' }
                 ]
             },
             {
                 id: 'lifestyle_dessert',
-                situation: '"디저트 좋아해요?"',
+                situation: '"디저트 좋아하세요? 케이크, 마카롱, 아이스크림 같은 거요. 저는 단 거 먹으면 기분이 좋아지는 타입이에요"',
                 choices: [
-                    { text: '"정말 좋아해요!"', affection: 16, trust: 14, type: 'love' },
-                    { text: '"가끔요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"별로예요"', affection: -6, trust: -8, type: 'no' }
+                    { text: '"정말 좋아해요! 식사 후에 디저트는 필수죠. 달콤한 디저트 먹으면 행복해지고, 스트레스도 풀리는 것 같아요"', affection: 16, trust: 14, type: 'love' },
+                    { text: '"가끔 먹는 편이에요. 특별한 날이나 기분 좋을 때 먹으면 더 맛있는 것 같아요. 매일은 부담스럽고요"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"별로 안 좋아해요. 너무 달면 물리더라고요. 건강에도 별로 안 좋을 것 같고, 담백한 게 더 좋아요"', affection: -6, trust: -8, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_alcohol',
-                situation: '"술 자주 마셔요?"',
+                situation: '"술은 자주 마시는 편이에요? 저는 건강을 위해 가능하면 줄이려고 노력하는 편이에요. 친구들 만날 때 가끔 한잔 정도는 하지만요"',
                 choices: [
-                    { text: '"가끔 마셔요"', affection: 14, trust: 14, type: 'sometimes' },
-                    { text: '"거의 안 마셔요"', affection: 16, trust: 16, type: 'rarely' },
-                    { text: '"자주 마셔요"', affection: -8, trust: -10, type: 'often' }
+                    { text: '"가끔 마시는 편이에요. 친구들이랑 모일 때나 특별한 날에만 마시고, 평소에는 잘 안 마셔요. 적당히가 제일 좋죠"', affection: 14, trust: 14, type: 'sometimes' },
+                    { text: '"거의 안 마셔요. 술을 별로 좋아하지 않고, 건강에도 안 좋은 것 같아서요. 술 없어도 충분히 재미있게 놀 수 있어요"', affection: 16, trust: 16, type: 'rarely' },
+                    { text: '"자주 마시는 편이에요. 일주일에 몇 번은 마시는데, 스트레스 풀기에 좋더라고요. 술자리 분위기가 좋아요"', affection: -8, trust: -10, type: 'often' }
                 ]
             },
             {
                 id: 'lifestyle_driving',
-                situation: '"운전 좋아해요?"',
+                situation: '"운전 좋아하시나요? 저는 운전하면서 음악 듣는 시간이 정말 좋더라고요. 드라이브하면 기분 전환도 되고요"',
                 choices: [
-                    { text: '"네, 좋아해요"', affection: 14, trust: 14, type: 'yes' },
-                    { text: '"할 줄만 알아요"', affection: 12, trust: 12, type: 'can' },
-                    { text: '"못 해요"', affection: 10, trust: 10, type: 'no' }
+                    { text: '"네, 운전 정말 좋아해요! 차 타고 달리는 게 자유롭고 좋아요. 장거리 운전도 전혀 힘들지 않고 즐거워요"', affection: 14, trust: 14, type: 'yes' },
+                    { text: '"운전은 할 줄만 알아요. 필요할 때 하는 정도고, 특별히 좋아하지도 싫어하지도 않아요. 그냥 이동 수단이에요"', affection: 12, trust: 12, type: 'can' },
+                    { text: '"운전 못 해요. 면허는 있는데 초보라서 무서워요. 아직은 대중교통이 더 편하고 안전한 것 같아요"', affection: 10, trust: 10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_public_transport',
-                situation: '"대중교통 vs 차?"',
+                situation: '"이동할 때 대중교통을 주로 이용하세요, 아니면 자가용을 이용하세요? 각각 장단점이 있는 것 같아요"',
                 choices: [
-                    { text: '"대중교통이요"', affection: 14, trust: 14, type: 'public' },
-                    { text: '"차요"', affection: 14, trust: 14, type: 'car' },
-                    { text: '"걸어요"', affection: 16, trust: 16, type: 'walk' }
+                    { text: '"대중교통을 주로 이용해요. 경제적이고 환경에도 좋잖아요. 운전할 필요 없어서 책 읽거나 휴대폰 볼 수 있어서 좋아요"', affection: 14, trust: 14, type: 'public' },
+                    { text: '"차를 주로 이용해요. 편하고 빠르거든요. 짐도 실을 수 있고, 시간에 구애받지 않아서 자유로워서 좋아요"', affection: 14, trust: 14, type: 'car' },
+                    { text: '"가능하면 걸어요! 가까운 곳은 무조건 걷는 편이에요. 건강에도 좋고, 주변 풍경 구경하는 재미도 있어서 좋더라고요"', affection: 16, trust: 16, type: 'walk' }
                 ]
             },
             {
                 id: 'lifestyle_earlybird',
-                situation: '"일찍 일어나는 편이에요?"',
+                situation: '"평소에 일찍 일어나는 편이세요? 저는 일찍 일어나서 여유롭게 준비하는 게 하루를 기분 좋게 시작하는 비결인 것 같아요"',
                 choices: [
-                    { text: '"네, 새벽형이에요"', affection: 16, trust: 16, type: 'early' },
-                    { text: '"적당히요"', affection: 14, trust: 14, type: 'moderate' },
-                    { text: '"늦게 일어나요"', affection: -6, trust: -8, type: 'late' }
+                    { text: '"네, 완전 새벽형 인간이에요! 아침 일찍 일어나서 운동하고 책도 읽고, 여유롭게 하루를 시작해요. 아침 시간이 정말 소중해요"', affection: 16, trust: 16, type: 'early' },
+                    { text: '"적당한 시간에 일어나요. 너무 일찍도 늦지도 않게, 딱 필요한 만큼만 여유 두고 일어나는 편이에요"', affection: 14, trust: 14, type: 'moderate' },
+                    { text: '"늦게 일어나는 편이에요. 아침에 일어나는 게 정말 힘들어서 항상 마지막 순간까지 자고, 급하게 준비하게 돼요"', affection: -6, trust: -8, type: 'late' }
                 ]
             },
             {
                 id: 'lifestyle_planning',
-                situation: '"계획 세우는 거 좋아해요?"',
+                situation: '"계획을 세워서 일을 진행하는 걸 좋아하세요? 저는 계획 없이 움직이면 불안한 타입이라 뭐든 미리 준비하는 편이에요"',
                 choices: [
-                    { text: '"정말 좋아해요"', affection: 16, trust: 18, type: 'yes' },
-                    { text: '"필요할 때만요"', affection: 14, trust: 16, type: 'sometimes' },
-                    { text: '"즉흥적인 게 좋아요"', affection: 12, trust: 12, type: 'spontaneous' }
+                    { text: '"정말 좋아해요! 모든 걸 꼼꼼하게 계획하고 체크리스트 만드는 걸 즐겨요. 계획대로 진행되면 뿌듯하고, 효율적이라고 생각해요"', affection: 16, trust: 18, type: 'yes' },
+                    { text: '"필요할 때만 계획 세워요. 중요한 일이나 여행 같은 건 계획하지만, 일상적인 건 그냥 흘러가는 대로 하는 편이에요"', affection: 14, trust: 16, type: 'sometimes' },
+                    { text: '"즉흥적인 게 좋아요! 계획에 얽매이면 재미없잖아요. 그때그때 상황에 맞춰서 움직이는 게 더 자유롭고 좋은 것 같아요"', affection: 12, trust: 12, type: 'spontaneous' }
                 ]
             },
             {
                 id: 'lifestyle_saving',
-                situation: '"저축 잘해요?"',
+                situation: '"저축을 잘하는 편이세요? 저는 미래를 위해서 꾸준히 저축하려고 노력하는 편이에요. 재테크도 중요하다고 생각해요"',
                 choices: [
-                    { text: '"네, 계획적이에요"', affection: 18, trust: 22, type: 'yes' },
-                    { text: '"노력 중이에요"', affection: 16, trust: 20, type: 'trying' },
-                    { text: '"잘 못해요..."', affection: -8, trust: -10, type: 'no' }
+                    { text: '"네, 계획적으로 저축해요! 매달 정해진 금액을 꼭 저축하고, 지출도 철저하게 관리하는 편이에요. 미래를 위한 투자라고 생각해요"', affection: 18, trust: 22, type: 'yes' },
+                    { text: '"노력 중이에요. 저축의 중요성은 알지만 아직 완벽하게 하진 못하고 있어요. 그래도 조금씩 나아지려고 노력하고 있어요"', affection: 16, trust: 20, type: 'trying' },
+                    { text: '"잘 못해요... 저축해야겠다고 생각은 하는데 자꾸 쓰게 되더라고요. 돈 관리가 정말 어려운 것 같아요"', affection: -8, trust: -10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_fashion',
-                situation: '"패션에 관심 있어요?"',
+                situation: '"패션이나 스타일링에 관심이 많으신 편이에요? 저는 옷 입는 걸 좋아해서 트렌드도 자주 찾아보고, 나만의 스타일 만드는 걸 즐겨요"',
                 choices: [
-                    { text: '"정말 관심 많아요"', affection: 14, trust: 12, type: 'yes' },
-                    { text: '"적당히요"', affection: 16, trust: 14, type: 'moderate' },
-                    { text: '"별로예요"', affection: -6, trust: -8, type: 'no' }
+                    { text: '"정말 관심 많아요! 패션 잡지도 보고, 인스타에서 패션 계정도 팔로우해요. 옷으로 나를 표현하는 게 정말 재미있어요"', affection: 14, trust: 12, type: 'yes' },
+                    { text: '"적당히 관심 있어요. 너무 심하게 신경 쓰진 않지만, 기본적으로 단정하게 입으려고 노력해요. 때와 장소에 맞게 입는 게 중요하죠"', affection: 16, trust: 14, type: 'moderate' },
+                    { text: '"별로 관심 없어요. 편하고 활동하기 좋은 게 최고예요. 패션은 너무 복잡하고 신경 쓸 게 많아서 별로 안 좋아해요"', affection: -6, trust: -8, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_perfume',
-                situation: '"향수 뿌려요?"',
+                situation: '"향수를 자주 사용하세요? 저는 좋아하는 향수가 있어서 외출할 때 뿌리는 편이에요. 좋은 향기가 기분을 좋게 만들어주더라고요"',
                 choices: [
-                    { text: '"매일 뿌려요"', affection: 16, trust: 14, type: 'daily' },
-                    { text: '"특별한 날만요"', affection: 14, trust: 14, type: 'special' },
-                    { text: '"안 뿌려요"', affection: 10, trust: 10, type: 'no' }
+                    { text: '"매일 뿌려요! 향수는 제 시그니처 같은 거라서 꼭 뿌리고 나가요. 향기로 나를 표현하는 게 좋더라고요"', affection: 16, trust: 14, type: 'daily' },
+                    { text: '"특별한 날에만 뿌려요. 중요한 약속이나 특별한 날에만 사용해서 더 의미 있게 느껴지는 것 같아요"', affection: 14, trust: 14, type: 'special' },
+                    { text: '"안 뿌려요. 향이 강한 게 좀 부담스럽고, 향수 없어도 충분한 것 같아요. 자연스러운 게 좋아요"', affection: 10, trust: 10, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_organization',
-                situation: '"정리정돈 잘해요?"',
+                situation: '"정리정돈을 잘하는 편이세요? 저는 물건이 제자리에 있어야 마음이 편한 타입이라 항상 깔끔하게 정리하려고 노력해요"',
                 choices: [
-                    { text: '"완벽하게 해요"', affection: 18, trust: 20, type: 'perfect' },
-                    { text: '"적당히요"', affection: 16, trust: 18, type: 'moderate' },
-                    { text: '"잘 못해요..."', affection: -10, trust: -12, type: 'messy' }
+                    { text: '"완벽하게 해요! 모든 물건이 정해진 자리가 있고, 항상 깔끔하게 정리정돈되어 있어야 해요. 정리되지 않으면 불편해요"', affection: 18, trust: 20, type: 'perfect' },
+                    { text: '"적당히 하는 편이에요. 너무 지저분하지도 않고 너무 완벽하지도 않게, 생활하기 편한 정도로 정리해요"', affection: 16, trust: 18, type: 'moderate' },
+                    { text: '"잘 못해요... 정리하려고 해도 금방 또 어질러지더라고요. 정리정돈은 정말 제 약점인 것 같아요"', affection: -10, trust: -12, type: 'messy' }
                 ]
             },
             {
                 id: 'lifestyle_noise',
-                situation: '"조용한 게 좋아요?"',
+                situation: '"조용한 환경을 좋아하세요? 저는 집중할 때나 쉴 때 조용한 게 정말 중요하더라고요. 시끄러우면 불편해지는 타입이에요"',
                 choices: [
-                    { text: '"네, 조용한 게 좋아요"', affection: 14, trust: 16, type: 'quiet' },
-                    { text: '"적당한 소음은 괜찮아요"', affection: 16, trust: 14, type: 'moderate' },
-                    { text: '"시끄러운 게 좋아요"', affection: 12, trust: 10, type: 'noisy' }
+                    { text: '"네, 조용한 게 좋아요. 작은 소리에도 민감한 편이라 도서관 같은 조용한 곳이 제일 편해요. 백색소음도 싫어하는 편이에요"', affection: 14, trust: 16, type: 'quiet' },
+                    { text: '"적당한 소음은 괜찮아요. 너무 조용하면 오히려 불편하고, 적당한 생활 소음이 있는 게 더 자연스러운 것 같아요"', affection: 16, trust: 14, type: 'moderate' },
+                    { text: '"시끄러운 게 좋아요. 조용하면 답답하고, 사람들 소리나 음악 소리가 있어야 활기차고 좋더라고요"', affection: 12, trust: 10, type: 'noisy' }
                 ]
             },
             {
                 id: 'lifestyle_reading_time',
-                situation: '"언제 책 읽어요?"',
+                situation: '"책을 읽는다면 주로 언제 읽으세요? 저는 독서가 좋은 습관이라고 생각해서 시간 날 때마다 책을 읽으려고 노력해요"',
                 choices: [
-                    { text: '"자기 전이요"', affection: 16, trust: 16, type: 'night' },
-                    { text: '"아침이요"', affection: 14, trust: 14, type: 'morning' },
-                    { text: '"안 읽어요"', affection: -6, trust: -8, type: 'no' }
+                    { text: '"자기 전에 읽어요. 침대에 누워서 책 읽다가 자는 게 하루의 마무리예요. 독서하면서 하루를 정리하는 시간이 정말 소중해요"', affection: 16, trust: 16, type: 'night' },
+                    { text: '"아침에 읽어요. 출근 전이나 출근길에 책을 읽으면 하루를 활기차게 시작할 수 있어요. 아침 독서가 습관이에요"', affection: 14, trust: 14, type: 'morning' },
+                    { text: '"책을 별로 안 읽어요. 읽으려고 해도 집중이 안 되고, 다른 걸 하는 게 더 재미있더라고요. 독서는 잘 안 맞아요"', affection: -6, trust: -8, type: 'no' }
                 ]
             },
             {
                 id: 'lifestyle_weekend',
-                situation: '"주말에 뭐 해요?"',
+                situation: '"주말에는 주로 뭐 하시나요? 저는 평일에 바쁘게 보내서 주말만큼은 여유롭게 보내려고 노력해요"',
                 choices: [
-                    { text: '"쉬어요"', affection: 14, trust: 14, type: 'rest' },
-                    { text: '"나가서 놀아요"', affection: 16, trust: 14, type: 'out' },
-                    { text: '"일해요"', affection: -8, trust: -10, type: 'work' }
+                    { text: '"집에서 쉬어요. 평일에 쌓인 피로를 풀고, 충분히 자고, 좋아하는 것 하면서 재충전하는 시간으로 보내요"', affection: 14, trust: 14, type: 'rest' },
+                    { text: '"밖에 나가서 놀아요! 친구들 만나거나 새로운 곳 탐방하고, 맛집도 가고, 활동적으로 보내는 편이에요. 주말은 즐겨야죠!"', affection: 16, trust: 14, type: 'out' },
+                    { text: '"주말에도 일하는 경우가 많아요. 밀린 업무 처리하거나 개인 프로젝트 하면서 보내요. 쉬는 것보다 생산적인 게 좋아요"', affection: -8, trust: -10, type: 'work' }
                 ]
             },
             {
                 id: 'lifestyle_stress',
-                situation: '"스트레스 어떻게 풀어요?"',
+                situation: '"스트레스를 어떻게 푸시나요? 저는 스트레스 관리가 정말 중요하다고 생각해요. 자기만의 해소 방법이 필요한 것 같아요"',
                 choices: [
-                    { text: '"운동해요"', affection: 18, trust: 18, type: 'exercise' },
-                    { text: '"영화 봐요"', affection: 16, trust: 16, type: 'movie' },
-                    { text: '"자요"', affection: 14, trust: 14, type: 'sleep' }
+                    { text: '"운동으로 풀어요! 땀 흘리면서 운동하면 스트레스가 다 날아가는 느낌이에요. 몸도 건강해지고 정신도 맑아져서 최고예요"', affection: 18, trust: 18, type: 'exercise' },
+                    { text: '"영화나 드라마 보면서 풀어요. 다른 세계에 빠져들면 현실 스트레스를 잊을 수 있거든요. 감정 이입하면서 카타르시스를 느껴요"', affection: 16, trust: 16, type: 'movie' },
+                    { text: '"그냥 자요. 푹 자고 일어나면 스트레스가 많이 풀려있더라고요. 수면이 최고의 치료법인 것 같아요"', affection: 14, trust: 14, type: 'sleep' }
                 ]
             },
             {
                 id: 'lifestyle_social',
-                situation: '"사교적인 편이에요?"',
+                situation: '"사교적인 성격이신가요? 저는 사람 만나는 것도 좋지만 혼자 있는 시간도 필요한 타입이에요. 균형이 중요한 것 같아요"',
                 choices: [
-                    { text: '"네, 사람 만나는 거 좋아요"', affection: 16, trust: 14, type: 'social' },
-                    { text: '"적당히요"', affection: 14, trust: 14, type: 'moderate' },
-                    { text: '"혼자 있는 게 좋아요"', affection: 12, trust: 14, type: 'introvert' }
+                    { text: '"네, 정말 사교적이에요! 사람 만나는 걸 좋아하고, 새로운 사람들과 친해지는 것도 재미있어요. 혼자 있으면 외로워요"', affection: 16, trust: 14, type: 'social' },
+                    { text: '"적당히 사교적이에요. 친한 사람들이랑 만나는 건 좋은데, 너무 많은 사람 만나면 피곤해요. 적절한 균형이 필요해요"', affection: 14, trust: 14, type: 'moderate' },
+                    { text: '"혼자 있는 게 더 좋아요. 사람 만나는 것도 나쁘진 않지만, 혼자 있을 때가 제일 편하고 좋더라고요. 내향적인 편이에요"', affection: 12, trust: 14, type: 'introvert' }
                 ]
             },
             {
                 id: 'lifestyle_punctual',
-                situation: '"시간 잘 지켜요?"',
+                situation: '"약속 시간을 잘 지키시는 편이에요? 저는 시간 약속이 정말 중요하다고 생각해서 절대 늦지 않으려고 노력해요. 상대방을 배려하는 기본이죠"',
                 choices: [
-                    { text: '"항상 일찍 가요"', affection: 20, trust: 24, type: 'early' },
-                    { text: '"정각에 가요"', affection: 18, trust: 22, type: 'ontime' },
-                    { text: '"가끔 늦어요..."', affection: -12, trust: -15, type: 'late' }
+                    { text: '"항상 일찍 가요! 약속 시간보다 최소 10-15분 일찍 도착하는 편이에요. 늦는 게 정말 싫어서 여유있게 출발해요"', affection: 20, trust: 24, type: 'early' },
+                    { text: '"정각에 맞춰 가요. 너무 일찍도 늦지도 않게, 딱 약속 시간에 맞춰서 도착하는 편이에요. 시간 관리 철저히 해요"', affection: 18, trust: 22, type: 'ontime' },
+                    { text: '"가끔 늦어요... 시간 관리가 잘 안 돼서 종종 늦게 되더라고요. 노력은 하는데 잘 안 되네요. 미안한 마음은 있어요"', affection: -12, trust: -15, type: 'late' }
                 ]
             },
             {
                 id: 'lifestyle_smartphone',
-                situation: '"스마트폰 없으면 불안해요?"',
+                situation: '"스마트폰이 없으면 불안하신가요? 요즘은 스마트폰 의존도가 정말 높아진 것 같아요. 저도 가끔 디지털 디톡스가 필요하다고 느껴요"',
                 choices: [
-                    { text: '"괜찮아요"', affection: 16, trust: 18, type: 'fine' },
-                    { text: '"조금 불안해요"', affection: 14, trust: 16, type: 'anxious' },
-                    { text: '"정말 불안해요"', affection: -8, trust: -10, type: 'very_anxious' }
+                    { text: '"괜찮아요. 스마트폰 없어도 전혀 불편하지 않아요. 오히려 없으면 더 자유로운 느낌이 들어서 좋을 때도 있어요"', affection: 16, trust: 18, type: 'fine' },
+                    { text: '"조금 불안해요. 급한 연락이 올 수도 있고, 필요한 정보를 못 찾을까봐 신경 쓰이긴 해요. 그래도 견딜만 해요"', affection: 14, trust: 16, type: 'anxious' },
+                    { text: '"정말 불안해요. 스마트폰 없으면 완전히 불안하고 답답해요. 항상 손에 들고 있어야 마음이 편해요"', affection: -8, trust: -10, type: 'very_anxious' }
                 ]
             },
             {
                 id: 'lifestyle_communication',
-                situation: '"전화 vs 문자?"',
+                situation: '"소통할 때 전화하는 게 좋으세요, 아니면 문자가 좋으세요? 저는 상황에 따라 다르긴 한데, 각각 장단점이 있는 것 같아요"',
                 choices: [
-                    { text: '"전화가 좋아요"', affection: 16, trust: 16, type: 'call' },
-                    { text: '"문자가 좋아요"', affection: 14, trust: 14, type: 'text' },
-                    { text: '"둘 다 괜찮아요"', affection: 18, trust: 18, type: 'both' }
+                    { text: '"전화가 좋아요! 목소리로 직접 대화하는 게 더 정확하고 빠르잖아요. 감정도 잘 전달되고, 오해도 적어서 좋아요"', affection: 16, trust: 16, type: 'call' },
+                    { text: '"문자가 좋아요. 생각 정리해서 보낼 수 있고, 부담도 덜하고, 나중에 다시 확인할 수도 있어서 편해요"', affection: 14, trust: 14, type: 'text' },
+                    { text: '"둘 다 괜찮아요! 급한 건 전화하고, 간단한 건 문자하고, 상황에 맞게 유연하게 선택하는 게 좋은 것 같아요"', affection: 18, trust: 18, type: 'both' }
                 ]
             },
             {
                 id: 'lifestyle_routine',
-                situation: '"루틴이 있어요?"',
+                situation: '"일상 루틴이 있으신가요? 저는 규칙적인 생활이 건강과 생산성에 도움이 된다고 생각해서 나름의 루틴을 만들려고 노력해요"',
                 choices: [
-                    { text: '"네, 철저해요"', affection: 16, trust: 20, type: 'strict' },
-                    { text: '"적당히요"', affection: 14, trust: 18, type: 'moderate' },
-                    { text: '"없어요"', affection: -6, trust: -8, type: 'no' }
+                    { text: '"네, 철저하게 지켜요! 아침 운동부터 저녁 독서까지 정해진 루틴이 있어요. 루틴대로 하면 안정감이 느껴지고 하루가 효율적이에요"', affection: 16, trust: 20, type: 'strict' },
+                    { text: '"적당히 있어요. 큰 틀은 정해져 있는데, 너무 엄격하게 지키진 않아요. 유연하게 조절하면서 생활하는 편이에요"', affection: 14, trust: 18, type: 'moderate' },
+                    { text: '"특별한 루틴은 없어요. 그날그날 기분이나 상황에 따라 자유롭게 생활하는 게 좋아요. 정해진 틀에 얽매이기 싫어요"', affection: -6, trust: -8, type: 'no' }
                 ]
             }
         ]
