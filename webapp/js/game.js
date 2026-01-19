@@ -146,7 +146,8 @@ function showGameObjective() {
                     <h3 style="margin-top: 20px;">💪 자원 관리</h3>
                     <ul style="line-height: 1.8;">
                         <li><strong>체력</strong>: 모든 행동에 필요, 휴식으로 회복</li>
-                        <li><strong>멘탈</strong>: 거절이나 안 좋은 반응 시 감소, 0이 되면 게임 오버!</li>
+                        <li><strong style="color: #ff6b6b;">멘탈</strong>: 데이트/스킨십 거절, 안 좋은 반응, 일부 일하기 실패 시 감소<br>
+                            <strong style="color: #ff6b6b;">⚠️ 0이 되면 게임 오버!</strong> 휴식으로 회복 필수</li>
                         <li><strong>신뢰도</strong>: 깊은 대화와 일관된 행동으로 상승</li>
                         <li><strong>돈</strong>: 다양한 방법으로 벌거나 데이트/선물에 사용</li>
                     </ul>
@@ -1487,7 +1488,7 @@ function showRestMenu() {
                             <div class="option-name">명상하기</div>
                             <div class="option-desc">마음을 가라앉히고 명상합니다</div>
                             <div class="action-cost">⚡ 체력 -10</div>
-                            <div class="action-gain">🧠 멘탈 +35, 💖 호감도 +2</div>
+                            <div class="action-gain">🧠 멘탈 +35</div>
                         </div>
                     </div>
                 </div>
@@ -1548,9 +1549,8 @@ window.selectRestOption = function(option) {
             }
             gameState.stamina -= 10;
             gameState.mental = Math.min(100, gameState.mental + 35);
-            gameState.affection = Math.min(100, gameState.affection + 2);
             recordActivity('rest', '🧘');
-            showResult('명상을 통해 마음의 평온을 찾았습니다.', 2, 0, '⚡-10, 🧠+35');
+            showResult('명상을 통해 마음의 평온을 찾았습니다.', 0, 0, '⚡-10, 🧠+35');
             break;
     }
 
