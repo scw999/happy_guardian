@@ -1430,7 +1430,10 @@ window.executeStock = function(investment) {
     if (profit > 0) {
         showResult(`📈 주식 투자 성공!`, 0, 0, `+${formatMoney(profit)} (${Math.round(result * 100)}%)`);
     } else {
-        showResult(`📉 주식 투자 실패...`, 0, 0, `${formatMoney(profit)} (${Math.round(result * 100)}%)`);
+        // 주식 실패 시 멘탈 감소 (손실액에 비례)
+        const mentalLoss = Math.min(20, Math.floor(Math.abs(profit) / 5000));
+        gameState.mental -= mentalLoss;
+        showResult(`📉 주식 투자 실패...`, 0, 0, `${formatMoney(profit)} (${Math.round(result * 100)}%), 🧠-${mentalLoss}`);
     }
     updateAllUI();
 };
