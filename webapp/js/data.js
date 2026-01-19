@@ -3172,56 +3172,56 @@ const TALK_TOPICS = {
             },
             {
                 id: 'hobby_escape_room',
-                situation: '"방탈출 게임 좋아해요"',
+                situation: '"저 방탈출 게임 진짜 좋아하거든요. 퍼즐 풀고 단서 찾는 그 짜릿함이 너무 재미있어요. 혹시 같이 한번 해보실래요?"',
                 choices: [
-                    { text: '"같이 도전해요!"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"재미있겠어요"', affection: 14, trust: 14, type: 'positive' },
-                    { text: '"갇히는 거 무서워요"', affection: -8, trust: -10, type: 'scared' }
+                    { text: '"오 재미있겠는데요! 저도 예전부터 해보고 싶었어요. 언제 같이 도전해봐요! 팀워크가 중요하다던데, 우리 둘이 힘 합치면 금방 탈출할 수 있을 것 같아요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"방탈출 게임 정말 재미있겠어요. 그런 거 좋아하시는구나. 두뇌 게임 좋아하시는 스타일이네요. 멋있어요"', affection: 14, trust: 14, type: 'positive' },
+                    { text: '"갇히는 거 생각하니까 좀 무서운데요... 폐쇄공포증 있으면 어떡하죠? 저는 좀..."', affection: -8, trust: -10, type: 'scared' }
                 ]
             },
             {
                 id: 'hobby_calligraphy',
-                situation: '"서예가 취미예요"',
+                situation: '"요즘 서예를 배우고 있어요. 붓으로 한 획 한 획 정성스럽게 쓰다 보면 마음이 차분해지더라고요. 전통적인 취미라 좀 특이하죠?"',
                 choices: [
-                    { text: '"멋져요. 작품 보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"저도 배우고 싶어요"', affection: 14, trust: 16, type: 'join' },
-                    { text: '"요즘 누가 그런 걸..."', affection: -18, trust: -20, type: 'dismissive' }
+                    { text: '"와, 정말 멋진 취미네요! 서예 작품 정말 보고 싶어요. 언제 한번 보여주실 수 있나요? 필체도 궁금하고요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"서예라니 정말 고급스러운 취미예요. 저도 배우고 싶은데 가르쳐주실 수 있어요? 같이 배우면 재미있을 것 같아요"', affection: 14, trust: 16, type: 'join' },
+                    { text: '"요즘 시대에 누가 서예를 해요... 좀 옛날 취미 아닌가요? 다른 재미있는 거 하는 게 낫지 않아요?"', affection: -18, trust: -20, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_vlog',
-                situation: '"브이로그 찍는 게 취미예요"',
+                situation: '"저 요즘 브이로그 찍는 게 취미예요. 일상을 영상으로 기록하고 편집하는 게 정말 재미있거든요. 나중에 추억으로도 남고요"',
                 choices: [
-                    { text: '"보고 싶어요! 어디서 볼 수 있어요?"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"같이 찍어요"', affection: 18, trust: 14, type: 'join' },
-                    { text: '"부끄럽지 않아요?"', affection: -10, trust: -12, type: 'negative' }
+                    { text: '"와 진짜요? 너무 보고 싶은데요! 어디 채널이에요? 바로 구독할게요! 일상이 얼마나 재미있게 담겨있을지 정말 궁금해요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"오 그럼 저도 출연해도 될까요? 같이 브이로그 찍으면 재미있을 것 같은데요. 당신과 함께하는 일상 영상, 좋을 것 같아요"', affection: 18, trust: 14, type: 'join' },
+                    { text: '"카메라 앞에 서는 거 부끄럽지 않아요? 저는 좀 그런 거 이해가 안 가는데... 왜 굳이 일상을 찍어요?"', affection: -10, trust: -12, type: 'negative' }
                 ]
             },
             {
                 id: 'hobby_skateboard',
-                situation: '"스케이트보드 타는 게 취미예요"',
+                situation: '"저 스케이트보드 타는 게 취미예요. 바람 가르며 달리는 그 느낌, 기술 하나하나 익혀가는 재미가 있어요. 좀 위험해 보이긴 하지만요"',
                 choices: [
-                    { text: '"멋져요! 가르쳐주세요"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"조심하세요"', affection: 12, trust: 14, type: 'worried' },
-                    { text: '"위험하지 않아요?"', affection: -8, trust: -10, type: 'worried_negative' }
+                    { text: '"와 정말 멋있는데요! 스케이트보드 타는 모습 진짜 보고 싶어요. 저도 타보고 싶은데 가르쳐주실 수 있나요? 처음엔 넘어질 것 같지만 같이하면 재미있을 것 같아요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"스케이트보드 정말 멋진 스포츠죠. 근데 다치지 않게 조심하세요. 보호대 꼭 착용하시고요. 당신 안전이 제일 중요하니까요"', affection: 12, trust: 14, type: 'worried' },
+                    { text: '"위험하지 않아요? 다치면 어떡하려고 그런 걸 해요... 좀 더 안전한 취미를 가지는 게 낫지 않을까요?"', affection: -8, trust: -10, type: 'worried_negative' }
                 ]
             },
             {
                 id: 'hobby_diy',
-                situation: '"DIY 공예가 취미예요"',
+                situation: '"저 DIY 공예가 취미예요. 직접 뭔가를 만드는 게 너무 재미있어요. 나만의 작품을 만들 수 있잖아요. 요즘은 목공예에 빠져있어요"',
                 choices: [
-                    { text: '"뭘 만드셨어요? 보고 싶어요"', affection: 16, trust: 16, type: 'interested' },
-                    { text: '"같이 만들어요"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"그냥 사는 게 낫지 않아요?"', affection: -15, trust: -18, type: 'dismissive' }
+                    { text: '"우와 정말 대단하시네요! 무슨 작품들 만드셨는지 너무 궁금한데요. 보여주실 수 있어요? 손재주가 정말 좋으신가봐요"', affection: 16, trust: 16, type: 'interested' },
+                    { text: '"저도 같이 만들어보면 안 될까요? 당신한테 배우고 싶어요. 함께 뭔가 만들면 정말 특별한 추억이 될 것 같아요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"힘들게 직접 만들어요? 그냥 사는 게 훨씬 편하고 깔끔하지 않나요? 시간과 노력이 너무 많이 드는 것 같은데..."', affection: -15, trust: -18, type: 'dismissive' }
                 ]
             },
             {
                 id: 'hobby_tea',
-                situation: '"차 공부하는 게 취미예요"',
+                situation: '"저 차 공부하는 게 취미예요. 다양한 차를 마시면서 향과 맛을 음미하는 게 정말 좋아요. 요즘은 전통 차에 푹 빠져있어요"',
                 choices: [
-                    { text: '"같이 차 마셔요"', affection: 18, trust: 16, type: 'join' },
-                    { text: '"어떤 차 좋아하세요?"', affection: 14, trust: 14, type: 'curious' },
-                    { text: '"커피가 더 낫지 않아요?"', affection: -12, trust: -14, type: 'dismissive' }
+                    { text: '"와 정말 고급스러운 취미네요. 저도 차 정말 좋아하는데, 언제 같이 차 한잔 하면서 이야기 나눠요. 당신이 좋아하는 차 같이 마시고 싶어요"', affection: 18, trust: 16, type: 'join' },
+                    { text: '"차 공부라니 멋지네요. 어떤 차를 제일 좋아하세요? 추천해주실 수 있어요? 저도 한번 시작해보고 싶어요"', affection: 14, trust: 14, type: 'curious' },
+                    { text: '"차보다는 커피가 훨씬 더 낫지 않아요? 요즘 누가 차를 마셔요... 좀 올드하신 것 같은데요"', affection: -12, trust: -14, type: 'dismissive' }
                 ]
             }
         ]
@@ -3238,38 +3238,38 @@ const TALK_TOPICS = {
         scenarios: [
             {
                 id: 'memories_childhood_home',
-                situation: '"어릴 때 살던 집이 그리워요"',
+                situation: '"가끔 어릴 때 살던 집이 그리워요. 좁았지만 따뜻한 기억들이 가득한 곳이었거든요. 지금은 다른 사람이 살고 있겠지만, 그 동네 골목길들이 아직도 생생해요"',
                 choices: [
-                    { text: '"어떤 집이었는지 이야기해줘요"', affection: 16, trust: 18, type: 'listen' },
-                    { text: '"언젠가 같이 가볼까요?"', affection: 18, trust: 16, type: 'romantic' },
-                    { text: '"과거는 과거예요"', affection: -12, trust: -15, type: 'dismissive' }
+                    { text: '"어떤 집이었는지 더 자세히 이야기해주실래요? 듣고 있으면 제가 다 그려지는 것 같아요. 당신의 소중한 기억들이 궁금해요"', affection: 16, trust: 18, type: 'listen' },
+                    { text: '"정말 소중한 추억이 있는 곳이네요. 언젠가 시간 나면 그 동네에 같이 가볼까요? 당신의 어린 시절이 시작된 곳, 함께 걸어보고 싶어요"', affection: 18, trust: 16, type: 'romantic' },
+                    { text: '"과거는 그냥 과거일 뿐이에요. 지금 현재를 사는 게 더 중요하지 않나요? 옛날 일은 잊어버리는 게 나아요"', affection: -12, trust: -15, type: 'dismissive' }
                 ]
             },
             {
                 id: 'memories_first_love',
-                situation: '"첫사랑 이야기 궁금해요?"',
+                situation: '"혹시... 제 첫사랑 이야기 궁금하세요? 말하기 좀 그런데, 물어보시면 솔직하게 이야기해드릴게요. 아니면 안 물어보셔도 괜찮아요"',
                 choices: [
-                    { text: '"듣고 싶어요. 이야기해줘요"', affection: 14, trust: 20, type: 'open' },
-                    { text: '"과거보다 현재가 중요해요"', affection: 12, trust: 16, type: 'present_focus' },
-                    { text: '"듣기 싫은데요"', affection: -10, trust: -12, type: 'jealous' }
+                    { text: '"듣고 싶어요. 당신의 과거도 당신의 일부니까요. 어떤 사람이었는지, 어떤 감정이었는지 궁금해요. 솔직하게 이야기해줘요"', affection: 14, trust: 20, type: 'open' },
+                    { text: '"과거의 사랑보다는 지금 우리의 현재가 훨씬 더 중요하다고 생각해요. 하지만 말하고 싶으시면 들을게요"', affection: 12, trust: 16, type: 'present_focus' },
+                    { text: '"솔직히 전 애인 이야기는 듣고 싶지 않은데요... 그냥 지나간 일로 남겨두는 게 좋을 것 같아요"', affection: -10, trust: -12, type: 'jealous' }
                 ]
             },
             {
                 id: 'memories_best_friend',
-                situation: '"어릴 때 제일 친한 친구 있었어요"',
+                situation: '"어릴 때 정말 친했던 친구가 있었어요. 매일 같이 놀고, 비밀도 공유하고... 그 친구와의 추억들이 제 어린 시절의 전부였던 것 같아요"',
                 choices: [
-                    { text: '"어떤 친구였는지 궁금해요"', affection: 14, trust: 18, type: 'interested' },
-                    { text: '"지금도 연락해요?"', affection: 12, trust: 16, type: 'curious' },
-                    { text: '"옛날 친구 얘기는..."', affection: -8, trust: -10, type: 'uninterested' }
+                    { text: '"우와, 정말 소중한 친구였나봐요. 어떤 친구였는지, 어떻게 친해지셨는지 더 자세히 듣고 싶어요. 당신의 소중한 사람 이야기가 궁금해요"', affection: 14, trust: 18, type: 'interested' },
+                    { text: '"그 친구분과 지금도 연락하고 지내시나요? 어린 시절 친구와 계속 연락하고 지낸다는 건 정말 특별한 인연인 것 같아요"', affection: 12, trust: 16, type: 'curious' },
+                    { text: '"옛날 친구 얘기는... 좀 지루한데요. 지금 친구들 이야기가 더 재미있지 않나요? 옛날 일은 그냥 넘어가요"', affection: -8, trust: -10, type: 'uninterested' }
                 ]
             },
             {
                 id: 'memories_family_trip',
-                situation: '"가족 여행 갔던 기억이 나요"',
+                situation: '"어렸을 때 가족들과 함께 여행 갔던 기억이 문득 떠올라요. 그때는 별거 아닌 줄 알았는데, 지금 생각해보니 정말 소중한 추억이었던 것 같아요"',
                 choices: [
-                    { text: '"어디 갔었는지 이야기해줘요"', affection: 16, trust: 18, type: 'listen' },
-                    { text: '"좋은 추억이네요"', affection: 14, trust: 16, type: 'positive' },
-                    { text: '"가족 얘기는 지루해요"', affection: -15, trust: -18, type: 'rude' }
+                    { text: '"어디로 여행 가셨는지 이야기해줘요. 가족분들과의 여행 이야기 정말 듣고 싶어요. 어떤 일들이 있었는지 궁금해요"', affection: 16, trust: 18, type: 'listen' },
+                    { text: '"가족과 함께한 추억이라니 정말 좋은 기억이네요. 그런 순간들이 나중에 되돌아보면 정말 소중하게 느껴지죠"', affection: 14, trust: 16, type: 'positive' },
+                    { text: '"가족 여행 얘기는 좀 지루한데요... 다른 재미있는 이야기 없어요? 가족 얘기는 그만하고 다른 얘기 해요"', affection: -15, trust: -18, type: 'rude' }
                 ]
             },
             {
@@ -3601,47 +3601,47 @@ const TALK_TOPICS = {
         scenarios: [
             {
                 id: 'values_success',
-                situation: '"성공이 뭐라고 생각해요?"',
+                situation: '"당신에게 성공이란 무엇인가요? 사람들마다 성공의 기준이 다 다르잖아요. 저는 당신이 어떻게 생각하는지 정말 궁금해요"',
                 choices: [
-                    { text: '"행복한 것이 성공이죠"', affection: 16, trust: 20, type: 'happiness' },
-                    { text: '"자신의 목표를 이루는 것"', affection: 14, trust: 22, type: 'achievement' },
-                    { text: '"돈과 명예"', affection: -10, trust: -12, type: 'materialistic' }
+                    { text: '"저는 행복하게 사는 것이 진정한 성공이라고 생각해요. 돈이 많거나 유명해지는 것보다 매일 웃으면서 살 수 있다면 그게 가장 성공한 삶이죠"', affection: 16, trust: 20, type: 'happiness' },
+                    { text: '"자신이 세운 목표를 이루는 것이 성공이라고 생각해요. 목표가 크든 작든, 그걸 달성하기 위해 노력하고 이뤄냈을 때의 성취감이 진정한 성공이죠"', affection: 14, trust: 22, type: 'achievement' },
+                    { text: '"솔직히 돈과 명예가 성공 아닌가요? 현실적으로 그게 있어야 인정받고 살 수 있잖아요. 이상보다는 현실이 중요하죠"', affection: -10, trust: -12, type: 'materialistic' }
                 ]
             },
             {
                 id: 'values_money',
-                situation: '"돈이 중요해요, 아니면 사랑?"',
+                situation: '"좀 직접적인 질문일 수 있는데... 당신에게 돈과 사랑 중 뭐가 더 중요해요? 둘 다 소중하지만 정말 선택해야 한다면요?"',
                 choices: [
-                    { text: '"사랑이 우선이죠"', affection: 20, trust: 18, type: 'love' },
-                    { text: '"둘 다 중요해요"', affection: 12, trust: 20, type: 'balanced' },
-                    { text: '"돈 없이는 사랑도 없어요"', affection: -15, trust: -18, type: 'money' }
+                    { text: '"저는 사랑이 우선이에요. 돈은 언젠가 벌 수 있지만, 진정한 사랑은 찾기 어렵잖아요. 사랑하는 사람과 함께라면 가난해도 행복할 수 있다고 생각해요"', affection: 20, trust: 18, type: 'love' },
+                    { text: '"어려운 질문이네요. 솔직히 둘 다 정말 중요하다고 생각해요. 사랑도 있어야 하고, 현실적으로 살아가려면 돈도 필요하니까요. 균형이 중요하죠"', affection: 12, trust: 20, type: 'balanced' },
+                    { text: '"현실적으로 생각하면 돈이 먼저예요. 돈 없이는 사랑도 유지하기 어렵다고 생각해요. 먹고살아야 사랑도 하죠"', affection: -15, trust: -18, type: 'money' }
                 ]
             },
             {
                 id: 'values_honesty',
-                situation: '"진실이 항상 옳을까요?"',
+                situation: '"진실이 항상 옳을까요? 때로는 거짓말이 상대를 지켜줄 수도 있잖아요. 이 문제에 대해 당신은 어떻게 생각하세요?"',
                 choices: [
-                    { text: '"상황에 따라 다르죠"', affection: 12, trust: 22, type: 'situational' },
-                    { text: '"진실이 최우선이에요"', affection: 10, trust: 26, type: 'honest' },
-                    { text: '"거짓말도 필요해요"', affection: -8, trust: -20, type: 'dishonest' }
+                    { text: '"상황에 따라 다르다고 생각해요. 대부분은 진실을 말해야 하지만, 상대를 지키기 위한 선의의 거짓말은 필요할 때도 있죠. 중요한 건 의도예요"', affection: 12, trust: 22, type: 'situational' },
+                    { text: '"어떤 상황이든 진실이 최우선이에요. 순간은 힘들어도 장기적으로는 진실이 최선이라고 믿어요. 거짓말은 결국 더 큰 상처를 만들죠"', affection: 10, trust: 26, type: 'honest' },
+                    { text: '"솔직히 거짓말도 살면서 필요한 기술이에요. 모든 걸 솔직하게 말하면 사람들이 상처받잖아요. 적당한 거짓말은 사회생활에 필요해요"', affection: -8, trust: -20, type: 'dishonest' }
                 ]
             },
             {
                 id: 'values_family',
-                situation: '"가족이 제일 중요해요?"',
+                situation: '"당신에게 가족은 얼마나 중요한 존재인가요? 사람마다 가족에 대한 생각이 다르잖아요. 당신의 솔직한 생각이 궁금해요"',
                 choices: [
-                    { text: '"당연하죠"', affection: 18, trust: 24, type: 'family_first' },
-                    { text: '"가족도 중요하지만 나도 중요해요"', affection: 14, trust: 20, type: 'balanced' },
-                    { text: '"제 인생이 우선이에요"', affection: -12, trust: -15, type: 'selfish' }
+                    { text: '"가족은 당연히 제일 중요하죠. 세상 누구보다 소중한 사람들이에요. 어떤 일이 있어도 가족을 최우선으로 생각하고 싶어요"', affection: 18, trust: 24, type: 'family_first' },
+                    { text: '"가족도 물론 중요하지만, 제 자신도 똑같이 중요하다고 생각해요. 가족을 위해 희생도 하지만, 제 삶도 소중히 해야 한다고 봐요"', affection: 14, trust: 20, type: 'balanced' },
+                    { text: '"솔직히 제 인생이 우선이에요. 가족도 소중하지만, 결국 제 삶은 제가 책임지는 거니까 제 선택과 행복이 먼저라고 생각해요"', affection: -12, trust: -15, type: 'selfish' }
                 ]
             },
             {
                 id: 'values_friendship',
-                situation: '"친구 관계를 어떻게 봐요?"',
+                situation: '"친구 관계를 어떻게 생각하세요? 어떤 사람은 평생 친구가 중요하다고 하고, 어떤 사람은 각자의 삶이 우선이라고 하잖아요"',
                 choices: [
-                    { text: '"평생 소중히 해야죠"', affection: 16, trust: 22, type: 'loyal' },
-                    { text: '"서로 도움이 되면 좋죠"', affection: 12, trust: 18, type: 'practical' },
-                    { text: '"필요할 때만 만나요"', affection: -10, trust: -15, type: 'opportunistic' }
+                    { text: '"친구는 평생 소중히 지켜야 할 관계라고 생각해요. 힘들 때 서로 의지하고, 좋을 때 함께 기뻐할 수 있는 친구들은 정말 귀한 존재죠"', affection: 16, trust: 22, type: 'loyal' },
+                    { text: '"친구 관계도 서로에게 도움이 되고 긍정적인 영향을 줄 때 의미있다고 봐요. 무조건적인 희생보다는 서로 윈윈하는 관계가 건강하죠"', affection: 12, trust: 18, type: 'practical' },
+                    { text: '"솔직히 필요할 때 만나고 각자 바쁘면 안 만나는 게 현실 아닌가요? 억지로 관계 유지하는 것보다 자연스럽게 필요할 때만 만나는 게 낫죠"', affection: -10, trust: -15, type: 'opportunistic' }
                 ]
             },
             {
