@@ -688,7 +688,7 @@ function showTalkMenu() {
 
                     let clickHandler = '';
                     if (canTalk && meetsRequirement) {
-                        clickHandler = `selectTalkTopic(${idx})`;
+                        clickHandler = `window.selectTalkTopic(${idx})`;
                     } else if (!canTalk) {
                         clickHandler = `alert('체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})')`;
                     } else if (!meetsRequirement) {
@@ -723,7 +723,7 @@ function showTalkMenu() {
     showModal('action-modal');
 }
 
-function selectTalkTopic(index) {
+window.selectTalkTopic = function(index) {
     const topic = window.currentTopics[index];
 
     // 대화 전체 횟수 계산 (증가는 finishMultiStage에서)
@@ -780,7 +780,7 @@ function selectTalkTopic(index) {
 
     closeModal('action-modal');
     showMultiStageScenario();
-}
+};
 
 // ============================================
 // 시나리오 시스템
