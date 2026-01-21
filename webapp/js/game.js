@@ -181,6 +181,9 @@ function showFirstMeetingScenario(characterId) {
     const scenario = FIRST_MEETING_SCENARIOS[characterId];
     if (!scenario) return;
 
+    // window.currentFirstMeetingChoices를 먼저 설정
+    window.currentFirstMeetingChoices = scenario.choices;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -198,8 +201,6 @@ function showFirstMeetingScenario(characterId) {
             </div>
         </div>
     `;
-
-    window.currentFirstMeetingChoices = scenario.choices;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -412,6 +413,9 @@ function showDateMenu() {
 
     const locations = Object.values(DATE_LOCATIONS);
 
+    // window.currentDateLocations를 먼저 설정
+    window.currentDateLocations = locations;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -440,8 +444,6 @@ function showDateMenu() {
             </div>
         </div>
     `;
-
-    window.currentDateLocations = locations;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -547,6 +549,9 @@ function showGiftMenu() {
 
     const gifts = Object.values(GIFT_ITEMS);
 
+    // window.currentGifts를 먼저 설정
+    window.currentGifts = gifts;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -572,8 +577,6 @@ function showGiftMenu() {
             </div>
         </div>
     `;
-
-    window.currentGifts = gifts;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -659,6 +662,9 @@ function showTalkMenu() {
 
     const topics = Object.values(TALK_TOPICS);
 
+    // window.currentTopics를 먼저 설정
+    window.currentTopics = topics;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -704,8 +710,6 @@ function showTalkMenu() {
             </div>
         </div>
     `;
-
-    window.currentTopics = topics;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -782,6 +786,11 @@ function selectTalkTopic(index) {
 // 시나리오 시스템
 // ============================================
 function showScenario(scenario, sourceData, actionType) {
+    // window 변수들을 먼저 설정
+    window.currentScenarioChoices = scenario.choices;
+    window.currentScenarioSource = sourceData;
+    window.currentScenarioType = actionType;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -799,10 +808,6 @@ function showScenario(scenario, sourceData, actionType) {
             </div>
         </div>
     `;
-
-    window.currentScenarioChoices = scenario.choices;
-    window.currentScenarioSource = sourceData;
-    window.currentScenarioType = actionType;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -1150,6 +1155,9 @@ function showSkinshipMenu() {
 
     const skinshipOptions = Object.values(SKINSHIP_OPTIONS);
 
+    // window.currentSkinshipOptions를 먼저 설정
+    window.currentSkinshipOptions = skinshipOptions;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -1194,8 +1202,6 @@ function showSkinshipMenu() {
             </div>
         </div>
     `;
-
-    window.currentSkinshipOptions = skinshipOptions;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -1289,6 +1295,9 @@ function doWork() {
 function showWorkMenu() {
     const workOptions = Object.values(WORK_OPTIONS);
 
+    // window.currentWorkOptions를 먼저 설정
+    window.currentWorkOptions = workOptions;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -1325,8 +1334,6 @@ function showWorkMenu() {
             </div>
         </div>
     `;
-
-    window.currentWorkOptions = workOptions;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
@@ -2145,6 +2152,10 @@ function triggerCrisisEvent() {
         gameState.usedScenarios.crisis.push(event.id);
     }
 
+    // window.currentCrisisChoices와 window.currentCrisisEvent를 먼저 설정
+    window.currentCrisisChoices = event.choices;
+    window.currentCrisisEvent = event;
+
     const html = `
         <div class="modal-content">
             <div class="modal-header">
@@ -2162,9 +2173,6 @@ function triggerCrisisEvent() {
             </div>
         </div>
     `;
-
-    window.currentCrisisChoices = event.choices;
-    window.currentCrisisEvent = event;
 
     let modal = document.getElementById('action-modal');
     if (!modal) {
