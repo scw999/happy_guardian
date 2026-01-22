@@ -160,7 +160,7 @@ function showGameObjective() {
                         <li>기념일을 챙기지 않으면 <strong>-15 호감도</strong></li>
                     </ul>
                 </div>
-                <button class="menu-btn" onclick="closeGameObjective()" style="margin-top: 20px;">시작하기!</button>
+                <button class="menu-btn" onclick="window.closeGameObjective()" style="margin-top: 20px;">시작하기!</button>
             </div>
         </div>
     `;
@@ -926,12 +926,12 @@ function showMultiStageScenario() {
         <div class="modal-content">
             <div class="modal-header">
                 <h2>${location.name} ${progress}</h2>
-                <button class="close-btn" onclick="closeMultiStageModal()">✕</button>
+                <button class="close-btn" onclick="window.closeMultiStageModal()">✕</button>
             </div>
             <div class="modal-body">
                 <p>${scenario.situation}</p>
                 ${scenario.choices.map((choice, idx) => `
-                    <button class="choice-option-btn" onclick="selectMultiStageChoice(${idx})">
+                    <button class="choice-option-btn" onclick="window.selectMultiStageChoice(${idx})">
                         <span class="choice-number">${idx + 1}.</span>
                         <span class="choice-text">${choice.text}</span>
                     </button>
@@ -1047,7 +1047,7 @@ function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
                         </span>
                     </div>
                 </div>
-                <button class="menu-btn" onclick="continueMultiStage()">${isLast ? '확인' : '계속하기'}</button>
+                <button class="menu-btn" onclick="window.continueMultiStage()">${isLast ? '확인' : '계속하기'}</button>
             </div>
         </div>
     `;
@@ -1070,12 +1070,12 @@ window.continueMultiStage = function() {
     }
 };
 
-function closeMultiStageModal() {
+window.closeMultiStageModal = function() {
     if (confirm('데이트를 중단하시겠습니까?')) {
         finishMultiStage();
         closeModal('action-modal');
     }
-}
+};
 
 function finishMultiStage() {
     if (!gameState.multiStage) return;
@@ -1197,7 +1197,7 @@ function showSkinshipMenu() {
                     }
 
                     return `
-                        <div class="action-option ${disabled}" onclick="${canTry ? `attemptSkinship(${idx})` : ''}">
+                        <div class="action-option ${disabled}" onclick="${canTry ? `window.attemptSkinship(${idx})` : ''}">
                             <div class="option-icon">${skinship.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${skinship.name}</div>
@@ -1333,7 +1333,7 @@ function showWorkMenu() {
 
                     const disabled = canWork ? '' : 'disabled';
                     return `
-                        <div class="action-option ${disabled}" onclick="${canWork ? `selectWorkOption(${idx})` : ''}">
+                        <div class="action-option ${disabled}" onclick="${canWork ? `window.selectWorkOption(${idx})` : ''}">
                             <div class="option-icon">${work.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${work.name}</div>
@@ -1407,16 +1407,16 @@ function showStockInvestment(work) {
                 <p style="font-size: 0.9rem; color: #ffaa00;">⚠️ 손실 가능: -50% ~ +100%</p>
                 <p style="font-size: 0.85rem; color: #aaa; margin-top: 5px;">현재 보유 자금: ${formatMoney(gameState.money)}</p>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-                    <button class="menu-btn" onclick="${gameState.money >= 50000 ? 'executeStock(50000)' : 'warnInsufficientFunds(50000)'}" ${gameState.money >= 50000 ? '' : 'style="opacity: 0.6;"'}>
+                    <button class="menu-btn" onclick="${gameState.money >= 50000 ? 'window.executeStock(50000)' : 'window.warnInsufficientFunds(50000)'}" ${gameState.money >= 50000 ? '' : 'style="opacity: 0.6;"'}>
                         5만원 투자 ${gameState.money >= 50000 ? '' : '(자금 부족)'}
                     </button>
-                    <button class="menu-btn" onclick="${gameState.money >= 100000 ? 'executeStock(100000)' : 'warnInsufficientFunds(100000)'}" ${gameState.money >= 100000 ? '' : 'style="opacity: 0.6;"'}>
+                    <button class="menu-btn" onclick="${gameState.money >= 100000 ? 'window.executeStock(100000)' : 'window.warnInsufficientFunds(100000)'}" ${gameState.money >= 100000 ? '' : 'style="opacity: 0.6;"'}>
                         10만원 투자 ${gameState.money >= 100000 ? '' : '(자금 부족)'}
                     </button>
-                    <button class="menu-btn" onclick="${gameState.money >= 200000 ? 'executeStock(200000)' : 'warnInsufficientFunds(200000)'}" ${gameState.money >= 200000 ? '' : 'style="opacity: 0.6;"'}>
+                    <button class="menu-btn" onclick="${gameState.money >= 200000 ? 'window.executeStock(200000)' : 'window.warnInsufficientFunds(200000)'}" ${gameState.money >= 200000 ? '' : 'style="opacity: 0.6;"'}>
                         20만원 투자 ${gameState.money >= 200000 ? '' : '(자금 부족)'}
                     </button>
-                    <button class="menu-btn" onclick="closeStockModal()">취소</button>
+                    <button class="menu-btn" onclick="window.closeStockModal()">취소</button>
                 </div>
             </div>
         </div>
@@ -1480,7 +1480,7 @@ function showRestMenu() {
             <div class="modal-body">
                 <p>어떻게 휴식을 취하시겠습니까?</p>
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
-                    <div class="action-option" onclick="selectRestOption('sleep')">
+                    <div class="action-option" onclick="window.selectRestOption('sleep')">
                         <div class="option-icon">🛏️</div>
                         <div class="option-info">
                             <div class="option-name">잠자기</div>
@@ -1488,7 +1488,7 @@ function showRestMenu() {
                             <div class="action-gain">⚡ 체력 +80, 🧠 멘탈 +5</div>
                         </div>
                     </div>
-                    <div class="action-option" onclick="selectRestOption('game')">
+                    <div class="action-option" onclick="window.selectRestOption('game')">
                         <div class="option-icon">🎮</div>
                         <div class="option-info">
                             <div class="option-name">게임하기</div>
@@ -1497,7 +1497,7 @@ function showRestMenu() {
                             <div class="action-gain">🧠 멘탈 +50</div>
                         </div>
                     </div>
-                    <div class="action-option" onclick="selectRestOption('exercise')">
+                    <div class="action-option" onclick="window.selectRestOption('exercise')">
                         <div class="option-icon">🏃</div>
                         <div class="option-info">
                             <div class="option-name">운동하기</div>
@@ -1506,7 +1506,7 @@ function showRestMenu() {
                             <div class="action-gain">🧠 멘탈 +40, 💪 건강 증진</div>
                         </div>
                     </div>
-                    <div class="action-option" onclick="selectRestOption('meditation')">
+                    <div class="action-option" onclick="window.selectRestOption('meditation')">
                         <div class="option-icon">🧘</div>
                         <div class="option-info">
                             <div class="option-name">명상하기</div>
