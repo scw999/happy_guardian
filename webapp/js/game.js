@@ -661,6 +661,7 @@ function showTalkMenu() {
     }
 
     const topics = Object.values(TALK_TOPICS);
+    console.log('대화 주제 메뉴 로드 - 주제 수:', topics.length, '주제 목록:', topics.map(t => t.name).join(', '));
 
     // window.currentTopics를 먼저 설정
     window.currentTopics = topics;
@@ -687,7 +688,7 @@ function showTalkMenu() {
                     let staminaDisplay = `⚡ ${actualStamina}`;
 
                     // onclick 핸들러를 항상 설정하도록 수정
-                    let clickHandler = `handleTalkTopicClick(${idx}, ${actualStamina}, ${canTalk}, ${meetsRequirement}, ${topic.minAffection || 0})`;
+                    let clickHandler = `window.handleTalkTopicClick(${idx}, ${actualStamina}, ${canTalk}, ${meetsRequirement}, ${topic.minAffection || 0})`;
 
                     return `
                         <div class="action-option ${disabled}" onclick="${clickHandler}">
@@ -719,6 +720,8 @@ function showTalkMenu() {
 
 // 대화 주제 클릭 핸들러
 window.handleTalkTopicClick = function(index, actualStamina, canTalk, meetsRequirement, minAffection) {
+    console.log('가치관 버튼 클릭 - 인덱스:', index, '체력:', actualStamina, '가능:', canTalk, '요구사항:', meetsRequirement, '최소호감도:', minAffection);
+
     if (!canTalk) {
         alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
         return;
@@ -730,6 +733,7 @@ window.handleTalkTopicClick = function(index, actualStamina, canTalk, meetsRequi
     }
 
     // 조건을 만족하면 selectTalkTopic 호출
+    console.log('대화 주제 선택:', window.currentTopics[index].name);
     window.selectTalkTopic(index);
 };
 
