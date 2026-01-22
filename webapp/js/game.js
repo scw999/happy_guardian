@@ -781,7 +781,17 @@ window.selectTalkTopic = function(index) {
 
     // 사용한 시나리오 추적
     const topicKey = topic.id;
-    if (!gameState.usedScenarios.talk[topicKey]) {
+
+    // usedScenarios.talk 초기화 확인
+    if (!gameState.usedScenarios) {
+        gameState.usedScenarios = {};
+    }
+    if (!gameState.usedScenarios.talk) {
+        gameState.usedScenarios.talk = {};
+    }
+
+    // 해당 토픽의 사용한 시나리오 배열 확인 및 초기화
+    if (!Array.isArray(gameState.usedScenarios.talk[topicKey])) {
         gameState.usedScenarios.talk[topicKey] = [];
     }
 
