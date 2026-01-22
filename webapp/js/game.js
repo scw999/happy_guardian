@@ -686,14 +686,8 @@ function showTalkMenu() {
                     // 체력 표시: 실제 소비 체력만 표시
                     let staminaDisplay = `⚡ ${actualStamina}`;
 
-                    let clickHandler = '';
-                    if (canTalk && meetsRequirement) {
-                        clickHandler = `window.selectTalkTopic(${idx})`;
-                    } else if (!canTalk) {
-                        clickHandler = `alert('체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})')`;
-                    } else if (!meetsRequirement) {
-                        clickHandler = `alert('호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)')`;
-                    }
+                    // onclick 핸들러를 항상 설정하도록 수정
+                    let clickHandler = `handleTalkTopicClick(${idx}, ${actualStamina}, ${canTalk}, ${meetsRequirement}, ${topic.minAffection || 0})`;
 
                     return `
                         <div class="action-option ${disabled}" onclick="${clickHandler}">
@@ -722,6 +716,22 @@ function showTalkMenu() {
     modal.innerHTML = html;
     showModal('action-modal');
 }
+
+// 대화 주제 클릭 핸들러
+window.handleTalkTopicClick = function(index, actualStamina, canTalk, meetsRequirement, minAffection) {
+    if (!canTalk) {
+        alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
+        return;
+    }
+
+    if (!meetsRequirement) {
+        alert(`호감도가 부족합니다! (필요: ${minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
+        return;
+    }
+
+    // 조건을 만족하면 selectTalkTopic 호출
+    window.selectTalkTopic(index);
+};
 
 window.selectTalkTopic = function(index) {
     const topic = window.currentTopics[index];
