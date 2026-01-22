@@ -682,13 +682,16 @@ function showTalkMenu() {
 
                     const canTalk = gameState.stamina >= actualStamina;
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
-                    const disabledClass = (canTalk && meetsRequirement) ? '' : 'disabled';
+                    const isAvailable = canTalk && meetsRequirement;
 
                     // 체력 표시: 실제 소비 체력만 표시
                     let staminaDisplay = `⚡ ${actualStamina}`;
 
+                    // 스타일을 인라인으로 적용 (disabled 클래스 대신)
+                    const style = isAvailable ? '' : 'opacity: 0.4; cursor: not-allowed; border-color: rgba(255,255,255,0.1);';
+
                     return `
-                        <div class="action-option ${disabledClass}" onclick="window.handleTalkTopicClick(${idx})">
+                        <div class="action-option" style="${style}" data-topic-idx="${idx}" onclick="window.handleTalkTopicClick(${idx})">
                             <div class="option-icon">${topic.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${topic.name}</div>
@@ -717,36 +720,46 @@ function showTalkMenu() {
 
 // 대화 주제 클릭 핸들러
 window.handleTalkTopicClick = function(index) {
-    console.log('대화 주제 클릭 - 인덱스:', index);
+    try {
+        console.log('대화 주제 클릭 - 인덱스:', index);
 
-    const topic = window.currentTopics[index];
-    if (!topic) {
-        console.error('토픽을 찾을 수 없습니다:', index);
-        return;
+        if (!window.currentTopics) {
+            alert('오류: currentTopics가 설정되지 않았습니다');
+            return;
+        }
+
+        const topic = window.currentTopics[index];
+        if (!topic) {
+            alert('오류: 토픽을 찾을 수 없습니다. 인덱스: ' + index);
+            return;
+        }
+
+        console.log('선택한 토픽:', topic.name);
+
+        // 오늘 대화한 전체 횟수 계산
+        const talkCount = (gameState.dailyActionCounts['talk'] || 0) + 1;
+        const actualStamina = topic.stamina * talkCount;
+
+        const canTalk = gameState.stamina >= actualStamina;
+        const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
+
+        if (!canTalk) {
+            alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
+            return;
+        }
+
+        if (!meetsRequirement) {
+            alert(`호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
+            return;
+        }
+
+        // 조건을 만족하면 selectTalkTopic 호출
+        console.log('대화 주제 선택:', topic.name);
+        window.selectTalkTopic(index);
+    } catch (e) {
+        alert('오류 발생: ' + e.message);
+        console.error(e);
     }
-
-    console.log('선택한 토픽:', topic.name);
-
-    // 오늘 대화한 전체 횟수 계산
-    const talkCount = (gameState.dailyActionCounts['talk'] || 0) + 1;
-    const actualStamina = topic.stamina * talkCount;
-
-    const canTalk = gameState.stamina >= actualStamina;
-    const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
-
-    if (!canTalk) {
-        alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
-        return;
-    }
-
-    if (!meetsRequirement) {
-        alert(`호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
-        return;
-    }
-
-    // 조건을 만족하면 selectTalkTopic 호출
-    console.log('대화 주제 선택:', topic.name);
-    window.selectTalkTopic(index);
 };
 
 window.selectTalkTopic = function(index) {
