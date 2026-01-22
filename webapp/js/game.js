@@ -682,16 +682,13 @@ function showTalkMenu() {
 
                     const canTalk = gameState.stamina >= actualStamina;
                     const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
-                    const disabled = (canTalk && meetsRequirement) ? '' : 'disabled';
+                    const disabledClass = (canTalk && meetsRequirement) ? '' : 'disabled';
 
                     // 체력 표시: 실제 소비 체력만 표시
                     let staminaDisplay = `⚡ ${actualStamina}`;
 
-                    // onclick 핸들러를 항상 설정하도록 수정
-                    let clickHandler = `window.handleTalkTopicClick(${idx}, ${actualStamina}, ${canTalk}, ${meetsRequirement}, ${topic.minAffection || 0})`;
-
                     return `
-                        <div class="action-option ${disabled}" onclick="${clickHandler}">
+                        <div class="action-option ${disabledClass}" onclick="window.handleTalkTopicClick(${idx})">
                             <div class="option-icon">${topic.icon}</div>
                             <div class="option-info">
                                 <div class="option-name">${topic.name}</div>
@@ -719,8 +716,23 @@ function showTalkMenu() {
 }
 
 // 대화 주제 클릭 핸들러
-window.handleTalkTopicClick = function(index, actualStamina, canTalk, meetsRequirement, minAffection) {
-    console.log('가치관 버튼 클릭 - 인덱스:', index, '체력:', actualStamina, '가능:', canTalk, '요구사항:', meetsRequirement, '최소호감도:', minAffection);
+window.handleTalkTopicClick = function(index) {
+    console.log('대화 주제 클릭 - 인덱스:', index);
+
+    const topic = window.currentTopics[index];
+    if (!topic) {
+        console.error('토픽을 찾을 수 없습니다:', index);
+        return;
+    }
+
+    console.log('선택한 토픽:', topic.name);
+
+    // 오늘 대화한 전체 횟수 계산
+    const talkCount = (gameState.dailyActionCounts['talk'] || 0) + 1;
+    const actualStamina = topic.stamina * talkCount;
+
+    const canTalk = gameState.stamina >= actualStamina;
+    const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
 
     if (!canTalk) {
         alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
@@ -728,12 +740,12 @@ window.handleTalkTopicClick = function(index, actualStamina, canTalk, meetsRequi
     }
 
     if (!meetsRequirement) {
-        alert(`호감도가 부족합니다! (필요: ${minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
+        alert(`호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
         return;
     }
 
     // 조건을 만족하면 selectTalkTopic 호출
-    console.log('대화 주제 선택:', window.currentTopics[index].name);
+    console.log('대화 주제 선택:', topic.name);
     window.selectTalkTopic(index);
 };
 
