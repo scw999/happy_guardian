@@ -140,7 +140,7 @@ function showGameObjective() {
                         <li><strong>하루 최대 3회</strong> 행동 가능 (데이트/선물/대화)</li>
                         <li>같은 행동을 반복하면 <strong>체력이 6배, 11배씩</strong> 급증!</li>
                         <li><strong>호감도가 낮으면</strong> 데이트를 거절당할 수 있습니다</li>
-                        <li>거절당하면 <strong>체력 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
+                        <li>거절당하면 <strong>멘탈 -40, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
                     </ul>
 
                     <h3 style="margin-top: 20px;">💪 자원 관리</h3>
@@ -479,12 +479,11 @@ function selectDateLocation(index) {
 
     // 거절 체크
     if (Math.random() > acceptChance) {
-        gameState.stamina -= 50;  // 체력 급감 (40 → 50으로 증가)
-        gameState.affection -= 8;  // 호감도 감소 (5 → 8로 증가)
-        gameState.trust -= 5;  // 신뢰도 감소 (3 → 5로 증가)
-        gameState.mental -= 25;  // 멘탈 감소 (거절로 인한 정신적 충격)
+        gameState.affection -= 8;  // 호감도 감소
+        gameState.trust -= 5;  // 신뢰도 감소
+        gameState.mental -= 40;  // 멘탈 감소 (거절로 인한 정신적 충격)
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-50 체력, -8 호감도, -5 신뢰도, -25 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-8 호감도, -5 신뢰도, -40 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
         updateAllUI();
         return;
     }
@@ -561,7 +560,13 @@ function showGiftMenu() {
             <div class="modal-body">
                 <p>무엇을 선물할까요?</p>
                 ${gifts.map((gift, idx) => {
-                    const canAfford = gameState.money >= gift.cost && gameState.stamina >= gift.stamina;
+                    // 반복 횟수에 따른 실제 체력 소모량 계산
+                    const repeatCount = (gameState.dailyActionCounts['gift'] || 0) + 1;
+                    let actualStamina = gift.stamina;
+                    if (repeatCount > 1) {
+                        actualStamina = Math.round(gift.stamina * (1 + (repeatCount - 1) * 5.0));
+                    }
+                    const canAfford = gameState.money >= gift.cost && gameState.stamina >= actualStamina;
                     const disabled = canAfford ? '' : 'disabled';
                     return `
                         <div class="action-option ${disabled}" onclick="${canAfford ? `giveGift(${idx})` : ''}">
@@ -569,7 +574,7 @@ function showGiftMenu() {
                             <div class="option-info">
                                 <div class="option-name">${gift.name}</div>
                                 <div class="option-desc">${gift.description}</div>
-                                <div class="option-cost">💰 ${formatMoney(gift.cost)}</div>
+                                <div class="option-cost">💰 ${formatMoney(gift.cost)} ⚡ ${actualStamina}</div>
                             </div>
                         </div>
                     `;
@@ -1217,7 +1222,7 @@ function showSkinshipMenu() {
                 <p>어떤 스킨십을 시도하시겠어요?</p>
                 <p style="font-size: 0.85rem; color: #ffaa00; margin-bottom: 15px;">
                     ⚠️ 호감도가 낮으면 거절당할 수 있습니다!<br>
-                    거절 시: 체력 -10, 호감도 -10, 신뢰도 -15, 멘탈 -20
+                    거절 시: 호감도 -10, 신뢰도 -15, 멘탈 -30
                 </p>
                 ${skinshipOptions.map((skinship, idx) => {
                     const canTry = gameState.affection >= skinship.minAffection &&
@@ -1323,12 +1328,11 @@ window.attemptSkinship = function(index) {
         showResult(`💕 ${skinship.name} 성공!`, affectionGain, trustGain);
     } else {
         // 실패...
-        gameState.stamina -= 10;  // 추가 체력 손실
         gameState.affection -= 10;
         gameState.trust -= 15;
-        gameState.mental -= 20;  // 멘탈 감소 (거절로 인한 정신적 충격)
+        gameState.mental -= 30;  // 멘탈 큰 감소 (거절로 인한 정신적 충격)
 
-        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n체력 -10, 호감도 -10, 신뢰도 -15, 멘탈 -20\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n호감도 -10, 신뢰도 -15, 멘탈 -30\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
     }
 
     updateAllUI();
@@ -2113,7 +2117,7 @@ function showInGameHelp() {
                         <li>다양한 주제로 대화하세요 (8가지 주제 활용)</li>
                     </ul>
                     <li>체력이 0이 되면 자동으로 잠들기</li>
-                    <li>휴식으로 체력 회복 (50 회복)</li>
+                    <li>휴식으로 체력 회복 (잠자기: +80, 게임/운동/명상: 멘탈 회복)</li>
                 </ul>
 
                 <h3>💰 돈 벌기</h3>
@@ -2129,7 +2133,7 @@ function showInGameHelp() {
                 <h3>💔 데이트 거절</h3>
                 <ul>
                     <li>호감도가 낮으면 데이트를 거절당할 수 있음</li>
-                    <li>거절 시 <strong>체력 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
+                    <li>거절 시 <strong>멘탈 -40, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
                     <li>호감도별 수락 확률 (엄격함):</li>
                     <ul>
                         <li>20% 미만: <strong>20%</strong> 확률 (거의 거절)</li>
