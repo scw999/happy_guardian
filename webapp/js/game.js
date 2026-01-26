@@ -140,7 +140,7 @@ function showGameObjective() {
                         <li><strong>하루 최대 3회</strong> 행동 가능 (데이트/선물/대화)</li>
                         <li>같은 행동을 반복하면 <strong>체력이 6배, 11배씩</strong> 급증!</li>
                         <li><strong>호감도가 낮으면</strong> 데이트를 거절당할 수 있습니다</li>
-                        <li>거절당하면 <strong>멘탈 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
+                        <li>거절당하면 <strong>멘탈 -40, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
                     </ul>
 
                     <h3 style="margin-top: 20px;">💪 자원 관리</h3>
@@ -481,9 +481,9 @@ function selectDateLocation(index) {
     if (Math.random() > acceptChance) {
         gameState.affection -= 8;  // 호감도 감소
         gameState.trust -= 5;  // 신뢰도 감소
-        gameState.mental -= 50;  // 멘탈 큰 감소 (거절로 인한 정신적 충격)
+        gameState.mental -= 40;  // 멘탈 감소 (거절로 인한 정신적 충격)
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-8 호감도, -5 신뢰도, -50 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
+        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-8 호감도, -5 신뢰도, -40 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
         updateAllUI();
         return;
     }
@@ -2133,7 +2133,7 @@ function showInGameHelp() {
                 <h3>💔 데이트 거절</h3>
                 <ul>
                     <li>호감도가 낮으면 데이트를 거절당할 수 있음</li>
-                    <li>거절 시 <strong>멘탈 -50, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
+                    <li>거절 시 <strong>멘탈 -40, 호감도 -8, 신뢰도 -5</strong> 큰 페널티!</li>
                     <li>호감도별 수락 확률 (엄격함):</li>
                     <ul>
                         <li>20% 미만: <strong>20%</strong> 확률 (거의 거절)</li>
