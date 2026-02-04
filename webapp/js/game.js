@@ -1063,26 +1063,55 @@ function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
         existingModal.remove();
     }
 
+    // 캐릭터별 반응 가져오기
+    const characterId = gameState.character.id;
+    const characterResponse = getCharacterResponse(characterId, affectionGain, trustGain);
+    const characterName = gameState.character.fullName;
+    const characterIcon = gameState.character.icon;
+
+    // 반응에 따른 이모지 결정
+    const totalGain = affectionGain + trustGain;
+    let reactionEmoji = '';
+    if (totalGain >= 15) {
+        reactionEmoji = characterId === 'tsundere' ? '💕' : '😊';
+    } else if (totalGain >= 5) {
+        reactionEmoji = '🙂';
+    } else if (totalGain >= 0) {
+        reactionEmoji = '';
+    } else if (totalGain > -15) {
+        reactionEmoji = '😕';
+    } else {
+        reactionEmoji = '😢';
+    }
+
     const resultModal = document.createElement('div');
     resultModal.id = 'multi-stage-result-modal';
     resultModal.className = 'modal active';
     resultModal.innerHTML = `
         <div class="modal-content">
             <div class="modal-header">
-                <h2>${isLast ? '데이트 결과' : '진행 중...'}</h2>
+                <h2>${isLast ? (gameState.multiStage.type === 'talk' ? '대화 결과' : '데이트 결과') : '진행 중...'}</h2>
             </div>
             <div class="modal-body">
-                <p><strong>${choiceText}</strong></p>
-                <div class="result-stats">
-                    <div class="result-stat">
-                        <span>호감도</span>
-                        <span class="stat-change ${affectionGain >= 0 ? 'positive' : 'negative'}">
+                <p style="color: var(--text-dim); margin-bottom: 10px;"><em>"${choiceText}"</em></p>
+                ${characterResponse ? `
+                    <div class="character-response" style="background: rgba(255,105,180,0.1); border: 2px solid rgba(255,105,180,0.3); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                        <div style="font-weight: bold; color: var(--primary-pink); margin-bottom: 8px;">
+                            ${characterIcon} ${characterName}의 반응 ${reactionEmoji}
+                        </div>
+                        <p style="font-size: 1.05rem; line-height: 1.6;">"${characterResponse}"</p>
+                    </div>
+                ` : ''}
+                <div class="result-stats" style="display: flex; gap: 20px; justify-content: center; margin: 15px 0;">
+                    <div class="result-stat" style="text-align: center;">
+                        <span style="display: block; color: var(--text-dim); font-size: 0.9rem;">호감도</span>
+                        <span class="stat-change ${affectionGain >= 0 ? 'positive' : 'negative'}" style="font-size: 1.3rem; font-weight: bold; color: ${affectionGain >= 0 ? '#44ff88' : '#ff4444'};">
                             ${affectionGain >= 0 ? '+' : ''}${affectionGain}
                         </span>
                     </div>
-                    <div class="result-stat">
-                        <span>신뢰도</span>
-                        <span class="stat-change ${trustGain >= 0 ? 'positive' : 'negative'}">
+                    <div class="result-stat" style="text-align: center;">
+                        <span style="display: block; color: var(--text-dim); font-size: 0.9rem;">신뢰도</span>
+                        <span class="stat-change ${trustGain >= 0 ? 'positive' : 'negative'}" style="font-size: 1.3rem; font-weight: bold; color: ${trustGain >= 0 ? '#4169E1' : '#ff4444'};">
                             ${trustGain >= 0 ? '+' : ''}${trustGain}
                         </span>
                     </div>
@@ -1626,12 +1655,22 @@ window.selectRestOption = function(option) {
 function showResult(message, affectionChange, trustChange, extraInfo = '') {
     const dialogueText = document.getElementById('dialogue-text');
 
+    // 캐릭터별 반응 가져오기
+    let characterResponse = '';
+    if (gameState.character) {
+        const response = getCharacterResponse(gameState.character.id, affectionChange, trustChange);
+        if (response) {
+            characterResponse = `\n\n${gameState.character.icon} "${response}"`;
+        }
+    }
+
     let resultText = message;
     if (affectionChange !== 0) resultText += `\n💖 호감도 ${affectionChange > 0 ? '+' : ''}${affectionChange}`;
     if (trustChange !== 0) resultText += `\n🤝 신뢰도 ${trustChange > 0 ? '+' : ''}${trustChange}`;
     if (extraInfo) resultText += `\n${extraInfo}`;
+    resultText += characterResponse;
 
-    dialogueText.textContent = resultText;
+    dialogueText.innerHTML = resultText.replace(/\n/g, '<br>');
     dialogueText.style.color = affectionChange >= 0 ? '#44ff88' : '#ff4444';
     dialogueText.style.fontWeight = 'bold';
 
@@ -1639,7 +1678,7 @@ function showResult(message, affectionChange, trustChange, extraInfo = '') {
         dialogueText.textContent = '무엇을 할까요?';
         dialogueText.style.color = '';
         dialogueText.style.fontWeight = '';
-    }, 3000);
+    }, 4000);
     pendingTimeouts.push(timeoutId);
 
     updateAllUI();
