@@ -1251,12 +1251,14 @@ body {
         word-break: keep-all !important;
         padding: 0 10px !important;
         margin-bottom: 5px !important;
+        text-align: center !important;
     }
 
     .screen-subtitle {
         font-size: 0.8rem !important;
         margin-bottom: 15px !important;
         padding: 0 10px !important;
+        text-align: center !important;
     }
 
     .character-selection {
@@ -1264,33 +1266,50 @@ body {
         padding: 0 !important;
         max-width: 100% !important;
         overflow: visible !important;
+        display: flex !important;
+        justify-content: center !important;
     }
 
     .carousel-container {
         max-width: 100% !important;
+        width: 100% !important;
         overflow: visible !important;
         position: relative !important;
-        padding: 0 40px !important;
+        padding: 0 35px !important;
+        box-sizing: border-box !important;
+    }
+
+    .carousel-wrapper {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
     }
 
     .char-card {
         max-width: 100% !important;
+        width: 100% !important;
         margin: 0 auto !important;
     }
 
-    /* 캐릭터 선택 화면 - 이미지 전체가 보이도록 */
+    /* 캐릭터 선택 화면 - 이미지 전체가 보이도록 + 가운데 정렬 */
     .char-portrait {
         height: auto !important;
         min-height: auto !important;
         aspect-ratio: 3/4 !important;
-        max-height: 55vh !important;
+        max-height: 50vh !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
     }
 
     .char-portrait img {
-        width: 100% !important;
+        width: auto !important;
         height: 100% !important;
+        max-width: 100% !important;
         object-fit: contain !important;
-        object-position: center top !important;
+        object-position: center center !important;
+        margin: 0 auto !important;
     }
 
     .char-icon {
