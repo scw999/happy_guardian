@@ -1154,6 +1154,59 @@ body {
     box-shadow: 0 10px 30px rgba(255,105,180,0.5);
 }
 
+/* ========== 게임 내 알림 모달 ========== */
+#game-alert-modal .game-alert-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.game-alert-header {
+    padding: 15px 20px !important;
+}
+
+.game-alert-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.game-alert-body {
+    padding: 20px !important;
+}
+
+.game-alert-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+#game-alert-message {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    white-space: pre-line;
+    word-break: keep-all;
+}
+
+/* 알림 타입별 스타일 */
+#game-alert-modal.alert-success .game-alert-header {
+    background: linear-gradient(135deg, #44ff88, #22cc66);
+}
+
+#game-alert-modal.alert-error .game-alert-header {
+    background: linear-gradient(135deg, #ff4444, #cc2222);
+}
+
+#game-alert-modal.alert-warning .game-alert-header {
+    background: linear-gradient(135deg, #ffaa44, #ff8822);
+}
+
+#game-alert-modal.alert-info .game-alert-header {
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-dark));
+}
+
+#game-alert-modal.alert-love .game-alert-header {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+}
+
 /* ========== 반응형 디자인 ========== */
 
 /* 태블릿 (1024px 이하) */
@@ -1189,25 +1242,26 @@ body {
 
     /* ===== 캐릭터 선택 화면 ===== */
     #character-select-screen {
-        padding: 20px 10px !important;
+        padding: 15px 10px !important;
         overflow-x: hidden !important;
     }
 
     .screen-title {
-        font-size: 1.5rem !important;
+        font-size: 1.4rem !important;
         word-break: keep-all !important;
         padding: 0 10px !important;
+        margin-bottom: 5px !important;
     }
 
     .screen-subtitle {
-        font-size: 0.85rem !important;
-        margin-bottom: 20px !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 15px !important;
         padding: 0 10px !important;
     }
 
     .character-selection {
         grid-template-columns: 1fr !important;
-        padding: 0 10px !important;
+        padding: 0 !important;
         max-width: 100% !important;
         overflow: visible !important;
     }
@@ -1216,53 +1270,70 @@ body {
         max-width: 100% !important;
         overflow: visible !important;
         position: relative !important;
+        padding: 0 40px !important;
     }
 
     .char-card {
         max-width: 100% !important;
+        margin: 0 auto !important;
     }
 
+    /* 캐릭터 선택 화면 - 이미지 크게 */
     .char-portrait {
-        height: 200px !important;
+        height: 320px !important;
+        min-height: 320px !important;
+    }
+
+    .char-portrait img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 
     .char-icon {
-        font-size: 5rem !important;
+        font-size: 6rem !important;
     }
 
     .char-info {
-        padding: 12px !important;
+        padding: 15px !important;
     }
 
     .char-info h3 {
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
     }
 
     .char-name {
-        font-size: 0.9rem !important;
+        font-size: 1rem !important;
     }
 
     .char-stats {
-        gap: 10px !important;
+        gap: 15px !important;
         flex-wrap: wrap !important;
     }
 
     .char-desc {
-        font-size: 0.8rem !important;
+        font-size: 0.85rem !important;
     }
 
     .char-quote {
-        font-size: 0.75rem !important;
+        font-size: 0.8rem !important;
     }
 
-    /* 카루셀 네비게이션 - 화면 안쪽으로 */
+    /* 캐릭터 선택 버튼 */
+    .char-select-btn {
+        padding: 15px 40px !important;
+        font-size: 1.1rem !important;
+        margin-top: 15px !important;
+    }
+
+    /* 카루셀 네비게이션 - 좌우 끝에 배치 */
     .carousel-nav {
         width: 35px !important;
         height: 35px !important;
         font-size: 1rem !important;
         position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
+        top: 180px !important;
+        transform: none !important;
         z-index: 100 !important;
         background: rgba(255,105,180,0.9) !important;
     }
@@ -1406,20 +1477,21 @@ body {
 
     .portrait-container {
         width: 100% !important;
-        max-width: 250px !important;
+        max-width: 320px !important;
         height: auto !important;
         aspect-ratio: 1 !important;
         margin: 0 auto !important;
     }
 
     .portrait-icon {
-        font-size: 4rem !important;
+        font-size: 5rem !important;
     }
 
     .character-portrait {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        border-radius: 10px !important;
     }
 
     /* 대화 영역 */
