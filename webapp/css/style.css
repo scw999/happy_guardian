@@ -1278,16 +1278,19 @@ body {
         margin: 0 auto !important;
     }
 
-    /* 캐릭터 선택 화면 - 이미지 크게 */
+    /* 캐릭터 선택 화면 - 이미지 전체가 보이도록 */
     .char-portrait {
-        height: 320px !important;
-        min-height: 320px !important;
+        height: auto !important;
+        min-height: auto !important;
+        aspect-ratio: 3/4 !important;
+        max-height: 55vh !important;
     }
 
     .char-portrait img {
         width: 100% !important;
         height: 100% !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
+        object-position: center top !important;
     }
 
     .char-icon {
@@ -1469,28 +1472,29 @@ body {
         box-sizing: border-box !important;
     }
 
-    /* 캐릭터 초상화 */
+    /* 캐릭터 초상화 - 모바일에서 크게 */
     .character-display {
         max-width: 100% !important;
         width: 100% !important;
     }
 
     .portrait-container {
-        width: 100% !important;
-        max-width: 320px !important;
+        width: 90% !important;
+        max-width: 400px !important;
         height: auto !important;
-        aspect-ratio: 1 !important;
+        aspect-ratio: 3/4 !important;
         margin: 0 auto !important;
     }
 
     .portrait-icon {
-        font-size: 5rem !important;
+        font-size: 6rem !important;
     }
 
     .character-portrait {
         width: 100% !important;
         height: 100% !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
+        object-position: center top !important;
         border-radius: 10px !important;
     }
 
@@ -1699,9 +1703,15 @@ body {
         height: 10px !important;
     }
 
-    /* 캐릭터 초상화 더 작게 */
+    /* 캐릭터 초상화 - 소형 모바일에서도 크게 유지 */
     .portrait-container {
-        max-width: 200px !important;
+        width: 85% !important;
+        max-width: 320px !important;
+    }
+
+    /* 캐릭터 선택 화면 이미지 */
+    .char-portrait {
+        max-height: 45vh !important;
     }
 
     /* 액션 버튼 - 1열로 */
