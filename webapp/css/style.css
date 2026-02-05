@@ -1291,19 +1291,23 @@ body {
         margin: 0 auto !important;
     }
 
-    /* 캐릭터 선택 화면 - 이미지 전체가 보이도록 */
+    /* 캐릭터 선택 화면 - 이미지 크기 제한 + 전체 표시 */
     .char-portrait {
         width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        max-height: none !important;
-        display: block !important;
-        overflow: visible !important;
+        height: 40vh !important;
+        max-height: 40vh !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        background: rgba(0,0,0,0.3) !important;
     }
 
     .char-portrait img {
-        width: 100% !important;
-        height: auto !important;
+        width: auto !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
         display: block !important;
         margin: 0 auto !important;
     }
