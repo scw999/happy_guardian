@@ -1174,457 +1174,493 @@ body {
 
 /* 모바일 (768px 이하) */
 @media (max-width: 768px) {
+    /* 메인 화면 */
     .game-logo h1 {
-        font-size: 2.5rem;
+        font-size: 1.8rem !important;
+    }
+
+    .game-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .game-tagline {
+        font-size: 0.9rem !important;
+    }
+
+    /* ===== 캐릭터 선택 화면 ===== */
+    #character-select-screen {
+        padding: 20px 10px !important;
+        overflow-x: hidden !important;
+    }
+
+    .screen-title {
+        font-size: 1.5rem !important;
+        word-break: keep-all !important;
+        padding: 0 10px !important;
+    }
+
+    .screen-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 20px !important;
+        padding: 0 10px !important;
     }
 
     .character-selection {
-        grid-template-columns: 1fr;
-        padding: 0 40px;
+        grid-template-columns: 1fr !important;
+        padding: 0 10px !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .carousel-container {
+        max-width: 100% !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+
+    .char-card {
+        max-width: 100% !important;
     }
 
     .char-portrait {
-        height: 250px;
+        height: 200px !important;
     }
 
     .char-icon {
-        font-size: 6rem;
+        font-size: 5rem !important;
     }
 
-    /* 게임 레이아웃 - 세로 스택으로 변경 */
+    .char-info {
+        padding: 12px !important;
+    }
+
+    .char-info h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .char-name {
+        font-size: 0.9rem !important;
+    }
+
+    .char-stats {
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .char-desc {
+        font-size: 0.8rem !important;
+    }
+
+    .char-quote {
+        font-size: 0.75rem !important;
+    }
+
+    /* 카루셀 네비게이션 - 화면 안쪽으로 */
+    .carousel-nav {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 1rem !important;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 100 !important;
+        background: rgba(255,105,180,0.9) !important;
+    }
+
+    .carousel-nav.prev {
+        left: 5px !important;
+    }
+
+    .carousel-nav.next {
+        right: 5px !important;
+    }
+
+    .carousel-indicators {
+        margin-top: 15px !important;
+    }
+
+    .carousel-indicator {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    /* 캐릭터 선택 버튼 */
+    .char-select-btn {
+        padding: 12px 30px !important;
+        font-size: 1rem !important;
+        margin-top: 15px !important;
+    }
+
+    /* ===== 게임 화면 레이아웃 ===== */
     .game-layout-container {
-        flex-direction: column;
-        height: auto;
-        min-height: 100vh;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow-x: hidden !important;
     }
 
-    /* 사이드바 - 상단에 가로 배치 */
+    /* 사이드바 - 상단에 컴팩트하게 */
     .game-sidebar {
-        width: 100%;
-        min-width: 100%;
-        border-right: none;
-        border-bottom: 3px solid rgba(255,105,180,0.3);
-        max-height: none;
-        overflow-y: visible;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        border-right: none !important;
+        border-bottom: 3px solid rgba(255,105,180,0.3) !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+        flex-shrink: 0 !important;
     }
 
     .sidebar-header {
-        padding: 10px 15px;
+        padding: 8px 15px !important;
     }
 
     .character-nameplate {
-        padding: 8px 20px;
-        font-size: 1rem;
-        margin-bottom: 8px;
+        padding: 6px 15px !important;
+        font-size: 0.9rem !important;
+        margin-bottom: 5px !important;
     }
 
     .day-counter {
-        font-size: 1.1rem;
+        font-size: 1rem !important;
     }
 
     #day-number {
-        font-size: 1.3rem;
+        font-size: 1.2rem !important;
     }
 
-    /* 자원 바 모바일 조정 - 2열 그리드 */
+    /* 자원 바 - 2x2 그리드로 컴팩트하게 */
     .resources-container {
-        padding: 10px 15px;
-        gap: 8px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        padding: 8px 10px !important;
+        gap: 6px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .resource-bar-wrapper {
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
     }
 
     .resource-label {
-        font-size: 0.75rem;
-        margin-bottom: 4px;
+        font-size: 0.7rem !important;
+        margin-bottom: 2px !important;
     }
 
     .resource-value {
-        font-size: 0.9rem;
+        font-size: 0.8rem !important;
     }
 
     .resource-bar {
-        height: 14px;
+        height: 10px !important;
     }
 
     .affection-bar {
-        height: 18px;
+        height: 12px !important;
     }
 
-    /* 관계 상태 표시 숨김 (모바일에서 공간 절약) */
+    /* 관계 상태 표시 숨김 */
     .relationship-status-display {
-        display: none;
+        display: none !important;
     }
 
-    /* 달력 모바일 최적화 */
+    /* 달력 숨김 (모바일에서 공간 절약) */
     .calendar-display {
-        margin: 10px;
-        padding: 10px;
+        display: none !important;
     }
 
-    .calendar-display-header {
-        font-size: 1rem;
-        margin-bottom: 10px;
+    .mini-calendar-container {
+        display: none !important;
     }
 
-    .calendar-display-grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 4px;
-    }
-
-    .calendar-display-day {
-        padding: 2px;
-        font-size: 0.75rem;
-    }
-
-    .calendar-display-day-number {
-        font-size: 0.85rem;
-        margin-bottom: 2px;
-    }
-
-    .calendar-display-day-icons {
-        font-size: 0.6rem;
-    }
-
-    /* 사이드바 메뉴 버튼 - 가로 배치 */
+    /* 사이드바 메뉴 버튼 - 가로 1줄 */
     .sidebar-menu {
-        flex-direction: row;
-        padding: 10px 15px;
-        justify-content: center;
-        gap: 8px;
+        flex-direction: row !important;
+        padding: 8px 10px !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
     }
 
     .sidebar-menu-btn {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-        flex: 1;
-        max-width: 150px;
+        padding: 6px 10px !important;
+        font-size: 0.75rem !important;
+        flex: 0 1 auto !important;
     }
 
-    /* 메인 게임 영역 */
+    /* ===== 메인 게임 영역 ===== */
     .game-main-area {
-        padding: 15px;
-        gap: 15px;
-        flex: 1;
+        padding: 10px !important;
+        gap: 10px !important;
+        flex: 1 !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     /* 캐릭터 초상화 */
     .character-display {
-        max-width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
     }
 
     .portrait-container {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
+        width: 100% !important;
+        max-width: 250px !important;
+        height: auto !important;
+        aspect-ratio: 1 !important;
+        margin: 0 auto !important;
     }
 
     .portrait-icon {
-        font-size: 4rem;
+        font-size: 4rem !important;
+    }
+
+    .character-portrait {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 
     /* 대화 영역 */
     .dialogue-area {
-        max-width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
     }
 
     .dialogue-box {
-        padding: 15px;
+        padding: 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .speaker-name {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        font-size: 0.9rem !important;
+        margin-bottom: 8px !important;
     }
 
     .dialogue-text {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        min-height: 50px;
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        min-height: 40px !important;
+        word-break: keep-all !important;
+        white-space: normal !important;
+        writing-mode: horizontal-tb !important;
     }
 
-    /* 액션 버튼 모바일 조정 */
+    /* 액션 버튼 영역 */
     .choices-area {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        max-width: 100%;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        max-width: 100% !important;
+        width: 100% !important;
     }
 
     .action-choice-btn {
-        padding: 12px;
+        padding: 10px !important;
+        flex-direction: column !important;
+        text-align: center !important;
     }
 
     .action-icon {
-        font-size: 1.8rem;
-        min-width: 35px;
+        font-size: 1.5rem !important;
+        min-width: auto !important;
+        margin-bottom: 5px !important;
     }
 
     .action-name {
-        font-size: 0.95rem;
+        font-size: 0.8rem !important;
     }
 
     .action-cost, .action-gain {
-        font-size: 0.7rem;
+        font-size: 0.65rem !important;
     }
 
-    /* 액션 버튼 */
+    .action-info {
+        align-items: center !important;
+    }
+
+    /* 일반 버튼 */
     .action-btn {
-        padding: 12px 40px;
-        font-size: 1rem;
+        padding: 10px 30px !important;
+        font-size: 0.9rem !important;
     }
 
-    /* 엔딩 화면 */
-    .ending-container {
-        padding: 20px;
-    }
-
-    .ending-portrait {
-        width: 150px;
-        height: 150px;
-        margin-bottom: 20px;
-    }
-
-    .ending-portrait.proposal-ending {
-        width: 100%;
-        max-width: 350px;
-        height: auto;
-        aspect-ratio: 1;
-    }
-
-    .ending-title {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-    }
-
-    .ending-stats {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-
-    .ending-stat .stat-value {
-        font-size: 1.5rem;
-    }
-
-    .ending-message {
-        font-size: 1rem;
-        margin-bottom: 25px;
-    }
-
-    .ending-buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .ending-btn {
-        padding: 12px 30px;
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    /* 모달 */
+    /* ===== 모달 ===== */
     .modal-content {
-        margin: 10px;
-        max-width: calc(100% - 20px);
-        max-height: 90vh;
+        margin: 10px !important;
+        max-width: calc(100% - 20px) !important;
+        max-height: 90vh !important;
     }
 
     .modal-header {
-        padding: 15px;
+        padding: 12px !important;
     }
 
     .modal-header h2 {
-        font-size: 1.2rem;
+        font-size: 1.1rem !important;
     }
 
     .modal-body {
-        padding: 15px;
+        padding: 12px !important;
     }
 
     .modal-footer {
-        padding: 15px;
+        padding: 12px !important;
     }
 
     /* 선택지 버튼 */
     .choice-option-btn {
-        padding: 14px 15px;
-        font-size: 0.9rem;
-        margin-bottom: 10px;
+        padding: 12px !important;
+        font-size: 0.85rem !important;
+        margin-bottom: 8px !important;
     }
 
     .choice-number {
-        font-size: 1rem;
+        font-size: 0.9rem !important;
     }
 
     .choice-text {
-        line-height: 1.5;
+        line-height: 1.4 !important;
     }
 
     /* 액션 옵션 */
     .action-option {
-        padding: 12px;
-        margin-bottom: 10px;
+        padding: 10px !important;
+        margin-bottom: 8px !important;
     }
 
     .option-icon {
-        font-size: 2rem;
-        min-width: 40px;
+        font-size: 1.8rem !important;
+        min-width: 35px !important;
     }
 
     .option-name {
-        font-size: 1rem;
+        font-size: 0.95rem !important;
     }
 
     .option-desc {
-        font-size: 0.8rem;
+        font-size: 0.75rem !important;
     }
 
     .option-cost {
-        font-size: 0.75rem;
+        font-size: 0.7rem !important;
     }
 
     /* 결과 모달 스타일 */
     .result-stats {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row !important;
+        gap: 15px !important;
     }
 
-    /* 캐릭터 선택 화면 */
-    .screen-title {
-        font-size: 2rem;
+    /* ===== 엔딩 화면 ===== */
+    .ending-container {
+        padding: 15px !important;
     }
 
-    .screen-subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 30px;
+    .ending-portrait {
+        width: 120px !important;
+        height: 120px !important;
+        margin-bottom: 15px !important;
     }
 
-    .char-info {
-        padding: 15px;
+    .ending-portrait.proposal-ending {
+        width: 100% !important;
+        max-width: 280px !important;
+        height: auto !important;
     }
 
-    .char-info h3 {
-        font-size: 1.2rem;
+    .ending-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 15px !important;
     }
 
-    .char-name {
-        font-size: 1rem;
+    .ending-stats {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-bottom: 15px !important;
     }
 
-    .char-stats {
-        gap: 15px;
+    .ending-stat .stat-value {
+        font-size: 1.3rem !important;
     }
 
-    .char-desc {
-        font-size: 0.85rem;
+    .ending-message {
+        font-size: 0.9rem !important;
+        margin-bottom: 20px !important;
     }
 
-    .char-quote {
-        font-size: 0.8rem;
+    .ending-buttons {
+        flex-direction: column !important;
+        gap: 10px !important;
     }
 
-    /* 카루셀 네비게이션 */
-    .carousel-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-
-    .carousel-nav.prev {
-        left: -45px;
-    }
-
-    .carousel-nav.next {
-        right: -45px;
-    }
-
-    /* 미니 캘린더 숨김 (모바일에서) */
-    .mini-calendar-container {
-        display: none;
+    .ending-btn {
+        padding: 10px 25px !important;
+        font-size: 0.9rem !important;
+        width: 100% !important;
     }
 }
 
 /* 소형 모바일 (480px 이하) */
 @media (max-width: 480px) {
     .game-logo h1 {
-        font-size: 2rem;
+        font-size: 1.5rem !important;
     }
 
-    .game-subtitle {
-        font-size: 1.2rem;
-    }
-
-    .game-tagline {
-        font-size: 0.95rem;
-        margin-bottom: 30px;
-    }
-
-    .menu-btn {
-        padding: 14px 35px;
-        font-size: 1rem;
+    .screen-title {
+        font-size: 1.3rem !important;
     }
 
     /* 자원 바 - 1열로 변경 */
     .resources-container {
-        grid-template-columns: 1fr;
-        gap: 6px;
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
     }
 
     .resource-bar {
-        height: 12px;
+        height: 8px !important;
     }
 
     .affection-bar {
-        height: 16px;
+        height: 10px !important;
     }
 
     /* 캐릭터 초상화 더 작게 */
     .portrait-container {
-        max-width: 220px;
+        max-width: 200px !important;
     }
 
-    /* 달력 더 작게 */
-    .calendar-display-grid {
-        grid-template-columns: repeat(5, 1fr);
+    /* 액션 버튼 - 1열로 */
+    .choices-area {
+        grid-template-columns: 1fr !important;
     }
 
-    /* 캐릭터 선택 화면 */
-    .character-selection {
-        padding: 0 30px;
+    .action-choice-btn {
+        flex-direction: row !important;
+        text-align: left !important;
     }
 
-    .carousel-nav.prev {
-        left: -35px;
-    }
-
-    .carousel-nav.next {
-        right: -35px;
-    }
-
-    .carousel-nav {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .action-icon {
+        margin-bottom: 0 !important;
+        margin-right: 10px !important;
     }
 
     /* 선택지 버튼 더 작게 */
     .choice-option-btn {
-        padding: 12px;
-        font-size: 0.85rem;
+        padding: 10px !important;
+        font-size: 0.8rem !important;
     }
 
     /* 엔딩 */
     .ending-portrait {
-        width: 120px;
-        height: 120px;
+        width: 100px !important;
+        height: 100px !important;
     }
 
     .ending-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem !important;
     }
 }
 
