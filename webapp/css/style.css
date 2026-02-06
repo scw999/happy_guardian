@@ -1227,6 +1227,18 @@ body {
 
 /* 모바일 (768px 이하) */
 @media (max-width: 768px) {
+    /* 전역 오버플로우 방지 */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .screen {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+
     /* 메인 화면 */
     .game-logo h1 {
         font-size: 1.8rem !important;
@@ -1263,18 +1275,19 @@ body {
 
     .character-selection {
         grid-template-columns: 1fr !important;
-        padding: 0 40px !important;
+        padding: 0 15px !important;
         max-width: 100% !important;
-        overflow: visible !important;
+        overflow-x: hidden !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
+        box-sizing: border-box !important;
     }
 
     .carousel-container {
-        max-width: 320px !important;
-        width: 100% !important;
+        max-width: 300px !important;
+        width: calc(100% - 30px) !important;
         overflow: visible !important;
         position: relative !important;
         padding: 0 !important;
@@ -1318,24 +1331,25 @@ body {
         margin: 0 auto !important;
     }
 
-    /* 카루셀 네비게이션 - 카드 바깥에 배치 */
+    /* 카루셀 네비게이션 - 카드 안쪽에 배치 */
     .carousel-nav {
-        width: 30px !important;
-        height: 30px !important;
+        width: 32px !important;
+        height: 32px !important;
         font-size: 0.9rem !important;
         position: absolute !important;
         top: 140px !important;
         transform: none !important;
         z-index: 100 !important;
         background: rgba(255,105,180,0.9) !important;
+        border-radius: 50% !important;
     }
 
     .carousel-nav.prev {
-        left: -35px !important;
+        left: 5px !important;
     }
 
     .carousel-nav.next {
-        right: -35px !important;
+        right: 5px !important;
     }
 
     .char-icon {
