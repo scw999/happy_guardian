@@ -5042,3 +5042,238 @@ const FIRST_MEETING_SCENARIOS = {
         ]
     }
 };
+
+// 캐릭터별 대화 반응 데이터
+const CHARACTER_RESPONSES = {
+    perfectionist: {
+        // 긍정적 반응 (호감도/신뢰도 상승)
+        positive: {
+            high: [
+                "후... 이 정도면 괜찮네요.",
+                "당신, 생각보다 섬세하시네요.",
+                "...고마워요. 진심으로요.",
+                "이런 배려... 오랜만이에요.",
+                "당신과 있으면 마음이 편해져요."
+            ],
+            medium: [
+                "음... 나쁘지 않네요.",
+                "그런 면도 있군요.",
+                "좀 더 노력하면 괜찮을 것 같아요.",
+                "...인정할게요.",
+                "조금은... 기대해 볼게요."
+            ],
+            low: [
+                "글쎄요... 뭐, 그럴 수 있죠.",
+                "...일단 알겠어요.",
+                "다음엔 좀 더 신경 써주세요.",
+                "...네.",
+                "뭐... 그 정도면..."
+            ]
+        },
+        // 부정적 반응 (호감도/신뢰도 하락)
+        negative: {
+            mild: [
+                "...좀 실망이에요.",
+                "그건 아닌 것 같은데요.",
+                "왜 그런 말을 하시는 거예요?",
+                "...다시 생각해 보세요.",
+                "제가 뭘 기대했던 걸까요."
+            ],
+            severe: [
+                "정말... 실망스럽네요.",
+                "당신이 그런 사람인 줄 몰랐어요.",
+                "...가식적이네요.",
+                "제 시간을 낭비한 기분이에요.",
+                "이런 걸 보면 역시 사람을 믿으면 안 되는 것 같아요."
+            ]
+        },
+        // 특수 상황 반응
+        special: {
+            firstMeeting: "처음 뵙겠어요. 저는 서윤아예요. 잘 부탁드려요.",
+            anniversary: "...오늘이 그런 날인 거 알고 있었어요?",
+            birthday: "제 생일을 기억하고 있었군요... 고마워요."
+        }
+    },
+    positive: {
+        positive: {
+            high: [
+                "와! 정말 최고예요! 💕",
+                "역시 당신이에요! 너무 좋아!",
+                "우와~ 진짜 행복해요!",
+                "당신 덕분에 오늘도 힘이 나요!",
+                "이런 게 바로 사랑이구나~ 히히!"
+            ],
+            medium: [
+                "오오~ 좋아요!",
+                "고마워요~ 기분 좋네!",
+                "우리 사이 점점 좋아지는 것 같아요!",
+                "역시 당신은 따뜻한 사람이에요~",
+                "헤헤, 기분 좋다!"
+            ],
+            low: [
+                "오~ 그래요? 좋네요!",
+                "고마워요!",
+                "나쁘지 않은데요?",
+                "오케이! 알겠어요~",
+                "그것도 괜찮아요!"
+            ]
+        },
+        negative: {
+            mild: [
+                "에... 조금 섭섭하네요...",
+                "음... 그런 건가요?",
+                "아, 그래요...? ㅜㅜ",
+                "좀 더 좋게 말해주면 안 돼요?",
+                "살짝 서운한데... 괜찮아요!"
+            ],
+            severe: [
+                "으... 너무 상처받았어요...",
+                "왜 그런 말을 해요... ㅠㅠ",
+                "저... 정말 슬퍼요...",
+                "그래도 긍정적으로... 아니, 힘들어요...",
+                "당신이 그런 말을 할 줄 몰랐어요..."
+            ]
+        },
+        special: {
+            firstMeeting: "안녕하세요! 저는 강하영이에요! 잘 지내봐요, 화이팅! ✨",
+            anniversary: "오늘 우리 기념일이에요! 너무 설레요! 💕",
+            birthday: "제 생일 축하해줘서 정말 고마워요! 최고예요!"
+        }
+    },
+    tsundere: {
+        positive: {
+            high: [
+                "뭐... 별로 안 좋은데... (얼굴 빨개짐)",
+                "그, 그게 뭐 대단하다고... (살짝 미소)",
+                "흥, 당연히 그래야지... 고마워요...",
+                "...바보. 왜 이렇게 잘해주는 거야...",
+                "별로... 라고 하고 싶은데... (작은 목소리로) 좋아요..."
+            ],
+            medium: [
+                "뭐야, 그거... (살짝 웃음)",
+                "흥, 나쁘진 않네.",
+                "...알았어요. 고마워요, 뭐.",
+                "그 정도는 당연한 거 아니에요? ...그래도 고마워요.",
+                "뭐, 괜찮네요... 아, 아무것도 아니에요!"
+            ],
+            low: [
+                "뭐... 그런가요.",
+                "흥, 알았어요.",
+                "그래요, 뭐...",
+                "...네.",
+                "별로... 뭐, 괜찮아요."
+            ]
+        },
+        negative: {
+            mild: [
+                "뭐야, 그게...? (살짝 삐침)",
+                "흥! 마음대로 하세요!",
+                "...몰라요, 이제.",
+                "왜 그래요, 진짜...",
+                "아, 짜증나... (작은 목소리로) 서운해요..."
+            ],
+            severe: [
+                "...진짜 싫어요, 당신.",
+                "바보... 왜 그러는 거예요...",
+                "저 화났어요. 진짜로.",
+                "...가버려요. 보기 싫어요.",
+                "당신이... 그런 사람인 줄 몰랐어요... (눈물)"
+            ]
+        },
+        special: {
+            firstMeeting: "뭐야, 갑자기... 이지우예요. 별로 관심 없어요. (힐끔)",
+            anniversary: "오, 오늘이 그런 날이라고요? 알고 있었어요, 바보! (선물 내밈)",
+            birthday: "제 생일 기억했어요...? ...별거 아니에요! (얼굴 빨개짐)"
+        }
+    },
+    career: {
+        positive: {
+            high: [
+                "논리적으로 훌륭한 선택이었어요.",
+                "당신의 판단력을 인정할게요.",
+                "효율적이면서도 배려가 있네요. 좋아요.",
+                "데이터로 증명되네요. 당신은 좋은 사람이에요.",
+                "합리적인 접근이에요. 신뢰가 가네요."
+            ],
+            medium: [
+                "괜찮은 판단이에요.",
+                "논리적이네요. 인정할게요.",
+                "분석해보면 나쁘지 않아요.",
+                "그 근거는 납득이 돼요.",
+                "합리적인 선택이에요."
+            ],
+            low: [
+                "일리가 있네요.",
+                "알겠어요.",
+                "그럴 수 있죠.",
+                "확인했어요.",
+                "노트해둘게요."
+            ]
+        },
+        negative: {
+            mild: [
+                "근거가 부족한 것 같은데요.",
+                "그건 논리적이지 않아요.",
+                "데이터를 다시 확인해 주세요.",
+                "그 판단의 근거가 뭐예요?",
+                "조금 더 생각해 보는 게 어때요?"
+            ],
+            severe: [
+                "완전히 비논리적이에요. 실망이에요.",
+                "감정적인 판단은 시간 낭비예요.",
+                "이런 접근 방식으로는 함께할 수 없어요.",
+                "제 시간을 낭비하게 하지 마세요.",
+                "신뢰를 잃게 되네요. 유감이에요."
+            ]
+        },
+        special: {
+            firstMeeting: "안녕하세요. 최서연 변호사입니다. 명확한 의사소통을 선호해요.",
+            anniversary: "기념일의 의미를 아시네요. 기억력이 좋으시군요.",
+            birthday: "제 생일까지 기억하다니. 세심한 분이시네요."
+        }
+    }
+};
+
+// 대화 결과에 따른 반응 가져오기
+function getCharacterResponse(characterId, affectionGain, trustGain) {
+    const responses = CHARACTER_RESPONSES[characterId];
+    if (!responses) return null;
+
+    const totalGain = affectionGain + trustGain;
+
+    if (totalGain >= 0) {
+        // 긍정적 반응
+        const category = responses.positive;
+        let responseArray;
+
+        if (totalGain >= 15) {
+            responseArray = category.high;
+        } else if (totalGain >= 5) {
+            responseArray = category.medium;
+        } else {
+            responseArray = category.low;
+        }
+
+        return responseArray[Math.floor(Math.random() * responseArray.length)];
+    } else {
+        // 부정적 반응
+        const category = responses.negative;
+        let responseArray;
+
+        if (totalGain <= -15) {
+            responseArray = category.severe;
+        } else {
+            responseArray = category.mild;
+        }
+
+        return responseArray[Math.floor(Math.random() * responseArray.length)];
+    }
+}
+
+// 특수 상황 반응 가져오기
+function getSpecialResponse(characterId, situation) {
+    const responses = CHARACTER_RESPONSES[characterId];
+    if (!responses || !responses.special) return null;
+
+    return responses.special[situation] || null;
+}

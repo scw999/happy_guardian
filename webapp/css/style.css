@@ -1154,78 +1154,627 @@ body {
     box-shadow: 0 10px 30px rgba(255,105,180,0.5);
 }
 
+/* ========== 게임 내 알림 모달 ========== */
+#game-alert-modal .game-alert-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.game-alert-header {
+    padding: 15px 20px !important;
+}
+
+.game-alert-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.game-alert-body {
+    padding: 20px !important;
+}
+
+.game-alert-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+#game-alert-message {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    white-space: pre-line;
+    word-break: keep-all;
+}
+
+/* 알림 타입별 스타일 */
+#game-alert-modal.alert-success .game-alert-header {
+    background: linear-gradient(135deg, #44ff88, #22cc66);
+}
+
+#game-alert-modal.alert-error .game-alert-header {
+    background: linear-gradient(135deg, #ff4444, #cc2222);
+}
+
+#game-alert-modal.alert-warning .game-alert-header {
+    background: linear-gradient(135deg, #ffaa44, #ff8822);
+}
+
+#game-alert-modal.alert-info .game-alert-header {
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-dark));
+}
+
+#game-alert-modal.alert-love .game-alert-header {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+}
+
 /* ========== 반응형 디자인 ========== */
-@media (max-width: 768px) {
-    .game-logo h1 {
-        font-size: 2.5rem;
-    }
 
-    .character-selection {
-        grid-template-columns: 1fr;
-    }
-
-    .char-portrait {
-        height: 250px;
-    }
-
-    .char-icon {
-        font-size: 6rem;
-    }
-
-    /* 자원 바 모바일 조정 */
-    .resources-container {
-        padding: 15px 20px;
-        gap: 10px;
-    }
-
-    .resource-label {
-        font-size: 0.85rem;
-    }
-
-    .resource-value {
-        font-size: 1rem;
-    }
-
-    /* 액션 버튼 모바일 조정 */
-    .choices-area {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .action-icon {
-        font-size: 2rem;
-        min-width: 40px;
-    }
-
-    .action-name {
-        font-size: 1rem;
-    }
-
-    .action-cost, .action-gain {
-        font-size: 0.75rem;
-    }
-
-    .ending-stats {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .modal-content {
-        margin: 20px;
-        max-width: calc(100% - 40px);
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+    .game-sidebar {
+        width: 280px;
+        min-width: 280px;
     }
 
     .portrait-container {
-        width: 300px;
-        height: 300px;
+        max-width: 500px;
     }
 
-    .mini-calendar-days {
-        grid-template-columns: repeat(6, 1fr);
+    .character-display {
+        max-width: 500px;
+    }
+}
+
+/* 모바일 (768px 이하) */
+@media (max-width: 768px) {
+    /* 전역 오버플로우 방지 */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .screen {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 메인 화면 */
+    .game-logo h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .game-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .game-tagline {
+        font-size: 0.9rem !important;
+    }
+
+    /* ===== 캐릭터 선택 화면 ===== */
+    #character-select-screen {
+        padding: 15px 10px !important;
+        overflow-x: hidden !important;
+    }
+
+    .screen-title {
+        font-size: 1.4rem !important;
+        word-break: keep-all !important;
+        padding: 0 10px !important;
+        margin-bottom: 5px !important;
+        text-align: center !important;
+    }
+
+    .screen-subtitle {
+        font-size: 0.8rem !important;
+        margin-bottom: 15px !important;
+        padding: 0 10px !important;
+        text-align: center !important;
+    }
+
+    .character-selection {
+        grid-template-columns: 1fr !important;
+        padding: 0 15px !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .carousel-container {
+        max-width: 300px !important;
+        width: calc(100% - 30px) !important;
+        overflow: visible !important;
+        position: relative !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .carousel-wrapper {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    .char-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* 캐릭터 선택 화면 - 이미지 크기 제한 + 전체 표시 */
+    .char-portrait {
+        width: 100% !important;
+        height: 280px !important;
+        max-height: 280px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        background: transparent !important;
+    }
+
+    .char-portrait img {
+        width: auto !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* 카루셀 네비게이션 - 카드 안쪽에 배치 */
+    .carousel-nav {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.9rem !important;
+        position: absolute !important;
+        top: 140px !important;
+        transform: none !important;
+        z-index: 100 !important;
+        background: rgba(255,105,180,0.9) !important;
+        border-radius: 50% !important;
+    }
+
+    .carousel-nav.prev {
+        left: 5px !important;
+    }
+
+    .carousel-nav.next {
+        right: 5px !important;
+    }
+
+    .char-icon {
+        font-size: 6rem !important;
+    }
+
+    .char-info {
+        padding: 15px !important;
+    }
+
+    .char-info h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .char-name {
+        font-size: 1rem !important;
+    }
+
+    .char-stats {
+        gap: 15px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .char-desc {
+        font-size: 0.85rem !important;
+    }
+
+    .char-quote {
+        font-size: 0.8rem !important;
+    }
+
+    .carousel-indicators {
+        margin-top: 15px !important;
+    }
+
+    .carousel-indicator {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    /* 캐릭터 선택 버튼 */
+    .char-select-btn {
+        padding: 12px 30px !important;
+        font-size: 1rem !important;
+        margin-top: 15px !important;
+    }
+
+    /* ===== 게임 화면 레이아웃 ===== */
+    .game-layout-container {
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow-x: hidden !important;
+    }
+
+    /* 사이드바 - 상단에 컴팩트하게 */
+    .game-sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        border-right: none !important;
+        border-bottom: 3px solid rgba(255,105,180,0.3) !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+        flex-shrink: 0 !important;
+    }
+
+    .sidebar-header {
+        padding: 8px 15px !important;
+    }
+
+    .character-nameplate {
+        padding: 6px 15px !important;
+        font-size: 0.9rem !important;
+        margin-bottom: 5px !important;
+    }
+
+    .day-counter {
+        font-size: 1rem !important;
+    }
+
+    #day-number {
+        font-size: 1.2rem !important;
+    }
+
+    /* 자원 바 - 2x2 그리드로 컴팩트하게 */
+    .resources-container {
+        padding: 8px 10px !important;
+        gap: 6px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .resource-bar-wrapper {
+        margin-bottom: 0 !important;
+    }
+
+    .resource-label {
+        font-size: 0.7rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .resource-value {
+        font-size: 0.8rem !important;
+    }
+
+    .resource-bar {
+        height: 10px !important;
+    }
+
+    .affection-bar {
+        height: 12px !important;
+    }
+
+    /* 관계 상태 표시 숨김 */
+    .relationship-status-display {
+        display: none !important;
+    }
+
+    /* 달력 숨김 (모바일에서 공간 절약) */
+    .calendar-display {
+        display: none !important;
+    }
+
+    .mini-calendar-container {
+        display: none !important;
+    }
+
+    /* 사이드바 메뉴 버튼 - 가로 1줄 */
+    .sidebar-menu {
+        flex-direction: row !important;
+        padding: 8px 10px !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .sidebar-menu-btn {
+        padding: 6px 10px !important;
+        font-size: 0.75rem !important;
+        flex: 0 1 auto !important;
+    }
+
+    /* ===== 메인 게임 영역 ===== */
+    .game-main-area {
+        padding: 10px !important;
+        gap: 10px !important;
+        flex: 1 !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 캐릭터 초상화 - 모바일에서 크게 */
+    .character-display {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .portrait-container {
+        width: 90% !important;
+        max-width: 400px !important;
+        height: auto !important;
+        aspect-ratio: 3/4 !important;
+        margin: 0 auto !important;
     }
 
     .portrait-icon {
-        font-size: 5rem;
+        font-size: 6rem !important;
+    }
+
+    .character-portrait {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: center top !important;
+        border-radius: 10px !important;
+    }
+
+    /* 대화 영역 */
+    .dialogue-area {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .dialogue-box {
+        padding: 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .speaker-name {
+        font-size: 0.9rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .dialogue-text {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        min-height: 40px !important;
+        word-break: keep-all !important;
+        white-space: normal !important;
+        writing-mode: horizontal-tb !important;
+    }
+
+    /* 액션 버튼 영역 */
+    .choices-area {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .action-choice-btn {
+        padding: 10px !important;
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .action-icon {
+        font-size: 1.5rem !important;
+        min-width: auto !important;
+        margin-bottom: 5px !important;
+    }
+
+    .action-name {
+        font-size: 0.8rem !important;
+    }
+
+    .action-cost, .action-gain {
+        font-size: 0.65rem !important;
+    }
+
+    .action-info {
+        align-items: center !important;
+    }
+
+    /* 일반 버튼 */
+    .action-btn {
+        padding: 10px 30px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* ===== 모달 ===== */
+    .modal-content {
+        margin: 10px !important;
+        max-width: calc(100% - 20px) !important;
+        max-height: 90vh !important;
+    }
+
+    .modal-header {
+        padding: 12px !important;
+    }
+
+    .modal-header h2 {
+        font-size: 1.1rem !important;
+    }
+
+    .modal-body {
+        padding: 12px !important;
+    }
+
+    .modal-footer {
+        padding: 12px !important;
+    }
+
+    /* 선택지 버튼 */
+    .choice-option-btn {
+        padding: 12px !important;
+        font-size: 0.85rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .choice-number {
+        font-size: 0.9rem !important;
+    }
+
+    .choice-text {
+        line-height: 1.4 !important;
+    }
+
+    /* 액션 옵션 */
+    .action-option {
+        padding: 10px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .option-icon {
+        font-size: 1.8rem !important;
+        min-width: 35px !important;
+    }
+
+    .option-name {
+        font-size: 0.95rem !important;
+    }
+
+    .option-desc {
+        font-size: 0.75rem !important;
+    }
+
+    .option-cost {
+        font-size: 0.7rem !important;
+    }
+
+    /* 결과 모달 스타일 */
+    .result-stats {
+        flex-direction: row !important;
+        gap: 15px !important;
+    }
+
+    /* ===== 엔딩 화면 ===== */
+    .ending-container {
+        padding: 15px !important;
+    }
+
+    .ending-portrait {
+        width: 120px !important;
+        height: 120px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .ending-portrait.proposal-ending {
+        width: 100% !important;
+        max-width: 280px !important;
+        height: auto !important;
+    }
+
+    .ending-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 15px !important;
+    }
+
+    .ending-stats {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .ending-stat .stat-value {
+        font-size: 1.3rem !important;
+    }
+
+    .ending-message {
+        font-size: 0.9rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    .ending-buttons {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .ending-btn {
+        padding: 10px 25px !important;
+        font-size: 0.9rem !important;
+        width: 100% !important;
+    }
+}
+
+/* 소형 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    .game-logo h1 {
+        font-size: 1.5rem !important;
+    }
+
+    .screen-title {
+        font-size: 1.3rem !important;
+    }
+
+    /* 자원 바 - 1열로 변경 */
+    .resources-container {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+    }
+
+    .resource-bar {
+        height: 8px !important;
+    }
+
+    .affection-bar {
+        height: 10px !important;
+    }
+
+    /* 캐릭터 초상화 - 소형 모바일에서도 크게 유지 */
+    .portrait-container {
+        width: 85% !important;
+        max-width: 320px !important;
+    }
+
+    /* 캐릭터 선택 화면 이미지 */
+    .char-portrait {
+        max-height: 45vh !important;
+    }
+
+    /* 액션 버튼 - 1열로 */
+    .choices-area {
+        grid-template-columns: 1fr !important;
+    }
+
+    .action-choice-btn {
+        flex-direction: row !important;
+        text-align: left !important;
+    }
+
+    .action-icon {
+        margin-bottom: 0 !important;
+        margin-right: 10px !important;
+    }
+
+    /* 선택지 버튼 더 작게 */
+    .choice-option-btn {
+        padding: 10px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* 엔딩 */
+    .ending-portrait {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .ending-title {
+        font-size: 1.3rem !important;
     }
 }
 
@@ -1579,4 +2128,121 @@ body {
 
 .carousel-indicator:hover {
     background: rgba(255,105,180,0.6);
+}
+
+/* ========== 캐릭터 반응 표시 스타일 ========== */
+.character-response {
+    background: rgba(255,105,180,0.1);
+    border: 2px solid rgba(255,105,180,0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.character-response-header {
+    font-weight: bold;
+    color: var(--primary-pink);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.character-response-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-light);
+}
+
+/* 결과 통계 스타일 */
+.result-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.result-stat {
+    text-align: center;
+    min-width: 80px;
+}
+
+.result-stat span:first-child {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.stat-change {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.stat-change.positive {
+    color: #44ff88;
+}
+
+.stat-change.negative {
+    color: #ff4444;
+}
+
+/* 결과 모달 추가 스타일 */
+#multi-stage-result-modal .modal-body p {
+    text-align: center;
+}
+
+#multi-stage-result-modal .modal-body em {
+    color: var(--text-dim);
+}
+
+/* 대화 결과 텍스트 스타일 */
+.dialogue-text br {
+    line-height: 1.8;
+}
+
+/* 모바일에서 캐릭터 반응 스타일 조정 */
+@media (max-width: 768px) {
+    .character-response {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .character-response-header {
+        font-size: 0.9rem;
+    }
+
+    .character-response-text {
+        font-size: 0.95rem;
+    }
+
+    .result-stats {
+        gap: 15px;
+    }
+
+    .result-stat {
+        min-width: 70px;
+    }
+
+    .stat-change {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .character-response {
+        padding: 10px;
+    }
+
+    .character-response-text {
+        font-size: 0.9rem;
+    }
+
+    .result-stats {
+        gap: 10px;
+    }
+
+    .stat-change {
+        font-size: 1rem;
+    }
 }

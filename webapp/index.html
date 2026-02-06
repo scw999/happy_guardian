@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>해피 하트 가디언 - Happy Heart Guardian</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -413,6 +414,22 @@
             </div>
             <div class="modal-footer">
                 <button class="modal-btn" onclick="closeRules()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 커스텀 게임 알림 모달 -->
+    <div id="game-alert-modal" class="modal">
+        <div class="modal-content game-alert-content">
+            <div class="modal-header game-alert-header">
+                <h2 id="game-alert-title">알림</h2>
+            </div>
+            <div class="modal-body game-alert-body">
+                <div id="game-alert-icon" class="game-alert-icon">💬</div>
+                <p id="game-alert-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeGameAlert()">확인</button>
             </div>
         </div>
     </div>

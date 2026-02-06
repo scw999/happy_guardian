@@ -37,6 +37,54 @@ let pendingTimeouts = [];
 // ============================================
 // 유틸리티 함수
 // ============================================
+
+// 게임 내 커스텀 알림 함수
+function showGameAlert(message, type = 'info', title = '알림') {
+    const modal = document.getElementById('game-alert-modal');
+    const titleEl = document.getElementById('game-alert-title');
+    const messageEl = document.getElementById('game-alert-message');
+    const iconEl = document.getElementById('game-alert-icon');
+
+    // 알림 타입에 따른 아이콘과 스타일 설정
+    const typeConfig = {
+        success: { icon: '✨', title: '성공' },
+        error: { icon: '❌', title: '오류' },
+        warning: { icon: '⚠️', title: '주의' },
+        info: { icon: '💬', title: '알림' },
+        love: { icon: '💕', title: '연애' },
+        heartbreak: { icon: '💔', title: '거절' },
+        money: { icon: '💰', title: '자금' },
+        stamina: { icon: '⚡', title: '체력' },
+        event: { icon: '🎉', title: '이벤트' },
+        birthday: { icon: '🎂', title: '생일' },
+        anniversary: { icon: '💑', title: '기념일' }
+    };
+
+    const config = typeConfig[type] || typeConfig.info;
+
+    // 클래스 초기화 및 타입 클래스 추가
+    modal.className = 'modal active';
+    modal.classList.add('alert-' + type);
+
+    // 내용 설정
+    titleEl.textContent = title || config.title;
+    iconEl.textContent = config.icon;
+    messageEl.textContent = message;
+
+    return new Promise(resolve => {
+        window.gameAlertResolve = resolve;
+    });
+}
+
+function closeGameAlert() {
+    const modal = document.getElementById('game-alert-modal');
+    modal.classList.remove('active');
+    if (window.gameAlertResolve) {
+        window.gameAlertResolve();
+        window.gameAlertResolve = null;
+    }
+}
+
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
@@ -407,7 +455,7 @@ function updateActionButtons() {
 function showDateMenu() {
     // 하루 액션 제한 체크 (최대 3회)
     if (gameState.dailyActionCount >= 3) {
-        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        showGameAlert('오늘은 더 이상 행동할 수 없습니다!\n휴식을 취하세요.', 'warning', '행동 제한');
         return;
     }
 
@@ -461,7 +509,7 @@ function selectDateLocation(index) {
     const location = window.currentDateLocations[index];
 
     if (gameState.money < location.cost || gameState.stamina < location.stamina) {
-        alert('자원이 부족합니다!');
+        showGameAlert('자원이 부족합니다!', 'warning', '자원 부족');
         return;
     }
 
@@ -483,14 +531,14 @@ function selectDateLocation(index) {
         gameState.trust -= 5;  // 신뢰도 감소
         gameState.mental -= 40;  // 멘탈 감소 (거절로 인한 정신적 충격)
         closeModal('action-modal');
-        alert(`💔 ${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n(-8 호감도, -5 신뢰도, -40 멘탈)\n\n거절로 인한 충격이 큽니다. 호감도를 더 높인 후 시도하세요!`);
+        showGameAlert(`${gameState.character.fullName}이(가) 데이트를 거절했습니다...\n\n-8 호감도, -5 신뢰도, -40 멘탈\n\n거절로 인한 충격이 큽니다.\n호감도를 더 높인 후 시도하세요!`, 'heartbreak', '데이트 거절');
         updateAllUI();
         return;
     }
 
     // 데이트 수락! 체력 회복
     gameState.stamina += 10;  // 데이트 수락으로 기쁨
-    alert(`💖 ${gameState.character.fullName}이(가) 데이트를 수락했습니다!\n\n기쁜 마음에 체력이 10 회복되었습니다! (+10 체력)`);
+    showGameAlert(`${gameState.character.fullName}이(가) 데이트를 수락했습니다!\n\n기쁜 마음에 체력이 10 회복되었습니다!\n(+10 체력)`, 'love', '데이트 수락');
 
     gameState.money -= location.cost;
     gameState.stamina -= location.stamina;
@@ -542,7 +590,7 @@ function selectDateLocation(index) {
 function showGiftMenu() {
     // 하루 액션 제한 체크 (최대 3회)
     if (gameState.dailyActionCount >= 3) {
-        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        showGameAlert('오늘은 더 이상 행동할 수 없습니다!\n휴식을 취하세요.', 'warning', '행동 제한');
         return;
     }
 
@@ -599,7 +647,7 @@ function giveGift(index) {
     const gift = window.currentGifts[index];
 
     if (gameState.money < gift.cost) {
-        alert('돈이 부족합니다!');
+        showGameAlert('돈이 부족합니다!', 'money', '자금 부족');
         return;
     }
 
@@ -635,7 +683,7 @@ function giveGift(index) {
 
         const bonusType = gameState.anniversaryType === 'birthday' ? '🎂 생일' : '💕 기념일';
         setTimeout(() => {
-            alert(`${bonusType} 선물 보너스! 효과가 1.5배로 증가했습니다! (+${affectionGain - originalAff} 호감도, +${trustGain - originalTrust} 신뢰도)`);
+            showGameAlert(`${bonusType} 선물 보너스!\n효과가 1.5배로 증가했습니다!\n\n+${affectionGain - originalAff} 호감도\n+${trustGain - originalTrust} 신뢰도`, 'event', '보너스');
         }, 500);
     }
 
@@ -661,7 +709,7 @@ function giveGift(index) {
 function showTalkMenu() {
     // 하루 액션 제한 체크 (최대 3회)
     if (gameState.dailyActionCount >= 3) {
-        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        showGameAlert('오늘은 더 이상 행동할 수 없습니다!\n휴식을 취하세요.', 'warning', '행동 제한');
         return;
     }
 
@@ -729,13 +777,13 @@ window.handleTalkTopicClick = function(index) {
         console.log('대화 주제 클릭 - 인덱스:', index);
 
         if (!window.currentTopics) {
-            alert('오류: currentTopics가 설정되지 않았습니다');
+            showGameAlert('오류: currentTopics가 설정되지 않았습니다', 'error', '오류');
             return;
         }
 
         const topic = window.currentTopics[index];
         if (!topic) {
-            alert('오류: 토픽을 찾을 수 없습니다. 인덱스: ' + index);
+            showGameAlert('오류: 토픽을 찾을 수 없습니다. 인덱스: ' + index, 'error', '오류');
             return;
         }
 
@@ -749,12 +797,12 @@ window.handleTalkTopicClick = function(index) {
         const meetsRequirement = !topic.minAffection || gameState.affection >= topic.minAffection;
 
         if (!canTalk) {
-            alert(`체력이 부족합니다! (필요: ${actualStamina}, 현재: ${gameState.stamina})`);
+            showGameAlert(`체력이 부족합니다!\n\n필요: ${actualStamina}\n현재: ${gameState.stamina}`, 'stamina', '체력 부족');
             return;
         }
 
         if (!meetsRequirement) {
-            alert(`호감도가 부족합니다! (필요: ${topic.minAffection}%, 현재: ${Math.round(gameState.affection)}%)`);
+            showGameAlert(`호감도가 부족합니다!\n\n필요: ${topic.minAffection}%\n현재: ${Math.round(gameState.affection)}%`, 'warning', '호감도 부족');
             return;
         }
 
@@ -762,7 +810,7 @@ window.handleTalkTopicClick = function(index) {
         console.log('대화 주제 선택:', topic.name);
         window.selectTalkTopic(index);
     } catch (e) {
-        alert('오류 발생: ' + e.message);
+        showGameAlert('오류 발생: ' + e.message, 'error', '오류');
         console.error(e);
     }
 };
@@ -778,7 +826,7 @@ window.selectTalkTopic = function(index) {
     let staminaCost = topic.stamina * talkCount;
 
     if (gameState.stamina < staminaCost) {
-        alert('체력이 부족합니다!');
+        showGameAlert('체력이 부족합니다!', 'stamina', '체력 부족');
         return;
     }
 
@@ -1063,26 +1111,55 @@ function showMultiStageResult(choiceText, affectionGain, trustGain, isLast) {
         existingModal.remove();
     }
 
+    // 캐릭터별 반응 가져오기
+    const characterId = gameState.character.id;
+    const characterResponse = getCharacterResponse(characterId, affectionGain, trustGain);
+    const characterName = gameState.character.fullName;
+    const characterIcon = gameState.character.icon;
+
+    // 반응에 따른 이모지 결정
+    const totalGain = affectionGain + trustGain;
+    let reactionEmoji = '';
+    if (totalGain >= 15) {
+        reactionEmoji = characterId === 'tsundere' ? '💕' : '😊';
+    } else if (totalGain >= 5) {
+        reactionEmoji = '🙂';
+    } else if (totalGain >= 0) {
+        reactionEmoji = '';
+    } else if (totalGain > -15) {
+        reactionEmoji = '😕';
+    } else {
+        reactionEmoji = '😢';
+    }
+
     const resultModal = document.createElement('div');
     resultModal.id = 'multi-stage-result-modal';
     resultModal.className = 'modal active';
     resultModal.innerHTML = `
         <div class="modal-content">
             <div class="modal-header">
-                <h2>${isLast ? '데이트 결과' : '진행 중...'}</h2>
+                <h2>${isLast ? (gameState.multiStage.type === 'talk' ? '대화 결과' : '데이트 결과') : '진행 중...'}</h2>
             </div>
             <div class="modal-body">
-                <p><strong>${choiceText}</strong></p>
-                <div class="result-stats">
-                    <div class="result-stat">
-                        <span>호감도</span>
-                        <span class="stat-change ${affectionGain >= 0 ? 'positive' : 'negative'}">
+                <p style="color: var(--text-dim); margin-bottom: 10px;"><em>"${choiceText}"</em></p>
+                ${characterResponse ? `
+                    <div class="character-response" style="background: rgba(255,105,180,0.1); border: 2px solid rgba(255,105,180,0.3); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                        <div style="font-weight: bold; color: var(--primary-pink); margin-bottom: 8px;">
+                            ${characterIcon} ${characterName}의 반응 ${reactionEmoji}
+                        </div>
+                        <p style="font-size: 1.05rem; line-height: 1.6;">"${characterResponse}"</p>
+                    </div>
+                ` : ''}
+                <div class="result-stats" style="display: flex; gap: 20px; justify-content: center; margin: 15px 0;">
+                    <div class="result-stat" style="text-align: center;">
+                        <span style="display: block; color: var(--text-dim); font-size: 0.9rem;">호감도</span>
+                        <span class="stat-change ${affectionGain >= 0 ? 'positive' : 'negative'}" style="font-size: 1.3rem; font-weight: bold; color: ${affectionGain >= 0 ? '#44ff88' : '#ff4444'};">
                             ${affectionGain >= 0 ? '+' : ''}${affectionGain}
                         </span>
                     </div>
-                    <div class="result-stat">
-                        <span>신뢰도</span>
-                        <span class="stat-change ${trustGain >= 0 ? 'positive' : 'negative'}">
+                    <div class="result-stat" style="text-align: center;">
+                        <span style="display: block; color: var(--text-dim); font-size: 0.9rem;">신뢰도</span>
+                        <span class="stat-change ${trustGain >= 0 ? 'positive' : 'negative'}" style="font-size: 1.3rem; font-weight: bold; color: ${trustGain >= 0 ? '#4169E1' : '#ff4444'};">
                             ${trustGain >= 0 ? '+' : ''}${trustGain}
                         </span>
                     </div>
@@ -1132,7 +1209,7 @@ function finishMultiStage() {
 
         const bonusType = gameState.anniversaryType === 'birthday' ? '🎂 생일' : '💕 기념일';
         setTimeout(() => {
-            alert(`${bonusType} 보너스! 효과가 1.5배로 증가했습니다! (+${totalAffection - originalAff} 호감도, +${totalTrust - originalTrust} 신뢰도)`);
+            showGameAlert(`${bonusType} 보너스!\n효과가 1.5배로 증가했습니다!\n\n+${totalAffection - originalAff} 호감도\n+${totalTrust - originalTrust} 신뢰도`, 'event', '보너스');
         }, 500);
     }
 
@@ -1203,7 +1280,7 @@ const GLOBAL_DIFFICULTY_MULTIPLIER = 0.35;
 function showSkinshipMenu() {
     // 하루 액션 제한 체크
     if (gameState.dailyActionCount >= 3) {
-        alert('오늘은 더 이상 행동할 수 없습니다! 휴식을 취하세요.');
+        showGameAlert('오늘은 더 이상 행동할 수 없습니다!\n휴식을 취하세요.', 'warning', '행동 제한');
         return;
     }
 
@@ -1273,17 +1350,17 @@ window.attemptSkinship = function(index) {
     const skinship = window.currentSkinshipOptions[index];
 
     if (gameState.affection < skinship.minAffection) {
-        alert(`호감도가 부족합니다! (필요: ${skinship.minAffection}, 현재: ${gameState.affection})`);
+        showGameAlert(`호감도가 부족합니다!\n\n필요: ${skinship.minAffection}\n현재: ${gameState.affection}`, 'warning', '호감도 부족');
         return;
     }
 
     if (gameState.stamina < skinship.stamina) {
-        alert('체력이 부족합니다!');
+        showGameAlert('체력이 부족합니다!', 'stamina', '체력 부족');
         return;
     }
 
     if (skinship.money && gameState.money < skinship.money) {
-        alert('돈이 부족합니다!');
+        showGameAlert('돈이 부족합니다!', 'money', '자금 부족');
         return;
     }
 
@@ -1332,7 +1409,7 @@ window.attemptSkinship = function(index) {
         gameState.trust -= 15;
         gameState.mental -= 30;  // 멘탈 큰 감소 (거절로 인한 정신적 충격)
 
-        alert(`💔 ${gameState.character.fullName}이(가) 거부했습니다...\n\n호감도 -10, 신뢰도 -15, 멘탈 -30\n\n너무 성급했나봅니다. 호감도를 더 높인 후 시도하세요!`);
+        showGameAlert(`${gameState.character.fullName}이(가) 거부했습니다...\n\n호감도 -10, 신뢰도 -15, 멘탈 -30\n\n너무 성급했나봅니다.\n호감도를 더 높인 후 시도하세요!`, 'heartbreak', '거절');
     }
 
     updateAllUI();
@@ -1404,7 +1481,7 @@ window.selectWorkOption = function(index) {
     const work = window.currentWorkOptions[index];
 
     if (gameState.stamina < work.stamina) {
-        alert('체력이 부족합니다!');
+        showGameAlert('체력이 부족합니다!', 'stamina', '체력 부족');
         return;
     }
 
@@ -1465,12 +1542,12 @@ function showStockInvestment(work) {
 
 window.warnInsufficientFunds = function(requiredAmount) {
     const shortage = requiredAmount - gameState.money;
-    alert(`자금이 부족합니다!\n필요 금액: ${formatMoney(requiredAmount)}\n현재 보유: ${formatMoney(gameState.money)}\n부족 금액: ${formatMoney(shortage)}`);
+    showGameAlert(`자금이 부족합니다!\n\n필요 금액: ${formatMoney(requiredAmount)}\n현재 보유: ${formatMoney(gameState.money)}\n부족 금액: ${formatMoney(shortage)}`, 'money', '자금 부족');
 };
 
 window.executeStock = function(investment) {
     if (gameState.money < investment) {
-        alert('돈이 부족합니다!');
+        showGameAlert('돈이 부족합니다!', 'money', '자금 부족');
         return;
     }
 
@@ -1585,7 +1662,7 @@ window.selectRestOption = function(option) {
 
         case 'game':
             if (gameState.stamina < 20) {
-                alert('체력이 부족합니다! (필요: 20)');
+                showGameAlert('체력이 부족합니다!\n\n필요: 20', 'stamina', '체력 부족');
                 return;
             }
             gameState.stamina -= 20;
@@ -1596,7 +1673,7 @@ window.selectRestOption = function(option) {
 
         case 'exercise':
             if (gameState.stamina < 30) {
-                alert('체력이 부족합니다! (필요: 30)');
+                showGameAlert('체력이 부족합니다!\n\n필요: 30', 'stamina', '체력 부족');
                 return;
             }
             gameState.stamina -= 30;
@@ -1607,7 +1684,7 @@ window.selectRestOption = function(option) {
 
         case 'meditation':
             if (gameState.stamina < 10) {
-                alert('체력이 부족합니다! (필요: 10)');
+                showGameAlert('체력이 부족합니다!\n\n필요: 10', 'stamina', '체력 부족');
                 return;
             }
             gameState.stamina -= 10;
@@ -1626,12 +1703,22 @@ window.selectRestOption = function(option) {
 function showResult(message, affectionChange, trustChange, extraInfo = '') {
     const dialogueText = document.getElementById('dialogue-text');
 
+    // 캐릭터별 반응 가져오기
+    let characterResponse = '';
+    if (gameState.character) {
+        const response = getCharacterResponse(gameState.character.id, affectionChange, trustChange);
+        if (response) {
+            characterResponse = `\n\n${gameState.character.icon} "${response}"`;
+        }
+    }
+
     let resultText = message;
     if (affectionChange !== 0) resultText += `\n💖 호감도 ${affectionChange > 0 ? '+' : ''}${affectionChange}`;
     if (trustChange !== 0) resultText += `\n🤝 신뢰도 ${trustChange > 0 ? '+' : ''}${trustChange}`;
     if (extraInfo) resultText += `\n${extraInfo}`;
+    resultText += characterResponse;
 
-    dialogueText.textContent = resultText;
+    dialogueText.innerHTML = resultText.replace(/\n/g, '<br>');
     dialogueText.style.color = affectionChange >= 0 ? '#44ff88' : '#ff4444';
     dialogueText.style.fontWeight = 'bold';
 
@@ -1639,7 +1726,7 @@ function showResult(message, affectionChange, trustChange, extraInfo = '') {
         dialogueText.textContent = '무엇을 할까요?';
         dialogueText.style.color = '';
         dialogueText.style.fontWeight = '';
-    }, 3000);
+    }, 4000);
     pendingTimeouts.push(timeoutId);
 
     updateAllUI();
@@ -1695,7 +1782,7 @@ function updateBiorhythm() {
         if (Math.random() < 0.2) {
             gameState.biorhythm = 'period';
             gameState.biorhythmDays = 3;
-            alert('⚠️ 컨디션이 안 좋아 보입니다...');
+            showGameAlert('컨디션이 안 좋아 보입니다...', 'warning', '컨디션');
         }
     }
 }
@@ -1712,7 +1799,7 @@ function checkNeglect() {
         }
 
         gameState.affection -= penalty;
-        alert(`😢 ${gameState.character.fullName}이(가) 서운해합니다... (-${penalty} 호감도)`);
+        showGameAlert(`${gameState.character.fullName}이(가) 서운해합니다...\n\n-${penalty} 호감도`, 'heartbreak', '방치');
     }
 }
 
@@ -1721,7 +1808,7 @@ function checkAnniversary() {
     if (gameState.todayIsAnniversary && !gameState.anniversaryCelebrated) {
         gameState.affection -= 15;
         gameState.trust -= 10;
-        alert(`💔 기념일을 챙기지 않아 ${gameState.character.fullName}이(가) 섭섭해합니다... (-15 호감도, -10 신뢰도)`);
+        showGameAlert(`기념일을 챙기지 않아\n${gameState.character.fullName}이(가) 섭섭해합니다...\n\n-15 호감도, -10 신뢰도`, 'heartbreak', '기념일');
     }
 
     // 새로운 날의 기념일 체크
@@ -1734,7 +1821,7 @@ function checkAnniversary() {
         gameState.todayIsAnniversary = true;
         gameState.anniversaryType = 'meeting';
         const weeks = gameState.day / 7;
-        alert(`💕 오늘은 만난 지 ${weeks}주 기념일입니다! 특별한 데이트나 선물로 마음을 전해보세요!`);
+        showGameAlert(`오늘은 만난 지 ${weeks}주 기념일입니다!\n\n특별한 데이트나 선물로\n마음을 전해보세요!`, 'anniversary', '기념일');
     }
 
     // 생일 체크 (게임 시작 날짜 기준)
@@ -1750,7 +1837,7 @@ function checkAnniversary() {
             currentDate.getDate() === gameState.character.birthday.day) {
             gameState.todayIsAnniversary = true;
             gameState.anniversaryType = 'birthday';
-            alert(`🎂 오늘은 ${gameState.character.fullName}의 생일입니다! 축하해주세요!`);
+            showGameAlert(`오늘은 ${gameState.character.fullName}의 생일입니다!\n\n축하해주세요!`, 'birthday', '생일');
         }
     }
 }
@@ -1769,7 +1856,7 @@ function addHistory() {
 
 function showStatsGraph() {
     if (gameState.history.length < 2) {
-        alert('그래프를 표시하기에 충분한 데이터가 없습니다.');
+        showGameAlert('그래프를 표시하기에 충분한 데이터가 없습니다.', 'info', '데이터 부족');
         return;
     }
 
@@ -2418,7 +2505,7 @@ function showCalendar() {
 
 function showDayDetail(day) {
     const activities = gameState.dailyActivities[day] || [];
-    let message = `📅 ${day}일차\n\n`;
+    let message = '';
 
     if (activities.length === 0) {
         message += '활동 없음';
@@ -2444,7 +2531,7 @@ function showDayDetail(day) {
         });
     }
 
-    alert(message);
+    showGameAlert(message, 'info', `📅 ${day}일차`);
 }
 
 // ============================================
